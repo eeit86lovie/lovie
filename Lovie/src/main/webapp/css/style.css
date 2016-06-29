@@ -1,0 +1,61 @@
+.card-content .content{
+	height:100px;
+	overflow:hidden;
+}
+
+.like_movie a{
+	color:#E91E63;
+}
+
+.card{
+	width:280px;
+	float:left;
+	margin:10px;
+
+}
+
+#logo{
+	margin:1%;
+	margin-left:10%;
+}
+
+#nav{
+	z-index: 1;
+	background-color:#EEE;
+	border-color:#EEE;
+}
+
+
+.navbar {
+	background-color:#DDDDDD;
+	border-color:#DDDDDD;
+}
+
+.navbar-inverse{
+	background-color:#DDDDDD;
+	border-color:#DDDDDD;
+}
+
+.member_nav{
+	float:right;
+	margin-top:10px;
+	margin-right:50px;
+}
+
+.member_pic_nav{
+	width:30px;
+	margin-right:5px;
+}
+
+.index_content2{
+	border:#0000000 5px dotted;
+	height:800px;
+	
+}
+
+
+
+
+.img-responsive{
+	height:80%;
+}

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Context>
+    <Resource name="jdbc/eeit86" auth="Container" type="javax.sql.DataSource"
+               maxTotal="8" maxIdle="4" maxWaitMillis="5000"
+               username="eeit86" password="eeit86" driverClassName="com.mysql.jdbc.Driver"
+               url="jdbc:mysql://eeit.kidscodetw.com:3306/eeit86?characterEncoding=utf8"/>
+
+</Context>

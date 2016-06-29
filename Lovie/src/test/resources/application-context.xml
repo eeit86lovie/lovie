@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
+	
+	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+	<property name="driverClassName" value="com.mysql.jdbc.Driver"></property>
+	<property name="url" value="jdbc:mysql://eeit.kidscodetw.com:3306/eeit86?characterEncoding=utf8"></property>
+	<property name="username" value="eeit86"></property>
+	<property name="password" value="eeit86"></property>
+	</bean>
+	
+	<bean id="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+		<property name="dataSource" ref="dataSource"></property>
+		<property name="configLocation" value="classpath:hibernate.cfg.xml"></property>
+	</bean>
+	
+	<bean id="transactionManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	
+	<tx:advice id="txAdvice" transaction-manager="transactionManager">
+		<tx:attributes>
+			<tx:method name="*" rollback-for="java.lang.Exception" propagation="REQUIRED"/>
+		</tx:attributes>
+	</tx:advice>
+	
+	<aop:config>
+		<aop:pointcut id="pointcutDAO" expression="execution(* com.kidscodetw.eeit.dao.*.*(..))"/>
+		<aop:advisor advice-ref="txAdvice" pointcut-ref="pointcutDAO"/>
+	</aop:config>
+	
+	<!-- 	ShowtimeDAO -->
+	<bean id="showtimeDAOHibernate" class="com.kidscodetw.eeit.dao.ShowtimeDAOHibernate">
+		<constructor-arg ref="sessionFactory"></constructor-arg>
+	</bean>
+	
+	<bean id="showtimeDAO" class="com.kidscodetw.eeit.service.ShowtimeService">
+		<constructor-arg ref="showtimeDAOHibernate"></constructor-arg>
+	</bean>
+	
+	<!-- 	TheaterDAO -->
+	<bean id="theaterDAOHibernate" class="com.kidscodetw.eeit.dao.TheaterDAOHibernate">
+		<constructor-arg ref="sessionFactory"></constructor-arg>
+	</bean>
+	
+	<bean id="theaterDAO" class="com.kidscodetw.eeit.service.TheaterService">
+		<constructor-arg ref="theaterDAOHibernate"></constructor-arg>
+	</bean>
+	
+	<!-- 	MovieDAO -->
+	<bean id="movieDAOHibernate" class="com.kidscodetw.eeit.dao.MovieDAOHibernate">
+		<constructor-arg ref="sessionFactory"></constructor-arg>
+	</bean>
+	
+	<bean id="movieDAO" class="com.kidscodetw.eeit.service.MovieService">
+		<constructor-arg ref="movieDAOHibernate"></constructor-arg>
+	</bean>
+	
+	<!-- 	GenreDAO -->
+	<bean id="genreDAOHibernate" class="com.kidscodetw.eeit.dao.GenreDAOHibernate">
+		<constructor-arg ref="sessionFactory"></constructor-arg>
+	</bean>
+	
+	<bean id="genreDAO" class="com.kidscodetw.eeit.service.GenreService">
+		<constructor-arg ref="genreDAOHibernate"></constructor-arg>
+	</bean>
+	
+	<!-- 	MovieGenreDAO -->
+	<bean id="movieGenreDAOHibernate" class="com.kidscodetw.eeit.dao.MovieGenreDAOHibernate">
+		<constructor-arg ref="sessionFactory"></constructor-arg>
+	</bean>
+	
+	<bean id="movieGenreDAO" class="com.kidscodetw.eeit.service.MovieGenreService">
+		<constructor-arg ref="movieGenreDAOHibernate"></constructor-arg>
+	</bean>
+	
+	<!-- 	MemberDAO -->
+	<bean id="memberDAOHibernate" class="com.kidscodetw.eeit.dao.MemberDAOHibernate">
+		<constructor-arg ref="sessionFactory"></constructor-arg>
+	</bean>
+	
+	<bean id="memberDAO" class="com.kidscodetw.eeit.service.MemberService">
+		<constructor-arg ref="memberDAOHibernate"></constructor-arg>
+	</bean>
+	
+	<!-- 	AppointmentDAO -->
+	<bean id="appointmentDAOHibernate" class="com.kidscodetw.eeit.dao.AppointmentDAOHibernate">
+		<constructor-arg ref="sessionFactory"></constructor-arg>
+	</bean>
+	
+	<bean id="appointmentDAO" class="com.kidscodetw.eeit.service.AppointmentService">
+		<constructor-arg ref="appointmentDAOHibernate"></constructor-arg>
+	</bean>
+	
+	
+	
+</beans>
