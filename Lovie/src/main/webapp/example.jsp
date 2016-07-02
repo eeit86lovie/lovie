@@ -11,7 +11,7 @@
 <c:import charEncoding="UTF-8" url="/header.jsp"></c:import>
 	
 	<div class="container">
-	<!-- 程式碼位置 利用<div col-md-12> 編排 -->
+	<!-- 程式碼位置 利用<div col-md-12> 編排 --> 
 		
 		
 		
