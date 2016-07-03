@@ -160,7 +160,7 @@
 				var moviename = ele.innerText;
 				xhr = new XMLHttpRequest();
 				xhr.onreadystatechange = callback;
-				xhr.open("get","${pageContext.request.contextPath}/showtimeJsonByMovie.do?MovieName="+moviename);
+				xhr.open("get","${pageContext.request.contextPath}/showtimeJsonByMovie.mvc?MovieName="+moviename);
 				xhr.send();
 				
 				function callback(){

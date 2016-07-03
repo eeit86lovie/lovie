@@ -1,4 +1,4 @@
-package com.kidscodetw.eeit.controller;
+package com.kidscodetw.eeit.service;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -18,7 +18,7 @@ import com.kidscodetw.eeit.dao.ShowtimeDAO;
 import com.kidscodetw.eeit.entity.ShowtimeBean;
 
 @WebServlet("/showtimeJsonByTheater.do")
-public class ShowtimeJsonByTheater extends HttpServlet {
+public class ShowtimeJsonByTheaterServlet extends HttpServlet {
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
 		selectMovie(request, response);
 	}
