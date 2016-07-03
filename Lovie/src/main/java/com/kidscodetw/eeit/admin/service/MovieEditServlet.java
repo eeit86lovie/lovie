@@ -34,28 +34,21 @@ public class MovieEditServlet extends HttpServlet {
 			return;
 		}
 		mID = Integer.parseInt(mID_row);
+		WebApplicationContext context =WebApplicationContextUtils.getWebApplicationContext(getServletContext()) ;
+		MovieDAO movieDAO = (MovieDAO)context.getBean("movieDAO");
+		MovieBean movieBean = movieDAO.select(mID);
 		String type = request.getParameter("type");
 		String value = request.getParameter("value");
 		switch(type){
-		case "mName": name = value;break;
-		case "mRank": rank = value;break;
-		case "mStartTime": startTime = value;break;
-		case "mFilmLength": filmLength = value;break;
-		case "mIntro": intro = value;break;
-		case "mPhotoUrl": photoUrl = value;break;
-		case "mTrailer": trailer = value;break;
+		case "mName": name = value;movieBean.setName(name);break;
+		case "mRank": rank = value;movieBean.setRank(rank);break;
+		case "mStartTime": startTime = value;movieBean.setStartTime(startTime);break;
+		case "mFilmLength": filmLength = value;movieBean.setFilmLength(filmLength);break;
+		case "mIntro": intro = value;movieBean.setIntro(intro);break;
+		case "mPhotoUrl": photoUrl = value;movieBean.setPhotoUrl(photoUrl);break;
+		case "mTrailer": trailer = value;movieBean.setTrailer(trailer);break;
 		}
-		WebApplicationContext context =WebApplicationContextUtils.getWebApplicationContext(getServletContext()) ;
-		MovieDAO movieDAO = (MovieDAO)context.getBean("movieDAO");
-		MovieBean movieBean = new MovieBean();
-		movieBean.setName(name);
-		movieBean.setRank(rank);
-		movieBean.setStartTime(startTime);
-		movieBean.setIntro(intro);
-		movieBean.setPhotoUrl(photoUrl);
-		movieBean.setTrailer(trailer);
-		movieBean.setFilmLength(filmLength);
-		movieBean.setId(mID);
+		
 		MovieBean tb = movieDAO.update(movieBean);
 		PrintWriter out = response.getWriter();
 		if (tb!=null) {

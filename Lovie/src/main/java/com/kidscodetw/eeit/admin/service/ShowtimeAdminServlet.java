@@ -28,8 +28,8 @@ public class ShowtimeAdminServlet extends HttpServlet {
 		
 		request.setCharacterEncoding("UTF-8");
 		WebApplicationContext context =WebApplicationContextUtils.getWebApplicationContext(getServletContext()) ;
-		MovieDAO movieDAO = (MovieDAO)context.getBean("beans.config.xml");
-		TheaterDAO theaterDAO = (TheaterDAO)context.getBean("beans.config.xml");
+		MovieDAO movieDAO = (MovieDAO)context.getBean("movieDAO");
+		TheaterDAO theaterDAO = (TheaterDAO)context.getBean("theaterDAO");
 		List<String> movie_names = movieDAO.select_movienames();
 		List<String> theater_names = theaterDAO.select_theaternames();
 		request.setAttribute("movienames", movie_names);

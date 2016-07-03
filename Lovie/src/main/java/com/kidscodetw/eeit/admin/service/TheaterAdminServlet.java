@@ -29,7 +29,7 @@ public class TheaterAdminServlet extends HttpServlet {
 		
 		request.setCharacterEncoding("UTF-8");
 		WebApplicationContext context =WebApplicationContextUtils.getWebApplicationContext(getServletContext()) ;
-		TheaterDAO theaterDAO = (TheaterDAO)context.getBean("beans.config.xml");
+		TheaterDAO theaterDAO = (TheaterDAO)context.getBean("theaterDAO");
 		List<TheaterBean> theater_list = theaterDAO.select();
 		request.setAttribute("theaters", theater_list);
 		RequestDispatcher rd = request.getRequestDispatcher("admin_theater.jsp");

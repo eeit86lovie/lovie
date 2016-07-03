@@ -160,7 +160,7 @@
 				var moviename = ele.innerText;
 				xhr = new XMLHttpRequest();
 				xhr.onreadystatechange = callback;
-				xhr.open("get","/Lovie/showtimeJsonByMovie.do?MovieName="+moviename);
+				xhr.open("get","${pageContext.request.contextPath}/showtimeJsonByMovie.do?MovieName="+moviename);
 				xhr.send();
 				
 				function callback(){
@@ -205,7 +205,7 @@
 				var theatername = ele.innerText;
 				xhr = new XMLHttpRequest();
 				xhr.onreadystatechange = callback;
-				xhr.open("get","/Lovie/showtimeJsonByTheater.do?tName="+theatername);
+				xhr.open("get","${pageContext.request.contextPath}/showtimeJsonByTheater.do?tName="+theatername);
 				xhr.send();
 				
 				function callback(){
