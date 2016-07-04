@@ -2,6 +2,7 @@
 /.project
 /target/
 /Lovie/
+/bin/
 /.classpath
 /.settings/
 /.gitignore

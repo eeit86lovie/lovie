@@ -18,9 +18,11 @@ import com.kidscodetw.eeit.entity.TheaterBean;
 @RequestMapping("theaters.mvc")
 public class TheaterFindAllMVC {
 	
+	@Autowired
+	private WebApplicationContext context;
 	
 	@RequestMapping(method = RequestMethod.GET)
-	public String getTheaters(WebApplicationContext context,Model model){
+	public String getTheaters(Model model){
 		TheaterDAO dao = (TheaterDAO)context.getBean("theaterDAO");
 		List<TheaterBean> theater_list = dao.select();
 		model.addAttribute("theaters", theater_list);

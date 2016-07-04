@@ -1,4 +1,4 @@
-package com.kidscodetw.eeit.admin.service;
+package com.kidscodetw.eeit.admin.controller;
 
 import java.io.IOException;
 import java.util.List;
@@ -14,10 +14,10 @@ import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 
 import com.kidscodetw.eeit.dao.MovieDAO;
-import com.kidscodetw.eeit.entity.MovieBean;
+import com.kidscodetw.eeit.dao.TheaterDAO;
 
-@WebServlet("/admin/movie/movie.do")
-public class MovieAdminServlet extends HttpServlet {
+@WebServlet("/admin/movie/showtime.do")
+public class ShowtimeAdminServlet extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -25,12 +25,16 @@ public class MovieAdminServlet extends HttpServlet {
 	}
 	
 	public void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		request.setCharacterEncoding("UTF-8");
 		WebApplicationContext context =WebApplicationContextUtils.getWebApplicationContext(getServletContext()) ;
 		MovieDAO movieDAO = (MovieDAO)context.getBean("movieDAO");
-		request.setCharacterEncoding("UTF-8");
-		List<MovieBean> movie_list = movieDAO.select();
-		request.setAttribute("movies", movie_list);
-		RequestDispatcher rd = request.getRequestDispatcher("admin_movie.jsp");
+		TheaterDAO theaterDAO = (TheaterDAO)context.getBean("theaterDAO");
+		List<String> movie_names = movieDAO.select_movienames();
+		List<String> theater_names = theaterDAO.select_theaternames();
+		request.setAttribute("movienames", movie_names);
+		request.setAttribute("theaternames", theater_names);
+		RequestDispatcher rd = request.getRequestDispatcher("admin_showtime.jsp");
 		rd.forward(request, response);
 		return;
 		

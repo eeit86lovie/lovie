@@ -44,7 +44,7 @@ public class TheaterEditServlet extends HttpServlet {
 		case "websiteUrl": websiteUrl = value;break;
 		}
 		WebApplicationContext context =WebApplicationContextUtils.getWebApplicationContext(getServletContext()) ;
-		TheaterDAO theaterDAO = (TheaterDAO)context.getBean("beans.config.xml");
+		TheaterDAO theaterDAO = (TheaterDAO)context.getBean("theaterDAO");
 		TheaterBean theaterBean = new TheaterBean();
 		theaterBean.setName(name);
 		theaterBean.setCity(city);
