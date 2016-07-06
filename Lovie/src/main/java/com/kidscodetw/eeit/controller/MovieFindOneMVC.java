@@ -37,6 +37,7 @@ public class MovieFindOneMVC {
 	@Autowired
 	private ShowtimeDAO showtimeDAO;
 	
+	
 	@RequestMapping(method=RequestMethod.GET)
 	public String getGenreList(@RequestParam("mID")Integer mID, Model model){
 		MovieBean movieBean = movieDAO.select(mID);

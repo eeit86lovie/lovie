@@ -55,8 +55,8 @@ public class MemberDAOTestDrive
     @Transactional
     @Rollback(true)
     public void findOneByIdTest(){
-       MemberBean bean = memberDAO.select(1);
-       Assert.isTrue(bean.getNickname().equals("微笑天使"),"FindOneByIdTest fail");
+       MemberBean bean = memberDAO.select(103);
+       Assert.isTrue(bean.getNickname().equals("小閔"),"FindOneByIdTest fail");
     }
     
     @Test
@@ -71,8 +71,8 @@ public class MemberDAOTestDrive
     @Transactional
     @Rollback(true)
     public void findByAccount(){
-       MemberBean bean = memberDAO.select("3122047");
-       Assert.isTrue(bean.getAccount().equals("3122047"),"FindByAccount fail");
+       MemberBean bean = memberDAO.select("3122379");
+       Assert.isTrue(bean.getAccount().equals("3122379"),"FindByAccount fail");
     }
     
     @Test
@@ -87,17 +87,17 @@ public class MemberDAOTestDrive
     @Transactional
     @Rollback(true)
     public void deleteByAccount(){
-       Assert.isTrue(memberDAO.delete("3122047"),"deleteByAccount fail");
+       Assert.isTrue(memberDAO.delete("3122379"),"deleteByAccount fail");
     }
     
     @Test
     @Transactional
     @Rollback(true)
     public void update(){
-    	MemberBean bean = memberDAO.select(1);
+    	MemberBean bean = memberDAO.select(103);
     	bean.setNickname("haha");
     	memberDAO.update(bean);
-    	String result = memberDAO.select(1).getNickname();
+    	String result = memberDAO.select(103).getNickname();
        Assert.isTrue(result.equals("haha"),"update fail");
     }
     
