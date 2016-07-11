@@ -6,6 +6,9 @@ import java.util.List;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.context.SecurityContextImpl;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -41,6 +44,7 @@ public class MyUserDetailsService implements UserDetailsService {
 			userDetails = new User(account, memberBean.getPassword(), true,
 					true, true, true, authList);
 		}
+		
 		return userDetails;
 	}
 
@@ -49,7 +53,6 @@ public class MyUserDetailsService implements UserDetailsService {
 		while(privilege>0){
 			MemberRoleBean roleBean = memberRoleDAO.select(privilege);
 			String role = roleBean.getRole();
-			System.out.println("Role:"+role);
 			authList.add(new SimpleGrantedAuthority(role));
 			privilege = privilege-1;
 		}

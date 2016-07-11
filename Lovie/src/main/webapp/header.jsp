@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@page pageEncoding="UTF-8" %>
 <header>
 
@@ -27,14 +28,14 @@
 				<ul class="nav navbar-nav">
 					<li><a href="index.jsp">首頁</a></li>
 					<li><a href="appointments.do">約會</a></li>
-					<li><a href="movies.do">電影</a></li>
-					<li><a href="theaters.do">戲院</a></li>
+					<li><a href="movies.mvc">電影</a></li>
+					<li><a href="theaters.mvc">戲院</a></li>
 					<li><a href="member.do">會員</a></li>
 					<li><a href="forum.do">討論</a></li>
 					<li><a href="interest.do">感興趣</a></li>
 				</ul>
 				
-				<c:if test="${empty LoginOK }">
+				<sec:authorize access="!hasRole('ROLE_ADMIN') or !hasRole('ROLE_GOLD') or !hasRole('ROLE_USER')">
 				<div class="member_nav">
 					<div id="regbar">
 					    <div id="navthing">
@@ -59,12 +60,12 @@
 					    </div>
   					</div>
 				</div>
-				</c:if>
+				</sec:authorize>
 				
 				
 				
 				
-				<c:if test="${!empty LoginOK }">
+				<sec:authorize access="hasRole('ROLE_ADMIN') or hasRole('ROLE_GOLD') or hasRole('ROLE_USER')">
 					<div class="member_nav" style="float:right">
 						<div>
 							<img width="20" src="${LoginOK.photoUrl }">${LoginOK.account }
@@ -75,7 +76,7 @@
 						</div>
 					</div>
 					
-				</c:if>
+				</sec:authorize>
 				
 				
 				

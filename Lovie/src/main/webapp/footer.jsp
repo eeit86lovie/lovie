@@ -123,7 +123,6 @@
 				if(xhr.readyState == 4 && xhr.status==200){
 					loginMsgs = JSON.parse(xhr.responseText);
 					if(loginMsgs.LoginSuccess){
-						
 						window.location.replace(loginMsgs.LoginSuccess);
 					}
 					account_error.text(loginMsgs.AccountEmptyError);
