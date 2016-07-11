@@ -97,6 +97,13 @@
 		<constructor-arg ref="appointmentDAOHibernate"></constructor-arg>
 	</bean>
 	
+	<bean id="memberRoleDAOHibernate" class="com.kidscodetw.eeit.dao.MemberRoleDAOHibernate">
+		<constructor-arg ref="sessionFactory"></constructor-arg>
+	</bean>
+	
+	<bean id="memberRoleDAO" class="com.kidscodetw.eeit.service.MemberRoleService">
+		<constructor-arg ref="memberRoleDAOHibernate"></constructor-arg>
+	</bean>
 	
 	
 </beans>

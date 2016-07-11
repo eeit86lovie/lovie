@@ -19,6 +19,7 @@
 	<context:component-scan base-package="com.kidscodetw.eeit.admin.controller" />
 	<context:component-scan base-package="com.kidscodetw.eeit.admin.service" />
 	<context:component-scan base-package="com.kidscodetw.eeit.websocket" />
+	<context:component-scan base-package="com.kidscodetw.eeit.config" />
 
 	
  
