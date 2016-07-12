@@ -2,16 +2,13 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:context="http://www.springframework.org/schema/context"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns:tx="http://www.springframework.org/schema/tx"
-	xmlns:websocket="http://www.springframework.org/schema/websocket"
-	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	
 	xsi:schemaLocation="
 		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
-		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
-		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
-		http://www.springframework.org/schema/websocket http://www.springframework.org/schema/websocket/spring-websocket.xsd
+		
 		">
  
 	<context:component-scan base-package="com.kidscodetw.eeit.controller" />
@@ -19,15 +16,17 @@
 	<context:component-scan base-package="com.kidscodetw.eeit.admin.controller" />
 	<context:component-scan base-package="com.kidscodetw.eeit.admin.service" />
 	<context:component-scan base-package="com.kidscodetw.eeit.websocket" />
-	<context:component-scan base-package="com.kidscodetw.eeit.config" />
-
+	<context:component-scan base-package="com.kidscodetw.eeit.security" />
+	<mvc:annotation-driven />
+	
+	<mvc:resources mapping="/**" location="/"></mvc:resources>
 	
  
 	<bean id="viewResolver"
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="viewClass"
 			value="org.springframework.web.servlet.view.JstlView" />
-<!-- 		<property name="prefix" value="/" /> -->
+		<property name="prefix" value="/" />
 <!-- 		<property name="suffix" value=".jsp" /> -->
 	</bean>
 	

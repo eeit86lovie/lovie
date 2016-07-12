@@ -8,10 +8,9 @@ import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import com.kidscodetw.eeit.dao.MovieDAO;
 import com.kidscodetw.eeit.dao.ShowtimeDAO;
@@ -21,7 +20,7 @@ import com.kidscodetw.eeit.entity.ShowtimeBean;
 import com.kidscodetw.eeit.entity.TheaterBean;
 
 @Controller
-@RequestMapping("theater.mvc")
+@RequestMapping("theater")
 public class TheaterFindOneMVC {
 	
 	@Autowired
@@ -33,8 +32,8 @@ public class TheaterFindOneMVC {
 	@Autowired
 	private MovieDAO movieDAO;
 	
-	@RequestMapping(method=RequestMethod.GET, params={"tID"})
-	public String getMovies(@RequestParam("tID")Integer tID, Model model){
+	@RequestMapping(method=RequestMethod.GET, path="{tID}")
+	public String getMovies(@PathVariable("tID")Integer tID, Model model){
 		TheaterBean theaterBean = theaterDAO.select(tID);
 		model.addAttribute("theater", theaterBean); 
 		List<ShowtimeBean> showtimeBeans = showtimeDAO.selectTheater(theaterBean.getName());

@@ -1,4 +1,4 @@
-package com.kidscodetw.eeit.controller;
+package com.kidscodetw.eeit.servlet;
 
 import java.io.IOException;
 import java.text.DateFormat;

@@ -3,7 +3,7 @@
 	<footer class="footer-distributed">
 	<div class="footer-left">
 		<h3>
-			<img id="logo" height="60" src="./image/icon/logo.png">
+			<img id="logo" height="60" src="${pageContext.request.contextPath}/image/icon/logo.png">
 		</h3>
 		<p class="footer-links">
 			<a href="#">首頁</a> · <a href="#">約會</a> · <a href="#">電影</a>

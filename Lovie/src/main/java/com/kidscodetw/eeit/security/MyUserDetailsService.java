@@ -1,4 +1,4 @@
-package com.kidscodetw.eeit.config;
+package com.kidscodetw.eeit.security;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -6,9 +6,7 @@ import java.util.List;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.context.SecurityContextImpl;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -43,6 +41,10 @@ public class MyUserDetailsService implements UserDetailsService {
 			Collection<GrantedAuthority> authList = getAuthorities(memberBean.getPrivilege());
 			userDetails = new User(account, memberBean.getPassword(), true,
 					true, true, true, authList);
+			SecurityContextImple context = new SecurityContextImple();
+			context.setMemberBean(memberBean);
+			SecurityContextHolder.setContext(context);
+
 		}
 		
 		return userDetails;

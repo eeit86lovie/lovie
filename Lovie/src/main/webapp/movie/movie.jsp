@@ -37,10 +37,10 @@
 
 		<div class="row">
 			<div class="col-md-3">
-				<img src=photo.do?type=movie&id=${movie.id}>
+				<img src=${pageContext.request.contextPath }/photo/movie/${movie.id}>
 			</div>
 			<div class="col-md-3">
-				<p><img src="image/movie/${movie.rank}.png" width="40"	></p>
+				<p><img src="${pageContext.request.contextPath }/image/movie/${movie.rank}.png" width="40"	></p>
 				<p>上映時間:${movie.startTime}</p>
 				<p>
 					類型:

@@ -20,7 +20,7 @@
 		<property name="jndiName" value="java:comp/env/jdbc/eeit86"></property>
 	</bean>
 
-	
+
 
 	<bean id="sessionFactory"
 		class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
@@ -99,23 +99,18 @@
 	<bean id="memberDAO" class="com.kidscodetw.eeit.service.MemberService">
 		<constructor-arg ref="memberDAOHibernate"></constructor-arg>
 	</bean>
-	
+
 	<bean id="memberRoleDAOHibernate" class="com.kidscodetw.eeit.dao.MemberRoleDAOHibernate">
 		<constructor-arg ref="sessionFactory"></constructor-arg>
 	</bean>
-	
+
 	<bean id="memberRoleDAO" class="com.kidscodetw.eeit.service.MemberRoleService">
 		<constructor-arg ref="memberRoleDAOHibernate"></constructor-arg>
 	</bean>
-	
-	<bean id="myUserDetailsService"
-		class="com.kidscodetw.eeit.config.MyUserDetailsService">
+
+	<bean id="myUserDetailsService" class="com.kidscodetw.eeit.security.MyUserDetailsService">
 		<property name="memberDAO" ref="memberDAO"></property>
 		<property name="memberRoleDAO" ref="memberRoleDAO"></property>
 	</bean>
-	
-	
-
-
 
 </beans>
