@@ -52,7 +52,7 @@ public class MovieFindOneMVC {
 		return "movie/movie.jsp";
 	}
 	
-	@RequestMapping(value="movie/{name}",method=RequestMethod.GET)
+	@RequestMapping(value="moviename/{name}",method=RequestMethod.GET)
 	public String getMovieByName(@PathVariable("name")String name, Model model){
 		MovieBean movieBean = movieDAO.select(name);
 		model.addAttribute("movie", movieBean);

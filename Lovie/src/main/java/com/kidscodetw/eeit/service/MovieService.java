@@ -75,7 +75,11 @@ public class MovieService implements MovieDAO{
 	public MovieBean insert(MovieBean bean){
 		MovieBean result = null;
 		if(bean!=null){
+			try{
 			result = movieDao.insert(bean);
+			}catch(Exception e){
+				System.out.println(e.getMessage());
+			}
 		}
 		return result;
 	}

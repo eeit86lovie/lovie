@@ -44,14 +44,14 @@ public class ShowtimeDAOTestDrive
     @Rollback(true)
     public void findOneByIdTest(){
        ShowtimeBean bean = showtimeDAO.select(1);
-       Assert.isTrue(bean.getMovieName().equals("魔境夢遊：時光怪客"),"FindOneByIdTest fail");
+       Assert.isTrue(bean.getMovieName().equals("國定殺戮日：大選之年"),"FindOneByIdTest fail");
     }
     
     @Test
     @Transactional
     @Rollback(true)
     public void findOneByBoth(){
-       List<ShowtimeBean> beans = showtimeDAO.selectBoth("魔境夢遊：時光怪客","基隆秀泰影城");
+       List<ShowtimeBean> beans = showtimeDAO.selectBoth("下女的誘惑","台北信義威秀");
        Assert.notEmpty(beans,"FindOneByBoth fail");
     }
     
@@ -59,7 +59,7 @@ public class ShowtimeDAOTestDrive
     @Transactional
     @Rollback(true)
     public void findByMovieName(){
-       List<ShowtimeBean> beans = showtimeDAO.selectMovie("魔境夢遊：時光怪客");
+       List<ShowtimeBean> beans = showtimeDAO.selectMovie("下女的誘惑");
        Assert.notEmpty(beans,"FindByMovieName fail");
     }
     
@@ -89,7 +89,7 @@ public class ShowtimeDAOTestDrive
     @Transactional
     @Rollback(true)
     public void deleteDateBefore() {
-    	showtimeDAO.deleteDateBefore("2016-06-03");
+    	showtimeDAO.deleteDateBefore("2016-07-15");
     	Assert.isNull(showtimeDAO.select(1), "deleteDateBefore fail");
     }
     

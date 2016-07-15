@@ -87,7 +87,7 @@ background-color: #555;
 			</c:if>
 			<div class="col-md-6">
 				<div class="col-md-6">
-					<a href="movie/${movie.id}"> <img
+					<a href="${pageContext.request.contextPath }/movie/${movie.id}"> <img
 						class="img-responsive" src="${pageContext.request.contextPath }/photo/movie/${movie.id}" alt=""></a>
 				</div>
 				<div class="col-md-6">

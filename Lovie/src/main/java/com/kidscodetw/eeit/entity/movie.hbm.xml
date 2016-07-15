@@ -15,7 +15,7 @@
         <property name="filmLength" column="filmLength" />
         <property name="intro" column="intro" />
         <property name="photoUrl" column="photoUrl" />
-        <property name="photo" column="photo" />
+        <property name="photo" column="photo" type="binary" />
         <property name="trailer" column="trailer" />
         <property name="online" column="online" />
         

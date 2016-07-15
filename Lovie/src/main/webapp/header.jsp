@@ -26,13 +26,13 @@
 			<div class="collapse navbar-collapse"
 				id="bs-example-navbar-collapse-1">
 				<ul class="nav navbar-nav">
-					<li><a href="index.jsp">首頁</a></li>
-					<li><a href="appointments">約會</a></li>
-					<li><a href="movies">電影</a></li>
-					<li><a href="theaters">戲院</a></li>
-					<li><a href="members">會員</a></li>
-					<li><a href="forums">討論</a></li>
-					<li><a href="interests">感興趣</a></li>
+					<li><a href=<c:url value="/index.jsp"/>>首頁</a></li>
+					<li><a href=<c:url value="/appointments"/>>約會</a></li>
+					<li><a href=<c:url value="/movies"/>>電影</a></li>
+					<li><a href=<c:url value="/theaters"/>>戲院</a></li>
+					<li><a href=<c:url value="/members"/>>會員</a></li>
+					<li><a href=<c:url value="/forums"/>>討論</a></li>
+					<li><a href=<c:url value="/interests"/>>感興趣</a></li>
 				</ul>
 				
 				<sec:authorize access="!hasRole('ROLE_ADMIN') or !hasRole('ROLE_GOLD') or !hasRole('ROLE_USER')">
@@ -54,16 +54,16 @@
 					
 							   <table>
 								<tr>
-									<td>User:</td>
-									<td><input type='text' name='username' value=''></td>
+									<td>帳號:</td>
+									<td><input id="login_account" placeholder="username" type='input' name='username' value=''></td>
 								</tr>
 								<tr>
-									<td>Password:</td>
-									<td><input type='password' name='password' /></td>
+									<td>密碼:</td>
+									<td><input id="login_password" type='password'  placeholder="password" name='password' /></td>
 								</tr>
 								<tr>
-									<td colspan='2'><input name="submit" type="submit"
-										value="submit" /></td>
+									<td colspan='2'><input id="login_submit" name="submit" type="submit"
+										value="登入" /></td>
 								</tr>
 							  </table>
 					

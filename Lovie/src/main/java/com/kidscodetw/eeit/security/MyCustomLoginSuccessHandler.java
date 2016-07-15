@@ -17,9 +17,7 @@ import org.springframework.stereotype.Component;
 public class MyCustomLoginSuccessHandler extends SavedRequestAwareAuthenticationSuccessHandler {
 	
 	private String loginMapping = "login.mvc";
-	
-	@Autowired
-	private ServletContext context;
+
 	
 	public MyCustomLoginSuccessHandler(){
 		
@@ -40,8 +38,8 @@ public class MyCustomLoginSuccessHandler extends SavedRequestAwareAuthentication
             String redirectUrl = (String) session.getAttribute("url_prior_login");
             if (redirectUrl != null) {
                 if(redirectUrl.substring(redirectUrl.length()-loginMapping.length()).equals(loginMapping)){
-                	System.out.println(context.getContextPath()+"/index.jsp");
-                	 getRedirectStrategy().sendRedirect(request, response, context.getContextPath()+"/index.jsp");
+                	 getRedirectStrategy().sendRedirect(request, response,"/index.jsp");
+                	 return;
                 }
                 session.removeAttribute("url_prior_login");
                 getRedirectStrategy().sendRedirect(request, response, redirectUrl);

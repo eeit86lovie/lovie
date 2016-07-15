@@ -36,7 +36,7 @@ public class PhotoService{
 	@RequestMapping(value="/{type}/{id}",method=RequestMethod.GET)
 	protected void getPhoto(@PathVariable("type")String type, @PathVariable("id")String id, HttpServletResponse response){
 		response.setContentType("image/jpeg");
-		
+		type = type.substring(0,1).toUpperCase() + type.substring(1);
 		String imgName = type.substring(0,1).toUpperCase() + type.substring(1) + id;
 		File f = new File(context.getRealPath("/") + "/photo/" + imgName + ".jpg");
 		if (f.exists()) {
@@ -80,8 +80,9 @@ public class PhotoService{
 		Connection conn = CommonUtil.connectMysql();
 		FileOutputStream out = null;
 		Blob blob = null;
+		type = type.substring(0,1).toUpperCase() + type.substring(1);
 		try {
-			PreparedStatement pstat = conn.prepareStatement("SELECT photo from " + type + " WHERE id =" + id);
+			PreparedStatement pstat = conn.prepareStatement("SELECT photo from "+type+ " WHERE id =" + id);
 			ResultSet rs = pstat.executeQuery();
 			if (rs.next()) {
 

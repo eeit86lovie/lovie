@@ -9,9 +9,6 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -19,30 +16,35 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
-import org.springframework.web.context.WebApplicationContext;
-import org.springframework.web.context.support.WebApplicationContextUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.kidscodetw.eeit.dao.MovieDAO;
 import com.kidscodetw.eeit.entity.MovieBean;
-import com.kidscodetw.eeit.service.MovieService;
 
-@WebServlet("/admin/movie/movieCrawler.do")
-public class MovieCrawler extends HttpServlet {
+@Service
+@RequestMapping("/admin/movie/movieCrawler")
+public class MovieCrawler {
 
-	@Override
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	@Autowired
+	private MovieDAO movieDAO;
+	@RequestMapping(method=RequestMethod.GET)
+	protected void doGet(HttpServletRequest request, HttpServletResponse response){
 		response.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html");
 		Map<String,String> movie_map = getMovieMap();
-		WebApplicationContext context =WebApplicationContextUtils.getWebApplicationContext(getServletContext()) ;
-		MovieDAO movieDAO = (MovieDAO)context.getBean("beans.config.xml");
 		List<MovieBean> list_mb = movieDAO.select();
 		for(MovieBean mb: list_mb){
 			if(movie_map.containsKey(mb.getName())){
 				movie_map.remove(mb.getName());
 			}
 		}
-		PrintWriter out = response.getWriter();
+		PrintWriter out;
+		try {
+			out = response.getWriter();
+		
 		if(movie_map.size()==0){
 			out.write("no");
 			return;
@@ -53,6 +55,10 @@ public class MovieCrawler extends HttpServlet {
 		while(iter.hasNext()){
 			Map.Entry<String, String> entry = (Map.Entry<String, String>) iter.next();
 			out.write(entry.getKey()+"<br />");
+		}
+		
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
 	}
 	

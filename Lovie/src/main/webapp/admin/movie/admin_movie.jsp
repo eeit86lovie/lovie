@@ -129,7 +129,7 @@ td{
 				xhr.onreadystatechange = callback;
 				update_button.setAttribute("style", "display:none")
 				update_loading_icon.setAttribute("style", "width:100px;display:block")
-				xhr.open("get", "movieCrawler.do");
+				xhr.open("get", "movieCrawler");
 				xhr.send();
 				
 				function callback(){
