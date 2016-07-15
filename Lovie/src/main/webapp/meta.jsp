@@ -1,17 +1,17 @@
 <%@page pageEncoding="UTF-8" %>
-<script src="js/jquery-2.2.3.min.js"></script>
+<script src="${pageContext.request.contextPath}/js/jquery-2.2.3.min.js"></script>
 
-<link rel="stylesheet" href="css/bootstrap-theme.css">
-<script src="js/bootstrap.min.js"></script>
+<!-- <link rel="stylesheet" href="css/bootstrap-theme.css"> -->
+<script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
 
-<link rel="stylesheet" href="css/imagehover.css">
+<%-- <link rel="stylesheet" href="${pageContext.request.contextPath}/css/imagehover.css"> --%>
 
 
-<link rel="stylesheet" href="css/login.css">
-<link rel="stylesheet" href="css/bootstrap.css">
-<link rel="stylesheet" href="css/bulma.css">
-<link rel="stylesheet" href="css/style.css">
-<link rel="stylesheet" href="css/footer.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/login.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/bootstrap.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/bulma.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/footer.css">
 
 
 <link rel="stylesheet"

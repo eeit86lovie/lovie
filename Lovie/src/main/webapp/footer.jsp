@@ -3,7 +3,7 @@
 	<footer class="footer-distributed">
 	<div class="footer-left">
 		<h3>
-			<img id="logo" height="60" src="./image/icon/logo.png">
+			<img id="logo" height="60" src="${pageContext.request.contextPath}/image/icon/logo.png">
 		</h3>
 		<p class="footer-links">
 			<a href="#">首頁</a> · <a href="#">約會</a> · <a href="#">電影</a>
@@ -123,7 +123,6 @@
 				if(xhr.readyState == 4 && xhr.status==200){
 					loginMsgs = JSON.parse(xhr.responseText);
 					if(loginMsgs.LoginSuccess){
-						
 						window.location.replace(loginMsgs.LoginSuccess);
 					}
 					account_error.text(loginMsgs.AccountEmptyError);

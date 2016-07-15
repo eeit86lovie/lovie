@@ -3,10 +3,8 @@ package com.kidscodetw.eeit.entity;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
-import javax.xml.bind.annotation.XmlRootElement;
 
 
-@XmlRootElement
 public class ShowtimeBean {
 	private Integer id;
 	private String movieName;

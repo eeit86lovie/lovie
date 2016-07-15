@@ -10,9 +10,6 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -20,25 +17,31 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
-import org.springframework.web.context.WebApplicationContext;
-import org.springframework.web.context.support.WebApplicationContextUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.google.gson.Gson;
 import com.kidscodetw.eeit.dao.MovieDAO;
 import com.kidscodetw.eeit.entity.MovieBean;
-import com.kidscodetw.eeit.service.MovieService;
 
-@WebServlet("/admin/movie/movieCrawlerConfirm.do")
-public class MovieCrawlerConfirm extends HttpServlet {
-
-	@Override
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+@Service
+@RequestMapping("/admin/movie/movieCrawlerConfirm")
+public class MovieCrawlerConfirm{
+	
+	@Autowired
+	private MovieDAO movieDAO;
+	
+	@RequestMapping(method=RequestMethod.GET)
+	protected void doGet(HttpServletRequest request, HttpServletResponse response){
 		response.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html");
-		PrintWriter out = response.getWriter();
+		PrintWriter out;
+		try {
+			out = response.getWriter();
+		
 		Map<String,String> movie_map = getMovieMap();
-		WebApplicationContext context =WebApplicationContextUtils.getWebApplicationContext(getServletContext()) ;
-		MovieDAO movieDAO = (MovieDAO)context.getBean("beans.config.xml");
 		List<MovieBean> list_mb = movieDAO.select();
 		for(MovieBean mb: list_mb){
 			if(movie_map.containsKey(mb.getName())){
@@ -56,11 +59,19 @@ public class MovieCrawlerConfirm extends HttpServlet {
 		while(iter.hasNext()){
 			Map.Entry<String, String> entry = (Map.Entry<String, String>) iter.next();
 			MovieBean mb = getMovieContext(entry.getValue());
-			MovieBean mb2 = movieDAO.insert(mb);
+			MovieBean mb2=null;
+			try{
+				mb2 = movieDAO.insert(mb);
+			}catch(Exception e){
+				System.out.println(e.getMessage());
+			}
 			list_mb_update_complete.add(mb2);
 		}
 		String json = new Gson().toJson(list_mb_update_complete);
 		out.write(json);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	
@@ -154,6 +165,7 @@ public class MovieCrawlerConfirm extends HttpServlet {
 			mb.setPhotoUrl(mPhotoUrl);
 			mb.setTrailer(mTrailer);
 			mb.setIntro(mIntro);
+			mb.setOnline(1);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

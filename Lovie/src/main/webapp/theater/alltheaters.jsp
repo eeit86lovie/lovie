@@ -83,7 +83,7 @@
 			var t_h1 = document.createElement("h1");
 			t_h1.setAttribute("style", "font-size: 24px;")
 			var t_a = document.createElement("a");
-			t_a.setAttribute("href", "theater.do?tID=${theater.id}")
+			t_a.setAttribute("href", "theater/${theater.id}")
 			var t_text = document.createTextNode("${theater.name}");
 			t_a.appendChild(t_text);
 			t_h1.appendChild(t_a);
@@ -136,7 +136,7 @@
 				var t_h1 = document.createElement("h1");
 				t_h1.setAttribute("style", "font-size: 24px;")
 				var t_a = document.createElement("a");
-				t_a.setAttribute("href", "theater.do?tID=${theater.id}")
+				t_a.setAttribute("href", "theater/${theater.id}")
 				var t_text = document.createTextNode("${theater.name}");
 				t_a.appendChild(t_text);
 				t_h1.appendChild(t_a);

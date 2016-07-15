@@ -48,13 +48,13 @@
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse navbar-ex1-collapse">
                 <ul class="nav navbar-nav">
-					<li><a href="index.jsp">首頁</a></li>
-					<li><a href="appointments.do">約會</a></li>
-					<li><a href="movies.do">電影</a></li>
-					<li><a href="theaters.do">戲院</a></li>
-					<li><a href="member.do">會員</a></li>
-					<li><a href="forum.do">討論</a></li>
-					<li><a href="interest.do">感興趣</a></li>
+					<li><a href=<c:url value="/index.jsp"/>>首頁</a></li>
+					<li><a href=<c:url value="/appointments"/>>約會</a></li>
+					<li><a href=<c:url value="/movies"/>>電影</a></li>
+					<li><a href=<c:url value="/theaters"/>>戲院</a></li>
+					<li><a href=<c:url value="/members"/>>會員</a></li>
+					<li><a href=<c:url value="/forums"/>>討論</a></li>
+					<li><a href=<c:url value="/interests"/>>感興趣</a></li>
 				</ul>
             </div>
             <!-- /.navbar-collapse -->

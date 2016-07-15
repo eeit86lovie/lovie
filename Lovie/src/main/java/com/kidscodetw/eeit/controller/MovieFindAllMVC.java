@@ -20,7 +20,7 @@ import com.kidscodetw.eeit.entity.MovieBean;
 import com.kidscodetw.eeit.entity.MovieGenreBean;
 
 @Controller
-@RequestMapping("movies.mvc")
+@RequestMapping("movies")
 public class MovieFindAllMVC {
 	
 	@Autowired

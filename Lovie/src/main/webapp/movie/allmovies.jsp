@@ -122,8 +122,8 @@
 		<c:forEach var="movie" items="${movies}" varStatus="theCount">
 			<div class="movie_item" data-genres="${genres[movie.id]}">
 				<div class="col-md-3 col-sm-4 col-xs-12 portfolio-item">
-					<a href="movie.do?mID=${movie.id}"> <img
-						class="img-responsive" src="photo.do?type=Movie&id=${movie.id}" alt=""></a>
+					<a href="movie/${movie.id}"> <img
+						class="img-responsive" src="photo/movie/${movie.id}" alt=""></a>
 					<h3>
 						<a href="/movies/selectMovie?mID=${movie.id}">${movie.name}</a>
 					</h3>
@@ -181,7 +181,7 @@
 			eleBtn.addEventListener("click", function() {
 				//keyword.value = this.firstChild.nodeValue;
 				//show.style.display = "none";
-				window.location="http://localhost:8080/Lovie/moviename.do?mName="+this.firstChild.nodeValue;
+				window.location="http://localhost:8080/Lovie/moviename/"+this.firstChild.nodeValue;
 				
 				
 				

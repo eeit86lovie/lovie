@@ -1,14 +1,13 @@
 package com.kidscodetw.eeit.crawler;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
-
 import com.kidscodetw.eeit.dao.MovieDAO;
 import com.kidscodetw.eeit.entity.MovieBean;
-import com.kidscodetw.eeit.service.MovieService;
+import com.kidscodetw.eeit.jdbc.MovieDAOJdbc;
 
 public class MoviePhotoToDB {
 
@@ -18,16 +17,20 @@ public class MoviePhotoToDB {
 	}
 
 	public void getLink() {
-		ApplicationContext context = new ClassPathXmlApplicationContext("beans.config.xml");
-		MovieDAO movieDAO = (MovieDAO)context.getBean("movieDAO");
+		MovieDAO movieDAO = new MovieDAOJdbc();
 		MovieBean tempBean = null;
 		Map<Integer, byte[]> photos = movieDAO.selectPhotos();
-		for (Map.Entry<Integer, byte[]> entry : photos.entrySet()) {
-			System.out.println(entry.getKey() + "/" + entry.getValue());
-			if(entry.getValue()!=null){
-				photos.remove(entry.getKey());
-			}
-		}
+		List<Integer> tempList = new ArrayList<Integer>();
+//		Set<Integer> photosKeys = photos.keySet();
+//		for(Integer key: photosKeys){
+//			if(photos.get(key)!=null){
+//				tempList.add(key);
+//			}
+//		}
+//		for(Integer key2: tempList){
+//			photos.remove(key2);
+//		}
+		
 		Set<Integer> photo_null = photos.keySet();
 		for(Integer i: photo_null){
 			tempBean = movieDAO.select(i);

@@ -70,7 +70,7 @@ background-color: #555;
 		<div class="row">
 			<div class="col-md-4">
 				<h1 class="page-header" style="font-size: 24px;">
-					<a href="theater.do?tID=${theater.id }">${theater.name}</a>
+					<a href="theater/${theater.id }">${theater.name}</a>
 				</h1>
 				${theater.address }<br> ${theater.phone } &nbsp <a
 					href="${theater.websiteUrl }">網站</a><br>
@@ -87,8 +87,8 @@ background-color: #555;
 			</c:if>
 			<div class="col-md-6">
 				<div class="col-md-6">
-					<a href="movie.do?mID=${movie.id}"> <img
-						class="img-responsive" src="photo.do?type=movie&id=${movie.id}" alt=""></a>
+					<a href="${pageContext.request.contextPath }/movie/${movie.id}"> <img
+						class="img-responsive" src="${pageContext.request.contextPath }/photo/movie/${movie.id}" alt=""></a>
 				</div>
 				<div class="col-md-6">
 					<div class="movie_head">
@@ -118,8 +118,6 @@ background-color: #555;
 
 	<!-- container -->
 	<c:import charEncoding="UTF-8" url="/footer.jsp"></c:import>
-	<script>
-		
-	</script>
+	
 </body>
 </html>

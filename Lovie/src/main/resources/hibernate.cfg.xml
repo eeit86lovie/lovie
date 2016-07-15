@@ -36,6 +36,7 @@
 		<mapping resource="com/kidscodetw/eeit/entity/showtime.hbm.xml" />
 		<mapping resource="com/kidscodetw/eeit/entity/appointment.hbm.xml" />
 		<mapping resource="com/kidscodetw/eeit/entity/member.hbm.xml" />
+		<mapping resource="com/kidscodetw/eeit/entity/memberRole.hbm.xml" />
 
 	</session-factory>
 	

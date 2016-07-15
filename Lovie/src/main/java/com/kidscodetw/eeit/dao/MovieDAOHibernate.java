@@ -13,7 +13,6 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
 import com.kidscodetw.eeit.entity.MovieBean;
-import com.kidscodetw.eeit.util.HibernateUtil;
 
 public class MovieDAOHibernate implements MovieDAO {
 
@@ -46,20 +45,26 @@ public class MovieDAOHibernate implements MovieDAO {
 
 	@Override
 	public void updatePhotos(String link, Integer id) {
-
-		Query query = this.getSession().createQuery(UPDATE_PHOTO);
+		
+		MovieBean movieBean = (MovieBean)this.getSession().get(MovieBean.class, id);
 		InputStream is;
 		try {
+			System.out.println(link);
 			is = new java.net.URL(link).openStream();
-			query.setParameter("id", id);
 			ByteArrayOutputStream os = new ByteArrayOutputStream();
 			byte[] buffer = new byte[8096];
-			for (int len; (len = is.read(buffer)) != -1;)
-				os.write(buffer, 0, len);
+//			for (int len; (len = is.read(buffer)) != -1;)
+//				os.write(buffer, 0, len);
+			int length = -1;
+	        while((length = is.read(buffer)) != -1) { 
+	            os.write(buffer, 0, length);
+	        } 
 			os.flush();
 			os.close();
-			query.setBinary(0, buffer);
-			query.executeUpdate();
+			
+			
+			movieBean.setPhoto(buffer);
+			getSession().save(movieBean);
 		} catch (MalformedURLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

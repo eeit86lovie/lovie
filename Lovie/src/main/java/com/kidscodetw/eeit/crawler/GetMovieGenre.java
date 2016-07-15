@@ -23,6 +23,7 @@ import com.kidscodetw.eeit.service.MovieService;
 public class GetMovieGenre {
 
 	public static void main(String[] args) {
+		Integer genreID = null;
 		ApplicationContext context = new ClassPathXmlApplicationContext("beans.config.xml");
 		MovieDAO movieDAO = (MovieDAO)context.getBean("movieDAO");
 		GenreDAO genreDAO = (GenreDAO)context.getBean("genreDAO");
@@ -37,7 +38,14 @@ public class GetMovieGenre {
 			for(String genreName: genreList){
 				MovieGenreBean mgb = new MovieGenreBean();
 				mgb.setMovieId(mb.getId());
-				int genreID = genreDAO.select(genreName).getId();
+				try{
+				genreID = genreDAO.select(genreName).getId();
+				}catch(Exception e){
+					e.printStackTrace();
+				}
+				if(genreID.equals(null)){
+					genreID = 19;
+				}
 				mgb.setGenreId(genreID);
 				movieGenreDAO.insert(mgb);
 				System.out.println("新增 "+mb.getName()+"("+mb.getId()+")"+": "+genreName);
@@ -46,6 +54,7 @@ public class GetMovieGenre {
 	}
 
 	public String getMovieLink(String s) {
+		Document doc = null;
 		HashMap<String, String> payload = new HashMap<String, String>();
 		try {
 			payload.put("type", "keyword");
@@ -53,13 +62,15 @@ public class GetMovieGenre {
 			payload.put("imageField2.x", "0");
 			payload.put("imageField2.y", "0");
 			payload.put("act", "movie");
-
-			Document doc = Jsoup.connect("http://movie.kingmedia.com.tw/search/search.php")
+			try{
+			doc = Jsoup.connect("http://movie.kingmedia.com.tw/search/search.php")
 					.userAgent("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2661.86 Safari/537.36")
 					.data(payload)
 					.postDataCharset("Big5")
 					.post();
-
+			}catch(java.net.SocketTimeoutException e){
+				System.out.println(e.getMessage());
+			}
 			String result = doc.select("tr.textblue>td>a").attr("href");
 			return result;
 
