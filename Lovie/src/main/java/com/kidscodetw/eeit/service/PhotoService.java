@@ -17,6 +17,7 @@ import java.sql.SQLException;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletResponse;
+import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -28,17 +29,23 @@ import com.kidscodetw.eeit.util.CommonUtil;
 
 @Controller
 @RequestMapping("photo")
-public class PhotoService{
-	
+public class PhotoService {
+
 	@Autowired
 	private ServletContext context;
 
-	@RequestMapping(value="/{type}/{id}",method=RequestMethod.GET)
-	protected void getPhoto(@PathVariable("type")String type, @PathVariable("id")String id, HttpServletResponse response){
+	@Autowired
+	private DataSource dataSource;
+
+	@RequestMapping(value = "/{type}/{id}", method = RequestMethod.GET)
+	protected void getPhoto(@PathVariable("type") String type,
+			@PathVariable("id") String id, HttpServletResponse response) {
 		response.setContentType("image/jpeg");
-		type = type.substring(0,1).toUpperCase() + type.substring(1);
-		String imgName = type.substring(0,1).toUpperCase() + type.substring(1) + id;
-		File f = new File(context.getRealPath("/") + "/photo/" + imgName + ".jpg");
+		type = type.substring(0, 1).toUpperCase() + type.substring(1);
+		String imgName = type.substring(0, 1).toUpperCase() + type.substring(1)
+				+ id;
+		File f = new File(context.getRealPath("/") + "/photo/" + imgName
+				+ ".jpg");
 		if (f.exists()) {
 			try {
 				writeImgToBrowser(response, imgName);
@@ -58,7 +65,8 @@ public class PhotoService{
 
 	}
 
-	public void writeImgToBrowser(HttpServletResponse response, String imgName) throws IOException {
+	public void writeImgToBrowser(HttpServletResponse response, String imgName)
+			throws IOException {
 		String path = context.getRealPath("/photo/" + imgName + ".jpg");
 		File photo = new File(path);
 		FileInputStream fin = new FileInputStream(photo);
@@ -77,12 +85,21 @@ public class PhotoService{
 	}
 
 	public void makeImgFromDb(String type, String id) {
-		Connection conn = CommonUtil.connectMysql();
+
+		Connection conn = null;
+		try {
+			conn = dataSource.getConnection();
+		} catch (SQLException e2) {
+			e2.printStackTrace();
+		}
+
 		FileOutputStream out = null;
 		Blob blob = null;
-		type = type.substring(0,1).toUpperCase() + type.substring(1);
+		type = type.substring(0, 1).toUpperCase() + type.substring(1);
 		try {
-			PreparedStatement pstat = conn.prepareStatement("SELECT photo from "+type+ " WHERE id =" + id);
+			PreparedStatement pstat = conn
+					.prepareStatement("SELECT photo from " + type
+							+ " WHERE id =" + id);
 			ResultSet rs = pstat.executeQuery();
 			if (rs.next()) {
 
@@ -90,21 +107,28 @@ public class PhotoService{
 			}
 			if (blob != null) {
 				InputStream is = blob.getBinaryStream();
-				String path = context.getRealPath("/photo/" + type + id + ".jpg");
+				String path = context.getRealPath("/photo/" + type + id
+						+ ".jpg");
 				File img = new File(path);
-
+				img.getParentFile().mkdirs();
+				try {
+					img.createNewFile();
+				} catch (IOException e2) {
+					e2.printStackTrace();
+				}
 				try {
 					out = new FileOutputStream(img);
 				} catch (FileNotFoundException e) {
-					e.printStackTrace();
+					System.out.println(path + " not found.");
 				}
 				try {
 					BufferedInputStream bin = new BufferedInputStream(is);
 					BufferedOutputStream bout = new BufferedOutputStream(out);
 					int length = 0;
-					;
 					while ((length = bin.read()) != -1) {
-						bout.write(length);
+						if (bout != null) {
+							bout.write(length);
+						}
 					}
 					bin.close();
 					is.close();

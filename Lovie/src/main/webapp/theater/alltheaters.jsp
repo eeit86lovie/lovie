@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -33,6 +34,17 @@
 	<c:import url="/header.jsp"></c:import>
 
 	<div class="container">
+<sec:authorize access="hasRole('ADMIN')">
+	<div style="color:red">ADMIN測試</div>: ${member}
+</sec:authorize>
+
+<sec:authorize access="hasRole('GOLD') and !hasRole('ADMIN')">
+	<div style="color:red">黃金會員測試</div>: ${member}
+</sec:authorize>
+
+<sec:authorize access="hasRole('USER') and !hasRole('GOLD') and !hasRole('ADMIN')">
+	<div style="color:red">一般會員測試</div>: ${member}
+</sec:authorize>
 
 		<div class="row" style="margin-bottom: 20px;">
 			<div class="col-md-12">

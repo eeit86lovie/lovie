@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.context.WebApplicationContext;
 
 import com.kidscodetw.eeit.dao.TheaterDAO;
+import com.kidscodetw.eeit.entity.MemberBean;
 import com.kidscodetw.eeit.entity.TheaterBean;
 import com.kidscodetw.eeit.security.SecurityContextImple;
 
@@ -35,9 +36,11 @@ public class TheaterFindAllMVC {
 			}
 		}
 		model.addAttribute("citys", city_list);
-//		SecurityContextImple context = (SecurityContextImple) SecurityContextHolder.getContext();
-//		System.out.println(context.getMemberBean().getDistrict());
-//		System.out.println(context.getAuthentication().getPrincipal());
+		try{
+			SecurityContextImple SecurityContext = (SecurityContextImple) SecurityContextHolder.getContext();
+			MemberBean bean = SecurityContext.getMemberBean();
+			model.addAttribute("member",bean);
+		}catch(java.lang.ClassCastException e){}
 		return "theater/alltheaters.jsp";
 	}
 

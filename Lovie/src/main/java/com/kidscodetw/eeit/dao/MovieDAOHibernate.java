@@ -22,6 +22,7 @@ public class MovieDAOHibernate implements MovieDAO {
 	private static final String UPDATE_PHOTO = "update MovieBean set photo=? where id=:id";
 	private static final String SELECT_BY_NAME = "from MovieBean where name=:name";
 
+
 	private SessionFactory sessionFactory;
 
 	public MovieDAOHibernate(SessionFactory sessionFactory) {
