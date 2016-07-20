@@ -40,7 +40,7 @@
         <mapping resource="com/kidscodetw/eeit/entity/cart/product.hbm.xml" />
 		<mapping resource="com/kidscodetw/eeit/entity/cart/tradedetail.hbm.xml" />
         <mapping resource="com/kidscodetw/eeit/entity/cart/bill.hbm.xml" />
-<!--         <mapping resource="com/kidscodetw/eeit/entity/forum/article_rank.hbm.xml" /> -->
+        <mapping resource="com/kidscodetw/eeit/entity/forum/article_rank.hbm.xml" />
         <mapping resource="com/kidscodetw/eeit/entity/forum/articlereply.hbm.xml" />
         <mapping resource="com/kidscodetw/eeit/entity/forum/forum.hbm.xml" />
 	</session-factory>

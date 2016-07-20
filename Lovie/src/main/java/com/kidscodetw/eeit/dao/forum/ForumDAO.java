@@ -18,7 +18,7 @@ public interface ForumDAO {
 	
 	ForumBean select_id(Integer id);
 	
-	ForumBean select_memberAccount(String memberAccount);
+	List<ForumBean> select_memberAccount(String memberAccount);
 	
 	ForumBean insert(ForumBean bean);
 

@@ -7,12 +7,15 @@ public class ArticleRankBean {
 	private String memberAccount;
 	private int good;
 	private int bad;
+	private int report;
+	private String reportReason;
 
 	@Override
 	public String toString() {
 		return "ArticleRankBean [id=" + id + ", articleID=" + articleID
 				+ ", memberAccount=" + memberAccount + ", good=" + good
-				+ ", bad=" + bad + "]";
+				+ ", bad=" + bad + ", report=" + report + ", reportReason="
+				+ reportReason + "]";
 	}
 
 	public int getId() {
@@ -53,6 +56,22 @@ public class ArticleRankBean {
 
 	public void setBad(int bad) {
 		this.bad = bad;
+	}
+
+	public int getReport() {
+		return report;
+	}
+
+	public void setReport(int report) {
+		this.report = report;
+	}
+
+	public String getReportReason() {
+		return reportReason;
+	}
+
+	public void setReportReason(String reportReason) {
+		this.reportReason = reportReason;
 	}
 
 }

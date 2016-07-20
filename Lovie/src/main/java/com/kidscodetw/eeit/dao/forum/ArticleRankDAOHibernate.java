@@ -2,10 +2,13 @@ package com.kidscodetw.eeit.dao.forum;
 
 import java.util.List;
 
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
 import com.kidscodetw.eeit.entity.forum.ArticleRankBean;
+
+
 
 public class ArticleRankDAOHibernate implements ArticleRankDAO {
 
@@ -13,6 +16,8 @@ public class ArticleRankDAOHibernate implements ArticleRankDAO {
 	private static final String SELECT_ID = "FROM ArticleRankBean WHERE id=?";
 	private static final String SELECT_NAME = "FROM ArticleRankBean WHERE memberAccount=?";
 	private static final String SELECT_ARTICLEID = "FROM ArticleRankBean WHERE articleID=?";
+	private static final String SELECT_GOOD = "FROM ArticleRankBean WHERE articleID=? AND good=?";	
+	private static final String SELECT_BAD = "FROM ArticleRankBean WHERE articleID=? AND bad=?";	
 	private static final String INSERT = "INSERT INTO ArticleRank(articleID,memberAccount,content,photo) VALUES (?,?,?,?)";
 	private static final String UPDATE = "UPDATE ArticleReplyBean SET content=?, photo=? ,editTime=? WHERE id =?";
 	private static final String DELETE = "DELETE FROM ArticleRankBean WHERE id=?";
@@ -28,38 +33,55 @@ public class ArticleRankDAOHibernate implements ArticleRankDAO {
 
 	@Override
 	public List<ArticleRankBean> select_ALL() {
-		// TODO Auto-generated method stub
-		return null;
+		List<ArticleRankBean> lrank = null;
+		Query query = getSession().createQuery(SELECT_ALL);
+		lrank = query.list();
+		return lrank;
 	}
 
 	@Override
 	public ArticleRankBean select_id(Integer id) {
-		// TODO Auto-generated method stub
-		return null;
+		ArticleRankBean rank = null;
+		rank = (ArticleRankBean) getSession().get(ArticleRankBean.class,id);
+		return rank;
 	}
 
 	@Override
 	public List<ArticleRankBean> select_memberAccount(String memberAccount) {
-		// TODO Auto-generated method stub
-		return null;
+    	 List<ArticleRankBean> rank = null;
+		 Query query = getSession().createQuery(SELECT_NAME);
+		 query.setParameter(0, memberAccount);
+		 rank = query.list();
+		 return rank;
 	}
 
 	@Override
-	public List<ArticleRankBean> select_totle_good(int articleID) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<ArticleRankBean> select_totle_good(int articleID,int good) {
+		 List<ArticleRankBean> rank = null;
+		 Query query = getSession().createQuery(SELECT_GOOD);
+		 query.setParameter(0, articleID);
+		 query.setParameter(1, good);
+		 rank = query.list();
+		 return rank;
 	}
 
 	@Override
-	public List<ArticleRankBean> select_totle_bad(int articleID) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<ArticleRankBean> select_totle_bad(int articleID,int bad) {
+		 List<ArticleRankBean> rank = null;
+		 Query query = getSession().createQuery(SELECT_GOOD);
+		 query.setParameter(0, articleID);
+		 query.setParameter(1, bad);
+		 rank = query.list();
+		 return rank;
 	}
 
 	@Override
 	public List<ArticleRankBean> select_articleID(int articleID) {
-		// TODO Auto-generated method stub
-		return null;
+		List<ArticleRankBean> rank = null;
+		Query query = getSession().createQuery(SELECT_ARTICLEID);
+		query.setParameter(0, articleID);
+		rank = query.list();
+		return rank;
 	}
 
 	@Override

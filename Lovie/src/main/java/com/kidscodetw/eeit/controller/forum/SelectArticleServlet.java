@@ -1,4 +1,4 @@
-package com.kidscodetw.eeit.controller.movie;
+package com.kidscodetw.eeit.controller.forum;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,8 +17,10 @@ import com.kidscodetw.eeit.entity.forum.ArticleReplyBean;
 import com.kidscodetw.eeit.entity.forum.ForumBean;
 import com.kidscodetw.eeit.entity.member.MemberBean;
 
+
+
 @Controller
-@RequestMapping("forums")
+// @RequestMapping("forum")
 public class SelectArticleServlet {
 
 	@Autowired
@@ -30,39 +32,39 @@ public class SelectArticleServlet {
 	@Autowired
 	private ArticleReplyDAO articleReplyDAO;
 
-	@RequestMapping(method = RequestMethod.GET)
+	@RequestMapping(value = "forums", method = RequestMethod.GET)
 	public String forumJsp() {
 		return "forum/NewTestForum.jsp";
 	}
 
-	@RequestMapping(value = "member", method = RequestMethod.GET)
+	@RequestMapping(value = "forumsMember", method = RequestMethod.GET)
 	public String forumJsp1() {
 		return "forum/NewTestForum.jsp";
 	}
 
-	@RequestMapping(value = "addarticle", method = RequestMethod.GET)
+	@RequestMapping(value = "forumsAddarticle.mvc", method = RequestMethod.GET)
 	public String forumJsp2() {
 		return "forum/NewTestForum.jsp";
 	}
 	
-	@RequestMapping(value = "addreply", method = RequestMethod.GET)
+	@RequestMapping(value = "forumsAddreply.mvc", method = RequestMethod.GET)
 	public String forumJsp3() {
 		return "forum/NewTestForum.jsp";
 	}
 	
-	@RequestMapping(value = "selectreply", method = RequestMethod.GET)
+	@RequestMapping(value = "forumsSelectreply.mvc", method = RequestMethod.GET)
 	public String forumJsp4() {
 		return "forum/NewTestForum.jsp";
 	}
 
-	@RequestMapping(value = "PublicationArticle", method = RequestMethod.GET)
+	@RequestMapping(value = "forumsPublicationArticle.mvc", method = RequestMethod.GET)
 	public String forumJsp5() {
 		return "forum/NewTestForum.jsp";
 	}
 
 	
     //顯示1~10筆文章
-	@RequestMapping(value = "forum", method = RequestMethod.POST, produces = "application/json")
+	@RequestMapping(value = "forums", method = RequestMethod.POST, produces = "application/json")
 	@ResponseBody
 	public List<ForumBean> getArticle() {
 		List<ForumBean> articlejson = forumDAO.select_ALL();
@@ -70,7 +72,7 @@ public class SelectArticleServlet {
 	}
     
 	//顯示留言
-	@RequestMapping(value = "selectreply", method = RequestMethod.POST, produces = "application/json")
+	@RequestMapping(value = "forumsSelectreply", method = RequestMethod.POST, produces = "application/json")
 	@ResponseBody
 	public List<ArticleReplyBean> selectReply() {
 		List<ArticleReplyBean> selectReplyjson = articleReplyDAO.select_ALL();
@@ -78,7 +80,7 @@ public class SelectArticleServlet {
 	}
 	
 	//顯示下10筆文章
-	@RequestMapping(value = "addarticle", params = { "addcontent" }, method = RequestMethod.GET)
+	@RequestMapping(value = "forumsAddarticle", params = { "addcontent" }, method = RequestMethod.GET)
 	@ResponseBody
 	public List<ForumBean> addArticle(
 			@RequestParam("addcontent") Integer addcontent) {
@@ -89,7 +91,7 @@ public class SelectArticleServlet {
 	}
 
 	//顯示會員資料
-	@RequestMapping(value = "member", method = RequestMethod.POST, produces = "application/json")
+	@RequestMapping(value = "forumsMember", method = RequestMethod.POST, produces = "application/json")
 	@ResponseBody
 	public List<MemberBean> getMember() {
 		List<MemberBean> memberjson = memberDAO.select();
@@ -97,7 +99,7 @@ public class SelectArticleServlet {
 	}
 	
 	//發表留言
-	@RequestMapping(value = "addreply", params = { "ReplyMember","ReplyContent" }, method = RequestMethod.POST)
+	@RequestMapping(value = "forumsAddreply", params = { "ReplyMember","ReplyContent" }, method = RequestMethod.POST)
 	@ResponseBody
 	public ArticleReplyBean addreply(
 			@RequestParam("ReplyMember") String ReplyMember,
@@ -117,7 +119,7 @@ public class SelectArticleServlet {
 	
 	
 	//發表文章
-	@RequestMapping(value = "PublicationArticle", params = {"PublicationMember","PublicationTitle" ,"PublicationGenre","PublicationContent"}, method = RequestMethod.POST)
+	@RequestMapping(value = "forumsPublicationArticle", params = {"PublicationMember","PublicationTitle" ,"PublicationGenre","PublicationContent"}, method = RequestMethod.POST)
 	@ResponseBody
 	public List<ForumBean> PublicationArticle(
 			@RequestParam("PublicationMember") String PublicationMember,

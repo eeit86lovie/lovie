@@ -227,7 +227,7 @@ function PublicationArticle() {
 	
 	
 	$.ajax({
-		url : "PublicationArticle.mvc",
+		url : "forumsPublicationArticle",
 		type : "post",
 		data : { 
 				 PublicationMember:pubMember,
@@ -297,18 +297,18 @@ var memberJson;
 
 
 $.ajax({
-	url : "member.mvc",
+	url : "forumsMember",
 	type : "post",
 	dataType : "json",
 	success : function(memberjson) {
 		memberJson = memberjson;
 		$.ajax({
-			url : "selectreply.mvc",
+			url : "forumsSelectreply",
 			type : "post",
 			dataType : "json",
 			success : function(selectReplyjson) {
 				$.ajax({
-					url : "forum.mvc",
+					url : "forums",
 					type : "post",
 					dataType : "json",
 					success : function(articlejson) {
@@ -352,12 +352,12 @@ $.ajax({
 function add(){
 	var count = $(".BOX01").size();
 	$.ajax({
-		url : "selectreply.mvc",
+		url : "forumsSelectreply",
 		type : "post",
 		dataType : "json",
 		success : function(selectReplyjson) {
 			$.ajax({
-				url : "addarticle.mvc",
+				url : "forumsAddarticle",
 				type : "GET",
 				dataType : "json",
 				data : {
@@ -488,7 +488,7 @@ function add(){
 		if(replyValue != ""){//需要再判斷有無登入
 			
 					$.ajax({
-						url : "addreply.mvc",
+						url : "forumsAddreply",
 						type : "POST",
 						dataType : "json",
 						data : {
