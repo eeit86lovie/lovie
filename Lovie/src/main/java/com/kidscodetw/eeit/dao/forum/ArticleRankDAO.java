@@ -26,4 +26,6 @@ public interface ArticleRankDAO {
 
 	int delete(int articleID);
 
+	//檢舉
+	
 }

@@ -11,9 +11,9 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
-
 import com.kidscodetw.eeit.dao.cart.ProductDAO;
 import com.kidscodetw.eeit.entity.cart.ProductBean;
+
 
 
 @ContextConfiguration(locations = "classpath:application-context.xml")
@@ -36,16 +36,16 @@ public class ProductDAOTestDrive {
 	@Transactional
 	@Rollback(true)
 	public void select_ID() {
-		ProductBean pb = productDAO.select_id(2);
-		Assert.isTrue(pb.getName().equals("�����|��"), "select_ID fail");
+		ProductBean pb = productDAO.select_id(75);
+		Assert.isTrue(pb.getName().equals("白銀會員"), "select_ID fail");
 	}
 
 	@Test
 	@Transactional
 	@Rollback(true)
 	public void select_name() {
-		ProductBean pb = productDAO.select_name("�����|��");
-		Assert.isTrue(pb.getName().equals("�����|��"),
+		ProductBean pb = productDAO.select_name("白銀會員");
+		Assert.isTrue(pb.getName().equals("白銀會員"),
 				"select_Account fail");
 	}
 
@@ -63,25 +63,25 @@ public class ProductDAOTestDrive {
 	public void insert() {
 
 		ProductBean pb = new ProductBean();
-		pb.setName("���K�H2");
+		pb.setName("黃金會員");
 		pb.setCost(10);
 		pb.setDiscount(0);
 		pb.setCategory(3);
 		pb.setInventory(50);
-		pb.setContent("�w�w�w�w�w");
+		pb.setContent("哈哈哈");
 		ProductBean result = productDAO.insert(pb);
-		Assert.isTrue(result.getName().equals("���K�H2"), "insert fail");
+		Assert.isTrue(result.getName().equals("黃金會員"), "insert fail");
 	}
 
 	@Test
 	@Transactional
 	@Rollback(true)
 	public void update() {
-		ProductBean pb = productDAO.select_id(46);
-		pb.setName("���K�H2");
+		ProductBean pb = productDAO.select_id(75);
+		pb.setName("鋼鐵人2");
 		pb.setContent("haha");
 		productDAO.update(pb);
-		String result = productDAO.select_id(46).getContent();
+		String result = productDAO.select_id(75).getContent();
 		Assert.isTrue(result.equals("haha"), "update fail");
 
 	}
@@ -90,8 +90,8 @@ public class ProductDAOTestDrive {
 	@Transactional
 	@Rollback(true)
 	public void delete() {
-		productDAO.delet(39);
-		Assert.isNull(productDAO.select_id(39), "delete fail");
+		productDAO.delet(79);
+		Assert.isNull(productDAO.select_id(79), "delete fail");
 	}
 
 }

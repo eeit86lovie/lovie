@@ -18,6 +18,7 @@
 	<context:component-scan base-package="com.kidscodetw.eeit.websocket" />
 	<context:component-scan base-package="com.kidscodetw.eeit.security" />
 	<context:component-scan base-package="com.kidscodetw.eeit.util" />
+	
 	<mvc:annotation-driven />
 	
 	<mvc:resources mapping="/**" location="/"></mvc:resources>

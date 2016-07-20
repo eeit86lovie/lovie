@@ -2,6 +2,7 @@ package com.kidscodetw.eeit.entity.cart;
 
 import java.io.Serializable;
 import java.sql.Date;
+import java.sql.Timestamp;
 
 
 
@@ -11,7 +12,7 @@ public class BillBean implements Serializable{
 	private Integer id;
 	private Integer memberid;
 	private String account;
-	private Date tradeTime;
+	private java.util.Date tradeTime;
 	private Integer creditnum;
 	private Integer status;
 	public Integer getId() {
@@ -32,10 +33,10 @@ public class BillBean implements Serializable{
 	public void setAccount(String account) {
 		this.account = account;
 	}
-	public Date getTradeTime() {
+	public java.util.Date getTradeTime() {
 		return tradeTime;
 	}
-	public void setTradeTime(Date tradeTime) {
+	public void setTradeTime(java.util.Date tradeTime) {
 		this.tradeTime = tradeTime;
 	}
 	public Integer getCreditnum() {
@@ -59,9 +60,7 @@ public class BillBean implements Serializable{
 				+ account + ", tradeTime=" + tradeTime + ", creditnum="
 				+ creditnum + ", status=" + status + "]";
 	}
-	
-	
-	
+
 	
 	
 }

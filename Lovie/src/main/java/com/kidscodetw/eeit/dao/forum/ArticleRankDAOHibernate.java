@@ -86,20 +86,23 @@ public class ArticleRankDAOHibernate implements ArticleRankDAO {
 
 	@Override
 	public ArticleRankBean insert(ArticleRankBean bean) {
-		// TODO Auto-generated method stub
-		return null;
+		getSession().save(bean);
+	    return bean;
 	}
 
 	@Override
 	public ArticleRankBean update(ArticleRankBean bean) {
-		// TODO Auto-generated method stub
-		return null;
+		getSession().update(bean);	
+		return bean;
 	}
 
 	@Override
 	public int delete(int articleID) {
-		// TODO Auto-generated method stub
-		return 0;
+		int count = 0;
+		Query query = getSession().createQuery(DELETE);
+		query.setParameter(0, articleID);
+		count = query.executeUpdate();
+		return count;
 	}
 
 }

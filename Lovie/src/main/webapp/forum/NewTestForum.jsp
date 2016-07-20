@@ -220,7 +220,7 @@ $('#modaltrigger').leanModal({ top: 110, overlay: 0.8, closeButton: ".hidemodal"
 
 
 function PublicationArticle() {
-	var pubMember = "3122663"//要改成登入
+	var pubMember = "${loginmember.account}";
 	var pubTitle = $("#username").val();
 	var pubGenre = $("#ArticleGenre").val();
 	var pubContent = $("#textArea").val();
@@ -385,8 +385,8 @@ function add(){
 	  		var article_genre_Text = document.createTextNode(articleJson[i].genre);
 	  		var article_title_Text = document.createTextNode(articleJson[i].title);
 	  		var article_content_Text = document.createTextNode(articleJson[i].content);
-	  		var article_pubTime_Text = document.createTextNode(articleJson[i].pubTime);
-	  		var article_editTime_Text = document.createTextNode(articleJson[i].editTime);
+	  		var article_pubTime_Text = document.createTextNode("發表時間:"+articleJson[i].pubTime);
+	  		var article_editTime_Text = document.createTextNode("最後編輯時間:"+articleJson[i].editTime);
 	 
 	  		
 	  		var replyText = document.createElement("input");
@@ -447,6 +447,12 @@ function add(){
 	  		Article_addReply_div.append(replyText);//留言文字框
 	  		Article_addReply_div.append(replybutton);//流言按鈕
 	 		
+	  		
+	  		var countReply = Article_replyarea_div.children().length+"則留言";
+	  		if(Article_replyarea_div.children().length>0){
+	  			var countReply_div = $("<div></div>").append(countReply);
+	  		}
+	  		
 	  		allarticle.append(Article_photo_div);
 	 		allarticle.append(Article_member_div);
 	 		allarticle.append(Article_pubTime_div);
@@ -455,8 +461,11 @@ function add(){
 			allarticle.append(Article_content_div);
 			allarticle.append(hideReply);
 			allarticle.append(Article_editTime_div);
-	 		allarticle.append(Article_replyarea_div);//留言放這
+			allarticle.append(countReply_div);
 	 		allarticle.append(Article_addReply_div);
+	 		allarticle.append(Article_replyarea_div);//留言放這
+	 		
+	 		
 	 		
 	 		if(articleJson.length == 1){
 	 			$("#box").prepend(allarticle);
@@ -483,7 +492,7 @@ function add(){
 		$("#errormessage").remove();
 		var replyValue = $("#"+"text"+replyButtonObject.id.substring(11)).val();
 		var replyArticle_id = replyButtonObject.id.substring(11);
-		var replyMember ="3122208"//改登錄會員
+		var replyMember ="${loginmember.account}";
 		
 		if(replyValue != ""){//需要再判斷有無登入
 			
@@ -519,7 +528,7 @@ function add(){
 	  	var Reply_photo_div = $("<div></div>").append(Reply_img);
 	  	var Reply_member_div = $("<div class='replymember'></div>").append(returnReplyjson.memberAccount);
 	  	var Reply_content_div = $("<div class='replycontent'></div>").append(returnReplyjson.content);
-	  	var Reply_pubTime_div = $("<div class='replypubTime'></div>").append(returnReplyjson.pubTime);	
+	  	var Reply_pubTime_div = $("<div class='replypubTime'></div>").append("留言時間:"+returnReplyjson.pubTime);	
 	    var replyAll_div = $("<div class='replyAll'></div>");//整塊留言DIV		
 		
 	    

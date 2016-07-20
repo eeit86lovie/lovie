@@ -5,15 +5,15 @@ import java.util.List;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-
 import com.kidscodetw.eeit.entity.cart.ProductBean;
+
 
 public class ProductDAOHibernate implements ProductDAO {
 
 	private static final String SELECT_ALL = "FROM ProductBean";
 	private static final String SELECT_ID = "FROM ProductBean WHERE productid = ?";
 	private static final String SELECT_NAME = "FROM ProductBean WHERE name = ?";
-	private static final String SELECT_CATEGORY = "FROM ProductBean WHERE CATEGORY=?";
+	private static final String SELECT_CATEGORY = "FROM ProductBean WHERE category=?";
 	private static final String INSERT = "INSERT INTO ProductBean(name,cost,discount,productphoto,inventory,category,content) VALUES (?,?,?,?,?,?,?)";
 	private static final String UPDATE = "UPDATE ProductBean SET name=COALESCE(?,name),cost =COALESCE(?, cost),productphoto =COALESCE(?, productphoto), discount = COALESCE(?, discount),inventory = COALESCE(?, inventory),category = COALESCE(?, category),content = COALESCE(?, content)WHERE productid=?";
 	private static final String DELETE = "DELETE FROM ProductBean WHERE productid=?";
@@ -77,7 +77,7 @@ public class ProductDAOHibernate implements ProductDAO {
 	public List<ProductBean> select_category(int category) {
 		List<ProductBean> lpb = null;
 		Query query = getSession().createQuery(SELECT_CATEGORY);
-		query.setParameter(1,category);
+		query.setParameter(0,category);
 		lpb = query.list();
 		return lpb;
 		
