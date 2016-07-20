@@ -43,9 +43,8 @@ public class ForumDAOTestDrive {
 	@Transactional
 	@Rollback(true)
 	public void select_Account() {
-		ForumBean fb = forumDAO.select_memberAccount("3122663");
-		Assert.isTrue(fb.getMemberAccount().equals("3122663"),
-				"select_Account fail");
+		List<ForumBean> fb = forumDAO.select_memberAccount("3122663");
+		Assert.notEmpty(fb, "select_Account fail");
 	}
 
 	@Test

@@ -71,16 +71,12 @@ public class ForumDAOHibernate implements ForumDAO {
 	
 	
 	@Override
-	public ForumBean select_memberAccount(String memberAccount) {
-		ForumBean fb = null;
+	public List<ForumBean> select_memberAccount(String memberAccount) {
+		List<ForumBean> fb = null;
 		Query query = getSession().createQuery(SELECT_BY_NAME);
 		query.setParameter(0, memberAccount);
-		List<ForumBean> fbs = query.list();
-		for(ForumBean forumbean :fbs){
-			fb = forumbean;
-			}
-			
-		
+		fb = query.list();
+				
 		return fb;
 	}
 

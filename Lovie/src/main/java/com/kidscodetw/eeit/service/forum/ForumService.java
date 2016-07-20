@@ -21,8 +21,8 @@ public class ForumService {
 		return result;
 	}
 
-	public ForumBean select_memberAccount(String account){
-		ForumBean result = null;
+	public List<ForumBean> select_memberAccount(String account){
+		List<ForumBean> result = null;
 		if(account!=null && account.length()!=0){
 			result = forumDAO.select_memberAccount(account);
 		}
