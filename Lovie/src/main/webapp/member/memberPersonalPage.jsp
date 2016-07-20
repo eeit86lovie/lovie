@@ -35,15 +35,15 @@ color:#CC6600
   <div class="col-md-9" ><b class="memberColumn" id="nickName">暱稱：</b>${oneMember.nickname}</div>
   <div class="col-md-9" ><b class="memberColumn">年齡：</b>${oneMember.birthday}</div>
   <div class="col-md-9" ><b class="memberColumn">性別：</b>${oneMember.gender}</div>
-  <div class="col-md-9" ><b class="memberColumn">星座：</b>${oneMember.birthday}</div>
-  <div class="col-md-9" ><b class="memberColumn">所在地：</b>${oneMember.city} ${member.district}</div>
+  <div class="col-md-9" ><b class="memberColumn">星座：</b>${constellation}</div>
+  <div class="col-md-9" ><b class="memberColumn">所在地：</b>${oneMember.city} ${oneMember.district}</div>
   <div class="col-md-9" ><b class="memberColumn">好友數：</b>${oneMember.friendNum}</div>
   <div class="col-md-9" ><b class="memberColumn">會員等級：</b>鑽石會員</div>
-  <div class="col-md-9" ><b class="memberColumn">會員發文總數：</b>123篇</div>
+  <div class="col-md-9" ><b class="memberColumn">會員發文總數：</b>${article}</div>
   <div class="col-md-12" > </div>
   <div class="col-md-12" ><b class="memberColumn">自我介紹：</b></div>
   <div class="col-md-1" ></div>
-  <div class="col-md-9" >${member.intro}</div>
+  <div class="col-md-9" >${oneMember.intro}</div>
   <div class="col-md-2" ></div>
   <div class="col-md-12" ><b class="memberColumn">喜歡的電影類型：</b>喜劇|奇幻|驚悚</div>
   <div class="col-md-12" ><br></div>

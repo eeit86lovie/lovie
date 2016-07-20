@@ -35,6 +35,7 @@
         	<column name="registeredTime" not-null="false" default="null" />
         </property>
         <property name="lastOnTime" column="lastOnTime" />
+        <property name="privilegeExp" column="privilegeExp" />
         
        
         

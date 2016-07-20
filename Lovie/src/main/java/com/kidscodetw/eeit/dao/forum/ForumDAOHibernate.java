@@ -80,6 +80,7 @@ public class ForumDAOHibernate implements ForumDAO {
 		return fb;
 	}
 
+
 	
 	@Override
 	public ForumBean insert(ForumBean bean) {

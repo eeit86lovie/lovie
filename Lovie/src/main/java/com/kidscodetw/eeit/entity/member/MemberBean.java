@@ -24,7 +24,10 @@ public class MemberBean implements Serializable{
 	private String constellation;
 	private String registeredTime;
 	private String lastOnTime;
+	private String privilegeExp;
 	
+
+
 	public MemberBean(){
 		
 	}
@@ -149,7 +152,13 @@ public class MemberBean implements Serializable{
 	public void setPhotoUrl(String photoUrl) {
 		this.photoUrl = photoUrl;
 	}
-	
+	public String getPrivilegeExp() {
+		return privilegeExp;
+	}
+
+	public void setPrivilegeExp(String privilegeExp) {
+		this.privilegeExp = privilegeExp;
+	}
 	
 
 }
