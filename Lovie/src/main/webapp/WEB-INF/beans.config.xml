@@ -42,72 +42,128 @@
 
 	<aop:config>
 		<aop:pointcut id="pointcutDAO"
-			expression="execution(* com.kidscodetw.eeit.dao.*.*(..))" />
+			expression="execution(* com.kidscodetw.eeit.dao.*.*.*(..))" />
 		<aop:advisor advice-ref="txAdvice" pointcut-ref="pointcutDAO" />
 	</aop:config>
 
 	<!-- ShowtimeDAO -->
-	<bean id="showtimeDAOHibernate" class="com.kidscodetw.eeit.dao.ShowtimeDAOHibernate">
+	<bean id="showtimeDAOHibernate" class="com.kidscodetw.eeit.dao.movie.ShowtimeDAOHibernate">
 		<constructor-arg ref="sessionFactory"></constructor-arg>
 	</bean>
 
-	<bean id="showtimeDAO" class="com.kidscodetw.eeit.service.ShowtimeService">
+	<bean id="showtimeDAO" class="com.kidscodetw.eeit.service.movie.ShowtimeService">
 		<constructor-arg ref="showtimeDAOHibernate"></constructor-arg>
 	</bean>
 
 	<!-- TheaterDAO -->
-	<bean id="theaterDAOHibernate" class="com.kidscodetw.eeit.dao.TheaterDAOHibernate">
+	<bean id="theaterDAOHibernate" class="com.kidscodetw.eeit.dao.movie.TheaterDAOHibernate">
 		<constructor-arg ref="sessionFactory"></constructor-arg>
 	</bean>
 
-	<bean id="theaterDAO" class="com.kidscodetw.eeit.service.TheaterService">
+	<bean id="theaterDAO" class="com.kidscodetw.eeit.service.movie.TheaterService">
 		<constructor-arg ref="theaterDAOHibernate"></constructor-arg>
 	</bean>
 
 	<!-- MovieDAO -->
-	<bean id="movieDAOHibernate" class="com.kidscodetw.eeit.dao.MovieDAOHibernate">
+	<bean id="movieDAOHibernate" class="com.kidscodetw.eeit.dao.movie.MovieDAOHibernate">
 		<constructor-arg ref="sessionFactory"></constructor-arg>
 	</bean>
 
-	<bean id="movieDAO" class="com.kidscodetw.eeit.service.MovieService">
+	<bean id="movieDAO" class="com.kidscodetw.eeit.service.movie.MovieService">
 		<constructor-arg ref="movieDAOHibernate"></constructor-arg>
 	</bean>
 
 	<!-- GenreDAO -->
-	<bean id="genreDAOHibernate" class="com.kidscodetw.eeit.dao.GenreDAOHibernate">
+	<bean id="genreDAOHibernate" class="com.kidscodetw.eeit.dao.movie.GenreDAOHibernate">
 		<constructor-arg ref="sessionFactory"></constructor-arg>
 	</bean>
 
-	<bean id="genreDAO" class="com.kidscodetw.eeit.service.GenreService">
+	<bean id="genreDAO" class="com.kidscodetw.eeit.service.movie.GenreService">
 		<constructor-arg ref="genreDAOHibernate"></constructor-arg>
 	</bean>
 
 	<!-- MovieGenreDAO -->
-	<bean id="movieGenreDAOHibernate" class="com.kidscodetw.eeit.dao.MovieGenreDAOHibernate">
+	<bean id="movieGenreDAOHibernate" class="com.kidscodetw.eeit.dao.movie.MovieGenreDAOHibernate">
 		<constructor-arg ref="sessionFactory"></constructor-arg>
 	</bean>
 
-	<bean id="movieGenreDAO" class="com.kidscodetw.eeit.service.MovieGenreService">
+	<bean id="movieGenreDAO" class="com.kidscodetw.eeit.service.movie.MovieGenreService">
 		<constructor-arg ref="movieGenreDAOHibernate"></constructor-arg>
 	</bean>
 
 	<!-- MemberDAO -->
-	<bean id="memberDAOHibernate" class="com.kidscodetw.eeit.dao.MemberDAOHibernate">
+	<bean id="memberDAOHibernate" class="com.kidscodetw.eeit.dao.member.MemberDAOHibernate">
 		<constructor-arg ref="sessionFactory"></constructor-arg>
 	</bean>
 
-	<bean id="memberDAO" class="com.kidscodetw.eeit.service.MemberService">
+	<bean id="memberDAO" class="com.kidscodetw.eeit.service.member.MemberService">
+		<constructor-arg ref="memberDAOHibernate"></constructor-arg>
+	</bean>
+	
+	<bean id="memberGetListService" class="com.kidscodetw.eeit.service.member.MemberGetListService">
 		<constructor-arg ref="memberDAOHibernate"></constructor-arg>
 	</bean>
 
-	<bean id="memberRoleDAOHibernate" class="com.kidscodetw.eeit.dao.MemberRoleDAOHibernate">
+	<!-- MemberRoleDAO -->
+	<bean id="memberRoleDAOHibernate" class="com.kidscodetw.eeit.dao.member.MemberRoleDAOHibernate">
 		<constructor-arg ref="sessionFactory"></constructor-arg>
 	</bean>
 
-	<bean id="memberRoleDAO" class="com.kidscodetw.eeit.service.MemberRoleService">
+	<bean id="memberRoleDAO" class="com.kidscodetw.eeit.service.member.MemberRoleService">
 		<constructor-arg ref="memberRoleDAOHibernate"></constructor-arg>
 	</bean>
-
+	
+	
+	
+	<!-- 	ProductDAO -->
+	<bean id="productDAOHibernate" class="com.kidscodetw.eeit.dao.cart.ProductDAOHibernate">
+		<constructor-arg ref="sessionFactory"></constructor-arg>
+	</bean>
+	
+	<bean id="productDAO" class="com.kidscodetw.eeit.service.cart.ProductService">
+		<constructor-arg ref="productDAOHibernate"></constructor-arg>
+	</bean>
+	
+	
+	<!-- 	BillDAO -->
+	<bean id="billDAOHibernate" class="com.kidscodetw.eeit.dao.cart.BillDAOHibernate">
+		<constructor-arg ref="sessionFactory"></constructor-arg>
+	</bean>
+	
+	<bean id="billDAO" class="com.kidscodetw.eeit.service.cart.BillService">
+		<constructor-arg ref="billDAOHibernate"></constructor-arg>
+	</bean>
+	
+	
+	<!-- 	TradeDetailDAO -->
+	<bean id="tradeDetailDAOHibernate" class="com.kidscodetw.eeit.dao.cart.TradeDetailDAOHibernate">
+		<constructor-arg ref="sessionFactory"></constructor-arg>
+	</bean>
+	
+	<bean id="tradeDetailDAO" class="com.kidscodetw.eeit.service.cart.TradeDetailService">
+		<constructor-arg ref="tradeDetailDAOHibernate"></constructor-arg>
+	</bean>
+	
+	<!-- 	ForumDAO -->
+	<bean id="forumDAOHibernate" class="com.kidscodetw.eeit.dao.forum.ForumDAOHibernate">
+		<constructor-arg ref="sessionFactory"></constructor-arg>
+	</bean>
+	
+	<bean id="forumDAO" class="com.kidscodetw.eeit.service.forum.ForumService">
+		<constructor-arg ref="forumDAOHibernate"></constructor-arg>
+	</bean>
+	
+	<!-- 	ArticleReplyDAO -->
+	<bean id="articleReplyDAOHibernate" class="com.kidscodetw.eeit.dao.forum.ArticleReplyDAOHibernate">
+		<constructor-arg ref="sessionFactory"></constructor-arg>
+	</bean>
+	
+	<bean id="articleReplyDAO" class="com.kidscodetw.eeit.service.forum.ArticleReplyService">
+		<constructor-arg ref="articleReplyDAOHibernate"></constructor-arg>
+	</bean>
+	
+	
+	<!-- 	UserDetail -->
 	<bean id="myUserDetailsService" class="com.kidscodetw.eeit.security.MyUserDetailsService">
 		<property name="memberDAO" ref="memberDAO"></property>
 		<property name="memberRoleDAO" ref="memberRoleDAO"></property>

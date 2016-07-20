@@ -12,9 +12,9 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 
-import com.kidscodetw.eeit.dao.MovieDAO;
-import com.kidscodetw.eeit.entity.MovieBean;
-import com.kidscodetw.eeit.service.MovieService;
+import com.kidscodetw.eeit.dao.movie.MovieDAO;
+import com.kidscodetw.eeit.entity.movie.MovieBean;
+import com.kidscodetw.eeit.service.movie.MovieService;
 
 @WebServlet("/admin/movie/movieEdit.do")
 public class MovieEditServlet extends HttpServlet {

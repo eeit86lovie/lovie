@@ -11,10 +11,13 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.DefaultRedirectStrategy;
 import org.springframework.security.web.RedirectStrategy;
 import org.springframework.security.web.WebAttributes;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
+
+import com.kidscodetw.eeit.entity.member.MemberBean;
 
 public class MyCustomLoginSuccessHandler implements AuthenticationSuccessHandler {
     protected Log logger = LogFactory.getLog(this.getClass());
@@ -65,11 +68,16 @@ public class MyCustomLoginSuccessHandler implements AuthenticationSuccessHandler
     }
  
     protected void clearAuthenticationAttributes(HttpServletRequest request) {
-        HttpSession session = request.getSession(false);
+        HttpSession session = request.getSession();
         if (session == null) {
             return;
         }
         session.removeAttribute(WebAttributes.AUTHENTICATION_EXCEPTION);
+        try{
+        	SecurityContextImple SecurityContext = (SecurityContextImple) SecurityContextHolder.getContext();
+        	MemberBean bean = SecurityContext.getMemberBean();
+        	session.setAttribute("loginmember",bean);
+        }catch(java.lang.ClassCastException e){}
     }
  
     public void setRedirectStrategy(RedirectStrategy redirectStrategy) {

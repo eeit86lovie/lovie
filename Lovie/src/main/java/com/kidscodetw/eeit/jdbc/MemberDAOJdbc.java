@@ -9,10 +9,12 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
-import com.kidscodetw.eeit.dao.MemberDAO;
-import com.kidscodetw.eeit.entity.MemberBean;
+import com.kidscodetw.eeit.dao.member.MemberDAO;
+import com.kidscodetw.eeit.entity.member.MemberBean;
 import com.kidscodetw.eeit.util.CommonUtil;
 
 public class MemberDAOJdbc implements MemberDAO {
@@ -35,12 +37,41 @@ public class MemberDAOJdbc implements MemberDAO {
 	private final static String DELETE_BY_ID = "DELETE FROM Member where id = ?";
 	private final static String DELETE_BY_ACCOUNT = "DELETE FROM Member where account = ?";
 	private static final String UPDATE_PHOTO = "UPDATE Member set photo = ? WHERE id = ?";
+	private static final String SELECT_PHOTO = "SELECT id, photo FROM Member";
 	
-	/* (non-Javadoc)
-	 * @see com.kidscodetw.eeit.member.model.dao.MemberDAO#updatePhoto(java.lang.String, int)
-	 */
-	@Override
-	public void updatePhoto(String link, int id) {
+	public Map<Integer, byte[]> selectPhotos(){
+		Connection conn = CommonUtil.connectMysql();
+		PreparedStatement pstat = null;
+		Map<Integer, byte[]> photos = new HashMap<Integer, byte[]>();
+		try{
+			pstat = conn.prepareStatement(SELECT_PHOTO);
+			ResultSet rs = pstat.executeQuery();
+			while(rs.next()){
+				photos.put((Integer)rs.getInt(1), rs.getBytes(2));
+			}
+		}catch (SQLException e1) {
+			e1.printStackTrace();
+		}finally {
+			
+			if (pstat != null) {
+				try {
+					pstat.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		return photos;
+	}
+
+	public void updatePhotos(String link, Integer id) {
 		Connection conn = CommonUtil.connectMysql();
 		PreparedStatement pstat = null;
 		try {
@@ -85,9 +116,7 @@ public class MemberDAOJdbc implements MemberDAO {
 	}
 	
 
-	/* (non-Javadoc)
-	 * @see com.kidscodetw.eeit.member.model.dao.MemberDAO#select()
-	 */
+	
 	@Override
 	public List<MemberBean> select() {
 		Connection conn = CommonUtil.connectMysql();
@@ -222,7 +251,7 @@ public class MemberDAOJdbc implements MemberDAO {
 	 * @see com.kidscodetw.eeit.member.model.dao.MemberDAO#select(int)
 	 */
 	@Override
-	public MemberBean select(int id) {
+	public MemberBean select(Integer id) {
 		Connection conn = CommonUtil.connectMysql();
 		MemberBean mb = null;
 		ResultSet rs = null;
@@ -243,6 +272,7 @@ public class MemberDAOJdbc implements MemberDAO {
 				mb.setDistrict(rs.getString(8));
 				mb.setPhone(rs.getString(9));
 				mb.setPrivilege(rs.getInt(10));
+				mb.setPhotoUrl(rs.getString(11));
 				mb.setBirthday(rs.getString(12));
 				mb.setFriendNum(rs.getInt(13));
 				mb.setCommentPoint(rs.getInt(14));
@@ -375,7 +405,7 @@ public class MemberDAOJdbc implements MemberDAO {
 	 * @see com.kidscodetw.eeit.member.model.dao.MemberDAO#delete(int)
 	 */
 	@Override
-	public boolean delete(int id) {
+	public boolean delete(Integer id) {
 		Connection conn = CommonUtil.connectMysql();
 		PreparedStatement pstat = null;
 		try {
@@ -613,8 +643,7 @@ public class MemberDAOJdbc implements MemberDAO {
 			}
 		}
 		return mb;
-			
-		
+
 	}
 
 }

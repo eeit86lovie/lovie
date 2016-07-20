@@ -9,8 +9,8 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.kidscodetw.eeit.dao.AppointmentDAO;
-import com.kidscodetw.eeit.entity.AppointmentBean;
+import com.kidscodetw.eeit.dao.appoint.AppointmentDAO;
+import com.kidscodetw.eeit.entity.appoint.AppointmentBean;
 import com.kidscodetw.eeit.util.CommonUtil;
 
 

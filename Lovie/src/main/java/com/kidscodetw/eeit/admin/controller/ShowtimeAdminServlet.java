@@ -13,8 +13,8 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 
-import com.kidscodetw.eeit.dao.MovieDAO;
-import com.kidscodetw.eeit.dao.TheaterDAO;
+import com.kidscodetw.eeit.dao.movie.MovieDAO;
+import com.kidscodetw.eeit.dao.movie.TheaterDAO;
 
 @WebServlet("/admin/movie/showtime.do")
 public class ShowtimeAdminServlet extends HttpServlet {

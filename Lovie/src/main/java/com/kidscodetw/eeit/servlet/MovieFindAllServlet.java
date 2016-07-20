@@ -16,12 +16,12 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 
-import com.kidscodetw.eeit.dao.GenreDAO;
-import com.kidscodetw.eeit.dao.MovieDAO;
-import com.kidscodetw.eeit.dao.MovieGenreDAO;
-import com.kidscodetw.eeit.entity.GenreBean;
-import com.kidscodetw.eeit.entity.MovieBean;
-import com.kidscodetw.eeit.entity.MovieGenreBean;
+import com.kidscodetw.eeit.dao.movie.GenreDAO;
+import com.kidscodetw.eeit.dao.movie.MovieDAO;
+import com.kidscodetw.eeit.dao.movie.MovieGenreDAO;
+import com.kidscodetw.eeit.entity.movie.GenreBean;
+import com.kidscodetw.eeit.entity.movie.MovieBean;
+import com.kidscodetw.eeit.entity.movie.MovieGenreBean;
 
 @WebServlet("/movies.do")
 public class MovieFindAllServlet extends HttpServlet {

@@ -5,8 +5,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import com.kidscodetw.eeit.dao.MovieDAO;
-import com.kidscodetw.eeit.entity.MovieBean;
+import com.kidscodetw.eeit.dao.movie.MovieDAO;
+import com.kidscodetw.eeit.entity.movie.MovieBean;
 import com.kidscodetw.eeit.jdbc.MovieDAOJdbc;
 
 public class MoviePhotoToDB {

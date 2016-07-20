@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -12,14 +15,16 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
-import com.kidscodetw.eeit.dao.MemberDAO;
-import com.kidscodetw.eeit.dao.MemberRoleDAO;
-import com.kidscodetw.eeit.entity.MemberBean;
-import com.kidscodetw.eeit.entity.MemberRoleBean;
+import com.kidscodetw.eeit.dao.member.MemberDAO;
+import com.kidscodetw.eeit.dao.member.MemberRoleDAO;
+import com.kidscodetw.eeit.entity.member.MemberBean;
+import com.kidscodetw.eeit.entity.member.MemberRoleBean;
 
 
 public class MyUserDetailsService implements UserDetailsService {
 	
+	@Autowired
+	HttpServletRequest request;
 	
 	private MemberDAO memberDAO;
 	private MemberRoleDAO memberRoleDAO;
@@ -44,7 +49,6 @@ public class MyUserDetailsService implements UserDetailsService {
 			SecurityContextImple context = new SecurityContextImple();
 			context.setMemberBean(memberBean);
 			SecurityContextHolder.setContext(context);
-
 		}
 		
 		return userDetails;

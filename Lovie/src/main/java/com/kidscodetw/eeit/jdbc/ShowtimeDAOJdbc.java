@@ -9,8 +9,8 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.kidscodetw.eeit.dao.ShowtimeDAO;
-import com.kidscodetw.eeit.entity.ShowtimeBean;
+import com.kidscodetw.eeit.dao.movie.ShowtimeDAO;
+import com.kidscodetw.eeit.entity.movie.ShowtimeBean;
 import com.kidscodetw.eeit.util.CommonUtil;
 
 public class ShowtimeDAOJdbc implements ShowtimeDAO{

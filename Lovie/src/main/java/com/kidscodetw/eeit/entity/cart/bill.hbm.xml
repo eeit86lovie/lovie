@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="com.kidscodetw.eeit.entity.cart.BillBean" table="Bill" >
+        
+        <id name="id" column="id" >
+            <generator class="identity"/>
+        </id>
+        <property name="memberid" column="memberid" />
+        <property name="account" column="account" />
+        <property name="tradeTime" column="tradeTime" />
+        <property name="creditnum" column="creditnum" />
+        <property name="status" column="status" />
+
+    
+
+    </class>
+</hibernate-mapping>

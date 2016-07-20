@@ -8,8 +8,8 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.kidscodetw.eeit.dao.TheaterDAO;
-import com.kidscodetw.eeit.entity.TheaterBean;
+import com.kidscodetw.eeit.dao.movie.TheaterDAO;
+import com.kidscodetw.eeit.entity.movie.TheaterBean;
 import com.kidscodetw.eeit.util.CommonUtil;
 
 public class TheaterDAOJdbc implements TheaterDAO {

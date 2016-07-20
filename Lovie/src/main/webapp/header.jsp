@@ -1,6 +1,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@page pageEncoding="UTF-8" %>
+<%@ page import ="com.kidscodetw.eeit.security.SecurityContextImple" %>
+				
 <header>
 
 
@@ -35,7 +37,7 @@
 					<li><a href=<c:url value="/interests"/>>感興趣</a></li>
 				</ul>
 				
-				<sec:authorize access="!hasRole('ROLE_ADMIN') or !hasRole('ROLE_GOLD') or !hasRole('ROLE_USER')">
+				<sec:authorize access="!hasRole('ROLE_ADMIN') and !hasRole('ROLE_GOLD') and !hasRole('ROLE_USER')">
 				<div class="member_nav">
 					<div id="regbar">
 					    <div id="navthing">
@@ -81,13 +83,11 @@
 				
 				
 				<sec:authorize access="hasRole('ROLE_ADMIN') or hasRole('ROLE_GOLD') or hasRole('ROLE_USER')">
+				
+				
 					<div class="member_nav" style="float:right">
 						<div>
-							<img width="20" src="${LoginOK.photoUrl }">${LoginOK.account }
-						</div>
-						
-						<div>
-							<a href="logout.do">登出</a>
+							<img src=photo/member/${loginmember.id} height="40"><a href="logout.do">登出</a>
 						</div>
 					</div>
 					

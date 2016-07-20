@@ -2,7 +2,7 @@ package com.kidscodetw.eeit.security;
 
 import org.springframework.security.core.context.SecurityContextImpl;
 
-import com.kidscodetw.eeit.entity.MemberBean;
+import com.kidscodetw.eeit.entity.member.MemberBean;
 
 public class SecurityContextImple extends SecurityContextImpl{
 	

@@ -21,8 +21,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.kidscodetw.eeit.dao.MovieDAO;
-import com.kidscodetw.eeit.entity.MovieBean;
+import com.kidscodetw.eeit.dao.movie.MovieDAO;
+import com.kidscodetw.eeit.entity.movie.MovieBean;
 
 @Service
 @RequestMapping("/admin/movie/movieCrawler")

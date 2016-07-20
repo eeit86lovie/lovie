@@ -15,7 +15,9 @@ try{
 	model.addAttribute("member",bean);
 }catch(java.lang.ClassCastException e){}
 
+${member.gender}
 前端程式:
+
 加入taglib宣告
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 

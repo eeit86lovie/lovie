@@ -11,7 +11,8 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
-import com.kidscodetw.eeit.entity.GenreBean;
+import com.kidscodetw.eeit.dao.movie.GenreDAO;
+import com.kidscodetw.eeit.entity.movie.GenreBean;
  
 
  

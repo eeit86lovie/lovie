@@ -12,13 +12,13 @@ import org.jsoup.nodes.Document;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import com.kidscodetw.eeit.dao.GenreDAO;
-import com.kidscodetw.eeit.dao.MovieDAO;
-import com.kidscodetw.eeit.dao.MovieGenreDAO;
-import com.kidscodetw.eeit.entity.MovieBean;
-import com.kidscodetw.eeit.entity.MovieGenreBean;
-import com.kidscodetw.eeit.service.GenreService;
-import com.kidscodetw.eeit.service.MovieService;
+import com.kidscodetw.eeit.dao.movie.GenreDAO;
+import com.kidscodetw.eeit.dao.movie.MovieDAO;
+import com.kidscodetw.eeit.dao.movie.MovieGenreDAO;
+import com.kidscodetw.eeit.entity.movie.MovieBean;
+import com.kidscodetw.eeit.entity.movie.MovieGenreBean;
+import com.kidscodetw.eeit.service.movie.GenreService;
+import com.kidscodetw.eeit.service.movie.MovieService;
 
 public class GetMovieGenre {
 

@@ -29,15 +29,20 @@
 <!-- 		<property name="hibernate.current_session_context_class">thread</property> -->
 
 		<!--Java物件與資料庫表格的映射檔 -->
-		<mapping resource="com/kidscodetw/eeit/entity/movie.hbm.xml" />
-		<mapping resource="com/kidscodetw/eeit/entity/theater.hbm.xml" />
-		<mapping resource="com/kidscodetw/eeit/entity/genre.hbm.xml" />
-		<mapping resource="com/kidscodetw/eeit/entity/movie_genre.hbm.xml" />
-		<mapping resource="com/kidscodetw/eeit/entity/showtime.hbm.xml" />
-		<mapping resource="com/kidscodetw/eeit/entity/appointment.hbm.xml" />
-		<mapping resource="com/kidscodetw/eeit/entity/member.hbm.xml" />
-		<mapping resource="com/kidscodetw/eeit/entity/memberRole.hbm.xml" />
-
+		<mapping resource="com/kidscodetw/eeit/entity/movie/movie.hbm.xml" />
+		<mapping resource="com/kidscodetw/eeit/entity/movie/theater.hbm.xml" />
+		<mapping resource="com/kidscodetw/eeit/entity/movie/genre.hbm.xml" />
+		<mapping resource="com/kidscodetw/eeit/entity/movie/movie_genre.hbm.xml" />
+		<mapping resource="com/kidscodetw/eeit/entity/movie/showtime.hbm.xml" />
+		<mapping resource="com/kidscodetw/eeit/entity/appoint/appointment.hbm.xml" />
+		<mapping resource="com/kidscodetw/eeit/entity/member/member.hbm.xml" />
+		<mapping resource="com/kidscodetw/eeit/entity/member/memberRole.hbm.xml" />
+        <mapping resource="com/kidscodetw/eeit/entity/cart/product.hbm.xml" />
+		<mapping resource="com/kidscodetw/eeit/entity/cart/tradedetail.hbm.xml" />
+        <mapping resource="com/kidscodetw/eeit/entity/cart/bill.hbm.xml" />
+<!--         <mapping resource="com/kidscodetw/eeit/entity/forum/article_rank.hbm.xml" /> -->
+        <mapping resource="com/kidscodetw/eeit/entity/forum/articlereply.hbm.xml" />
+        <mapping resource="com/kidscodetw/eeit/entity/forum/forum.hbm.xml" />
 	</session-factory>
 	
 </hibernate-configuration>

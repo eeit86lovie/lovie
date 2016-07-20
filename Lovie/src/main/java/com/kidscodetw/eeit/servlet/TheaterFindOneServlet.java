@@ -17,12 +17,12 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 
-import com.kidscodetw.eeit.dao.MovieDAO;
-import com.kidscodetw.eeit.dao.ShowtimeDAO;
-import com.kidscodetw.eeit.dao.TheaterDAO;
-import com.kidscodetw.eeit.entity.MovieBean;
-import com.kidscodetw.eeit.entity.ShowtimeBean;
-import com.kidscodetw.eeit.entity.TheaterBean;
+import com.kidscodetw.eeit.dao.movie.MovieDAO;
+import com.kidscodetw.eeit.dao.movie.ShowtimeDAO;
+import com.kidscodetw.eeit.dao.movie.TheaterDAO;
+import com.kidscodetw.eeit.entity.movie.MovieBean;
+import com.kidscodetw.eeit.entity.movie.ShowtimeBean;
+import com.kidscodetw.eeit.entity.movie.TheaterBean;
 
 @WebServlet("/theater.do")
 public class TheaterFindOneServlet extends HttpServlet {

@@ -15,9 +15,9 @@ import org.jsoup.select.Elements;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import com.kidscodetw.eeit.dao.MovieDAO;
-import com.kidscodetw.eeit.entity.MovieBean;
-import com.kidscodetw.eeit.service.MovieService;
+import com.kidscodetw.eeit.dao.movie.MovieDAO;
+import com.kidscodetw.eeit.entity.movie.MovieBean;
+import com.kidscodetw.eeit.service.movie.MovieService;
 
 public class GetMovie {
 

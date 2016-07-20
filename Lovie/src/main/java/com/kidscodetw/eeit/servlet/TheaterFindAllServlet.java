@@ -14,8 +14,8 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 
-import com.kidscodetw.eeit.dao.TheaterDAO;
-import com.kidscodetw.eeit.entity.TheaterBean;
+import com.kidscodetw.eeit.dao.movie.TheaterDAO;
+import com.kidscodetw.eeit.entity.movie.TheaterBean;
 
 
 @WebServlet("/theaters.do")

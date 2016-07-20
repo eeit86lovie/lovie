@@ -7,8 +7,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.kidscodetw.eeit.dao.MovieGenreDAO;
-import com.kidscodetw.eeit.entity.MovieGenreBean;
+import com.kidscodetw.eeit.dao.movie.MovieGenreDAO;
+import com.kidscodetw.eeit.entity.movie.MovieGenreBean;
 import com.kidscodetw.eeit.util.CommonUtil;
 
 public class MovieGenreDAOJdbc implements MovieGenreDAO {

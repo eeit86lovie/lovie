@@ -11,8 +11,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.kidscodetw.eeit.entity.MemberBean;
-import com.kidscodetw.eeit.entity.MemberDB;
+import com.kidscodetw.eeit.entity.member.MemberBean;
+import com.kidscodetw.eeit.entity.member.MemberDB;
 
 @WebServlet("/appointments.do")
 public class AppointmentFindAllServlet extends HttpServlet {

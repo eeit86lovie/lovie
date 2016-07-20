@@ -17,12 +17,12 @@ import javax.servlet.http.HttpSession;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import com.kidscodetw.eeit.dao.MovieDAO;
-import com.kidscodetw.eeit.dao.TheaterDAO;
-import com.kidscodetw.eeit.entity.MemberBean;
-import com.kidscodetw.eeit.entity.MovieBean;
-import com.kidscodetw.eeit.entity.TheaterBean;
-import com.kidscodetw.eeit.service.TheaterService;
+import com.kidscodetw.eeit.dao.movie.MovieDAO;
+import com.kidscodetw.eeit.dao.movie.TheaterDAO;
+import com.kidscodetw.eeit.entity.member.MemberBean;
+import com.kidscodetw.eeit.entity.movie.MovieBean;
+import com.kidscodetw.eeit.entity.movie.TheaterBean;
+import com.kidscodetw.eeit.service.movie.TheaterService;
 
 @WebServlet("/new_appointment.do")
 public class AppointmentSaveServlet extends HttpServlet{
