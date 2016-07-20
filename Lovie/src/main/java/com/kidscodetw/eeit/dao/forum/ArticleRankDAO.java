@@ -10,8 +10,6 @@ public interface ArticleRankDAO {
 
 	List<ArticleRankBean> select_ALL();
 
-	ArticleRankBean select_id(Integer id);
-
 	List<ArticleRankBean> select_memberAccount(String memberAccount);
 
 	List<ArticleRankBean> select_totle_good(int articleID, int good);
@@ -26,6 +24,6 @@ public interface ArticleRankDAO {
 
 	int delete(int articleID);
 
-	//檢舉
+	List<ArticleRankBean> select_report(int report);
 	
 }

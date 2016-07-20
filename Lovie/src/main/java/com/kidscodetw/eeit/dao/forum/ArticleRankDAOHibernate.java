@@ -18,6 +18,7 @@ public class ArticleRankDAOHibernate implements ArticleRankDAO {
 	private static final String SELECT_ARTICLEID = "FROM ArticleRankBean WHERE articleID=?";
 	private static final String SELECT_GOOD = "FROM ArticleRankBean WHERE articleID=? AND good=?";	
 	private static final String SELECT_BAD = "FROM ArticleRankBean WHERE articleID=? AND bad=?";	
+	private static final String SELECT_REPORT = "FROM ArticleRankBean WHERE report=?";	
 	private static final String INSERT = "INSERT INTO ArticleRank(articleID,memberAccount,content,photo) VALUES (?,?,?,?)";
 	private static final String UPDATE = "UPDATE ArticleReplyBean SET content=?, photo=? ,editTime=? WHERE id =?";
 	private static final String DELETE = "DELETE FROM ArticleRankBean WHERE id=?";
@@ -39,12 +40,6 @@ public class ArticleRankDAOHibernate implements ArticleRankDAO {
 		return lrank;
 	}
 
-	@Override
-	public ArticleRankBean select_id(Integer id) {
-		ArticleRankBean rank = null;
-		rank = (ArticleRankBean) getSession().get(ArticleRankBean.class,id);
-		return rank;
-	}
 
 	@Override
 	public List<ArticleRankBean> select_memberAccount(String memberAccount) {
@@ -103,6 +98,15 @@ public class ArticleRankDAOHibernate implements ArticleRankDAO {
 		query.setParameter(0, articleID);
 		count = query.executeUpdate();
 		return count;
+	}
+
+	@Override
+	public List<ArticleRankBean> select_report(int report) {
+		 List<ArticleRankBean> rank = null;
+		 Query query = getSession().createQuery(SELECT_NAME);
+		 query.setParameter(0, report);
+		 rank = query.list();
+		 return rank;
 	}
 
 }

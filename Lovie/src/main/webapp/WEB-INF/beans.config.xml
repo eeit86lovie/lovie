@@ -144,6 +144,12 @@
 		<constructor-arg ref="tradeDetailDAOHibernate"></constructor-arg>
 	</bean>
 	
+	<!-- 	UserDetail -->
+	<bean id="myUserDetailsService" class="com.kidscodetw.eeit.security.MyUserDetailsService">
+		<property name="memberDAO" ref="memberDAO"></property>
+		<property name="memberRoleDAO" ref="memberRoleDAO"></property>
+	</bean>
+	
 	<!-- 	ForumDAO -->
 	<bean id="forumDAOHibernate" class="com.kidscodetw.eeit.dao.forum.ForumDAOHibernate">
 		<constructor-arg ref="sessionFactory"></constructor-arg>
@@ -162,11 +168,14 @@
 		<constructor-arg ref="articleReplyDAOHibernate"></constructor-arg>
 	</bean>
 	
-	
-	<!-- 	UserDetail -->
-	<bean id="myUserDetailsService" class="com.kidscodetw.eeit.security.MyUserDetailsService">
-		<property name="memberDAO" ref="memberDAO"></property>
-		<property name="memberRoleDAO" ref="memberRoleDAO"></property>
+	<!-- 	ArticleRankDAO -->
+	<bean id="articleRankDAOHibernate" class="com.kidscodetw.eeit.dao.forum.ArticleRankDAOHibernate">
+		<constructor-arg ref="sessionFactory"></constructor-arg>
 	</bean>
+	
+	<bean id="articleRankDAO" class="com.kidscodetw.eeit.service.forum.ArticleRankService">
+		<constructor-arg ref="articleRankDAOHibernate"></constructor-arg>
+	</bean>
+	
 
 </beans>

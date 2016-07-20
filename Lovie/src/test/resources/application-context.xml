@@ -160,6 +160,14 @@
 		<constructor-arg ref="articleReplyDAOHibernate"></constructor-arg>
 	</bean>
 	
+	<!-- 	ArticleRankDAO -->
+	<bean id="articleRankDAOHibernate" class="com.kidscodetw.eeit.dao.forum.ArticleRankDAOHibernate">
+		<constructor-arg ref="sessionFactory"></constructor-arg>
+	</bean>
+	
+	<bean id="articleRankDAO" class="com.kidscodetw.eeit.service.forum.ArticleRankService">
+		<constructor-arg ref="articleRankDAOHibernate"></constructor-arg>
+	</bean>
 	
 
 </beans>

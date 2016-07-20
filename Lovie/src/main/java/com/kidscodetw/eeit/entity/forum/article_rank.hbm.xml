@@ -5,12 +5,12 @@
 <hibernate-mapping>
     <class name="com.kidscodetw.eeit.entity.forum.ArticleRankBean" table="ArticleRank" >
         
-        <id name="id" column="id">
-            <generator class="identity"/>
-        </id>
+        <composite-id>
+            <key-property name="articleID" column="articleID"/>
+            <key-property name="memberAccount" column="memberAccount"/>
+        </composite-id>
         
-        <property name="articleID" column="articleID" />
-        <property name="memberAccount" column="memberAccount" />
+        
         <property name="good" column="good" />
         <property name="bad" column="bad" />
         <property name="report" column="report" />

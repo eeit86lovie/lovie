@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kidscodetw.eeit.entity.member.MemberBean;
 import com.kidscodetw.eeit.service.member.MemberGetListService;
-import com.kidscodetw.eeit.util.ChangeBrithToOther;
+
 
 @Controller
 public class MemberListMVC {
@@ -32,7 +32,7 @@ public class MemberListMVC {
 	
 	private List<MemberBean> changeBirthdayToAge(List<MemberBean> memberBean){
 		for (MemberBean mb : memberBean) {
-			mb=ChangeBrithToOther.changeBirthdayToAge(mb);
+			//mb=ChangeBrithToOther.changeBirthdayToAge(mb);
 		}
 		return memberBean;
 	}
