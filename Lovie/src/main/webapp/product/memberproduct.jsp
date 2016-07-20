@@ -82,7 +82,7 @@ text-align:center;
                     <ul class="nav" id="side-menu">
                         
                        <li>
-                            <a href="/Lovie/product.do"><i class="my home"></i>回商城首頁 </a>
+                            <a href="products"><i class="my home"></i>回商城首頁 </a>
                         </li>
                         <li>
                             <a href="#"><i class=""></i> 電影週邊商品<span class="fa arrow"></span></a>
@@ -120,14 +120,16 @@ text-align:center;
 
 <div id="page-wrapper">
 
- 
-                    <div class="col-sm-4 col-lg-4 col-md-4">
+ <c:forEach var="memberproducts" items="${memberproduct}">
+ 		
+  <div class="col-sm-4 col-lg-4 col-md-4">
                         <div class="thumbnail" id="memberdiscount">
                             <img src="/Lovie/cart/images01.jpg" alt="">
                             <div class="caption" id="memberproduct01">
-                               <p id="membername"></p>
+                               <p id="membername">${memberproducts.name}</p>
 						       <p id="membermoney">元</p>
 				               <p id="membercontent"></p>
+				               <p id="xx"></p>
                                 </h4>
                             </div>
                             <div class="ratings">
@@ -142,38 +144,38 @@ text-align:center;
                             </div>
                         </div>
                     </div>
+ 
+ </c:forEach>
+                   
                    
                 </div>
 
             </div>
 
 
-
-</div>
-
    
  
  <script>
 
- $.ajax({
-    type:"post",
-    url:"memberproduct",
-    dataType:"json",
-    success : function(memberproduct) {
-		var membername = memberproduct[0].name;
-		var membermoney= memberproduct[0].cost;
-		var membercontent=memberproduct[0].content;
-$("#memberproduct").append(memberdiscount);
 
 
-		}
+//  $.ajax({
+//     type:"post",
+//     url:"memberproduct",
+//     dataType:"json",
+//     success : function(memberproduct) {
+// 		var xxx = memberproduct[1].name;
+	
+// $("#xx").append(xxx);
+
+
+// 		}
 
 	 
-	 })
+// 	 })
 	 
-	 
-	 
-
+ 
+	
  </script>
  
  
