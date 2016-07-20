@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.kidscodetw.eeit.dao.member.MemberDAO;
-import com.kidscodetw.eeit.dao.member.MemberDAOHibernate;
 import com.kidscodetw.eeit.entity.member.MemberBean;
 
 public class MemberGetListService {

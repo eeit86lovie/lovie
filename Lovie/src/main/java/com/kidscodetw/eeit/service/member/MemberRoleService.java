@@ -2,8 +2,6 @@ package com.kidscodetw.eeit.service.member;
 
 import java.util.List;
 
-import org.hibernate.Session;
-
 import com.kidscodetw.eeit.dao.member.MemberRoleDAO;
 import com.kidscodetw.eeit.entity.member.MemberRoleBean;
 

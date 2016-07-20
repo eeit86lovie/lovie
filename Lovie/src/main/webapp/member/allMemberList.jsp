@@ -57,7 +57,10 @@
 				var img=$('<img />')
 				img.addClass("img1");
  				img.attr('src',"photo/member/"+member.id)
-				var cell1  = $("<div></div>").append(img)
+ 				var cell1=$("<a herf></a>")
+ 				cell1.attr('href',"MemberPersonalPage/"+member.id)
+				cell1.append(img)
+// 				var cell1  = $("<div></div>").append(img)
 				var cell2  = $("<div></div>").text(member.nickname)
 				var cell3  = $("<div></div>").text(member.city)
 				var cell4  = $("<div></div>").text(member.birthday+"歲")
