@@ -4,6 +4,31 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+
+<!-- Bootstrap Core CSS -->
+    <link href="${pageContext.request.contextPath}/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- MetisMenu CSS -->
+    <link href="${pageContext.request.contextPath}/bower_components/metisMenu/dist/metisMenu.min.css" rel="stylesheet">
+
+    <!-- Timeline CSS -->
+    <link href="${pageContext.request.contextPath}/dist/css/timeline.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="${pageContext.request.contextPath}/dist/css/sb-admin-2.css" rel="stylesheet">
+
+    <!-- Morris Charts CSS -->
+    <link href="${pageContext.request.contextPath}/bower_components/morrisjs/morris.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="${pageContext.request.contextPath}/bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    
+     <!-- Bootstrap Core CSS -->
+    <link href="${pageContext.request.contextPath}/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="${pageContext.request.contextPath}/css/shop-homepage.css" rel="stylesheet">
+
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <c:import charEncoding="UTF-8" url="/meta.jsp"></c:import>
 <title>商城購物</title>
@@ -95,14 +120,14 @@ text-align:center;
 
 <div id="page-wrapper">
 
- <c:forEach var="memberproducts" items="${Allmemberproduct}">
+ 
                     <div class="col-sm-4 col-lg-4 col-md-4">
-                        <div class="thumbnail" id="memberdiscount">${memberproducts.category=1}
+                        <div class="thumbnail" id="memberdiscount">
                             <img src="/Lovie/cart/images01.jpg" alt="">
-                            <div class="caption">
-                               <p id="membername">${memberproducts.name}</p>
-						       <p id="membermoney">NT:${memberproducts.cost}元</p>
-				               <p id="membercontent">${memberproducts.content}</p>
+                            <div class="caption" id="memberproduct01">
+                               <p id="membername"></p>
+						       <p id="membermoney">元</p>
+				               <p id="membercontent"></p>
                                 </h4>
                             </div>
                             <div class="ratings">
@@ -117,10 +142,12 @@ text-align:center;
                             </div>
                         </div>
                     </div>
-  </c:forEach>                   
+                   
                 </div>
 
             </div>
+
+
 
 </div>
 
@@ -128,8 +155,63 @@ text-align:center;
  
  <script>
 
+ $.ajax({
+    type:"post",
+    url:"memberproduct",
+    dataType:"json",
+    success : function(memberproduct) {
+		var membername = memberproduct[0].name;
+		var membermoney= memberproduct[0].cost;
+		var membercontent=memberproduct[0].content;
+$("#memberproduct").append(memberdiscount);
+
+
+		}
+
+	 
+	 })
+	 
+	 
+	 
 
  </script>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+   <!-- jQuery -->
+    <script src="${pageContext.request.contextPath}/bower_components/jquery/dist/jquery.min.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="${pageContext.request.contextPath}/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+
+    <!-- Metis Menu Plugin JavaScript -->
+    <script src="${pageContext.request.contextPath}/bower_components/metisMenu/dist/metisMenu.min.js"></script>
+
+    <!-- Morris Charts JavaScript -->
+    <script src="${pageContext.request.contextPath}/bower_components/raphael/raphael-min.js"></script>
+    <script src="${pageContext.request.contextPath}/bower_components/morrisjs/morris.min.js"></script>
+    <script src="${pageContext.request.contextPath}/js/morris-data.js"></script>
+
+    <!-- Custom Theme JavaScript -->
+    <script src="${pageContext.request.contextPath}/dist/js/sb-admin-2.js"></script>
+ 
+ <!-- jQuery -->
+    <script src="${pageContext.request.contextPath}/js/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
+ 
+ 
+ 
+ 
+ 
+ 
 </body>
    <c:import charEncoding="UTF-8" url="/footer.jsp"></c:import>              
 </html>

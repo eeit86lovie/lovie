@@ -4,6 +4,30 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+
+<!-- Bootstrap Core CSS -->
+    <link href="${pageContext.request.contextPath}/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- MetisMenu CSS -->
+    <link href="${pageContext.request.contextPath}/bower_components/metisMenu/dist/metisMenu.min.css" rel="stylesheet">
+
+    <!-- Timeline CSS -->
+    <link href="${pageContext.request.contextPath}/dist/css/timeline.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="${pageContext.request.contextPath}/dist/css/sb-admin-2.css" rel="stylesheet">
+
+    <!-- Morris Charts CSS -->
+    <link href="${pageContext.request.contextPath}/bower_components/morrisjs/morris.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="${pageContext.request.contextPath}/bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+
+
+
+
+
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <c:import charEncoding="UTF-8" url="/meta.jsp"></c:import>
 <title>商城購物</title>
@@ -50,14 +74,14 @@ text-align:center;
 <c:import charEncoding="UTF-8" url="/header.jsp"></c:import>
 </head>
 <body>
-  <div class="row">
+  <div class="row" items"">
  <div id="wrapper">
        <div class="navbar-default sidebar">
                 <div class="sidebar-nav navbar-collapse">
                     <ul class="nav" id="side-menu">
                         
                         <li>
-                            <a href="/Lovie/memberproduct.do?category=1"><i class="buy member"></i>購買會員 </a>
+                            <a href="/Lovie/memberproduct"><i class="buy member"></i>購買會員 </a>
                         </li>
                         <li>
                             <a href="#"><i class=""></i> 電影週邊商品<span class="fa arrow"></span></a>
@@ -127,39 +151,77 @@ text-align:center;
                     </div>
 
                 </div>
-<%--  <c:forEach var="showproducts" items="${Allproduct}"> --%>
-<!--                     <div class="col-sm-4 col-lg-4 col-md-4"> -->
-<%--                         <div class="thumbnail" id="showdiscount">${showproducts.category=1} --%>
-<!--                             <img src="/Lovie/cart/images01.jpg" alt=""> -->
-<!--                             <div class="caption"> -->
-<%--                                <p id="showtname">${showproducts.name}</p> --%>
-<%-- 						       <p id="showmoney">NT:${showproducts.cost}元</p> --%>
-<%-- 				               <p id="showcontent">${showproducts.content}</p> --%>
-<!--                                 </h4> -->
-<!--                             </div> -->
-<!--                             <div class="ratings"> -->
-<!--                                 <p class="pull-right">12 reviews</p> -->
-<!--                                 <p> -->
-<!--                                     <span class="glyphicon glyphicon-star"></span> -->
-<!--                                     <span class="glyphicon glyphicon-star"></span> -->
-<!--                                     <span class="glyphicon glyphicon-star"></span> -->
-<!--                                     <span class="glyphicon glyphicon-star"></span> -->
-<!--                                     <span class="glyphicon glyphicon-star-empty"></span> -->
-<!--                                 </p> -->
-<!--                             </div> -->
-<!--                         </div> -->
-<!--                     </div> -->
-<%--   </c:forEach>                    --%>
+ <c:forEach var="showproducts" items="">
+                    <div class="col-sm-4 col-lg-4 col-md-4">
+                        <div class="thumbnail" id="showdiscount">
+                            <img src="/Lovie/cart/images01.jpg" alt="">
+                            <div class="caption">
+                               <p id="showtname"></p>
+						       <p id="showmoney"></p>
+				               <p id="showcontent"></p>
+                                </h4>
+                            </div>
+                            <div class="ratings">
+                                <p class="pull-right">12 reviews</p>
+                                <p>
+                                    <span class="glyphicon glyphicon-star"></span>
+                                    <span class="glyphicon glyphicon-star"></span>
+                                    <span class="glyphicon glyphicon-star"></span>
+                                    <span class="glyphicon glyphicon-star"></span>
+                                    <span class="glyphicon glyphicon-star-empty"></span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+  </c:forEach>                   
                 </div>
 
             </div>
 
 </div>
 
+
+<script>
+var productjson;
+$.ajax({
+	url : "product",
+	type : "get",
+	dataType : "json",
+	success : function(productjson) {
+		productJson = productjson;
+	}
+})
+
+
+
+</script>
    
  
  <script>
 
+ <!-- jQuery -->
+ <script src="${pageContext.request.contextPath}/bower_components/jquery/dist/jquery.min.js"></script>
+
+ <!-- Bootstrap Core JavaScript -->
+ <script src="${pageContext.request.contextPath}/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+
+ <!-- Metis Menu Plugin JavaScript -->
+ <script src="${pageContext.request.contextPath}/bower_components/metisMenu/dist/metisMenu.min.js"></script>
+
+ <!-- Morris Charts JavaScript -->
+ <script src="${pageContext.request.contextPath}/bower_components/raphael/raphael-min.js"></script>
+ <script src="${pageContext.request.contextPath}/bower_components/morrisjs/morris.min.js"></script>
+ <script src="${pageContext.request.contextPath}/js/morris-data.js"></script>
+
+ <!-- Custom Theme JavaScript -->
+ <script src="${pageContext.request.contextPath}/dist/js/sb-admin-2.js"></script>
+
+
+
+
+
+
+ 
 
  </script>
 </body>
