@@ -19,11 +19,30 @@ public class ArticleRankService {
 		return result;
 	}
 
+	public List<ArticleRankBean> select_Rank_Primarykey(int article, String memberAccount){
+		List<ArticleRankBean> result = null;
+		result = articleRankDAO.select_Rank_Primarykey(article, memberAccount);
+		return result;
+	}
+	
 	public List<ArticleRankBean> select_memberAccount(String account){
 		List<ArticleRankBean> result = null;
 		if(account!=null && account.length()!=0){
 			result = articleRankDAO.select_memberAccount(account);
 		}
+		return result;
+	}
+	
+	public List<ArticleRankBean> select_articleID(int articleID){		
+		List<ArticleRankBean> result = null;
+		result = articleRankDAO.select_articleID(articleID);		
+		return result;
+	}
+	
+	public List<ArticleRankBean> select_report(int report){
+		
+		List<ArticleRankBean> result = null;
+		result = articleRankDAO.select_report(report);		
 		return result;
 	}
 	
@@ -40,17 +59,7 @@ public class ArticleRankService {
 		List<ArticleRankBean> result = null;
 		result = articleRankDAO.select_totle_bad(articleID, bad);		
 		return result;
-	}
-	
-	
-	public List<ArticleRankBean> select_report(int report){
-		
-		List<ArticleRankBean> result = null;
-		result = articleRankDAO.select_report(report);
-		
-		return result;
-	}
-	
+	}	
 	
 	public ArticleRankBean insert(ArticleRankBean arb){
 		ArticleRankBean result = null;
@@ -62,9 +71,9 @@ public class ArticleRankService {
 
 	public int delete(int articleID){
 		int result = 0;
-		if(articleID!=0){
+		
 			result = articleRankDAO.delete(articleID);
-		}
+		
 		return result;
 	}
 

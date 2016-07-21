@@ -1,9 +1,27 @@
 package com.kidscodetw.eeit.entity.forum;
 
-public class ArticleRankBean {
+import java.io.Serializable;
 
+
+
+
+
+
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.IdClass;
+
+
+
+@Entity
+@IdClass(ArticleRankBean.class)
+public class ArticleRankBean implements Serializable{
+
+	@Id
 	private int articleID;
+	@Id
 	private String memberAccount;
+	
 	private int good;
 	private int bad;
 	private int report;

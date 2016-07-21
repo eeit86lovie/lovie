@@ -9,6 +9,8 @@ import com.kidscodetw.eeit.entity.forum.ArticleRankBean;
 public interface ArticleRankDAO {
 
 	List<ArticleRankBean> select_ALL();
+	
+	List<ArticleRankBean> select_Rank_Primarykey(int article, String memberAccount);
 
 	List<ArticleRankBean> select_memberAccount(String memberAccount);
 
