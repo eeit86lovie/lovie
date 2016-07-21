@@ -23,6 +23,7 @@ public class MyCustomLoginSuccessHandler implements AuthenticationSuccessHandler
     protected Log logger = LogFactory.getLog(this.getClass());
  
     private RedirectStrategy redirectStrategy = new DefaultRedirectStrategy();
+    private String referer;
  
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, 
@@ -33,6 +34,7 @@ public class MyCustomLoginSuccessHandler implements AuthenticationSuccessHandler
  
     protected void handle(HttpServletRequest request, 
       HttpServletResponse response, Authentication authentication) throws IOException {
+    	referer = request.getHeader("referer");
         String targetUrl = determineTargetUrl(authentication);
  
         if (response.isCommitted()) {
@@ -45,26 +47,37 @@ public class MyCustomLoginSuccessHandler implements AuthenticationSuccessHandler
  
     /** Builds the target URL according to the logic defined in the main class Javadoc. */
     protected String determineTargetUrl(Authentication authentication) {
-        boolean isUser = false;
-        boolean isAdmin = false;
-        Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
-        for (GrantedAuthority grantedAuthority : authorities) {
-            if (grantedAuthority.getAuthority().equals("ROLE_USER")) {
-                isUser = true;
-                break;
-            } else if (grantedAuthority.getAuthority().equals("ROLE_ADMIN")) {
-                isAdmin = true;
-                break;
+    	if(referer.contains("login")){
+    		
+    		boolean isUser = false;
+            boolean isAdmin = false;
+            Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
+            for (GrantedAuthority grantedAuthority : authorities) {
+                if (grantedAuthority.getAuthority().equals("ROLE_USER")) {
+                    isUser = true;
+                    break;
+                } else if (grantedAuthority.getAuthority().equals("ROLE_ADMIN")) {
+                    isAdmin = true;
+                    break;
+                }
             }
-        }
- 
-        if (isUser) {
-            return "/index.jsp";
-        } else if (isAdmin) {
-            return "/admin/index.jsp";
-        } else {
-            throw new IllegalStateException();
-        }
+     
+            if (isUser) {
+                return "/index.jsp";
+            } else if (isAdmin) {
+                return "/admin/index.jsp";
+            } else {
+                throw new IllegalStateException();
+            }
+    		
+    	}
+    	else{
+    		return referer;
+    	}
+    	
+    	
+    	
+        
     }
  
     protected void clearAuthenticationAttributes(HttpServletRequest request) {

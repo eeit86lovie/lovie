@@ -1,5 +1,7 @@
 package com.kidscodetw.eeit.security;
 
+import java.io.IOException;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -11,12 +13,16 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 public class LogoutHandler {
 	
+	private String referer;
+	
 	@RequestMapping(value="/logout", method = RequestMethod.GET)
-	public String logoutPage (HttpServletRequest request, HttpServletResponse response) {
-	    Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-	    if (auth != null){    
-	        new SecurityContextLogoutHandler().logout(request, response, auth);
-	    }
-	    return "redirect:/login?logout";//You can redirect wherever you want, but generally it's a good practice to show login screen again.
+	public String logoutPage (HttpServletRequest request, HttpServletResponse response) throws IOException {
+		referer = request.getHeader("referer");
+		return referer;
+//	    Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+//	    if (auth != null){    
+//	        new SecurityContextLogoutHandler().logout(request, response, auth);
+//	    }
+//	    return "redirect:/login";
 	}
 }

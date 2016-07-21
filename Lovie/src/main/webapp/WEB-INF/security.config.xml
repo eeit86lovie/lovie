@@ -18,7 +18,6 @@
 			authentication-failure-url="/login?error" 
 			username-parameter="username"
 			password-parameter="password" />
-		<security:logout logout-success-url="/logout" />
       <security:csrf disabled="true"/>
    </security:http>    
   
