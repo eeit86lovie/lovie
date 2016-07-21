@@ -1,7 +1,13 @@
 package com.kidscodetw.eeit.entity.forum;
 
-public class ArticleRankBean {
+import java.io.Serializable;
 
+public class ArticleRankBean implements Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private int articleID;
 	private String memberAccount;
 	private int good;
