@@ -2,7 +2,15 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@page pageEncoding="UTF-8" %>
 <%@ page import ="com.kidscodetw.eeit.security.SecurityContextImple" %>
-				
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.0/themes/base/jquery-ui.css">
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.js"></script>
+<style>
+a{
+    text-decoration:none;
+}
+</style>
+
 <header>
 
 
@@ -76,7 +84,7 @@
 					    </div>
 					    </div>
   					</div>
-				</div>
+				</div></div>
 				</sec:authorize>
 				
 				
@@ -87,8 +95,25 @@
 				
 					<div class="member_nav" style="float:right">
 						<div>
-							<a href='/member/${loginmember.id}'> <img src=photo/member/${loginmember.id} height="40" /></a>
-							<a href="<c:url value='logout' />" >登出</a>
+							 <div id="memberPic" >
+							 <img src=${pageContext.request.contextPath}/photo/member/${loginmember.id} height="40" />
+
+								<ul id="menu" style="display:none;position:absolute;">
+									<li><div><a href='${pageContext.request.contextPath}/MemberPersonalPage/${loginmember.id}'>個人首頁</a></div></li>
+									<li><div>我的朋友</div></li>
+									<li><div>有興趣的對象</div></li>
+									<li><div>我的邀請</div></li>
+									<li><div>我的請求</div></li>
+									<li><div>訊息通知</div></li>
+									<sec:authorize access="hasRole('ADMIN')">
+									<li id="backstage" style="display: none"><div>
+									<a href='${pageContext.request.contextPath}/admin/index.jsp'>管理頁面</a>
+									</div></li>
+									</sec:authorize>
+
+									</ul>
+								</div>
+								<a href="<c:url value='logout' />" >登出</a>
 						</div>
 					</div>
 					
@@ -102,6 +127,19 @@
 		</nav>
 		
 	</div>
-	
+	<script>
+		$("#memberPic").hover(function() {
+			document.getElementById("menu").style.display = "block";
+		}, function() {
+			document.getElementById("menu").style.display = "none";
+		})
+	$(function() {
+		$("#menu").menu();
+	});
+	var privilege="${loginmember.privilege}"
+	if(privilege==3){
+		document.getElementById("backstage").style.display = "block";
+	}
+	</script>
 	</header>
 	

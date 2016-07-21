@@ -46,10 +46,10 @@ public class MyUserDetailsService implements UserDetailsService {
 			Collection<GrantedAuthority> authList = getAuthorities(memberBean.getPrivilege());
 			userDetails = new User(account, memberBean.getPassword(), true,
 					true, true, true, authList);
-			SecurityContextImple context = new SecurityContextImple();
-			context.setMemberBean(memberBean);
-			SecurityContextHolder.setContext(context);
 		}
+		SecurityContextImple context = new SecurityContextImple();
+		context.setMemberBean(memberBean);
+		SecurityContextHolder.setContext(context);
 		
 		return userDetails;
 	}

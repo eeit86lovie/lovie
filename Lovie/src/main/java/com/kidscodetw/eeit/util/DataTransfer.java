@@ -5,16 +5,20 @@ import java.util.Date;
 
 import com.kidscodetw.eeit.entity.member.MemberBean;
 
-public class ChangeBirthToOther {
-	public static MemberBean changeBirthdayToAge(MemberBean memberBean) {
-		if (memberBean.getBirthday().length() > 4) {
+public class DataTransfer {
+	public static int changeBirthdayToAge(MemberBean memberBean) {
 			int intValue = Integer.parseInt(memberBean.getBirthday().substring(
 					0, 4));
 			Date today = Calendar.getInstance().getTime();
-			int age = today.getYear() + 1900 - intValue;
-			memberBean.setBirthday(age + "");
-		}
-		return memberBean;
+			return today.getYear() + 1900 - intValue;
+	}
+	public static String genderTransfer(MemberBean memberBean){
+		String gender=null;
+		if(memberBean.getGender()==0)
+			gender="女";
+		else if(memberBean.getGender()==1)
+			gender="男";
+		return gender;
 	}
 
 	public static String changeBirthdayToConstellations(MemberBean memberBean) {

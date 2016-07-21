@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,9 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.context.WebApplicationContext;
 
 import com.kidscodetw.eeit.dao.movie.TheaterDAO;
-import com.kidscodetw.eeit.entity.member.MemberBean;
 import com.kidscodetw.eeit.entity.movie.TheaterBean;
-import com.kidscodetw.eeit.security.SecurityContextImple;
 
 
 @Controller
@@ -36,11 +33,6 @@ public class TheaterFindAllMVC {
 			}
 		}
 		model.addAttribute("citys", city_list);
-		try{
-			SecurityContextImple SecurityContext = (SecurityContextImple) SecurityContextHolder.getContext();
-			MemberBean bean = SecurityContext.getMemberBean();
-			model.addAttribute("member",bean);
-		}catch(java.lang.ClassCastException e){}
 		return "theater/alltheaters.jsp";
 	}
 
