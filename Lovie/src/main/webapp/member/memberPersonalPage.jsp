@@ -60,31 +60,31 @@ color:#CC6600
 
 window.onload=function() {
 
-	$.ajax({
-	"type":"get",
-	"url":"${pageContext.request.contextPath}/MemberPersonalPage/{id}",
-	"dataType" : "json",
-	"success":function(memberBean){
-		var flag = $(document.createDocumentFragment());
-		$.each(memberBean,function(idx,member){	
-			var img=$('<img />')
-			img.addClass("img1");
-				img.attr('src',"photo/member/"+member.id)
-				var cell1=$("<a herf></a>")
-				cell1.attr('href','/member/MemberPersonalPage/'+member.id)
-			cell1.append(img)
-//				var cell1  = $("<div></div>").append(img)
-			var cell2  = $("<div></div>").text(member.nickname)
-			var cell3  = $("<div></div>").text(member.city)
-			var cell4  = $("<div></div>").text(member.birthday+"歲")
+// 	$.ajax({
+// 	"type":"get",
+// 	"url":"${pageContext.request.contextPath}/MemberPersonalPage/{id}",
+// 	"dataType" : "json",
+// 	"success":function(memberBean){
+// 		var flag = $(document.createDocumentFragment());
+// 		$.each(memberBean,function(idx,member){	
+// 			var img=$('<img />')
+// 			img.addClass("img1");
+// 				img.attr('src',"photo/member/"+member.id)
+// 				var cell1=$("<a herf></a>")
+// 				cell1.attr('href','/member/MemberPersonalPage/'+member.id)
+// 			cell1.append(img)
+// //				var cell1  = $("<div></div>").append(img)
+// 			var cell2  = $("<div></div>").text(member.nickname)
+// 			var cell3  = $("<div></div>").text(member.city)
+// 			var cell4  = $("<div></div>").text(member.birthday+"歲")
 
-			var row = $("<li class='item'></li>").append([cell1,cell2,cell3,cell4])
-			flag.append(row);
-		})
-		tb.append(flag)
+// 			var row = $("<li class='item'></li>").append([cell1,cell2,cell3,cell4])
+// 			flag.append(row);
+// 		})
+// 		tb.append(flag)
 		
-	}
-	})
+// 	}
+// 	})
 
 		}
 
