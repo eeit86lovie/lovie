@@ -3,6 +3,7 @@ package com.kidscodetw.eeit.entity.member;
 import java.io.Serializable;
 
 
+
 public class MemberBean implements Serializable{
 	
 	private Integer id;

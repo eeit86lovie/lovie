@@ -21,7 +21,7 @@ public class HandshakeInterceptor extends HttpSessionHandshakeInterceptor {
 			HttpSession session = servletRequest.getServletRequest()
 					.getSession(false);
 			if (session != null) {
-				attributes.put("ACCOUNT", session.getId());
+				//attributes.put("ACCOUNT", session.getId());
 			}
 		}
 		return true;

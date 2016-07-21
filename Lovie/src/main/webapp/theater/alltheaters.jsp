@@ -34,18 +34,19 @@
 	<c:import url="/header.jsp"></c:import>
 
 	<div class="container">
+	${pageContext.session.id}
+	
 <sec:authorize access="hasRole('ADMIN')">
-	<div style="color:red">ADMIN測試</div>: ${member}
+	<div style="color:red">ADMIN測試</div>: 
 </sec:authorize>
 
 <sec:authorize access="hasRole('GOLD') and !hasRole('ADMIN')">
-	<div style="color:red">黃金會員測試</div>: ${member}
+	<div style="color:red">黃金會員測試</div>: 
 </sec:authorize>
 
 <sec:authorize access="hasRole('USER') and !hasRole('GOLD') and !hasRole('ADMIN')">
-	<div style="color:red">一般會員測試</div>: ${member}
+	<div style="color:red">一般會員測試</div>: 
 </sec:authorize>
-
 		<div class="row" style="margin-bottom: 20px;">
 			<div class="col-md-12">
 				<div class="city col-md-3" style="float: left; margin-right: 20px">
