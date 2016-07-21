@@ -87,7 +87,7 @@
 				
 					<div class="member_nav" style="float:right">
 						<div>
-							<a href='/member/${loginmember.id}'> <img src=photo/member/${loginmember.id} height="40" /></a>
+							<a href='${pageContext.request.contextPath}/MemberPersonalPage/${loginmember.id}'> <img src=photo/member/${loginmember.id} height="40" /></a>
 							<a href="<c:url value='logout' />" >登出</a>
 						</div>
 					</div>

@@ -33,9 +33,9 @@ color:#CC6600
   <div class="col-md-3"><img style="border:5px solid #acd6ff;border-radius:15px;" src="${oneMember.photoUrl}" style="width:80%"> </div>
   <div class="col-md-9" ></div>
   <div class="col-md-9" ><b class="memberColumn" id="nickName">暱稱：</b>${oneMember.nickname}</div>
-  <div class="col-md-9" ><b class="memberColumn">年齡：</b>${oneMember.birthday}</div>
-  <div class="col-md-9" ><b class="memberColumn">性別：</b>${oneMember.gender}</div>
-  <div class="col-md-9" ><b class="memberColumn">星座：</b>${constellation}</div>
+  <div class="col-md-9" ><b class="memberColumn">年齡：</b>${memberAge}歲</div>
+  <div class="col-md-9" ><b class="memberColumn">性別：</b>${gender}</div>
+  <div class="col-md-9" ><b class="memberColumn">星座：</b>${memberConstellation}</div>
   <div class="col-md-9" ><b class="memberColumn">所在地：</b>${oneMember.city} ${oneMember.district}</div>
   <div class="col-md-9" ><b class="memberColumn">好友數：</b>${oneMember.friendNum}</div>
   <div class="col-md-9" ><b class="memberColumn">會員等級：</b>鑽石會員</div>
@@ -45,11 +45,13 @@ color:#CC6600
   <div class="col-md-1" ></div>
   <div class="col-md-9" >${oneMember.intro}</div>
   <div class="col-md-2" ></div>
-  <div class="col-md-12" ><b class="memberColumn">喜歡的電影類型：</b>喜劇|奇幻|驚悚</div>
+   <div class="col-md-12" ><br></div>
+  <div class="col-md-10" ><b class="memberColumn">喜歡的電影類型：</b>喜劇|奇幻|驚悚</div>
+  <div class="col-md-2" ><button  style="display:none">套用</button></div>
   <div class="col-md-12" ><br></div>
- <div class="col-md-5" style="font-size:20%;color:black">註冊日期：${member.registeredTime}</div>
+ <div class="col-md-5" style="font-size:20%;color:black">註冊日期：${oneMember.registeredTime}</div>
  <div class="col-md-3"></div>
- <div class="col-md-4" style="font-size:20%;color:black">上次上站：${member.lastOnTime}</div>
+ <div class="col-md-4" style="font-size:20%;color:black">上次上站：${oneMember.lastOnTime}</div>
 
  
  </form>
@@ -59,35 +61,36 @@ color:#CC6600
 <script>
 
 window.onload=function() {
+if("${loginmember.id}"=="${oneMember.id}"){
+	
+}
+		// 	$.ajax({
+		// 	"type":"get",
+		// 	"url":"${pageContext.request.contextPath}/MemberPersonalPage/{id}",
+		// 	"dataType" : "json",
+		// 	"success":function(memberBean){
+		// 		var flag = $(document.createDocumentFragment());
+		// 		$.each(memberBean,function(idx,member){	
+		// 			var img=$('<img />')
+		// 			img.addClass("img1");
+		// 				img.attr('src',"photo/member/"+member.id)
+		// 				var cell1=$("<a herf></a>")
+		// 				cell1.attr('href','/member/MemberPersonalPage/'+member.id)
+		// 			cell1.append(img)
+		// //				var cell1  = $("<div></div>").append(img)
+		// 			var cell2  = $("<div></div>").text(member.nickname)
+		// 			var cell3  = $("<div></div>").text(member.city)
+		// 			var cell4  = $("<div></div>").text(member.birthday+"歲")
 
-// 	$.ajax({
-// 	"type":"get",
-// 	"url":"${pageContext.request.contextPath}/MemberPersonalPage/{id}",
-// 	"dataType" : "json",
-// 	"success":function(memberBean){
-// 		var flag = $(document.createDocumentFragment());
-// 		$.each(memberBean,function(idx,member){	
-// 			var img=$('<img />')
-// 			img.addClass("img1");
-// 				img.attr('src',"photo/member/"+member.id)
-// 				var cell1=$("<a herf></a>")
-// 				cell1.attr('href','/member/MemberPersonalPage/'+member.id)
-// 			cell1.append(img)
-// //				var cell1  = $("<div></div>").append(img)
-// 			var cell2  = $("<div></div>").text(member.nickname)
-// 			var cell3  = $("<div></div>").text(member.city)
-// 			var cell4  = $("<div></div>").text(member.birthday+"歲")
+		// 			var row = $("<li class='item'></li>").append([cell1,cell2,cell3,cell4])
+		// 			flag.append(row);
+		// 		})
+		// 		tb.append(flag)
 
-// 			var row = $("<li class='item'></li>").append([cell1,cell2,cell3,cell4])
-// 			flag.append(row);
-// 		})
-// 		tb.append(flag)
-		
-// 	}
-// 	})
+		// 	}
+		// 	})
 
-		}
-
+	}
 </script>
 
 
