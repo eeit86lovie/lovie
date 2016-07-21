@@ -10,18 +10,7 @@ a{
     text-decoration:none;
 }
 </style>
-<script>
-	$(document).ready(function() {
-		$("#memberPic").hover(function() {
-			document.getElementById("menu").style.display = "block";
-		}, function() {
-			document.getElementById("menu").style.display = "none";
-		})
-	})
-	$(function() {
-		$("#menu").menu();
-	});
-</script>
+
 <header>
 
 
@@ -95,7 +84,7 @@ a{
 					    </div>
 					    </div>
   					</div>
-				</div>
+				</div></div>
 				</sec:authorize>
 				
 				
@@ -116,8 +105,13 @@ a{
 									<li><div>我的邀請</div></li>
 									<li><div>我的請求</div></li>
 									<li><div>訊息通知</div></li>
-									<li id="backstage" style="display:none"><div><a href='${pageContext.request.contextPath}/admin/index.jsp'>後台</a></div></li>
-								</ul>
+									<sec:authorize access="hasRole('ADMIN')">
+									<li id="backstage" style="display: none"><div>
+									<a href='${pageContext.request.contextPath}/admin/index.jsp'>管理頁面</a>
+									</div></li>
+									</sec:authorize>
+
+									</ul>
 								</div>
 								<a href="<c:url value='logout' />" >登出</a>
 						</div>
@@ -134,6 +128,14 @@ a{
 		
 	</div>
 	<script>
+		$("#memberPic").hover(function() {
+			document.getElementById("menu").style.display = "block";
+		}, function() {
+			document.getElementById("menu").style.display = "none";
+		})
+	$(function() {
+		$("#menu").menu();
+	});
 	var privilege="${loginmember.privilege}"
 	if(privilege==3){
 		document.getElementById("backstage").style.display = "block";

@@ -25,7 +25,7 @@ public class MemberPersonalPage {
 	public String getMemberById(@PathVariable("id")Integer memberId,Model model){
 		MemberBean memberBean = memberDAO.select(memberId);
 
-		model.addAttribute("memberConstellation",DataTransfer.changeBirthdayToConstellations(memberBean));
+//		model.addAttribute("memberConstellation",DataTransfer.changeBirthdayToConstellations(memberBean));
 		model.addAttribute("memberAge",DataTransfer.changeBirthdayToAge(memberBean));
 		model.addAttribute("gender",DataTransfer.genderTransfer(memberBean));
 		model.addAttribute("oneMember",memberBean);
