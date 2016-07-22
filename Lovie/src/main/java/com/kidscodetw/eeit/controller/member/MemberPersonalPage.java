@@ -21,19 +21,14 @@ public class MemberPersonalPage {
 	@Autowired
 	private ForumDAO forumDAO;
 	
-	@RequestMapping(value="MemberPersonalPage/{id}", produces=MediaType.APPLICATION_JSON)
-	public String getMemberById(@PathVariable("id")Integer memberId,Model model){
-		MemberBean memberBean = memberDAO.select(memberId);
-
+	@RequestMapping(value="/member/profile/{id}", produces=MediaType.APPLICATION_JSON)
+	public String getMemberById(@PathVariable("id")Integer memberId, Model model){
+		MemberBean memberBean=memberDAO.select(memberId);
 //		model.addAttribute("memberConstellation",DataTransfer.changeBirthdayToConstellations(memberBean));
 		model.addAttribute("memberAge",DataTransfer.changeBirthdayToAge(memberBean));
 		model.addAttribute("gender",DataTransfer.genderTransfer(memberBean));
 		model.addAttribute("oneMember",memberBean);
-
 		model.addAttribute("article",forumDAO.select_memberAccount(memberBean.getAccount()).size());
-		
-		
 		return "member/memberPersonalPage.jsp";
 	}
-	
 }

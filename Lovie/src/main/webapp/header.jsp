@@ -98,8 +98,8 @@ a{
 							 <div id="memberPic" >
 							 <img src=${pageContext.request.contextPath}/photo/member/${loginmember.id} height="40" />
 
-								<ul id="menu" style="display:none;position:absolute;">
-									<li><div><a href='${pageContext.request.contextPath}/MemberPersonalPage/${loginmember.id}'>個人首頁</a></div></li>
+								<ul id="menu" style="display:none;position:absolute;z-index:1;">
+									<li><div><a href='${pageContext.request.contextPath}/member/profile/${loginmember.id}'>個人首頁</a></div></li>
 									<li><div>我的朋友</div></li>
 									<li><div>有興趣的對象</div></li>
 									<li><div>我的邀請</div></li>
