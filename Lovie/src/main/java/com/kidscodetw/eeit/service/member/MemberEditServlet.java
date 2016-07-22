@@ -16,8 +16,9 @@ import com.kidscodetw.eeit.dao.member.MemberDAO;
 import com.kidscodetw.eeit.entity.member.MemberBean;
 import com.kidscodetw.eeit.entity.movie.MovieBean;
 
-@WebServlet("/member/memberEdit.do")
+@WebServlet("/member/profile/memberEdit.do")
 public class MemberEditServlet extends HttpServlet {
+	
 	private static final long serialVersionUID = 1L;
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String password;
@@ -30,43 +31,31 @@ public class MemberEditServlet extends HttpServlet {
 //		String photoUrl;
 		byte[] photo;
 		String birthday;
-//		String intro;
-
-//		-------------------------------------------------------------------
-		String name =null;
-		String rank =null;
-		String startTime =null;
-		String filmLength =null;
-		String intro =null;
-		String photoUrl =null;
-		String trailer =null;
+		String intro;
 		request.setCharacterEncoding("UTF-8");
-		String mID_row = request.getParameter("mID");
-		Integer memberID = null;
-		if (mID_row == "") {
-			return;
-		}
-		memberID = Integer.parseInt(mID_row);
+		Integer id=Integer.parseInt(request.getParameter("id"));
 		WebApplicationContext context =WebApplicationContextUtils.getWebApplicationContext(getServletContext()) ;
 		MemberDAO memberDAO = (MemberDAO)context.getBean("memberDAO");
-		MemberBean memberBean = memberDAO.select(memberID);
+		MemberBean memberBean = memberDAO.select(id);
 		String type = request.getParameter("type");
 		String value = request.getParameter("value");
-//		switch(type){
-//		case "mName": name = value;memberBean.setName(name);break;
-//		case "mRank": rank = value;memberBean.setRank(rank);break;
-//		case "mStartTime": startTime = value;memberBean.setStartTime(startTime);break;
-//		case "mFilmLength": filmLength = value;memberBean.setFilmLength(filmLength);break;
-//		case "mIntro": intro = value;memberBean.setIntro(intro);break;
+		System.out.println(type+value);
+		switch(type){
+		
+//		case "gender": gender = value;memberBean.setGender(gender);break;
+		case "nickname": nickname = value;memberBean.setNickname(nickname);break;
+		case "city": city = value;memberBean.setCity(city);break;
+		case "district": district = value;memberBean.setDistrict(district);;break;
+		case "intro": intro = value;memberBean.setIntro(intro);break;
 //		case "mPhotoUrl": photoUrl = value;memberBean.setPhotoUrl(photoUrl);break;
 //		case "mTrailer": trailer = value;memberBean.setTrailer(trailer);break;
-//		}
+		}
 //		
-//		MovieBean tb = memberDAO.update(memberBean);
+		MemberBean tb = memberDAO.update(memberBean);
 		PrintWriter out = response.getWriter();
-//		if (tb!=null) {
-//			out.write("true");
-//		}
+		if (tb!=null) {
+			out.write("true");
+		}
 		return;
 	}
 
