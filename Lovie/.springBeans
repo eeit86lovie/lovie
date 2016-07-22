@@ -9,10 +9,10 @@
 	<configs>
 		<config>src/main/webapp/WEB-INF/beans.config.xml</config>
 		<config>src/main/webapp/WEB-INF/mvc-servlet.xml</config>
-		<config>java:com.kidscodetw.eeit.websocket.WebsocketConfig</config>
 	</configs>
 	<autoconfigs>
 		<config>src/main/webapp/WEB-INF/security.config.xml</config>
+		<config>src/main/webapp/WEB-INF/websocket.config.xml</config>
 	</autoconfigs>
 	<configSets>
 	</configSets>
