@@ -98,21 +98,35 @@ function member_edit(member_col){//呼叫的member欄位物件,onclick時觸發
 	})
 	$("#"+member_col.id).keydown(function(event){
 		if(event.which==13){//代表按下enter
-		var after_text = $("#"+member_col.id).val();//enter之前輸入欄位的值
-		var intro=member_col.innerHTML;
-		var member_id = member_col.id;
-		xhr = new XMLHttpRequest();
-		xhr.onreadystatechange = callback;
-		xhr.open("get", "movieEdit.do?id="+member_id+"&type="+member_id+"&value="+after_text);
-		xhr.send();
-		}
-		function callback() {
-			if(xhr.readyState==4 && xhr.status==200){
-				if(member_col.id=="intro")
+			var after_text = $("#"+member_col.id).val();
+			var member_id = member_col.id;
+			xhr = new XMLHttpRequest();
+			xhr.onreadystatechange = callback;
+			xhr.open("get", "memberEdit.do?id="+loginmemberId+"&type="+member_id+"&value="+after_text);
+			xhr.send();
+			function callback() {
+				if(xhr.readyState==4 && xhr.status==200){
 					$("#"+member_id).replaceWith('<span id="'+member_id+'" onclick="member_edit(this)">'+after_text+'</span>')
-				$("#"+member_id).replaceWith('<span id="'+member_id+'" onclick="member_edit(this)">'+after_text+'</span>')
+				}
 			}
+// 		var after_text = $("#"+member_col.id).val();//enter之前輸入欄位的值
+// 		var member_id = member_col.id;
+// 		var intro=member_col.innerHTML;
+		
+// 		xhr = new XMLHttpRequest();
+// 		xhr.onreadystatechange = callback;
+// 		xhr.open("get", "movieEdit.do?id="+loginmemberId+"&type="+member_id+"&value="+after_text);
+// 		xhr.send();
+		
+// 		function callback() {
+// 			if(xhr.readyState==4 && xhr.status==200){
+// 				if(member_col.id=="intro")
+// 					$("#"+member_id).replaceWith('<span id="'+member_id+'" onclick="member_edit(this)">'+after_text+'</span>')
+// 				$("#"+member_id).replaceWith('<span id="'+member_id+'" onclick="member_edit(this)">'+after_text+'</span>')
+// 			}
+// 		}
 		}
+		
 	})
 }
 

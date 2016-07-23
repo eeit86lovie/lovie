@@ -6,8 +6,8 @@
 <head>
 <link rel="stylesheet" href="css/lightbox.css">
 <c:import charEncoding="UTF-8" url="/meta.jsp"></c:import>
-<script src="js/jquery-ui/jquery-ui.js"></script>
-<script src="js/jquery.leanModal.min.js"></script>
+<script src="${pageContext.request.contextPath}/js/jquery-ui/jquery-ui.js"></script>
+<script src="${pageContext.request.contextPath}/js/jquery.leanModal.min.js"></script>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 
@@ -311,10 +311,17 @@ $.ajax({
 					url : "forums",
 					type : "post",
 					dataType : "json",
-					success : function(articlejson) {
- 						articleJson = articlejson;
- 						createArticle(articleJson,selectReplyjson);
-
+					success : function(articlejson) {			
+						$.ajax({
+							url : "forumsAllLike",
+							type : "post",
+							dataType : "json",
+							success : function(allLikejson) {
+		 						articleJson = articlejson;
+		 						createArticle(articleJson,selectReplyjson,allLikejson);
+		//alert(allLikejson);
+							}					
+						})
 					}					
 				})
 			}		
@@ -375,14 +382,19 @@ function add(){
 
 
 
-	function createArticle(articleJson,selectReplyjson){
+	function createArticle(articleJson,selectReplyjson,allLikejson){
 		
 		for(i = 0; i<articleJson.length;i++){
 	      
 			var allarticle = $("<div id='BOX01' class='BOX01'></div>");
-	  		
-			var article_memberAccount_Text = document.createTextNode(articleJson[i].memberAccount);
-	  		var article_genre_Text = document.createTextNode(articleJson[i].genre);
+			
+			var linkMember = document.createElement("a");
+			var memberLink = "${pageContext.request.contextPath}/member/profile/"+getmemberPhoto(articleJson[i].memberAccount).id;
+			linkMember.setAttribute("href", memberLink);
+			var article_memberAccount_Text = document.createTextNode(getmemberPhoto(articleJson[i].memberAccount).nickname);
+			linkMember.appendChild(article_memberAccount_Text);
+			
+			var article_genre_Text = document.createTextNode(articleJson[i].genre);
 	  		var article_title_Text = document.createTextNode(articleJson[i].title);
 	  		var article_content_Text = document.createTextNode(articleJson[i].content);
 	  		var article_pubTime_Text = document.createTextNode("發表時間:"+articleJson[i].pubTime);
@@ -407,22 +419,34 @@ function add(){
 				replybutton.appendChild(reply_button_Text);	
 				
 			
-				var hideReply = document.createElement('input');
+				var hideReply = document.createElement('input');//隱藏留言
 				hideReply.type = "checkbox";
 				hideReply.id = "hideReply"+articleJson[i].id;
 				hideReply.checked="checked";
 				hideReply.setAttribute("onchange", "heidReplyDiv(this)");
+				var hideReply_div = $("<div></div>").append(hideReply);
 				
+				var like_Button = document.createElement('input');//Like
+				like_Button.type = "checkbox";
+				like_Button.id = "like_Button"+articleJson[i].id;
+				like_Button.setAttribute("onchange", "checkLike(this)");
+				var like_Button_div = $("<div id='"+'like_Button_div'+articleJson[i].id+"'></div>").append(like_Button);
 				
-				
+				var disLike_Button = document.createElement('input');//DisLike
+				disLike_Button.type = "checkbox";
+				disLike_Button.id = "disLike_Button"+articleJson[i].id;
+				disLike_Button.setAttribute("onchange", "checkDisLike(this)");
+				var disLike_Button_div = $("<div id='"+'disLike_Button_div'+articleJson[i].id+"'></div>").append(disLike_Button);
 				
 	  		
 	  		var img = document.createElement("img");
-	  		img.src = getmemberPhoto(articleJson[i].memberAccount);
+	  		img.src = getmemberPhoto(articleJson[i].memberAccount).photoUrl;
 	  		img.className = "photo_div";
 	  		var Article_photo_div = $("<div></div>").append(img);
-	  		var Article_member_div = $("<div class='member'></div>").append(article_memberAccount_Text);
-	  		var Article_genre_div = $("<div class='title'></div>").append(article_genre_Text);
+	  		var Article_member_div = $("<div class='member'></div>").append(linkMember);
+	  		
+	  		
+			var Article_genre_div = $("<div class='title'></div>").append(article_genre_Text);
 	  		var Article_title_div = $("<div class='title'></div>").append(article_title_Text);
 	  		var Article_content_div = $("<div class='content'></div>").append(article_content_Text);
 	  		var Article_pubTime_div = $("<div class='pubTime'></div>").append(article_pubTime_Text);
@@ -432,8 +456,35 @@ function add(){
 	  		
 	  		
 	  		
+	  		if(allLikejson!=null){//顯示每筆文章的Like && DisLike
+	  			var countLike = 0;
+	  			var countDisLike = 0;
+	  			var myself ="";
+	  			for(m =0; m<allLikejson.length;m++){
+					if(allLikejson[m].articleID == articleJson[i].id){
+						
+						if(allLikejson[m].good == 1 && allLikejson[m].memberAccount == "${loginmember.account}"){
+							myself = "你和其他";
+							like_Button.checked="checked";
+						}else if(allLikejson[m].good == 1){
+							countLike++;
+						}
+						
+						if(allLikejson[m].bad == 1 && allLikejson[m].memberAccount == "${loginmember.account}"){
+							myself = "你和其他"
+						}else if(allLikejson[m].bad == 1){
+							countDisLike++;
+						}
+					}
+		  		}
+	  	    like_Button_div.append(myself + countLike+"人Like");
+	  	  	disLike_Button_div.append(countDisLike+"人disLike");
+	  		}
+	  	
 	  		
-	  		if(selectReplyjson!=null){
+	  		
+	  		
+	  		if(selectReplyjson!=null){//顯示每筆文章的留言
 		  		for(k = 0; k < Object.keys(selectReplyjson).length;k++){
 					if(selectReplyjson[k].articleID == articleJson[i].id){
 					returnReplyString = JSON.stringify(selectReplyjson[k]);
@@ -459,7 +510,11 @@ function add(){
 	 		allarticle.append(Article_genre_div);
 	 		allarticle.append(Article_title_div);
 			allarticle.append(Article_content_div);
-			allarticle.append(hideReply);
+			
+			allarticle.append(hideReply_div);////隱藏留言
+			allarticle.append(like_Button_div);//like
+			allarticle.append(disLike_Button_div);//disLike
+			
 			allarticle.append(Article_editTime_div);
 			allarticle.append(countReply_div);
 	 		allarticle.append(Article_addReply_div);
@@ -480,7 +535,7 @@ function add(){
 	function getmemberPhoto(articlemember){
 		for(j = 0; j<Object.keys(memberJson).length;j++){
 			if(memberJson[j].account == articlemember){
-				return memberJson[j].photoUrl;
+				return memberJson[j];
 			}	
 		}	
 	}//end of getMemberPhoto
@@ -523,10 +578,21 @@ function add(){
 		
 	
 		var Reply_img = document.createElement("img");
-		Reply_img.src = getmemberPhoto(returnReplyjson.memberAccount);
+		Reply_img.src = getmemberPhoto(returnReplyjson.memberAccount).photoUrl;
 		Reply_img.className = "replyphoto";
 	  	var Reply_photo_div = $("<div></div>").append(Reply_img);
-	  	var Reply_member_div = $("<div class='replymember'></div>").append(returnReplyjson.memberAccount);
+	  		  	
+	  	var linkReplyMember = document.createElement("a");
+		var ReplymemberLink = "${pageContext.request.contextPath}/member/profile/"+getmemberPhoto(returnReplyjson.memberAccount).id;
+		linkReplyMember.setAttribute("href", ReplymemberLink);
+	  	var Repty_member_TextNode = document.createTextNode(getmemberPhoto(returnReplyjson.memberAccount).nickname);
+	  	linkReplyMember.appendChild(Repty_member_TextNode);
+	  	
+	  	var Reply_member_div = document.createElement("div");
+	  	Reply_member_div.className = "replymember";
+	  	Reply_member_div.appendChild(linkReplyMember);
+	  	
+	  	
 	  	var Reply_content_div = $("<div class='replycontent'></div>").append(returnReplyjson.content);
 	  	var Reply_pubTime_div = $("<div class='replypubTime'></div>").append("留言時間:"+returnReplyjson.pubTime);	
 	    var replyAll_div = $("<div class='replyAll'></div>");//整塊留言DIV		
@@ -571,6 +637,57 @@ function add(){
 		
 // 	}
 	
+	function checkLike(likeObiect){
+		var like;
+		if(document.getElementById(likeObiect.id).checked){				
+			like = 1;
+		}else{			
+			like = 0;			
+ 		}		
+		if("${loginmember.account}"!=""){
+			
+			var likeArticleId = likeObiect.id.substring(11);
+			var likeMember = "${loginmember.account}"
+			//var like = //function判斷??
+			
+			$.ajax({
+				url : "forumsLike",
+				type : "POST",
+				dataType : "json",
+				data : {
+					LikeArticleId:likeArticleId,
+					LikeMember:likeMember,
+					Like:like
+				},
+				success : function(articleLikeResult) {
+					//alert(articleLikeResult);
+					var countLike = articleLikeResult.length;
+						for(n =0;n<articleLikeResult.length;n++){
+							//alert(articleLikeResult[n].memberAccount);
+						}
+				//$("#"+"disLike_Button_div"+likeObiect.id).append(countLike+"人Like");
+				}		
+			})			
+		
+		}else{
+			alert("請先登入會員")
+		}
+	}
+	
+	
+	function checkDisLike(disLikeObiect){
+        if("${loginmember.account}"!=""){
+			
+		}else{
+			alert("請先登入會員")
+		}
+	}
+	
+	
+	function articleAllLike(allLikejson,ArticleID){
+		
+		
+	}
 	
 </script>
 

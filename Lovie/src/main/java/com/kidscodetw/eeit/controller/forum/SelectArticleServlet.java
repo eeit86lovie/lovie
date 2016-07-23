@@ -99,7 +99,7 @@ public class SelectArticleServlet {
 	}
 	
 	//發表留言
-	@RequestMapping(value = "forumsAddreply", params = { "ReplyMember","ReplyContent" }, method = RequestMethod.POST)
+	@RequestMapping(value = "forumsAddreply", params = { "ReplyMember","ReplyContent","ReplyArticle_ID"}, method = RequestMethod.POST)
 	@ResponseBody
 	public ArticleReplyBean addreply(
 			@RequestParam("ReplyMember") String ReplyMember,
