@@ -16,21 +16,13 @@ public class UserMessageController {
 		for (Object role : message.getGroup()) {
 			if (role != null) {
 				if (role.equals("guest")) {
-					template.convertAndSend(
-							"/topic/guest",
-							new SendToRoleMessage(message.getMessage()));
+					template.convertAndSend("/topic/guest",new SendToRoleMessage(message.getMessage()));
 				} else if (role.equals("user")) {
-					template.convertAndSend(
-							"/topic/user",
-							new SendToRoleMessage(message.getMessage()));
+					template.convertAndSend("/topic/user",new SendToRoleMessage(message.getMessage()));
 				} else if (role.equals("gold")) {
-					template.convertAndSend(
-							"/topic/gold",
-							new SendToRoleMessage(message.getMessage()));
+					template.convertAndSend("/topic/gold",new SendToRoleMessage(message.getMessage()));
 				}
 			}
-		}
-		;
+		};
 	}
-
 }
