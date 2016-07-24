@@ -389,7 +389,7 @@ function add(){
 			var allarticle = $("<div id='BOX01' class='BOX01'></div>");
 			
 			var linkMember = document.createElement("a");
-			var memberLink = "${pageContext.request.contextPath}/MemberPersonalPage/"+getmemberPhoto(articleJson[i].memberAccount).id;
+			var memberLink = "${pageContext.request.contextPath}/member/profile/"+getmemberPhoto(articleJson[i].memberAccount).id;
 			linkMember.setAttribute("href", memberLink);
 			var article_memberAccount_Text = document.createTextNode(getmemberPhoto(articleJson[i].memberAccount).nickname);
 			linkMember.appendChild(article_memberAccount_Text);
@@ -458,17 +458,29 @@ function add(){
 	  		
 	  		if(allLikejson!=null){//顯示每筆文章的Like && DisLike
 	  			var countLike = 0;
-		  		for(m =0; m<allLikejson.length;m++){
+	  			var countDisLike = 0;
+	  			var myself ="";
+	  			for(m =0; m<allLikejson.length;m++){
 					if(allLikejson[m].articleID == articleJson[i].id){
-						//alert(allLikejson[m].memberAccount);
-						if(allLikejson[m].good == 1){
+						
+						if(allLikejson[m].good == 1 && allLikejson[m].memberAccount == "${loginmember.account}"){
+							myself = "你和其他";
+							like_Button.checked="checked";
+						}else if(allLikejson[m].good == 1){
 							countLike++;
+						}
+						
+						if(allLikejson[m].bad == 1 && allLikejson[m].memberAccount == "${loginmember.account}"){
+							myself = "你和其他"
+						}else if(allLikejson[m].bad == 1){
+							countDisLike++;
 						}
 					}
 		  		}
-	  	    alert(countLike);//每筆的總Like
+	  	    like_Button_div.append(myself + countLike+"人Like");
+	  	  	disLike_Button_div.append(countDisLike+"人disLike");
 	  		}
-	  		
+	  	
 	  		
 	  		
 	  		
@@ -571,7 +583,7 @@ function add(){
 	  	var Reply_photo_div = $("<div></div>").append(Reply_img);
 	  		  	
 	  	var linkReplyMember = document.createElement("a");
-		var ReplymemberLink = "${pageContext.request.contextPath}/MemberPersonalPage/"+getmemberPhoto(returnReplyjson.memberAccount).id;
+		var ReplymemberLink = "${pageContext.request.contextPath}/member/profile/"+getmemberPhoto(returnReplyjson.memberAccount).id;
 		linkReplyMember.setAttribute("href", ReplymemberLink);
 	  	var Repty_member_TextNode = document.createTextNode(getmemberPhoto(returnReplyjson.memberAccount).nickname);
 	  	linkReplyMember.appendChild(Repty_member_TextNode);
@@ -653,7 +665,7 @@ function add(){
 						for(n =0;n<articleLikeResult.length;n++){
 							//alert(articleLikeResult[n].memberAccount);
 						}
-				$("#"+"disLike_Button_div"+likeObiect.id).append(countLike+"人Like");
+				//$("#"+"disLike_Button_div"+likeObiect.id).append(countLike+"人Like");
 				}		
 			})			
 		
