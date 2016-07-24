@@ -1,4 +1,4 @@
-package com.kidscodetw.eeit.admin.service;
+package com.kidscodetw.eeit.admin.service.movie;
 
 import java.io.IOException;
 import java.io.PrintWriter;

@@ -1,4 +1,4 @@
-package com.kidscodetw.eeit.admin.controller;
+package com.kidscodetw.eeit.admin.controller.movie;
 
 import java.io.IOException;
 import java.util.List;

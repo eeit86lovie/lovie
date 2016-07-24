@@ -226,7 +226,7 @@
 					</ul></li>
 				<li><a href="#"><i class="fa fa-credit-card fa-fw"></i> 訂單</span></a>
 					<!-- /.nav-second-level --></li>
-
+				<li><a href="broadcast"><i class="fa fa-heart fa-fw"></i> 廣播</a></li>
 			</ul>
 		</div>
 		<!-- /.sidebar-collapse -->
