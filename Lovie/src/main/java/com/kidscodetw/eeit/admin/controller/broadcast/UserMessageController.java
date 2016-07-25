@@ -1,4 +1,4 @@
-package com.kidscodetw.eeit.websocket;
+package com.kidscodetw.eeit.admin.controller.broadcast;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.handler.annotation.MessageMapping;
@@ -11,7 +11,7 @@ public class UserMessageController {
 	@Autowired
 	private SimpMessagingTemplate template;
 
-	@MessageMapping("/backend")
+	@MessageMapping("/broadcast")
 	public void dispatch(FromBackendMessge message) throws Exception {
 		for (Object role : message.getGroup()) {
 			if (role != null) {

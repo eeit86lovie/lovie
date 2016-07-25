@@ -13,7 +13,7 @@
 
 
         function connect() {
-            var socket = new SockJS('/Lovie/broadcast');
+            var socket = new SockJS('/Lovie/stomp');
             stompClient = Stomp.over(socket);
             stompClient.connect({}, function(frame) {
                 console.log('Connected: ' + frame);
@@ -37,7 +37,7 @@
            	if(!checkedGuest.checked && !checkedUser.checked && !checkedGold.checked){
             	alert("請至少勾選一項使用者群組");
            	}else{
-           		stompClient.send("/app/backend", {}, JSON.stringify({ 'message': message ,'group':[getCheckedValue(checkedGuest) ,getCheckedValue(checkedUser),getCheckedValue(checkedGold)]}));
+           		stompClient.send("/app/broadcast", {}, JSON.stringify({ 'message': message ,'group':[getCheckedValue(checkedGuest) ,getCheckedValue(checkedUser),getCheckedValue(checkedGold)]}));
            	}
         }
 
