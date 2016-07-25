@@ -72,7 +72,7 @@ public class PhotoService {
 		BufferedInputStream bin = new BufferedInputStream(fin);
 		BufferedOutputStream bout = new BufferedOutputStream(out);
 		int length = 0;
-		;
+		
 		while ((length = bin.read()) != -1) {
 			bout.write(length);
 		}

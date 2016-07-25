@@ -5,6 +5,8 @@
   <link rel="stylesheet" href="//code.jquery.com/ui/1.12.0/themes/base/jquery-ui.css">
   <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
   <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.js"></script>
+  <script src="${pageContext.request.contextPath }/css/sweetalert/dist/sweetalert.min.js"></script> 
+  <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/css/sweetalert/dist/sweetalert.css">
 <style>
 a{
     text-decoration:none;
@@ -14,7 +16,7 @@ a{
 <header>
 
 
-	<div class="nav-top" >
+	<div id="navtop" class="nav-top" style="width:80%;margin: auto;">
 
 		<a href="${pageContext.request.contextPath}/index.jsp"><img id="logo" height="60" src="${pageContext.request.contextPath}/image/icon/logo.png"></a>
 

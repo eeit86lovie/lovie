@@ -3,8 +3,8 @@
 
 <!-- <link rel="stylesheet" href="css/bootstrap-theme.css"> -->
 <script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
-
-<%-- <link rel="stylesheet" href="${pageContext.request.contextPath}/css/imagehover.css"> --%>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.1.1/sockjs.min.js"></script>
+<script src="//cdn.bootcss.com/stomp.js/2.3.3/stomp.js"></script>
 
 
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/login.css">
@@ -20,3 +20,4 @@
 <meta name="description" content="">
 <meta name="author" content="">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="utf-8" /> 

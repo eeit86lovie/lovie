@@ -20,8 +20,6 @@
 		<property name="jndiName" value="java:comp/env/jdbc/eeit86"></property>
 	</bean>
 
-
-
 	<bean id="sessionFactory"
 		class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
 		<property name="dataSource" ref="dataSource"></property>
@@ -177,5 +175,19 @@
 		<constructor-arg ref="articleRankDAOHibernate"></constructor-arg>
 	</bean>
 	
+	<!-- 	AppointmentDAO -->
+	<bean id="appointmentDAO2" class="com.kidscodetw.eeit.dao.appointment.AppointmentDAO2Hibernate">
+		<constructor-arg ref="sessionFactory"></constructor-arg>
+	</bean>
+	<bean id="appointmentService2" class="com.kidscodetw.eeit.service.appointment.AppointmentService2">
+		<constructor-arg ref="appointmentDAO2"></constructor-arg>
+	</bean>	
 
+	<!-- 	ChartDAO -->
+	<bean id="chartDAO" class="com.kidscodetw.eeit.dao.report.ChartDAOHibernate">
+		<constructor-arg ref="sessionFactory"></constructor-arg>
+	</bean>
+	<bean id="chartService" class="com.kidscodetw.eeit.service.report.ChartService">
+		<constructor-arg ref="chartDAO"></constructor-arg>
+	</bean>	
 </beans>
