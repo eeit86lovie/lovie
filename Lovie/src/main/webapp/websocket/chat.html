@@ -15,7 +15,7 @@
         }
 
         function connect() {
-            var socket = new SockJS('/Lovie/broadcast');
+            var socket = new SockJS('/Lovie/stomp');
             stompClient = Stomp.over(socket);
             stompClient.connect({}, function(frame) {
                 setConnected(true);

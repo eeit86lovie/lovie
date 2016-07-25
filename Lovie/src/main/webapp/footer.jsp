@@ -112,7 +112,7 @@
 		</c:if>
 		
 		<sec:authorize access="!hasRole('USER') and !hasRole('GOLD') and !hasRole('ADMIN')">
-			var socket = new SockJS('/Lovie/broadcast');
+			var socket = new SockJS('/Lovie/stomp');
 	        stompClient = Stomp.over(socket);
 	        stompClient.connect({}, function(frame) {
 	            //setConnected(true);
@@ -125,7 +125,7 @@
 		
 		
 		<sec:authorize access="hasRole('GOLD') and !hasRole('ADMIN')">
-			var socket = new SockJS('/Lovie/broadcast');
+			var socket = new SockJS('/Lovie/stomp');
 	        stompClient = Stomp.over(socket);
 	        stompClient.connect({}, function(frame) {
 	            //setConnected(true);
@@ -137,7 +137,7 @@
 		</sec:authorize>
 	
 		<sec:authorize access="hasRole('USER') and !hasRole('GOLD') and !hasRole('ADMIN')">
-			var socket = new SockJS('/Lovie/broadcast');
+			var socket = new SockJS('/Lovie/stomp');
 	        stompClient = Stomp.over(socket);
 	        stompClient.connect({}, function(frame) {
 	            //setConnected(true);
