@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="com.kidscodetw.eeit.entity.forum.ArticleRankBean" table="ArticleRank" >
+        
+        <composite-id>
+            <key-property name="articleID" column="articleID"/>
+            <key-property name="memberAccount" column="memberAccount"/>
+        </composite-id>
+        
+        
+        <property name="good" column="good" />
+        <property name="bad" column="bad" />
+        <property name="report" column="report" />
+        <property name="reportReason" column="reportReason" />
+        
+    </class>
+</hibernate-mapping>

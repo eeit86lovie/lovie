@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="com.kidscodetw.eeit.entity.forum.ForumBean" table="Article" >
+        
+        <id name="id" column="id">
+            <generator class="identity"/>
+        </id>
+        
+        <property name="memberAccount" column="memberAccount" />
+        <property name="title" column="title" />
+        <property name="photo" column="photo" />
+        <property name="content" column="content" />
+        <property name="genre" column="genre" />
+        <property name="pubTime" column="pubTime" />
+        <property name="editTime" column="editTime" />
+    
+        
+    </class>
+</hibernate-mapping>

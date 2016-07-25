@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="com.kidscodetw.eeit.entity.cart.ProductBean" table="Product" >
+        
+        <id name="productid" column="productid">
+            <generator class="identity"/>
+        </id>
+        <property name="name" column="name" />
+        <property name="cost" column="cost" />
+        <property name="discount" column="discount" />
+        <property name="inventory" column=" inventory" />
+         <property name="productphoto" column="productphoto" />
+          <property name="category" column="category" />
+           <property name="content" column="content" />
+        
+
+     
+
+    </class>
+</hibernate-mapping>
