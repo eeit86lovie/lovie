@@ -201,9 +201,14 @@
 						</span>
 					</div> <!-- /input-group -->
 				</li>
-				<li><a href="index.jsp"><i class="fa fa-windows fa-fw"></i>
-						控制台</a></li>
-				<li><a href="#"><i class="fa fa-heart fa-fw"></i> 約會</a></li>
+				<li><a href="index.jsp"><i class="fa fa-windows fa-fw"></i> 
+					控制台 <span class="fa arrow"></span></a>
+					<ul class="nav nav-second-level">
+						<li><a href="${pageContext.request.contextPath}/admin/report/chart.jsp">會員資料分析圖</a></li>
+						<li><a href="${pageContext.request.contextPath}/admin/report/report.jsp">會員明細表</a></li>
+					</ul>
+				</li>
+				<li><a href="${pageContext.request.contextPath}/admin/appointment/admin_appointment.jsp"><i class="fa fa-heart fa-fw"></i> 約會</a></li>
 				<li><a href="#"><i class="fa fa-film fa-fw"></i> 電影<span
 						class="fa arrow"></span></a>
 					<ul class="nav nav-second-level">
