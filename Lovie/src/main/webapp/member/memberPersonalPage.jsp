@@ -70,7 +70,7 @@
 <script src="${pageContext.request.contextPath }/js/jQuery-TWzipcode.js"></script>
 
 <script>
-
+console.log("測試")
 if("${loginmember.id}"=="${oneMember.id}"&&"${oneMember.id}"!=""){
 	document.getElementById("uesrBasic").style.display = "block";
 	document.getElementById("uesrAdvanced").style.display = "block";
