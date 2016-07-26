@@ -39,7 +39,7 @@
   <div class="col-md-9" ><b class="memberColumn">年齡：</b>${memberAge}歲</div>
   <div class="col-md-9" ><b class="memberColumn">性別：</b>${gender}</div>
   <div class="col-md-9" ><b class="memberColumn">星座：</b>${oneMember.constellation}</div>
-  <div class="col-md-9" ><b class="memberColumn">所在地：</b><span id="city" onclick="city_edit(this)">${oneMember.city}</span>   <span id="district" onclick="city_edit(this)"> ${oneMember.district}</span></div>
+  <div class="col-md-9" ><b class="memberColumn">所在地：</b><span id="city" onclick="city_edit(this)"><span>${oneMember.city}</span>  <span>${oneMember.district}</span></span></div>
   <div class="col-md-9" ><b class="memberColumn">好友數：</b>${oneMember.friendNum}</div>
   <div class="col-md-9" ><b class="memberColumn">會員等級：</b>鑽石會員</div>
   <div class="col-md-9" ><b class="memberColumn">會員發文總數：</b>${article}</div>
@@ -60,7 +60,6 @@
 <div class="col-md-12"></div>
 
  </form>
-<!-- <span id="twzipcode"></span> -->
  </div>
 
 </div>
@@ -80,7 +79,7 @@ function member_edit(member_col){//呼叫的member欄位物件,onclick時觸發
 	var loginmemberId=${loginmember.id}
 	var text = member_col.innerHTML;
 	var editableText = $('<input type="text" value="'+text+'" " name="'+member_col.id+'" id="'+member_col.id+'"/>');
-	var genderText=$('<select name="gender" id="gender">'+'<option value="1">男性</option>'+'<option value="0" selected>女性</option>'+'</select>');
+// 	var genderText=$('<select name="gender" id="gender">'+'<option value="1">男性</option>'+'<option value="0" selected>女性</option>'+'</select>');
 	var introText=$('<textarea cols="40" rows="5" style="width:auto;"id="intro">'+text+'</textarea>')
 
 
@@ -92,7 +91,8 @@ function member_edit(member_col){//呼叫的member欄位物件,onclick時觸發
 		
 	$("#"+member_col.id).focus();//onclick時focus本欄位
 
-	$("#"+member_col.id).blur(function(){
+	$("#"+member_col.id).blur(
+			function(){
 		var after_text = $("#"+member_col.id).val();
 		var member_id = member_col.id;
 		xhr = new XMLHttpRequest();
@@ -105,7 +105,8 @@ function member_edit(member_col){//呼叫的member欄位物件,onclick時觸發
 				$("#"+member_id).replaceWith('<span id="'+member_id+'" onclick="member_edit(this)">'+after_text+'</span>')
 			}
 		}
-	})
+	}
+			)
 	$("#"+member_col.id).keydown(function(event){
 		if(event.which==13){//代表按下enter
 			var after_text = $("#"+member_col.id).val();
@@ -123,51 +124,35 @@ function member_edit(member_col){//呼叫的member欄位物件,onclick時觸發
 		
 	})
 }
+
 function city_edit(member_col){
 	var loginmemberId=${loginmember.id}
-	var text = member_col.innerHTML;
-	var cityText=$('<span id="twzipcode"></span>')//自動生成county跟district
-	var district="${oneMember.district}"
-	console.log(district)
+	var text = member_col.childNodes[0].innerHTML;
+	var cityText=$('<span id="twzipcode"></span>')
 		$("#"+member_col.id).replaceWith(cityText);
-		$('#twzipcode').twzipcode({ //選項預設值
-				'countySel' : text
-			});
-			member_col.id = "cityselect";
-
-			$("#" + member_col.id).focus();//onclick時focus本欄位
-			$("#" + member_col.id).blur(
-					function() {
-						var after_text = $("#" + member_col.id).val();
-						if (after_text != "") {
-							var member_id = member_col.id;
-							xhr = new XMLHttpRequest();
-							xhr.onreadystatechange = callback;
-							if (member_id == "cityselect")
-								member_id = "city"
-							xhr.open("get", "memberEdit.do?id=" + loginmemberId
-									+ "&type=" + member_id + "&value="
-									+ after_text);
-							xhr.send();
-							function callback() {
-								if (xhr.readyState == 4 && xhr.status == 200) {
-
-									if (document.getElementById("twzipcode")) {
-										$("#twzipcode").replaceWith(
-												'<span id="city" onclick="city_edit(this)">'
-														+ after_text
-														+ '</span>')
-									}
-								}
-							}
-
-						}
-
-					})
+		$('#twzipcode').twzipcode({'countySel':text,})
+		member_col.id="cityselect";
+	$("#districtselect").blur(function(){
+		var after_text = $("#cityselect").val();
+		var district_after_text = $("#districtselect").val();
+			xhr = new XMLHttpRequest();
+			xhr.onreadystatechange = callback;
+			xhr.open("get", "memberEdit.do?id="+loginmemberId+"&type=city&value="+after_text+"&type1=district&value1="+district_after_text);
+			xhr.send();
+			function callback() {
+				if(xhr.readyState==4 && xhr.status==200){
+					if(document.getElementById("twzipcode")){
+						$("#twzipcode").replaceWith('<span id="city" onclick="city_edit(this)"><span>'+after_text+'</span>  <span>'+district_after_text+'</span></span>')
+					}
+				}
+			}
+		
 		}
+		)
+}
+
 	}
 </script>
 
-<script>$('#twzipcode').twzipcode();</script>
 </body>
 </html>
