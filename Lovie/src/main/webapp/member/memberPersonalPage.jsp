@@ -51,7 +51,7 @@
   <div class="col-md-2" ></div>
    <div class="col-md-12" ><br></div>
   <div class="col-md-8" ><b class="memberColumn">喜歡的電影類型：</b>喜劇|奇幻|驚悚</div>
-<!--   <div class="col-md-2" ><button class="edit" id=uesrBasic style="display:none;float:right;" >編輯</button></div> -->
+  <div class="col-md-2" ><button class="edit" id=uesrBasic style="display:none;float:right;" >編輯</button></div>
   <div class="col-md-2" ><button class="edit" id=uesrAdvanced style="display:none">進階編輯</button></div>
   <div class="col-md-12" ><br></div>
  <div class="col-md-5" style="font-size:20%;color:black">註冊日期：${oneMember.registeredTime}</div>
@@ -60,7 +60,7 @@
 <div class="col-md-12"></div>
 
  </form>
-
+<!-- <span id="twzipcode"></span> -->
  </div>
 
 </div>
@@ -70,7 +70,7 @@
 <script src="${pageContext.request.contextPath }/js/jQuery-TWzipcode.js"></script>
 
 <script>
-console.log("測試")
+
 if("${loginmember.id}"=="${oneMember.id}"&&"${oneMember.id}"!=""){
 	document.getElementById("uesrBasic").style.display = "block";
 	document.getElementById("uesrAdvanced").style.display = "block";
@@ -82,15 +82,11 @@ function member_edit(member_col){//呼叫的member欄位物件,onclick時觸發
 	var editableText = $('<input type="text" value="'+text+'" " name="'+member_col.id+'" id="'+member_col.id+'"/>');
 	var genderText=$('<select name="gender" id="gender">'+'<option value="1">男性</option>'+'<option value="0" selected>女性</option>'+'</select>');
 	var introText=$('<textarea cols="40" rows="5" style="width:auto;"id="intro">'+text+'</textarea>')
-// 	var cityText=$('<span id="twzipcode"></span>')
+
 
 	if(member_col.id=="intro")
 		$("#"+member_col.id).replaceWith(introText);
-// 	else if(member_col.id=="city"){
-// 		$("#"+member_col.id).replaceWith(cityText);
-// 		$('#twzipcode').twzipcode()
-// 		member_col.id="cityselect";
-// 	}
+
 	else 
 		$("#"+member_col.id).replaceWith(editableText);//把原本的span換成input
 		
@@ -101,16 +97,11 @@ function member_edit(member_col){//呼叫的member欄位物件,onclick時觸發
 		var member_id = member_col.id;
 		xhr = new XMLHttpRequest();
 		xhr.onreadystatechange = callback;
-// 		if(member_id=="cityselect")
-// 			member_id="city"
+
 		xhr.open("get", "memberEdit.do?id="+loginmemberId+"&type="+member_id+"&value="+after_text);
 		xhr.send();
 		function callback() {
-			if(xhr.readyState==4 && xhr.status==200){
-// 				if(document.getElementById("twzipcode")){
-// 					$("#twzipcode").replaceWith('<span id="city" onclick="member_edit(this)">'+after_text+'</span>')
-// 				}
-				
+			if(xhr.readyState==4 && xhr.status==200){		
 				$("#"+member_id).replaceWith('<span id="'+member_id+'" onclick="member_edit(this)">'+after_text+'</span>')
 			}
 		}
@@ -133,44 +124,48 @@ function member_edit(member_col){//呼叫的member欄位物件,onclick時觸發
 	})
 }
 function city_edit(member_col){
-
 	var loginmemberId=${loginmember.id}
 	var text = member_col.innerHTML;
-	var cityText=$('<span id="twzipcode"></span>')
-
+	var cityText=$('<span id="twzipcode"></span>')//自動生成county跟district
+	var district="${oneMember.district}"
+	console.log(district)
 		$("#"+member_col.id).replaceWith(cityText);
-		$('#twzipcode').twzipcode()
-		member_col.id="cityselect";
+		$('#twzipcode').twzipcode({ //選項預設值
+				'countySel' : text
+			});
+			member_col.id = "cityselect";
 
-	$("#"+member_col.id).focus();//onclick時focus本欄位
-	$("#"+member_col.id).blur(function(){
-		
-		var after_text = $("#"+member_col.id).val();
-		if(after_text!=""){
-			var member_id = member_col.id;
-			xhr = new XMLHttpRequest();
-			xhr.onreadystatechange = callback;
-			if(member_id=="cityselect")
-				member_id="city"
-			xhr.open("get", "memberEdit.do?id="+loginmemberId+"&type="+member_id+"&value="+after_text);
-			xhr.send();
-			function callback() {
-				if(xhr.readyState==4 && xhr.status==200){
+			$("#" + member_col.id).focus();//onclick時focus本欄位
+			$("#" + member_col.id).blur(
+					function() {
+						var after_text = $("#" + member_col.id).val();
+						if (after_text != "") {
+							var member_id = member_col.id;
+							xhr = new XMLHttpRequest();
+							xhr.onreadystatechange = callback;
+							if (member_id == "cityselect")
+								member_id = "city"
+							xhr.open("get", "memberEdit.do?id=" + loginmemberId
+									+ "&type=" + member_id + "&value="
+									+ after_text);
+							xhr.send();
+							function callback() {
+								if (xhr.readyState == 4 && xhr.status == 200) {
 
-					if(document.getElementById("twzipcode")){
-						$("#twzipcode").replaceWith('<span id="city" onclick="city_edit(this)">'+after_text+'</span>')
-					}
-				}
-			}
-			
+									if (document.getElementById("twzipcode")) {
+										$("#twzipcode").replaceWith(
+												'<span id="city" onclick="city_edit(this)">'
+														+ after_text
+														+ '</span>')
+									}
+								}
+							}
+
+						}
+
+					})
 		}
-			
-		
-		}
-		)
-}
-}
-
+	}
 </script>
 
 <script>$('#twzipcode').twzipcode();</script>
