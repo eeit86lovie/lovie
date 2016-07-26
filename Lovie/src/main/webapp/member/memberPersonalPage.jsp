@@ -51,7 +51,7 @@
   <div class="col-md-2" ></div>
    <div class="col-md-12" ><br></div>
   <div class="col-md-8" ><b class="memberColumn">喜歡的電影類型：</b>喜劇|奇幻|驚悚</div>
-  <div class="col-md-2" ><button class="edit" id=uesrBasic style="display:none;float:right;" >編輯</button></div>
+<!--   <div class="col-md-2" ><button class="edit" id=uesrBasic style="display:none;float:right;" >編輯</button></div> -->
   <div class="col-md-2" ><button class="edit" id=uesrAdvanced style="display:none">進階編輯</button></div>
   <div class="col-md-12" ><br></div>
  <div class="col-md-5" style="font-size:20%;color:black">註冊日期：${oneMember.registeredTime}</div>

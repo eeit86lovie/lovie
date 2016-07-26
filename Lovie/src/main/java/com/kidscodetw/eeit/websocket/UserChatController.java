@@ -1,5 +1,8 @@
 package com.kidscodetw.eeit.websocket;
 
+import java.security.Principal;
+import java.text.SimpleDateFormat;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.Payload;
@@ -7,6 +10,8 @@ import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Controller;
 
 import com.google.gson.Gson;
+import com.kidscodetw.eeit.dao.message.MessageDAO;
+import com.kidscodetw.eeit.entity.message.MessageBean;
 
 @Controller
 public class UserChatController {
@@ -14,25 +19,21 @@ public class UserChatController {
 	@Autowired
 	private SimpMessagingTemplate template;
 	
+	@Autowired
+	private MessageDAO messageDAO;
+	
 	@MessageMapping("/chat")
-	public void search(@Payload String jsonMessage) {
+	public void search(@Payload String jsonMessage, Principal principal) {
 		Gson gson = new Gson();
-		ChatMessage message = gson.fromJson(jsonMessage, ChatMessage.class);
-		template.convertAndSendToUser(message.getDestUser(), "/queue/chat", message.getMessage());
+		MessageBean message = gson.fromJson(jsonMessage, MessageBean.class);
+		message.setSender(principal.getName());
+		MessageBean result = messageDAO.insert(message);
+		System.out.println(result);
+		template.convertAndSendToUser(message.getReceiver(), "/queue/chat", result);
+		template.convertAndSendToUser(message.getSender(), "/queue/chat", result);
 	}
 	
-	private class ChatMessage{
-		private String destUser;
-		private String message;
-		public String getDestUser() {
-			return destUser;
-		}
-		
-		public String getMessage() {
-			return message;
-		}
-
-	}
+	
 	
 }
 
