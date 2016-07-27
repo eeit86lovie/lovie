@@ -33,7 +33,8 @@
 <div class="row" >
 <form>
   <div class="col-md-12" style="font-weight:bold;text-align:center;">${oneMember.nickname}的個人首頁</div>
-  <div class="col-md-3"><img style="border:5px solid #acd6ff;border-radius:15px;" src="${oneMember.photoUrl}" style="width:80%"> </div>
+  <div class="col-md-12" ><br></div>
+  <div class="col-md-3"><img style="border:5px solid #acd6ff;border-radius:15px;width:100%" src="${oneMember.photoUrl}"><input type="file"></input></img></div>
   <div class="col-md-9" ></div>
   <div class="col-md-9" ><b class="memberColumn">暱稱：</b><span id="nickname" onclick="member_edit(this)">${oneMember.nickname}</span></div>
   <div class="col-md-9" ><b class="memberColumn">年齡：</b>${memberAge}歲</div>
@@ -77,15 +78,13 @@ if("${loginmember.id}"=="${oneMember.id}"&&"${oneMember.id}"!=""){
 function member_edit(member_col){//呼叫的member欄位物件,onclick時觸發
 	
 	var loginmemberId=${loginmember.id}
-	var text = member_col.innerHTML;
+	var text = member_col.innerHTML.replace(/<br>/gi, "\n");
+	console.log(text)
 	var editableText = $('<input type="text" value="'+text+'" " name="'+member_col.id+'" id="'+member_col.id+'"/>');
 // 	var genderText=$('<select name="gender" id="gender">'+'<option value="1">男性</option>'+'<option value="0" selected>女性</option>'+'</select>');
 	var introText=$('<textarea cols="40" rows="5" style="width:auto;"id="intro">'+text+'</textarea>')
-
-
 	if(member_col.id=="intro")
 		$("#"+member_col.id).replaceWith(introText);
-
 	else 
 		$("#"+member_col.id).replaceWith(editableText);//把原本的span換成input
 		
@@ -99,7 +98,6 @@ function member_edit(member_col){//呼叫的member欄位物件,onclick時觸發
 		var member_id = member_col.id;
 		xhr = new XMLHttpRequest();
 		xhr.onreadystatechange = callback;
-
 		xhr.open("get", "memberEdit.do?id="+loginmemberId+"&type="+member_id+"&value="+after_text);
 		xhr.send();
 		function callback() {
@@ -109,8 +107,8 @@ function member_edit(member_col){//呼叫的member欄位物件,onclick時觸發
 		}
 	}
 			)
-	$("#"+member_col.id).keydown(function(event){
-// 		if(event.which==13){//代表按下enter
+// 	$("#"+member_col.id).keydown(function(event){
+// 		if(event.which==13&&member_col.id!="intro"){//代表按下enter
 // 			var after_text = $("#"+member_col.id).val();
 // 			var member_id = member_col.id;
 // 			xhr = new XMLHttpRequest();
@@ -124,7 +122,7 @@ function member_edit(member_col){//呼叫的member欄位物件,onclick時觸發
 // 			}
 // 		}
 		
-	})
+// 	})
 }
 
 function city_edit(member_col){
