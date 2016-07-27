@@ -294,6 +294,9 @@ input[name="dislike_checkBox"]:checked + label span{
 }
 
 
+
+
+
 </style>
 
 
@@ -307,7 +310,7 @@ input[name="dislike_checkBox"]:checked + label span{
 
 		
 	<div class="container">
-
+        <c:import charEncoding="UTF-8" url="/forum/NewLightBox.jsp"></c:import>
 		<input type="button" id="addarticle" value="ADD" onclick="add()">
 		<a href="#loginmodal" class="flatbtn" id="modaltrigger">lightbox</a>
 		<div class="row">
@@ -352,7 +355,7 @@ input[name="dislike_checkBox"]:checked + label span{
 
 <script>
 
-//$('#modaltrigger').leanModal({ top: 110, overlay: 0.8, closeButton: ".hidemodal" });
+$('#modaltrigger').leanModal({ top: 110, overlay: 0.8, closeButton: ".hidemodal" });
 
 
 
@@ -686,7 +689,7 @@ function add(){
 					returnReplyString = JSON.stringify(selectReplyjson[k]);
 					var returnReplyjson = JSON.parse(returnReplyString);
 					var replyAll_div = createReply(returnReplyjson);
-					Article_replyarea_div.append(replyAll_div);	
+					Article_replyarea_div.prepend(replyAll_div);	
 							}	
 		  			}
 	  		}
@@ -700,7 +703,7 @@ function add(){
 	  		countReplyimg_div.className = "countReplyimg_div"
 	  		var countReply = Article_replyarea_div.children().length+"則留言";
 	  		if(Article_replyarea_div.children().length>0){
-	  			var countReply_div = $("<div></div>").append(countReply);
+	  			var countReply_div = $("<div id='"+'countReply_div'+articleJson[i].id+"'></div>").append(countReply);
 	  			countReplyimg_div.append(countReply_div);
 	  		}
 	  		
@@ -770,11 +773,17 @@ function add(){
 						},
 						success : function(articleReplyResult) {
 							var replyAll_div = createReply(articleReplyResult);
-							$("#"+"replyarea"+replyButtonObject.id.substring(11)).append(replyAll_div);
-							$("#"+"text"+replyButtonObject.id.substring(11)).val("");	
+							$("#"+"replyarea"+replyButtonObject.id.substring(11)).prepend(replyAll_div);
+							$("#"+"text"+replyButtonObject.id.substring(11)).val("");
+							
 						}		
 					})			
-			}else{
+						    var countReply_div_Id = $("#"+"countReply_div"+replyButtonObject.id.substring(11));
+						    var newCountReply = parseInt(countReply_div_Id.text().slice(0,-3)) + 1;		
+						    countReply_div_Id.text("");
+						    countReply_div_Id.append(newCountReply+"則留言");	
+		
+		}else{
 				var error_message = $("<div class='errormessage' id='errormessage'></div>").append("請輸入留言");
 				$("#"+"addReply"+ replyButtonObject.id.substring(11)).append(error_message);
 			}
