@@ -1,6 +1,6 @@
 package com.kidscodetw.eeit.entity.message;
 
-public class MessageBean {
+public class MessageBean{
 	
 	private Integer id;
 	private String sender;
@@ -43,5 +43,8 @@ public class MessageBean {
 		return "model.EntityBean["+
 				"id: " +id+ ", sender: "+ sender+", receiver: "+ receiver+", message: "+ message+", timestamp: "+ timestamp+"]";
 	}
+	
+	
+	
 
 }
