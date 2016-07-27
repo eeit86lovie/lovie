@@ -44,7 +44,7 @@
 				  <div class="form-group">
 				    <label class="control-label col-sm-2" for="lastOnTime">最後登入日 < </label>
 				    <div class="col-sm-5"> 
-				    	<input type="text" class="form-control" id="lastOnTime" name="lastOnTime" placeholder="lastOnTime" readonly>
+				    	<input type="text" class="form-control" id="lastOnTime" name="lastOnTime" placeholder="會員最後登入日在選擇日期之前" readonly>
 				    </div>
 				  </div>
 				  <div class="form-group"> 

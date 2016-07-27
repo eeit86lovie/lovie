@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.3.0.final using JasperReports Library version 6.3.0  -->
-<!-- 2016-07-27T11:18:19 -->
+<!-- 2016-07-27T13:15:02 -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report" pageWidth="842" pageHeight="595" orientation="Landscape" whenNoDataType="AllSectionsNoDetail" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="7a5c9b49-9dc5-422a-ac69-e92cf61ef530">
 	<property name="com.jaspersoft.studio.data.sql.tables" value="ZWVpdDg2LmBNZW1iZXJgIEFTICw3MiwxNiw3ZGYyMmRjZi00OGNmLTQ5MDgtOTQ3NS04OTFmZDZl&#xA;YjI2ZmQ7"/>
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="loviemysql"/>
@@ -155,8 +155,8 @@ order by
 	</background>
 	<title>
 		<band height="102" splitType="Stretch">
-			<rectangle>
-				<reportElement x="680" y="0" width="122" height="66" backcolor="#000000" uuid="32703293-b52d-4270-8ae2-2f54eb3fefa7"/>
+			<rectangle radius="6">
+				<reportElement x="680" y="0" width="122" height="66" forecolor="#FF0011" backcolor="#FC0905" uuid="32703293-b52d-4270-8ae2-2f54eb3fefa7"/>
 				<graphicElement>
 					<pen lineWidth="0.0"/>
 				</graphicElement>
@@ -190,55 +190,55 @@ order by
 				</textField>
 			</frame>
 			<ellipse>
-				<reportElement x="693" y="5" width="51" height="47" forecolor="#FF2B00" backcolor="#FF2B00" uuid="7ec7481a-15ad-4e5b-b144-f3e71f0ed8e4"/>
+				<reportElement x="693" y="5" width="51" height="47" forecolor="#FF2B00" backcolor="#FFFFFF" uuid="7ec7481a-15ad-4e5b-b144-f3e71f0ed8e4"/>
 				<graphicElement>
-					<pen lineColor="rgba(255, 0, 106, 0.24313726)"/>
+					<pen lineColor="#FFFFFF"/>
 				</graphicElement>
 			</ellipse>
 			<ellipse>
-				<reportElement x="735" y="5" width="51" height="47" forecolor="#FF2B00" backcolor="#FF2B00" uuid="852392fc-4345-4eb0-be11-b131fcde427e"/>
+				<reportElement x="735" y="5" width="51" height="47" forecolor="#FF2B00" backcolor="#FFFFFF" uuid="852392fc-4345-4eb0-be11-b131fcde427e"/>
 				<graphicElement>
-					<pen lineColor="rgba(255, 0, 106, 0.24313726)"/>
+					<pen lineColor="#FFFFFF"/>
 				</graphicElement>
 			</ellipse>
 			<ellipse>
-				<reportElement x="704" y="24" width="70" height="23" forecolor="#FF2B00" backcolor="#FF2B00" uuid="f86f2c83-1930-4994-9c92-c9c822f88667"/>
+				<reportElement x="704" y="24" width="70" height="23" forecolor="#FF2B00" backcolor="#FFFFFF" uuid="f86f2c83-1930-4994-9c92-c9c822f88667"/>
 				<graphicElement>
-					<pen lineColor="rgba(255, 0, 106, 0.24313726)"/>
+					<pen lineColor="#FFFFFF"/>
 				</graphicElement>
 			</ellipse>
 			<ellipse>
-				<reportElement x="704" y="34" width="70" height="23" forecolor="#FF2B00" backcolor="#FF2B00" uuid="f40bcec7-286e-4942-81ce-1a02fa68a4a2"/>
+				<reportElement x="704" y="34" width="70" height="23" forecolor="#FF2B00" backcolor="#FFFFFF" uuid="f40bcec7-286e-4942-81ce-1a02fa68a4a2"/>
 				<graphicElement>
-					<pen lineColor="rgba(255, 0, 106, 0.24313726)"/>
+					<pen lineColor="#FFFFFF"/>
 				</graphicElement>
 			</ellipse>
 			<ellipse>
-				<reportElement x="714" y="35" width="52" height="23" forecolor="#FF2B00" backcolor="#FF2B00" uuid="4f903597-3276-490e-a4b4-0f7d2e58fec0"/>
+				<reportElement x="714" y="35" width="52" height="23" forecolor="#FF2B00" backcolor="#FFFFFF" uuid="4f903597-3276-490e-a4b4-0f7d2e58fec0"/>
 				<graphicElement>
-					<pen lineColor="rgba(255, 0, 106, 0.24313726)"/>
+					<pen lineColor="#FFFFFF"/>
 				</graphicElement>
 			</ellipse>
 			<ellipse>
-				<reportElement x="711" y="36" width="60" height="23" forecolor="#FF2B00" backcolor="#FF2B00" uuid="00cc243b-2c4e-4066-92fc-6895e9f1382f"/>
+				<reportElement x="711" y="36" width="60" height="23" forecolor="#FF2B00" backcolor="#FFFFFF" uuid="00cc243b-2c4e-4066-92fc-6895e9f1382f"/>
 				<graphicElement>
-					<pen lineColor="rgba(255, 0, 106, 0.24313726)"/>
+					<pen lineColor="#FFFFFF"/>
 				</graphicElement>
 			</ellipse>
 			<ellipse>
-				<reportElement x="719" y="31" width="47" height="30" forecolor="#FF2B00" backcolor="#FF2B00" uuid="22dac6cb-aafb-4a95-abb3-42419fbfaf9b"/>
+				<reportElement x="719" y="31" width="47" height="30" forecolor="#FF2B00" backcolor="#FFFFFF" uuid="22dac6cb-aafb-4a95-abb3-42419fbfaf9b"/>
 				<graphicElement>
-					<pen lineColor="rgba(255, 0, 106, 0.24313726)"/>
+					<pen lineColor="#FFFFFF"/>
 				</graphicElement>
 			</ellipse>
 			<ellipse>
-				<reportElement x="715" y="30" width="51" height="30" forecolor="#FF2B00" backcolor="#FF2B00" uuid="6b009d90-c727-4eba-9710-7fbb2a5609c7"/>
+				<reportElement x="715" y="30" width="51" height="30" forecolor="#FF2B00" backcolor="#FFFFFF" uuid="6b009d90-c727-4eba-9710-7fbb2a5609c7"/>
 				<graphicElement>
-					<pen lineColor="rgba(255, 0, 106, 0.24313726)"/>
+					<pen lineColor="#FFFFFF"/>
 				</graphicElement>
 			</ellipse>
 			<staticText>
-				<reportElement style="SubTitle" x="702" y="13" width="80" height="40" forecolor="#FFFFFF" uuid="9e2cf5e5-e935-4ff6-bee9-0525ceb32108">
+				<reportElement style="SubTitle" x="702" y="13" width="80" height="40" forecolor="#696565" backcolor="#FFFFFF" uuid="69d09351-cb49-4630-a9ed-2433df313c94">
 					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
 				</reportElement>
 				<box>

@@ -59,7 +59,7 @@ public class ReportAdminController {
 		Map reportParameters;
 		try {
 		  reportPath = request.getServletContext().
-		      getRealPath("admin\\report") + "\\report.jrxml";
+		      getRealPath("/admin/report") + "/report.jrxml";
 		
 		  //Set report parameters
 		  StringBuffer p_select = new StringBuffer();
