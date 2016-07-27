@@ -26,7 +26,7 @@
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
-			<version>5.1.6</version>
+			 <version>5.1.6</version>  
 		</dependency>
 		<dependency>
 			<groupId>javax.servlet</groupId>
@@ -179,9 +179,12 @@
 			<scope>runtime</scope>
 		</dependency>
 
-
-
-
+		<!-- jasper Report -->
+		<dependency>
+			<groupId>net.sf.jasperreports</groupId>
+			<artifactId>jasperreports</artifactId>
+			<version>6.0.0</version>
+		</dependency>
 	</dependencies>
 	<build>
 		<finalName>Lovie</finalName>

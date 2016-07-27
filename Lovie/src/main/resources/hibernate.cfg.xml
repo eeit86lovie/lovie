@@ -47,6 +47,7 @@
         <mapping class="com.kidscodetw.eeit.entity.report.Chart1Bean" />
         <mapping class="com.kidscodetw.eeit.entity.report.Chart2Bean" />
         <mapping class="com.kidscodetw.eeit.entity.report.Chart3Bean" />
+        <mapping class="com.kidscodetw.eeit.entity.report.ReportBean" />
 	</session-factory>
 	
 </hibernate-configuration>
