@@ -8,7 +8,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -49,12 +48,9 @@ public class AppointmentAdminController {
 	@RequestMapping("/appointmentUpdateStatus")
     public void UpdateStatus(@RequestParam("id") Integer id,@RequestParam("status") Integer status,HttpServletResponse response) {
 		try {
-			System.out.println(id+","+status);
 			AppointmentBean2 appointmentBean = appointmentService2.select(id);
-			System.out.println(appointmentBean.toString());
 			appointmentBean.setStatus(status);
 			AppointmentBean2 resu = appointmentService2.update(appointmentBean);
-			System.out.println(resu.toString());
 			PrintWriter out;
 			try {
 				out = response.getWriter();

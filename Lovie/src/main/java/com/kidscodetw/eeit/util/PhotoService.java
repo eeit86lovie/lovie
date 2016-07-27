@@ -25,6 +25,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.kidscodetw.eeit.dao.member.MemberDAO;
+import com.kidscodetw.eeit.entity.member.MemberBean;
+
 @Controller
 @RequestMapping("photo")
 public class PhotoService {
@@ -34,12 +37,45 @@ public class PhotoService {
 
 	@Autowired
 	private DataSource dataSource;
+	
+	@Autowired
+	private MemberDAO memberDAO;
 
 	@RequestMapping(value = "/{type}/{id}", method = RequestMethod.GET)
 	protected void getPhoto(@PathVariable("type") String type,
 			@PathVariable("id") String id, HttpServletResponse response) {
 		response.setContentType("image/jpeg");
 		type = type.substring(0, 1).toUpperCase() + type.substring(1);
+		String imgName = type.substring(0, 1).toUpperCase() + type.substring(1)
+				+ id;
+		File f = new File(context.getRealPath("/") + "/photo/" + imgName
+				+ ".jpg");
+		if (f.exists()) {
+			try {
+				writeImgToBrowser(response, imgName);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		} else {
+			makeImgFromDb(type, id);
+			if (f.exists()) {
+				try {
+					writeImgToBrowser(response, imgName);
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+
+	}
+	
+	@RequestMapping(value = "/member/account/{account}", method = RequestMethod.GET)
+	protected void getPhoto(@PathVariable("account") String account, HttpServletResponse response) {
+		response.setContentType("image/jpeg");
+		String type = "member";
+		type = type.substring(0, 1).toUpperCase() + type.substring(1);
+		MemberBean memberBean = memberDAO.select(account);
+		String id = memberBean.getId().toString();
 		String imgName = type.substring(0, 1).toUpperCase() + type.substring(1)
 				+ id;
 		File f = new File(context.getRealPath("/") + "/photo/" + imgName

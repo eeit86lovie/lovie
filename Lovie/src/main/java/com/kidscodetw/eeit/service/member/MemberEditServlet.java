@@ -22,7 +22,6 @@ public class MemberEditServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String password;
-		Integer gender;
 		String email;
 		String nickname;
 		String city;
@@ -44,7 +43,6 @@ public class MemberEditServlet extends HttpServlet {
 
 		System.out.println(type+value);
 		switch(type){
-//		case "gender": gender = value;memberBean.setGender(gender);break;
 		case "nickname": nickname = value;memberBean.setNickname(nickname);break;
 		case "city": city = value;memberBean.setCity(city);break;
 		case "intro": intro = value;memberBean.setIntro(intro);break;

@@ -1,0 +1,407 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.3.0.final using JasperReports Library version 6.3.0  -->
+<!-- 2016-07-27T13:15:02 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report" pageWidth="842" pageHeight="595" orientation="Landscape" whenNoDataType="AllSectionsNoDetail" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="7a5c9b49-9dc5-422a-ac69-e92cf61ef530">
+	<property name="com.jaspersoft.studio.data.sql.tables" value="ZWVpdDg2LmBNZW1iZXJgIEFTICw3MiwxNiw3ZGYyMmRjZi00OGNmLTQ5MDgtOTQ3NS04OTFmZDZl&#xA;YjI2ZmQ7"/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="loviemysql"/>
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="Title" forecolor="#FFFFFF" fontName="微軟正黑體" fontSize="50" isBold="false"/>
+	<style name="SubTitle" forecolor="#CCCCCC" fontName="Times New Roman" fontSize="18" isBold="false"/>
+	<style name="Column header" forecolor="#666666" fontName="微軟正黑體" fontSize="14" isBold="true"/>
+	<style name="Detail" mode="Transparent" fontName="Times New Roman"/>
+	<style name="Row" mode="Transparent" fontName="Times New Roman" pdfFontName="Times-Roman">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$V{REPORT_COUNT}%2 == 0]]></conditionExpression>
+			<style mode="Opaque" backcolor="#F0EFEF"/>
+		</conditionalStyle>
+	</style>
+	<parameter name="p_select" class="java.lang.String" isForPrompting="false"/>
+	<queryString>
+		<![CDATA[SELECT
+	eeit86.`Member`.privilege,
+	eeit86.`Member`.gender,
+    eeit86.`Member`.id,
+	eeit86.`Member`.account,
+	eeit86.`Member`.email,
+	eeit86.`Member`.nickname,
+	eeit86.`Member`.birthday,
+	eeit86.`Member`.`lastOnTime`,
+	eeit86.`Member`.`registeredTime`
+FROM eeit86.`Member`
+where
+	eeit86.`Member`.privilege <> '2'
+order by
+	eeit86.`Member`.privilege asc,
+	eeit86.`Member`.gender asc]]>
+	</queryString>
+	<field name="privilege" class="java.lang.Integer"/>
+	<field name="gender" class="java.lang.Boolean"/>
+	<field name="id" class="java.lang.Integer"/>
+	<field name="account" class="java.lang.String"/>
+	<field name="nickname" class="java.lang.String"/>
+	<field name="email" class="java.lang.String"/>
+	<field name="birthday" class="java.lang.String"/>
+	<field name="lastOnTime" class="java.lang.String"/>
+	<field name="registeredTime" class="java.lang.String"/>
+	<group name="Group1" isReprintHeaderOnEachPage="true">
+		<groupExpression><![CDATA[$F{privilege}]]></groupExpression>
+		<groupHeader>
+			<band height="28">
+				<frame>
+					<reportElement mode="Opaque" x="0" y="2" width="675" height="24" forecolor="#B89F7D" backcolor="#FF0011" uuid="f24569ed-2518-465a-a480-0c195aacd180"/>
+					<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+						<reportElement style="SubTitle" x="2" y="2" width="618" height="21" forecolor="#FFFFFF" uuid="5b7282d2-5169-4db4-b85a-e2391d4d4e66"/>
+						<textElement>
+							<font fontName="微軟正黑體" isBold="false"/>
+						</textElement>
+						<textFieldExpression><![CDATA[$F{privilege}.equals(1)?"一般會員":($F{privilege}.equals(2)?"鑽石會員":"管理員")]]></textFieldExpression>
+					</textField>
+				</frame>
+				<rectangle>
+					<reportElement x="678" y="2" width="124" height="26" backcolor="#666666" uuid="70e1e931-2edd-4f3d-b09b-b9da04709f25"/>
+					<graphicElement>
+						<pen lineWidth="0.0"/>
+					</graphicElement>
+				</rectangle>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="20">
+				<staticText>
+					<reportElement x="55" y="0" width="60" height="20" uuid="a308ded4-b1ce-4f96-ac1d-0ce45067e4d1"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="微軟正黑體" size="12" isUnderline="false"/>
+					</textElement>
+					<text><![CDATA[人數合計:]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="117" y="0" width="130" height="20" uuid="8f7964a3-764b-4ca4-a797-a440282da973"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="微軟正黑體" size="12"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{Group1_COUNT}]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement x="2" y="0" width="59" height="20" uuid="34bdf909-396e-46b4-a5fd-1ba201095600"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="微軟正黑體" size="12"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{privilege}.equals(1)?"一般會員":($F{privilege}.equals(2)?"鑽石會員":"管理員")]]></textFieldExpression>
+				</textField>
+				<line>
+					<reportElement x="0" y="0" width="802" height="1" uuid="1bfc9ea5-394b-4729-816b-11fd501cd2f1"/>
+				</line>
+			</band>
+		</groupFooter>
+	</group>
+	<group name="Group2" isReprintHeaderOnEachPage="true">
+		<groupExpression><![CDATA[$F{gender}]]></groupExpression>
+		<groupHeader>
+			<band height="22">
+				<rectangle>
+					<reportElement x="-2" y="1" width="804" height="19" backcolor="rgba(255, 0, 225, 0.32941177)" uuid="cb11984d-a8ca-4090-a159-0b26dc695811"/>
+					<graphicElement>
+						<pen lineColor="#FFFCFC"/>
+					</graphicElement>
+				</rectangle>
+				<rectangle radius="0">
+					<reportElement mode="Opaque" x="0" y="13" width="802" height="8" forecolor="#FFFCFC" backcolor="rgba(255, 0, 196, 0.39215687)" uuid="f16f72bd-0e17-4d5b-a30c-25081f3913d8"/>
+					<graphicElement>
+						<pen lineWidth="0.0" lineColor="#FFFFFF"/>
+					</graphicElement>
+				</rectangle>
+				<textField isBlankWhenNull="true">
+					<reportElement positionType="Float" mode="Transparent" x="2" y="-3" width="803" height="23" forecolor="#000000" backcolor="rgba(255, 0, 102, 0.6392157)" uuid="a764bb59-eefa-45a6-8dbf-137a6b4c8db5"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="微軟正黑體" size="16" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{gender}?" 男會員":" 女會員"]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="20">
+				<line>
+					<reportElement x="0" y="1" width="680" height="1" uuid="1bfc9ea5-394b-4729-816b-11fd501cd2f1"/>
+				</line>
+				<staticText>
+					<reportElement x="55" y="0" width="60" height="20" uuid="65be5fcb-e098-486e-b76b-780406c9e68f"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="微軟正黑體" size="12" isUnderline="false"/>
+					</textElement>
+					<text><![CDATA[人數小計:]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="117" y="0" width="130" height="20" uuid="891bfb10-0cd8-4a61-913f-7e409e8a38f8"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="微軟正黑體" size="12"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{Group2_COUNT}]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement x="2" y="0" width="59" height="20" uuid="16ef2cb3-a960-4688-ab41-af4f065c2495"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="微軟正黑體" size="12"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{gender}?"男會員":"女會員"]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupFooter>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="102" splitType="Stretch">
+			<rectangle radius="6">
+				<reportElement x="680" y="0" width="122" height="66" forecolor="#FF0011" backcolor="#FC0905" uuid="32703293-b52d-4270-8ae2-2f54eb3fefa7"/>
+				<graphicElement>
+					<pen lineWidth="0.0"/>
+				</graphicElement>
+			</rectangle>
+			<frame>
+				<reportElement mode="Opaque" x="0" y="0" width="677" height="66" backcolor="#000000" uuid="d8d9e644-3a32-491d-97cb-a277aff17133"/>
+				<staticText>
+					<reportElement style="Title" x="0" y="0" width="370" height="66" uuid="27d8f6ee-f0a9-44f6-a160-1763c3b00f30"/>
+					<box topPadding="4" leftPadding="4" bottomPadding="4" rightPadding="4"/>
+					<textElement verticalAlignment="Bottom">
+						<font fontName="微軟正黑體" size="43" isBold="true"/>
+					</textElement>
+					<text><![CDATA[會員明細表]]></text>
+				</staticText>
+			</frame>
+			<frame>
+				<reportElement mode="Opaque" x="0" y="70" width="802" height="32" forecolor="#000000" backcolor="#6B6565" uuid="b0c895f6-6dbd-477d-9858-9ad66af087e1"/>
+				<textField pattern="yyyy-MM-dd(EEEEE)">
+					<reportElement x="677" y="10" width="120" height="20" forecolor="#FFFFFF" uuid="a33fce3b-20c1-4696-873a-fe134d1e7d88"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="微軟正黑體" size="12"/>
+					</textElement>
+					<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement x="5" y="4" width="418" height="24" forecolor="#CECFC4" uuid="0c874536-dd4b-4c66-a1a7-8db4b7c80dbd"/>
+					<textElement>
+						<font fontName="微軟正黑體" size="16"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$P{p_select}]]></textFieldExpression>
+				</textField>
+			</frame>
+			<ellipse>
+				<reportElement x="693" y="5" width="51" height="47" forecolor="#FF2B00" backcolor="#FFFFFF" uuid="7ec7481a-15ad-4e5b-b144-f3e71f0ed8e4"/>
+				<graphicElement>
+					<pen lineColor="#FFFFFF"/>
+				</graphicElement>
+			</ellipse>
+			<ellipse>
+				<reportElement x="735" y="5" width="51" height="47" forecolor="#FF2B00" backcolor="#FFFFFF" uuid="852392fc-4345-4eb0-be11-b131fcde427e"/>
+				<graphicElement>
+					<pen lineColor="#FFFFFF"/>
+				</graphicElement>
+			</ellipse>
+			<ellipse>
+				<reportElement x="704" y="24" width="70" height="23" forecolor="#FF2B00" backcolor="#FFFFFF" uuid="f86f2c83-1930-4994-9c92-c9c822f88667"/>
+				<graphicElement>
+					<pen lineColor="#FFFFFF"/>
+				</graphicElement>
+			</ellipse>
+			<ellipse>
+				<reportElement x="704" y="34" width="70" height="23" forecolor="#FF2B00" backcolor="#FFFFFF" uuid="f40bcec7-286e-4942-81ce-1a02fa68a4a2"/>
+				<graphicElement>
+					<pen lineColor="#FFFFFF"/>
+				</graphicElement>
+			</ellipse>
+			<ellipse>
+				<reportElement x="714" y="35" width="52" height="23" forecolor="#FF2B00" backcolor="#FFFFFF" uuid="4f903597-3276-490e-a4b4-0f7d2e58fec0"/>
+				<graphicElement>
+					<pen lineColor="#FFFFFF"/>
+				</graphicElement>
+			</ellipse>
+			<ellipse>
+				<reportElement x="711" y="36" width="60" height="23" forecolor="#FF2B00" backcolor="#FFFFFF" uuid="00cc243b-2c4e-4066-92fc-6895e9f1382f"/>
+				<graphicElement>
+					<pen lineColor="#FFFFFF"/>
+				</graphicElement>
+			</ellipse>
+			<ellipse>
+				<reportElement x="719" y="31" width="47" height="30" forecolor="#FF2B00" backcolor="#FFFFFF" uuid="22dac6cb-aafb-4a95-abb3-42419fbfaf9b"/>
+				<graphicElement>
+					<pen lineColor="#FFFFFF"/>
+				</graphicElement>
+			</ellipse>
+			<ellipse>
+				<reportElement x="715" y="30" width="51" height="30" forecolor="#FF2B00" backcolor="#FFFFFF" uuid="6b009d90-c727-4eba-9710-7fbb2a5609c7"/>
+				<graphicElement>
+					<pen lineColor="#FFFFFF"/>
+				</graphicElement>
+			</ellipse>
+			<staticText>
+				<reportElement style="SubTitle" x="702" y="13" width="80" height="40" forecolor="#696565" backcolor="#FFFFFF" uuid="69d09351-cb49-4630-a9ed-2433df313c94">
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+				</reportElement>
+				<box>
+					<topPen lineColor="#CCCCCC"/>
+					<leftPen lineColor="#CCCCCC"/>
+					<bottomPen lineColor="#CCCCCC"/>
+					<rightPen lineColor="#CCCCCC"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="30" isBold="false" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Lovie]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="18" splitType="Stretch">
+			<staticText>
+				<reportElement style="Column header" x="1" y="0" width="60" height="18" forecolor="#000000" uuid="06b8e00d-34e5-47e2-b8dc-2b518df77f91"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="微軟正黑體" size="12" isBold="false"/>
+				</textElement>
+				<text><![CDATA[ID]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="68" y="0" width="93" height="18" forecolor="#000000" uuid="c931c980-0122-4514-aa90-444d1a896a53"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="微軟正黑體" size="12" isBold="false"/>
+				</textElement>
+				<text><![CDATA[帳號]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="170" y="0" width="132" height="18" forecolor="#000000" uuid="72c96c3d-4e5f-48ff-af9c-585bc6747d0e"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="微軟正黑體" size="12" isBold="false"/>
+				</textElement>
+				<text><![CDATA[名稱]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="309" y="0" width="153" height="18" forecolor="#000000" uuid="76ce29b5-6e93-4fd4-bd05-3f3eb42d31bc"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="微軟正黑體" size="12" isBold="false"/>
+				</textElement>
+				<text><![CDATA[E-mail]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="470" y="0" width="80" height="18" forecolor="#000000" uuid="63cbc8ad-ba91-41eb-b5b5-c261d070647f"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="微軟正黑體" size="12" isBold="false"/>
+				</textElement>
+				<text><![CDATA[生日]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="558" y="0" width="113" height="18" forecolor="#000000" uuid="67dbf688-a974-4b34-8d29-ae58dcb3e654"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="微軟正黑體" size="12" isBold="false"/>
+				</textElement>
+				<text><![CDATA[最後登入時間]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="684" y="0" width="113" height="18" forecolor="#000000" uuid="4b6f0d2a-c9a4-4aa0-bc96-14904319abaa"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="微軟正黑體" size="12" isBold="false"/>
+				</textElement>
+				<text><![CDATA[註冊日期]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="18" splitType="Stretch">
+			<frame>
+				<reportElement style="Row" mode="Opaque" x="0" y="0" width="797" height="18" uuid="34a2ae4b-4055-476b-8676-d499f6af510b"/>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement style="Detail" positionType="Float" x="1" y="0" width="60" height="18" uuid="eb1f4fcc-b0dc-45e5-85ac-01e823fb38ff"/>
+					<textElement>
+						<font size="14"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{id}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement style="Detail" positionType="Float" x="68" y="0" width="93" height="18" uuid="ba19ff24-1fb6-4a05-9b92-7d6fa2429bde"/>
+					<textElement>
+						<font size="14"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{account}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement style="Detail" positionType="Float" x="170" y="0" width="132" height="18" uuid="153ddb81-5626-42d6-948d-23689e5daa10"/>
+					<textElement>
+						<font fontName="微軟正黑體" size="14"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{nickname}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement style="Detail" positionType="Float" x="309" y="0" width="153" height="18" uuid="dc187ae0-b8c8-4273-92af-c25118ac757d"/>
+					<textElement>
+						<font size="14"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{email}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement style="Detail" positionType="Float" x="470" y="0" width="80" height="18" uuid="1b9f62fd-ca72-4e52-8dfd-3660863876e8"/>
+					<textElement>
+						<font size="14"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{birthday}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement style="Detail" positionType="Float" x="558" y="0" width="113" height="18" uuid="c17b7cda-38d0-4d37-8968-3ae246020dfc"/>
+					<textElement>
+						<font size="14"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{lastOnTime}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement style="Detail" positionType="Float" x="684" y="0" width="113" height="18" uuid="8c01e1ce-c727-4231-ae64-43ad149959b3"/>
+					<textElement>
+						<font size="14"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{registeredTime}]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="1" splitType="Stretch">
+			<line>
+				<reportElement x="0" y="0" width="802" height="1" uuid="e5f0952d-d07f-4bab-abee-bbb4a1766917"/>
+			</line>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="25" splitType="Stretch">
+			<frame>
+				<reportElement mode="Opaque" x="0" y="0" width="802" height="25" forecolor="#D0B48E" backcolor="#000000" uuid="ffb10ec8-0371-4545-8eaa-96d62ad3cec0"/>
+				<textField evaluationTime="Report">
+					<reportElement style="Column header" x="757" y="3" width="40" height="20" forecolor="#FFFFFF" uuid="b5521ea6-5f36-4864-856f-58d0bcd011f2"/>
+					<textElement verticalAlignment="Middle">
+						<font size="11" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement style="Column header" x="677" y="3" width="80" height="20" forecolor="#FFFFFF" uuid="e625ea3c-1741-4cfe-81cf-fbbdd00162c8"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font size="11" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+				</textField>
+				<textField pattern="yyyy-MM-dd(EEEEE) ">
+					<reportElement style="Column header" x="2" y="3" width="197" height="20" forecolor="#FFFFFF" uuid="0c9f7e91-d3f5-47f9-82b7-0b2b3a43a5d6"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="微軟正黑體" size="11" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

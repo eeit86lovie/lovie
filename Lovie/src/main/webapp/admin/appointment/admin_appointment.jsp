@@ -39,8 +39,8 @@
 <script type="text/ecmascript"	src="${pageContext.request.contextPath}/js/trirand/jquery.jqGrid.min.js"></script>
 <link rel="stylesheet" type="text/css" media="screen"	href="${pageContext.request.contextPath}/css/trirand/ui.jqgrid-bootstrap.css" />
 
-<link rel="stylesheet" href="//code.jquery.com/ui/1.12.0/themes/base/jquery-ui.css">
 <!--  為了search 條件可以用 datapicker..才引用的js -->
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.0/themes/base/jquery-ui.css">
 <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.js"></script>
 
 <script>

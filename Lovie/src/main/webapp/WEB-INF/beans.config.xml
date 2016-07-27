@@ -199,4 +199,12 @@
 	<bean id="chartService" class="com.kidscodetw.eeit.service.report.ChartService">
 		<constructor-arg ref="chartDAO"></constructor-arg>
 	</bean>	
+	
+	<!-- 	ReportDAO -->
+	<bean id="reportDAO" class="com.kidscodetw.eeit.dao.report.ReportDAOHibernate">
+		<constructor-arg ref="sessionFactory"></constructor-arg>
+	</bean>
+	<bean id="reportService" class="com.kidscodetw.eeit.service.report.ReportService">
+		<constructor-arg ref="reportDAO"></constructor-arg>
+	</bean>	
 </beans>
