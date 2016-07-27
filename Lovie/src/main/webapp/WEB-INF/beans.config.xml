@@ -111,6 +111,15 @@
 		<constructor-arg ref="memberRoleDAOHibernate"></constructor-arg>
 	</bean>
 	
+	<!-- MessageDAO -->
+	<bean id="MessageDAOHibernate" class="com.kidscodetw.eeit.dao.message.MessageDAOHibernate">
+		<constructor-arg ref="sessionFactory"></constructor-arg>
+	</bean>
+
+	<bean id="messageDAO" class="com.kidscodetw.eeit.service.message.MessageService">
+		<constructor-arg ref="MessageDAOHibernate"></constructor-arg>
+	</bean>
+	
 	
 	
 	<!-- 	ProductDAO -->

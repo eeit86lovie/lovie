@@ -22,7 +22,6 @@ public class MemberEditServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String password;
-		Integer gender;
 		String email;
 		String nickname;
 		String city;
@@ -39,16 +38,19 @@ public class MemberEditServlet extends HttpServlet {
 		MemberBean memberBean = memberDAO.select(id);
 		String type = request.getParameter("type");
 		String value = request.getParameter("value");
+		String type1 =request.getParameter("type1");
+		String value1 =request.getParameter("value1");
+
 		System.out.println(type+value);
 		switch(type){
-		
-//		case "gender": gender = value;memberBean.setGender(gender);break;
 		case "nickname": nickname = value;memberBean.setNickname(nickname);break;
 		case "city": city = value;memberBean.setCity(city);break;
-		case "district": district = value;memberBean.setDistrict(district);;break;
 		case "intro": intro = value;memberBean.setIntro(intro);break;
 //		case "mPhotoUrl": photoUrl = value;memberBean.setPhotoUrl(photoUrl);break;
 //		case "mTrailer": trailer = value;memberBean.setTrailer(trailer);break;
+		}
+		if (type1 != null&& type1.length() != 0) {
+			district = value1;memberBean.setDistrict(district);
 		}
 //		
 		MemberBean tb = memberDAO.update(memberBean);

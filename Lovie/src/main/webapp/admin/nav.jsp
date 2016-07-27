@@ -8,7 +8,7 @@
 			<span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span>
 			<span class="icon-bar"></span> <span class="icon-bar"></span>
 		</button>
-		<a class="navbar-brand" href="index.html">Lovie Admin</a>
+		<a class="navbar-brand" href="${pageContext.request.contextPath}/admin/index.jsp">Lovie Admin</a>
 	</div>
 	<!-- /.navbar-header -->
 
@@ -231,7 +231,12 @@
 					</ul></li>
 				<li><a href="#"><i class="fa fa-credit-card fa-fw"></i> 訂單</span></a>
 					<!-- /.nav-second-level --></li>
-				<li><a href="broadcast"><i class="fa fa-heart fa-fw"></i> 廣播</a></li>
+				<li><a href="pages/forms.html"><i class="fa fa-microphone fa-fw"></i>
+						廣播<span class="fa arrow"></a>
+					<ul class="nav nav-second-level">
+						<li><a href="${pageContext.request.contextPath}/admin/broadcast/broadcastAll">使用者群組廣播</a></li>
+						<li><a href="${pageContext.request.contextPath}/admin/broadcast/broadcastOne">特定使用者廣播</a></li>
+					</ul></li>
 			</ul>
 		</div>
 		<!-- /.sidebar-collapse -->

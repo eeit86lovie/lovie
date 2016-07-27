@@ -43,6 +43,7 @@
         <mapping resource="com/kidscodetw/eeit/entity/forum/article_rank.hbm.xml" />
         <mapping resource="com/kidscodetw/eeit/entity/forum/articlereply.hbm.xml" />
         <mapping resource="com/kidscodetw/eeit/entity/forum/forum.hbm.xml" />
+        <mapping resource="com/kidscodetw/eeit/entity/message/message.hbm.xml" />
         <mapping class="com.kidscodetw.eeit.entity.appointment.AppointmentBean2" />
         <mapping class="com.kidscodetw.eeit.entity.report.Chart1Bean" />
         <mapping class="com.kidscodetw.eeit.entity.report.Chart2Bean" />
