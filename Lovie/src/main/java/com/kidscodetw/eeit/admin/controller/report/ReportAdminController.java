@@ -71,7 +71,7 @@ public class ReportAdminController {
 		  if (p_privilege == 2)
 		  {   if (p_select.length()>0) 
 			  	 p_select.append(",");
-			  p_select.append("鑽石會員");
+			  p_select.append("黃金會員");
 		  }
 		  if (p_privilege == 3)
 		  {   if (p_select.length()>0) 

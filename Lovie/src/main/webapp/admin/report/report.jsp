@@ -29,7 +29,7 @@
 				    <div class="col-sm-10">
 				    	<label class="radio-inline"><input type="radio" name="privilege" value="0" checked>全部</label>
 						<label class="radio-inline"><input type="radio" name="privilege" value="1">一般會員</label>
-						<label class="radio-inline"><input type="radio" name="privilege" value="2">鑽石會員</label>
+						<label class="radio-inline"><input type="radio" name="privilege" value="2">黃金會員</label>
 						<label class="radio-inline"><input type="radio" name="privilege" value="3">管理員</label>
 				    </div>
 				  </div>

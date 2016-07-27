@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.3.0.final using JasperReports Library version 6.3.0  -->
-<!-- 2016-07-27T13:15:02 -->
+<!-- 2016-07-28T00:53:05 -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report" pageWidth="842" pageHeight="595" orientation="Landscape" whenNoDataType="AllSectionsNoDetail" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="7a5c9b49-9dc5-422a-ac69-e92cf61ef530">
 	<property name="com.jaspersoft.studio.data.sql.tables" value="ZWVpdDg2LmBNZW1iZXJgIEFTICw3MiwxNiw3ZGYyMmRjZi00OGNmLTQ5MDgtOTQ3NS04OTFmZDZl&#xA;YjI2ZmQ7"/>
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="loviemysql"/>
@@ -56,7 +56,7 @@ order by
 						<textElement>
 							<font fontName="微軟正黑體" isBold="false"/>
 						</textElement>
-						<textFieldExpression><![CDATA[$F{privilege}.equals(1)?"一般會員":($F{privilege}.equals(2)?"鑽石會員":"管理員")]]></textFieldExpression>
+						<textFieldExpression><![CDATA[$F{privilege}.equals(1)?"一般會員":($F{privilege}.equals(2)?"黃金會員":"管理員")]]></textFieldExpression>
 					</textField>
 				</frame>
 				<rectangle>
@@ -88,7 +88,7 @@ order by
 					<textElement verticalAlignment="Middle">
 						<font fontName="微軟正黑體" size="12"/>
 					</textElement>
-					<textFieldExpression><![CDATA[$F{privilege}.equals(1)?"一般會員":($F{privilege}.equals(2)?"鑽石會員":"管理員")]]></textFieldExpression>
+					<textFieldExpression><![CDATA[$F{privilege}.equals(1)?"一般會員":($F{privilege}.equals(2)?"黃金會員":"管理員")]]></textFieldExpression>
 				</textField>
 				<line>
 					<reportElement x="0" y="0" width="802" height="1" uuid="1bfc9ea5-394b-4729-816b-11fd501cd2f1"/>
