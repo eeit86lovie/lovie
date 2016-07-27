@@ -50,8 +50,8 @@
 <%--   <div class="col-md-9" ><textarea cols="40" rows="5" style="width:auto;">${oneMember.intro}</textarea></div> --%>
   <div class="col-md-2" ></div>
    <div class="col-md-12" ><br></div>
-  <div class="col-md-8" ><b class="memberColumn">喜歡的電影類型：</b>喜劇|奇幻|驚悚</div>
-  <div class="col-md-2" ><button class="edit" id=uesrBasic style="display:none;float:right;" >編輯</button></div>
+  <div class="col-md-10" ><b class="memberColumn">喜歡的電影類型：</b>喜劇|奇幻|驚悚</div>
+<!--   <div class="col-md-2" ><button class="edit" id=uesrBasic style="display:none;float:right;" >編輯</button></div> -->
   <div class="col-md-2" ><button class="edit" id=uesrAdvanced style="display:none">進階編輯</button></div>
   <div class="col-md-12" ><br></div>
  <div class="col-md-5" style="font-size:20%;color:black">註冊日期：${oneMember.registeredTime}</div>
@@ -71,7 +71,7 @@
 <script>
 
 if("${loginmember.id}"=="${oneMember.id}"&&"${oneMember.id}"!=""){
-	document.getElementById("uesrBasic").style.display = "block";
+// 	document.getElementById("uesrBasic").style.display = "block";
 	document.getElementById("uesrAdvanced").style.display = "block";
 
 function member_edit(member_col){//呼叫的member欄位物件,onclick時觸發
@@ -92,8 +92,10 @@ function member_edit(member_col){//呼叫的member欄位物件,onclick時觸發
 	$("#"+member_col.id).focus();//onclick時focus本欄位
 
 	$("#"+member_col.id).blur(
-			function(){
+		function(){
 		var after_text = $("#"+member_col.id).val();
+		if(member_col.id=="intro")
+			after_text=after_text.replace(/\n/g,"<br>");
 		var member_id = member_col.id;
 		xhr = new XMLHttpRequest();
 		xhr.onreadystatechange = callback;
@@ -108,19 +110,19 @@ function member_edit(member_col){//呼叫的member欄位物件,onclick時觸發
 	}
 			)
 	$("#"+member_col.id).keydown(function(event){
-		if(event.which==13){//代表按下enter
-			var after_text = $("#"+member_col.id).val();
-			var member_id = member_col.id;
-			xhr = new XMLHttpRequest();
-			xhr.onreadystatechange = callback;
-			xhr.open("get", "memberEdit.do?id="+loginmemberId+"&type="+member_id+"&value="+after_text);
-			xhr.send();
-			function callback() {
-				if(xhr.readyState==4 && xhr.status==200){
-					$("#"+member_id).replaceWith('<span id="'+member_id+'" onclick="member_edit(this)">'+after_text+'</span>')
-				}
-			}
-		}
+// 		if(event.which==13){//代表按下enter
+// 			var after_text = $("#"+member_col.id).val();
+// 			var member_id = member_col.id;
+// 			xhr = new XMLHttpRequest();
+// 			xhr.onreadystatechange = callback;
+// 			xhr.open("get", "memberEdit.do?id="+loginmemberId+"&type="+member_id+"&value="+after_text);
+// 			xhr.send();
+// 			function callback() {
+// 				if(xhr.readyState==4 && xhr.status==200){
+// 					$("#"+member_id).replaceWith('<span id="'+member_id+'" onclick="member_edit(this)">'+after_text+'</span>')
+// 				}
+// 			}
+// 		}
 		
 	})
 }
