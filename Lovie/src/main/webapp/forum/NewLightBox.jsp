@@ -14,13 +14,34 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 
+<style type="text/css">
+.cont{
+    background:#0F0;
+    width:400px;
+    height:40px;
+    line-height:40px;
+    display: table;
+}
+.button{
+    background:#F00;
+    display: table-cell;
+}
+​
+
+
+
+</style>
+
 </head>
 <body>
-<a id="modal_trigger" href="#modal" class="btn">Click here to Login or register</a>
+
+<div>
+	<a id="modal_trigger" href="#modal" class="btn">我要發表文章</a>
+</div>
 
 <div id="modal" class="popupContainer" style="display:none;">
 	<header class="popupHeader">
-		<span class="header_title">Login</span>
+		<span class="header_title">發表文章</span>
 		
 	</header>
 
@@ -28,22 +49,24 @@
     
       <div class="user_login">
     <form>
-        <label>Email / Username</label> <input type="text"><br>
-        <label>Password</label> <input type="password"><br>
+        <label>文章標題</label> <input type="text" id="username"><br>
+       <label>文章分類</label>
+       <select id="ArticleGenre">
+　		<option value="好雷">好雷</option>
+　		<option value="負雷">負雷</option>
+　		<option value="新聞">新聞</option>
+　		<option value="討論">討論</option>
+　		<option value="問片">問片</option>
+　		<option value="其他">其他</option>
+　	  </select><br>
 
-        <div class="checkbox">
-            <input id="remember" type="checkbox"> <label for=
-            "remember">Remember me on this computer</label>
-        </div>
-
+        <label>文章內容</label><TextArea type="text" id="textArea"></TextArea><br>
+        
         <div class="action_btns">
-            <div class="one_half">
-                <a class="btn back_btn" href="#">Back</a>
-            </div>
 
             <div class="one_half last">
                 
-                <div class="center"><input class="btn btn_red" type="button" name="loginbtn" id="loginbtn"   value="發文" ></div>
+                <div class="center"><input class="btn btn_red" type="button" name="loginbtn" id="loginbtn" onclick="clickLightButton()"  value="發文" ></div>
             </div>
         </div>
     </form>
@@ -57,6 +80,36 @@
 
 <script>
 $("#modal_trigger").leanModal({top : 200, overlay : 0.6, closeButton: ".btn btn_red"});
+
+
+
+function clickLightButton(){
+	var pubMember = "${loginmember.account}";
+	var pubTitle = $("#username").val();
+	var pubGenre = $("#ArticleGenre").val();
+	var pubContent = $("#textArea").val();
+	
+	
+	$.ajax({
+		url : "forumsPublicationArticle",
+		type : "post",
+		data : { 
+				 PublicationMember:pubMember,
+				 PublicationTitle:pubTitle,
+		 		 PublicationGenre:pubGenre,
+		 		 PublicationContent:pubContent,  		
+		},
+		dataType : "json",
+		success : function(PublicationArticleResult) {
+			$("#lean_overlay").hide();
+			$("#modal").hide();
+			var selectReplyjson;	 
+			//alert(PublicationArticleResult.id);
+				  createArticle(PublicationArticleResult,selectReplyjson);
+		}					
+	})
+
+}
 
 </script>
 

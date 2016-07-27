@@ -19,7 +19,7 @@ body {
 .BOX01 {
 	width: 780px;
 	overflow: hidden;
-	margin: 15px 0;
+	margin: 15px auto;
 	border: #ADADAD 1px solid;
 	box-shadow: 0px 3px 3px rgba(0, 0, 0, 0.2);
 	border-radius: 7px;
@@ -296,7 +296,6 @@ input[name="dislike_checkBox"]:checked + label span{
 
 
 
-
 </style>
 
 
@@ -308,88 +307,35 @@ input[name="dislike_checkBox"]:checked + label span{
 	<c:import charEncoding="UTF-8" url="/header.jsp"></c:import>
 
 
+		<c:import charEncoding="UTF-8" url="/forum/NewLightBox.jsp"></c:import>
+	
+	
+       
+	
 		
-	<div class="container">
-        <c:import charEncoding="UTF-8" url="/forum/NewLightBox.jsp"></c:import>
-		<input type="button" id="addarticle" value="ADD" onclick="add()">
-		<a href="#loginmodal" class="flatbtn" id="modaltrigger">lightbox</a>
-		<div class="row">
-
-			<div id="box"></div>
-
-		</div>
-	</div>
-
-
-<!-- ------------------------------------------------------------------------------------------------------------------- -->             
-  
-  
-  <div id="loginmodal"style="display:none">
-    
-    
-      <label >Title:</label>
-      <input type="text" name="username" id="username" class="txtfield" tabindex="1">
-      <div id="error_message_title"></div>
-      <label >文章類別:</label>
-      <select id="ArticleGenre">
-　		<option value="好雷">好雷</option>
-　		<option value="負雷">負雷</option>
-　		<option value="新聞">新聞</option>
-　		<option value="討論">討論</option>
-　		<option value="問片">問片</option>
-　		<option value="其他">其他</option>
-　	  </select>
-      
-      <label>Content:</label>
-      <TextArea id="textArea" Cols="20" Rows="5" Name="意見內容" Wrap="off" class="txtfield" tabindex="2"></TextArea>
-
-	  <div id="error_message_content"></div>
-
-      <div class="center"><input type="button" name="loginbtn" id="loginbtn" onclick="PublicationArticle()" class="flatbtn-blu hidemodal" value="發文" tabindex="3"></div>
+	<div class="row">
    
-  </div>
-  
-  
-             
-<!-- ------------------------------------------------------------------------------------------------------------------- -->     
-
-<script>
-
-$('#modaltrigger').leanModal({ top: 110, overlay: 0.8, closeButton: ".hidemodal" });
-
-
-
-function PublicationArticle() {
-	var pubMember = "${loginmember.account}";
-	var pubTitle = $("#username").val();
-	var pubGenre = $("#ArticleGenre").val();
-	var pubContent = $("#textArea").val();
+		
+		<div class="col-md-2">
+		<ul>
+  <li>Coffee</li>
+  <li>Tea</li>
+  <li>Milk</li>
+</ul>
+		
+		</div>
+		
+		<div class="col-md-8">			
+			<div id="box">
+				<input type="button" id="addarticle" value="ADD" onclick="add()">
+			</div>
+		</div>
 	
-	
-	$.ajax({
-		url : "forumsPublicationArticle",
-		type : "post",
-		data : { 
-				 PublicationMember:pubMember,
-				 PublicationTitle:pubTitle,
-		 		 PublicationGenre:pubGenre,
-		 		 PublicationContent:pubContent,  		
-		},
-		dataType : "json",
-		success : function(PublicationArticleResult) {
-			var selectReplyjson;	 
-			//alert(PublicationArticleResult.id);
-				  createArticle(PublicationArticleResult,selectReplyjson);
-		}					
-	})
-}
-
-
-</script>
-
-
-
-
+        <div class="col-md-2">ssssssssssssssssssssssssssssssssssss</div>
+    
+        
+	</div>
+    
 
 
 	<script>
