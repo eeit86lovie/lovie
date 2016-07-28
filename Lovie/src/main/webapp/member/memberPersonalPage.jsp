@@ -34,7 +34,7 @@
 <form>
   <div class="col-md-12" style="font-weight:bold;text-align:center;">${oneMember.nickname}的個人首頁</div>
   <div class="col-md-12" ><br></div>
-  <div class="col-md-3"><img style="border:5px solid #acd6ff;border-radius:15px;width:100%" src="${oneMember.photoUrl}"><input type="file"></input></img></div>
+  <div class="col-md-3"><img id="blah" style="border:5px solid #acd6ff;border-radius:15px;width:100%" src="${oneMember.photoUrl}"></div>
   <div class="col-md-9" ></div>
   <div class="col-md-9" ><b class="memberColumn">暱稱：</b><span id="nickname" onclick="member_edit(this)">${oneMember.nickname}</span></div>
   <div class="col-md-9" ><b class="memberColumn">年齡：</b>${memberAge}歲</div>
@@ -44,11 +44,12 @@
   <div class="col-md-9" ><b class="memberColumn">好友數：</b>${oneMember.friendNum}</div>
   <div class="col-md-9" ><b class="memberColumn">會員等級：</b>鑽石會員</div>
   <div class="col-md-9" ><b class="memberColumn">會員發文總數：</b>${article}</div>
+  <div class="col-md-9" id="pic" style="display:none"><b class="memberColumn">頭像：</b><input id="imgInp" style="margin-top:5px;display:inline" type="file"></input></div>
+  <div class="col-md-9" ><button class="edit" id=uesrPic style="margin-top:5px;display:none">確認上傳圖片</button> </div>
   <div class="col-md-12" > </div>
   <div class="col-md-12" ><b class="memberColumn">自我介紹：</b></div>
   <div class="col-md-1" ></div>
   <div class="col-md-9" ><span id="intro" onclick="member_edit(this)">${oneMember.intro}</span></div>
-<%--   <div class="col-md-9" ><textarea cols="40" rows="5" style="width:auto;">${oneMember.intro}</textarea></div> --%>
   <div class="col-md-2" ></div>
    <div class="col-md-12" ><br></div>
   <div class="col-md-10" ><b class="memberColumn">喜歡的電影類型：</b>喜劇|奇幻|驚悚</div>
@@ -72,16 +73,30 @@
 <script>
 
 if("${loginmember.id}"=="${oneMember.id}"&&"${oneMember.id}"!=""){
-// 	document.getElementById("uesrBasic").style.display = "block";
+	document.getElementById("pic").style.display = "block";
+	document.getElementById("uesrPic").style.display = "block";
 	document.getElementById("uesrAdvanced").style.display = "block";
+	
+	function readURL(input) {
+		  if (input.files && input.files[0]) {
+		    var reader = new FileReader();
+		    reader.onload = function (e) {
+		      $('#blah').attr('src', e.target.result);
+		    }
+		    reader.readAsDataURL(input.files[0]);
+		  }
+		}
 
+		$("#imgInp").change(function(){
+		  readURL(this);
+		  console.log(document.getElementById("imgInp").files.item(0).action="memberEdit.do?"+"----------------------------")
+		});
 function member_edit(member_col){//呼叫的member欄位物件,onclick時觸發
 	
 	var loginmemberId=${loginmember.id}
-	var text = member_col.innerHTML.replace(/<br>/gi, "\n");
+	var text = member_col.innerHTML.replace(/<br>/gi,"\n");
 	console.log(text)
 	var editableText = $('<input type="text" value="'+text+'" " name="'+member_col.id+'" id="'+member_col.id+'"/>');
-// 	var genderText=$('<select name="gender" id="gender">'+'<option value="1">男性</option>'+'<option value="0" selected>女性</option>'+'</select>');
 	var introText=$('<textarea cols="40" rows="5" style="width:auto;"id="intro">'+text+'</textarea>')
 	if(member_col.id=="intro")
 		$("#"+member_col.id).replaceWith(introText);
@@ -128,9 +143,13 @@ function member_edit(member_col){//呼叫的member欄位物件,onclick時觸發
 function city_edit(member_col){
 	var loginmemberId=${loginmember.id}
 	var text = member_col.childNodes[0].innerHTML;
+	var districttext=member_col.childNodes[2].innerHTML;
 	var cityText=$('<span id="twzipcode"></span>')
 		$("#"+member_col.id).replaceWith(cityText);
-		$('#twzipcode').twzipcode({'countySel':text,})
+	console.log(districttext)
+		$('#twzipcode').twzipcode({
+			'countySel':text,
+			'districtSel':districttext})
 		member_col.id="cityselect";
 	$("#districtselect").blur(function(){
 		var after_text = $("#cityselect").val();
@@ -150,6 +169,24 @@ function city_edit(member_col){
 		}
 		)
 }
+$('#uesrPic').click(function(){
+	var formData = new FormData();
+	var file = $('#imgInp').prop("files")[0];
+	formData.append('file', file);
+		$.ajax({
+			url: "${pageContext.request.contextPath}/member/MemberChangePhoto",
+			type: 'post',
+			data: formData,
+			processData: false,
+			contentType: false,
+			success: function(data){
+			
+			},error: function(){
+// 				alertify.alert('檔案格式異常').set('title', '警告');
+			}
+		})	
+
+})
 
 	}
 </script>

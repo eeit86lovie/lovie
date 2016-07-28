@@ -26,11 +26,9 @@ public class MemberEditServlet extends HttpServlet {
 		String nickname;
 		String city;
 		String district;
-		String phone;
-//		String photoUrl;
-		byte[] photo;
 		String birthday;
 		String intro;
+		
 		request.setCharacterEncoding("UTF-8");
 		Integer id=Integer.parseInt(request.getParameter("id"));
 		WebApplicationContext context =WebApplicationContextUtils.getWebApplicationContext(getServletContext()) ;
@@ -38,27 +36,31 @@ public class MemberEditServlet extends HttpServlet {
 		MemberBean memberBean = memberDAO.select(id);
 		String type = request.getParameter("type");
 		String value = request.getParameter("value");
+		
 		String type1 =request.getParameter("type1");
 		String value1 =request.getParameter("value1");
 
-		System.out.println(type+value);
 		switch(type){
 		case "nickname": nickname = value;memberBean.setNickname(nickname);break;
 		case "city": city = value;memberBean.setCity(city);break;
 		case "intro": intro = value;memberBean.setIntro(intro);break;
-//		case "mPhotoUrl": photoUrl = value;memberBean.setPhotoUrl(photoUrl);break;
 //		case "mTrailer": trailer = value;memberBean.setTrailer(trailer);break;
 		}
 		if (type1 != null&& type1.length() != 0) {
 			district = value1;memberBean.setDistrict(district);
 		}
-//		
+
 		MemberBean tb = memberDAO.update(memberBean);
 		PrintWriter out = response.getWriter();
 		if (tb!=null) {
 			out.write("true");
 		}
 		return;
+	}
+	@Override
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
+			throws ServletException, IOException {
+		doGet(req, resp);
 	}
 
 
