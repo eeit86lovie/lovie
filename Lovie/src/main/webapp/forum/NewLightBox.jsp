@@ -36,7 +36,7 @@
 <body>
 
 <div>
-	<a id="modal_trigger" href="#modal" class="btn">我要發表文章</a>
+	<a id="modal_trigger" href="#modal" class="btn" onclick="checkLogin()">我要發表文章</a>
 </div>
 
 <div id="modal" class="popupContainer" style="display:none;">
@@ -50,6 +50,7 @@
       <div class="user_login">
     <form>
         <label>文章標題</label> <input type="text" id="username"><br>
+        <p id ="error_title"></p>
        <label>文章分類</label>
        <select id="ArticleGenre">
 　		<option value="好雷">好雷</option>
@@ -61,6 +62,7 @@
 　	  </select><br>
 
         <label>文章內容</label><TextArea type="text" id="textArea"></TextArea><br>
+        <p id="error_content"></p>
         
         <div class="action_btns">
 
@@ -72,6 +74,21 @@
     </form>
     
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 </div>
    
 </div>
@@ -79,8 +96,16 @@
 </div>
 
 <script>
-$("#modal_trigger").leanModal({top : 200, overlay : 0.6, closeButton: ".btn btn_red"});
 
+function checkLogin(){
+	
+	if("${loginmember.account}" != ""){
+		$("#modal_trigger").leanModal({top : 200, overlay : 0.6, closeButton: ".btn btn_red"});	
+	}else{
+		alert("請先登入會員");
+	}
+	
+}
 
 
 function clickLightButton(){
@@ -89,26 +114,50 @@ function clickLightButton(){
 	var pubGenre = $("#ArticleGenre").val();
 	var pubContent = $("#textArea").val();
 	
+	var error_title = 0;
+	var error_content = 0;
 	
-	$.ajax({
-		url : "forumsPublicationArticle",
-		type : "post",
-		data : { 
-				 PublicationMember:pubMember,
-				 PublicationTitle:pubTitle,
-		 		 PublicationGenre:pubGenre,
-		 		 PublicationContent:pubContent,  		
-		},
-		dataType : "json",
-		success : function(PublicationArticleResult) {
-			$("#lean_overlay").hide();
-			$("#modal").hide();
-			var selectReplyjson;	 
-			//alert(PublicationArticleResult.id);
-				  createArticle(PublicationArticleResult,selectReplyjson);
-		}					
-	})
-
+		
+		
+		
+		if(pubTitle==""){
+			$("#error_title").empty();
+			$("#error_title").append("請輸入標題");
+			var error_title = 1;
+		}else{
+			$("#error_title").empty();
+		}
+		
+		if(pubContent==""){
+			$("#error_content").empty();
+			$("#error_content").append("請輸入內容");
+			var error_content = 1;
+		}else{
+			$("#error_content").empty();
+		}
+		
+		
+		if(error_title == 0 && error_content == 0){
+			$.ajax({
+				url : "forumsPublicationArticle",
+				type : "post",
+				data : { 
+						 PublicationMember:pubMember,
+						 PublicationTitle:pubTitle,
+				 		 PublicationGenre:pubGenre,
+				 		 PublicationContent:pubContent,  		
+				},
+				dataType : "json",
+				success : function(PublicationArticleResult) {
+					$("#lean_overlay").hide();
+					$("#modal").hide();
+					
+					var selectReplyjson;	 
+				    createArticle(PublicationArticleResult,selectReplyjson);
+				}					
+			})
+		
+		}	
 }
 
 </script>

@@ -32,7 +32,7 @@ body {
 
 .BOX01 .article_header_div{
 	width: 770px;
-	height:60px;
+	height:250px;
 	float: left;
 	margin:5px 5px;
 	height:50px;
@@ -41,19 +41,19 @@ body {
 }
 
 .BOX01 .article_header_div .photo_div {
-	width: 60px;
-	height: 90px;
+	width: 90px;
+	height: 120px;
 	display: block;
     -moz-border-radius: 5px;
     -webkit-border-radius: 5px;
     float:left;
 	margin-left:12px;
 	margin-top:12px;
-	_display:inline;
+	display:inline;
 }
 
 .BOX01 .article_header_div .member {
-	width: 80px;
+	width: 300px;
 	height:30px;
 	margin:2px 3px 3px 10px;
 	font-size: 26px;
@@ -62,35 +62,34 @@ body {
 	float:left;
 	margin-left:12px;
 	margin-top:8px;
-	_display:inline;
+
 }
 
 .BOX01 .article_header_div .genre{
-	width: 600px;
+	width: 80px;
 	font-size: 24px;
-	margin-left: 110px;
-	margin-top: 60px;
+	float:left;
+	margin-top: 15px;
+	margin-left: 35px;
 	font-weight: bold;
 }
 
 .BOX01 .article_header_div .title {
-	width: 600px;
+	width: 500px;
 	font-size: 24px;
-	margin-left: 110px;
-	margin-top: 0px;
+	margin-left: 5px;
+	float:left;
 	font-weight: bold;
+
 }
 
 .BOX01 .content {
 	width: 740px;
 	clear:both;
-	margin:0 auto;
+	margin:10px 15px;
 	background-color:#FFFFFF ;
-	margin-top:110px;
-	box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.2);
-	border-radius: 2px;
-	-moz-border-radius: 2px;
-	-webkit-border-radius: 2px;
+	margin-top:150px;
+	overflow: hidden;
 	text-align: justify;
 	font-size: 18px;
 }
@@ -103,27 +102,40 @@ body {
 }
 
 .pubTime {
-	width: 150px;
+	width: 300px;
 	margin: 20px 20px;
 	float: right;
+	text-align:right;
 }
 
 .editTime {
-	width: 150px;
-	margin: 20px 20px 20px 670px;
+	width: 300px;
+	margin: 0 20px 0 670px;
 	float: right;
+	text-align:right;
 }
 
 .replyButton {
 	weight: 30px;
-	height: 30px;
+	height: 26px;
+	border: #ADADAD 1px solid;
+	border-radius: 5px;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
 	background-Color: lightgreen;
+	margin-top:20px;
 }
 
 .replyText {
-	width: 750px;
-	margin: 20px 20px 20px 100px;
+	width: 650px;
+	margin: 20px 15px 20px 15px;
 	height: 26px;
+	border: #ADADAD 1px solid;
+	border-radius: 5px;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	background-color: #FFFFFF;
+	float: left;
 }
 
 .col-md-12 {
@@ -260,42 +272,87 @@ input[name="dislike_checkBox"]:checked + label span{
 }
 
 .countReplyimg_div{
-	width:100px;
+	width:30px;
+	height:25px;
 	float: left;
-	margin-left: 10px;
-
+	margin-left:5px;
+	border: #ADADAD 1px solid;
+	border-radius: 2px;
+	-moz-border-radius: 2px;
+	-webkit-border-radius: 2px;
 }
 
 
 .like_Button_div{
-	width:100px;
+	width:30px;
+	height:25px;
 	float: left;
-	margin-left: 10px;
+	margin-left: 15px;
+	border: #ADADAD 1px solid;
+	border-radius: 2px;
+	-moz-border-radius: 2px;
+	-webkit-border-radius: 2px;
 }
 
 .disLike_Button_div{
-	width:100px;
+	width:30px;
+	height:25px;
 	float: left;
-	margin-left: 10px;
+	margin-left:5px;
+	border: #ADADAD 1px solid;
+	border-radius: 2px;
+	-moz-border-radius: 2px;
+	-webkit-border-radius: 2px;
 }
 
 .hideReply_div{
-	width:100px;
+	width:30px;
+	height:25px;
 	float: left;
-	margin-left: 10px;
+	margin-left: 5px;
+	border: #ADADAD 1px solid;
+	border-radius: 2px;
+	-moz-border-radius: 2px;
+	-webkit-border-radius: 2px;
 }
 
 
 .BOX01 .ALLbutton_div{
-	width:740px;
+	width:840px;
 	background-color:CCCC00;
 	float: left;
-	margin-right: 10px;
+	margin-right:5px;
 }
 
 
+.BOX01 .addReply{
+margin-top:50px;
+
+}
+
+.countLike_div{
+	width:60px;
+	height:25px;
+	float: left;
+	margin-left:5px;
+}
+
+.countDisLike_div{
+	width:60px;
+	height:25px;
+	float: left;
+	margin-left:5px;
+
+}
+
+.countReply_div{
+	width:60px;
+	height:25px;
+	float: left;
+	margin-left:5px;
 
 
+}
 </style>
 
 
@@ -509,7 +566,7 @@ function add(){
 	  		
 	  		var replyText = document.createElement("input");
 				replyText.setAttribute("type", "text");
-				//replyText.className = "replyText";
+				replyText.className = "replyText";
 				replyText.id="text" + articleJson[i].id;
 				FocusReplyText
 				replyText.setAttribute("onfocus", "FocusReplyText(this)");
@@ -517,7 +574,7 @@ function add(){
 				
 			var replybutton = document.createElement("button");
 			    replybutton.id = "replyButton" + articleJson[i].id;
-			    //replybutton.className="replyButton";
+			    replybutton.className="replyButton";
 				replybutton.setAttribute("onclick", "clickReplyButton(this)");
 				var reply_button_Text = document.createTextNode("留言");
 				//var reply_addcontent_error_div = document.createElement("div");
@@ -544,6 +601,7 @@ function add(){
 				
 							
 				var like_Button = document.createElement('input');//Like
+				var countLike_div = $("<div class='countLike_div' id='"+'countLike_div'+articleJson[i].id+"'></div>");
 				like_Button.type = "checkbox";
 				like_Button.id = "like_Button"+articleJson[i].id;
 				like_Button.name = "like_checkBox";
@@ -557,6 +615,7 @@ function add(){
 				
 				
 				var disLike_Button = document.createElement('input');//DisLike
+				var countDisLike_div = $("<div class='countDisLike_div' id='"+'countDisLike_div'+articleJson[i].id+"'></div>");
 				disLike_Button.type = "checkbox";
 				disLike_Button.id = "disLike_Button"+articleJson[i].id;
 				disLike_Button.name = "dislike_checkBox";
@@ -610,20 +669,17 @@ function add(){
 					}
 		  		}
 			  	    if(countLike==0){
-			  	    	var countLike_div = $("<div id='"+'countLike_div'+articleJson[i].id+"'></div>").append("");
+			  	    	countLike_div.append("");
 			  	    }else{
-			  	    	var countLike_div = $("<div id='"+'countLike_div'+articleJson[i].id+"'></div>").append(myself + countLike+"人Like");
+			  	    	countLike_div.append(myself + countLike+"人Like");
 			  	    }
 	  		
 			  	    if(countDisLike==0){
-			  	    	var countDisLike_div = $("<div id='"+'countDisLike_div'+articleJson[i].id+"'></div>").append("");
+			  	    	countDisLike_div.append("");
 			  	    }else{
-			  	    	var countDisLike_div = $("<div id='"+'countDisLike_div'+articleJson[i].id+"'></div>").append(myself + countDisLike+"人disLike");
+			  	    	countDisLike_div.append(myself + countDisLike+"人disLike");
 			  	    }
 	  		
-	  			
-	  		like_Button_div.append(countLike_div);
-	  	  	disLike_Button_div.append(countDisLike_div);
 	  		}
 	  	
 	  		
@@ -649,8 +705,7 @@ function add(){
 	  		countReplyimg_div.className = "countReplyimg_div"
 	  		var countReply = Article_replyarea_div.children().length+"則留言";
 	  		if(Article_replyarea_div.children().length>0){
-	  			var countReply_div = $("<div id='"+'countReply_div'+articleJson[i].id+"'></div>").append(countReply);
-	  			countReplyimg_div.append(countReply_div);
+	  			var countReply_div = $("<div class='countReply_div' id='"+'countReply_div'+articleJson[i].id+"'></div>").append(countReply);
 	  		}
 	  		
 	  		var article_header_div = $("<div class='article_header_div'></div>").append(Article_photo_div);
@@ -661,9 +716,11 @@ function add(){
 	  		
 	  		
 	  		var ALLbutton_div = $("<div class='ALLbutton_div'></div>").append(like_Button_div);
-	  		
+	  		ALLbutton_div.append(countLike_div);
 	  		ALLbutton_div.append(disLike_Button_div);
+	  		ALLbutton_div.append(countDisLike_div);
 	  		ALLbutton_div.append(countReplyimg_div);
+	  		ALLbutton_div.append(countReply_div);
 	  		ALLbutton_div.append(hideReply_div);
 	  	
 	  			  		
