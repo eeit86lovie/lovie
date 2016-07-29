@@ -23,5 +23,7 @@ public interface MemberDAO {
 
 	public abstract void updatePhotos(String link, Integer id);
 	
+	public abstract MemberBean updatePhotos(byte[] file, MemberBean bean);
+	
 
 }
