@@ -88,9 +88,8 @@ if("${loginmember.id}"=="${oneMember.id}"&&"${oneMember.id}"!=""){
 		}
 
 		$("#imgInp").change(function(){
-		  readURL(this);
-		  console.log(document.getElementById("imgInp").files.item(0).action="memberEdit.do?"+"----------------------------")
-		});
+		  readURL(this);})
+
 function member_edit(member_col){//呼叫的member欄位物件,onclick時觸發
 	
 	var loginmemberId=${loginmember.id}
@@ -169,26 +168,34 @@ function city_edit(member_col){
 		}
 		)
 }
+var files;
+$('body').on('change','#imgInp',function(event){
+	files=event.target.files;
+})
+
 $('#uesrPic').click(function(){
+	loginmemberId="${loginmember.id}"
 	var formData = new FormData();
-	var file = $('#imgInp').prop("files")[0];
-	formData.append('file', file);
-		$.ajax({
-			url: "${pageContext.request.contextPath}/member/MemberChangePhoto",
-			type: 'post',
-			data: formData,
-			processData: false,
-			contentType: false,
-			success: function(data){
+	
+	formData.append('file', files[0]);
+	formData.append('id', loginmemberId);
+// 		$.ajax({
+// 			url: "${pageContext.request.contextPath}/member/MemberChangePhoto/insertPhoto",
+// 			type: 'post',
+// 			data: formData,
+// 			processData: false,
+// 			contentType: false,
+// 			success: function(data){
 			
-			},error: function(){
-// 				alertify.alert('檔案格式異常').set('title', '警告');
-			}
-		})	
+// 			},error: function(){
+				
+// // 				alertify.alert('檔案格式異常').set('title', '警告');
+// 			}
+// 		})	
 
 })
 
-	}
+		}
 </script>
 
 </body>

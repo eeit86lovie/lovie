@@ -646,4 +646,10 @@ public class MemberDAOJdbc implements MemberDAO {
 
 	}
 
+	@Override
+	public MemberBean updatePhotos(byte[] file, MemberBean bean) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

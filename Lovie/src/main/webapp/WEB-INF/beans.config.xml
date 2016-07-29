@@ -215,4 +215,6 @@
 	<bean id="reportService" class="com.kidscodetw.eeit.service.report.ReportService">
 		<constructor-arg ref="reportDAO"></constructor-arg>
 	</bean>	
+	
+	
 </beans>

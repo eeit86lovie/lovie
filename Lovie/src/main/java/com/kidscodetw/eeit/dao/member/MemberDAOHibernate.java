@@ -20,8 +20,6 @@ public class MemberDAOHibernate implements MemberDAO {
 		return sessionFactory.getCurrentSession();
 	}
 
-	
-	
 
 	@Override
 	public List<MemberBean> select() {
@@ -82,7 +80,17 @@ public class MemberDAOHibernate implements MemberDAO {
 
 	@Override
 	public void updatePhotos(String link, Integer id) {
-		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public MemberBean updatePhotos(byte[] file, MemberBean bean) {
+		if (bean != null && bean.getId()!= 0) {
+			bean.setPhoto(file);
+			this.getSession().saveOrUpdate(bean);
+		}
+		return (MemberBean) this.getSession().get(MemberBean.class,
+				bean.getId());
 		
 	}
 
