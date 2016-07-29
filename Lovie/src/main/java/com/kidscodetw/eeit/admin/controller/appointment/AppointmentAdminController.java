@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kidscodetw.eeit.entity.appointment.AppointmentBean2;
+import com.kidscodetw.eeit.service.appointment.AppointmentRequestService;
 import com.kidscodetw.eeit.service.appointment.AppointmentService2;
 
 @Controller
@@ -20,6 +21,8 @@ import com.kidscodetw.eeit.service.appointment.AppointmentService2;
 public class AppointmentAdminController {
 	@Autowired
 	AppointmentService2 appointmentService2;
+	@Autowired
+	AppointmentRequestService appointmentRequestService;
 	
 	@RequestMapping("/appointmentjson")
 	public @ResponseBody List<AppointmentBean2> selectjson() {
@@ -51,6 +54,8 @@ public class AppointmentAdminController {
 			AppointmentBean2 appointmentBean = appointmentService2.select(id);
 			appointmentBean.setStatus(status);
 			AppointmentBean2 resu = appointmentService2.update(appointmentBean);
+			if (status == 0 || status == 9) //狀態為0.取消 9.封存 , 對於AppointmentRequest也要更改狀態為'status'=9管理員取消
+			{  appointmentRequestService.updatestatus(id, 9); }
 			PrintWriter out;
 			try {
 				out = response.getWriter();

@@ -192,6 +192,14 @@
 		<constructor-arg ref="appointmentDAO2"></constructor-arg>
 	</bean>	
 
+	<!-- 	AppointmentRequestDAO -->
+	<bean id="appointmentRequestDAO" class="com.kidscodetw.eeit.dao.appointment.AppointmentRequestDAOHibernate">
+		<constructor-arg ref="sessionFactory"></constructor-arg>
+	</bean>
+	<bean id="appointmentRequestService" class="com.kidscodetw.eeit.service.appointment.AppointmentRequestService">
+		<constructor-arg ref="appointmentRequestDAO"></constructor-arg>
+	</bean>	
+	
 	<!-- 	ChartDAO -->
 	<bean id="chartDAO" class="com.kidscodetw.eeit.dao.report.ChartDAOHibernate">
 		<constructor-arg ref="sessionFactory"></constructor-arg>

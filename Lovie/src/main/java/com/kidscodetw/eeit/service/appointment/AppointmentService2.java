@@ -1,9 +1,11 @@
 package com.kidscodetw.eeit.service.appointment;
 
+import java.sql.Date;
 import java.util.List;
 
 import com.kidscodetw.eeit.dao.appointment.AppointmentDAO2;
 import com.kidscodetw.eeit.entity.appointment.AppointmentBean2;
+import com.kidscodetw.eeit.entity.appointment.AppointmentsBean;
 
 public class AppointmentService2 {
 	
@@ -64,5 +66,13 @@ public class AppointmentService2 {
 			result = appointmentDAO.delete(id);
 		}
 		return result;
+	}
+	
+	public List<AppointmentsBean> selectcal(Integer memberId,Date showstart,Date showend) {
+		List<AppointmentsBean> result = null;
+		if(memberId!=0){
+			result = appointmentDAO.selectcal(memberId, showstart, showend);
+		}
+		return result;	
 	}
 }
