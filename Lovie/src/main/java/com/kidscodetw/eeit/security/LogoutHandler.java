@@ -18,6 +18,9 @@ public class LogoutHandler {
 	@RequestMapping(value="/logout", method = RequestMethod.GET)
 	public String logoutPage (HttpServletRequest request, HttpServletResponse response) throws IOException {
 		referer = request.getHeader("referer");
+		if(referer.contains("profile")){
+			return "/index.jsp";
+		}
 		return referer;
 //	    Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 //	    if (auth != null){    

@@ -44,7 +44,7 @@ a{
 					<li><a href=<c:url value="/theaters"/>>戲院</a></li>
 					<li><a href=<c:url value="/members"/>>會員</a></li>
 					<li><a href=<c:url value="/forums"/>>討論</a></li>
-					<li><a href=<c:url value="/interests"/>>感興趣</a></li>
+					<li><a href=<c:url value="/chat"/>>聊天</a></li>
 				</ul>
 				
 				<sec:authorize access="!hasRole('ROLE_ADMIN') and !hasRole('ROLE_GOLD') and !hasRole('ROLE_USER')">
@@ -107,6 +107,7 @@ a{
 									<li><div>我的邀請</div></li>
 									<li><div>我的請求</div></li>
 									<li><div>訊息通知</div></li>
+									<li><div><a href="${pageContext.request.contextPath}/chat/" target="_blank">聊天</a></div></li>
 									<sec:authorize access="hasRole('ADMIN')">
 									<li id="backstage" style="display: none"><div>
 									<a href='${pageContext.request.contextPath}/admin/index.jsp'>管理頁面</a>
@@ -115,7 +116,7 @@ a{
 
 									</ul>
 								</div>
-								<a href="<c:url value='logout' />" >登出</a>
+								<a href='${pageContext.request.contextPath }/logout'>登出</a>
 						</div>
 					</div>
 					

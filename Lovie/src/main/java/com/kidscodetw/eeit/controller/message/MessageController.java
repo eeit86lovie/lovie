@@ -28,9 +28,7 @@ public class MessageController {
 	private MessageDAO messageDAO;
 
 	@RequestMapping(method = RequestMethod.GET)
-	public String dispatch(Model model, Principal principal) {
-		if (principal != null)
-			model.addAttribute("loginmember", principal.getName());
+	public String dispatch(Model model) {
 		return "/chat/chat.jsp";
 	}
 
