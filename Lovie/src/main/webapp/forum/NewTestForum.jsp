@@ -364,7 +364,8 @@ margin-top:50px;
 	<c:import charEncoding="UTF-8" url="/header.jsp"></c:import>
 
 
-		<c:import charEncoding="UTF-8" url="/forum/NewLightBox.jsp"></c:import>
+	<c:import charEncoding="UTF-8" url="/forum/NewLightBox.jsp"></c:import>
+		
 	
 	
        
@@ -373,14 +374,10 @@ margin-top:50px;
 	<div class="row">
    
 		
-		<div class="col-md-2">
-		<ul>
-  <li>Coffee</li>
-  <li>Tea</li>
-  <li>Milk</li>
-</ul>
+		<div class="col-md-2"></div>
 		
-		</div>
+		
+		
 		
 		<div class="col-md-8">			
 			<div id="box">
@@ -388,11 +385,54 @@ margin-top:50px;
 			</div>
 		</div>
 	
-        <div class="col-md-2">ssssssssssssssssssssssssssssssssssss</div>
+        <div class="col-md-2"></div>
     
         
 	</div>
     
+
+
+<div>
+	<a id="xxx_trigger" href="#xxx" class="btn" onclick="testButton()">我要發表文章</a>
+</div>
+
+<div id="xxx" class="popupContainer" style="display:none;">
+	<header class="popupHeader">
+		<span class="header_title">發表文章</span>
+		
+	</header>
+
+    <section class="popupBody">
+    
+      <div class="user_login">
+    <form>
+        <label>文章標題</label> <input type="text" id="updateTitle"><br>
+        <p id ="error_title"></p>
+        
+        <label>文章分類</label>
+        <select id="updateGenre">
+	　		<option value="好雷">好雷</option>
+	　		<option value="負雷">負雷</option>
+	　		<option value="新聞">新聞</option>
+	　		<option value="討論">討論</option>
+	　		<option value="問片">問片</option>
+	　		<option value="其他">其他</option>
+	　	</select><br>
+
+        <label>文章內容</label><TextArea type="text" id="updateTextArea"></TextArea><br>
+        <p id="error_content"></p>
+        
+        <div class="action_btns">
+			<div class="one_half last">
+            	<div class="center"><input class="btn btn_red" type="button" name="loginbtn" id="updatebtn" value="發文" onclick="clickUpdate()" ></div>
+            </div>
+        </div>
+    </form>
+           
+     </div>   
+</div>
+    </section>
+</div>
 
 
 	<script>
@@ -549,8 +589,7 @@ function add(){
 		
 		for(i = 0; i<articleJson.length;i++){
 	      
-			var allarticle = $("<div id='BOX01' class='BOX01'></div>");
-			
+			var allarticle = $("<div class='BOX01' id='"+'BOX01'+articleJson[i].id+"'></div>");
 			var linkMember = document.createElement("a");
 			var memberLink = "${pageContext.request.contextPath}/member/profile/"+getmemberPhoto(articleJson[i].memberAccount).id;
 			linkMember.setAttribute("href", memberLink);
@@ -601,7 +640,26 @@ function add(){
 				
 							
 				var like_Button = document.createElement('input');//Like
-				var countLike_div = $("<div class='countLike_div' id='"+'countLike_div'+articleJson[i].id+"'></div>");
+				
+				
+				var countLike_div = $("<div onclick='selectRankPeople(this)' class='countLike_div' id='"+'countLike_div'+articleJson[i].id+"'></div>");
+				
+				
+				
+				//--------------------------------------------------------------------------------------------------------------------
+
+				var testButton = document.createElement("button");
+				var testButton_Text = document.createTextNode("測式按鈕");
+				testButton.id = "testButton"+articleJson[i].id;
+				testButton.setAttribute("onclick", "testButton(this)");
+				testButton.setAttribute("href", "#xxx");
+				testButton.appendChild(testButton_Text);
+				
+				
+				//--------------------------------------------------------------------------------------------------------------------
+				
+				
+				
 				like_Button.type = "checkbox";
 				like_Button.id = "like_Button"+articleJson[i].id;
 				like_Button.name = "like_checkBox";
@@ -644,45 +702,10 @@ function add(){
 	  		var Article_addReply_div = $("<div class='addReply' id='"+'addReply'+articleJson[i].id+"'></div>");
 	  		
 	  		
-	  		
-	  		
-	  		if(allLikejson!=null){//顯示每筆文章的Like && DisLike
-	  			var countLike = 0;
-	  			var countDisLike = 0;
-	  			var myself ="";
-	  			for(m =0; m<allLikejson.length;m++){
-					if(allLikejson[m].articleID == articleJson[i].id){
-						
-						if(allLikejson[m].good == 1 && allLikejson[m].memberAccount == "${loginmember.account}"){
-							myself = "你和其他";
-							like_Button.checked="checked";
-						}else if(allLikejson[m].good == 1){
-							countLike++;
-						}
-						
-						if(allLikejson[m].bad == 1 && allLikejson[m].memberAccount == "${loginmember.account}"){
-							myself = "你和其他"
-							disLike_Button.checked="checked";
-						}else if(allLikejson[m].bad == 1){
-							countDisLike++;
-						}
-					}
-		  		}
-			  	    if(countLike==0){
-			  	    	countLike_div.append("");
-			  	    }else{
-			  	    	countLike_div.append(myself + countLike+"人Like");
-			  	    }
-	  		
-			  	    if(countDisLike==0){
-			  	    	countDisLike_div.append("");
-			  	    }else{
-			  	    	countDisLike_div.append(myself + countDisLike+"人disLike");
-			  	    }
-	  		
-	  		}
 	  	
 	  		
+	  	
+  		
 
 	  		
 	  		if(selectReplyjson!=null){
@@ -708,6 +731,63 @@ function add(){
 	  			var countReply_div = $("<div class='countReply_div' id='"+'countReply_div'+articleJson[i].id+"'></div>").append(countReply);
 	  		}
 	  		
+	  		
+	  		
+	  		if(allLikejson!=null){//顯示每筆文章的Like && DisLike
+	  			var countLike = 0;
+	  			var countDisLike = 0;
+	  			var myself ="";
+	  			var justILike = 0;
+	  			var justIDisLike = 0;
+	  			for(m =0; m<allLikejson.length;m++){
+					if(allLikejson[m].articleID == articleJson[i].id){
+					
+						if(allLikejson[m].good == 1 && allLikejson[m].memberAccount == "${loginmember.account}"){
+							myself = "你和其他";
+							like_Button.checked="checked";
+							justILike++;
+						
+						}else if(allLikejson[m].good == 1){
+							countLike++;							
+						}
+						
+						if(allLikejson[m].bad == 1 && allLikejson[m].memberAccount == "${loginmember.account}"){
+							myself = "你和其他"
+							disLike_Button.checked="checked";
+							justIDisLike++
+						}else if(allLikejson[m].bad == 1){
+							countDisLike++;
+						}
+					}
+		  		}
+			  	    
+		  			if(justILike==1){
+			  	    	countLike_div.append("你覺得Like");
+		  			}
+	  				if(countLike==0){
+			  	    	countLike_div.append("");
+			  	    }else{
+			  	    	countLike_div.empty();
+			  	    	countLike_div.append(myself + countLike+"人Like");
+			  	    }
+	  			
+	  				
+	  				if(justIDisLike==1){
+	  					countDisLike_div.append("你覺得disLike");
+		  			}
+			  	    if(countDisLike==0){
+			  	    	countDisLike_div.append("");
+			  	    }else{
+			  	    	countDisLike_div.empty();
+			  	    	countDisLike_div.append(myself + countDisLike+"人disLike");
+			  	    }
+	  		
+	  		}
+	  		
+	  	
+	  		
+	  		
+	  		
 	  		var article_header_div = $("<div class='article_header_div'></div>").append(Article_photo_div);
 	  		article_header_div.append(Article_member_div);
 	  		article_header_div.append(Article_pubTime_div);
@@ -729,6 +809,7 @@ function add(){
 	  		
 	  		allarticle.append(article_header_div);//photo member pubTime title genre	 		
 			allarticle.append(Article_content_div);//文章			
+			allarticle.append(testButton);//---------------------------------------------------測式按鈕			
 			allarticle.append(Article_editTime_div);
 			allarticle.append(ALLbutton_div);//縮放文章 Like DisLike 留言人數 按鈕
 			allarticle.append(Article_addReply_div);//留言按鈕加文字框
@@ -857,6 +938,18 @@ function add(){
 		
 // 	}
 	
+	function selectRank(allLikejson,article_Id){
+		for(m =0; m<allLikejson.length;m++){
+			if(allLikejson[m].articleID == article_Id){
+				return allLikejson[m];
+			}
+		}
+	}
+	
+	
+	
+	
+	
 	function checkLike(likeObiect){
 		var like = 0;
 		if(document.getElementById(likeObiect.id).checked){				
@@ -952,7 +1045,98 @@ function add(){
 	}
 	
 	
+	
+	function testButton(testButtonObject){
+		var article_ID = testButtonObject.id.substring(10);
+		//deleteAreicle(article_ID);
+		$("#"+testButtonObject.id).leanModal({top : 200, overlay : 0.6, closeButton: ".btn btn_red"});//修改文章用
+		
+		var id = updateArticle(article_ID);
+		
+	
+	}
+	
+	
+	
+	
+	
+	function deleteAreicle(article_ID){
+		
+		$.ajax({
+			url : "forumsDelete",
+			type : "POST",
+			
+			data : {
+				Article_ID:article_ID,
+			},
+			success : function(deleteCount) {
+				if(deleteCount==1){
+					$("#"+"BOX01"+ article_ID).remove();
+					alert("刪除成功");
+				}else{
+					alert("刪除失敗");
+				}
+			}		
+		})			
+	}
+	
+	
+   function updateArticle(article_ID){
+		
+	   $.ajax({
+			url : "forumsSelectUpdate",
+			type : "POST",
+			dataType : "json",
+			data : {
+				Article_ID:article_ID,
+			},
+			success : function(selectUpdateArticlejson) {
+				var updateTitle = $("#updateTitle").val(selectUpdateArticlejson.title);
+				var updateGenre = $("#updateGenre").val(selectUpdateArticlejson.genre);
+				var updateContent = $("#updateTextArea").text(selectUpdateArticlejson.content);
+				$("#updatebtn").attr("name",selectUpdateArticlejson.id); 
+			}		
+		})				
+	   
+     
+   }	   
+	   
+   
+   
+   
+   function clickUpdate(){
+	    
+	    var upArticleID = $("#updatebtn").prop("name");
+ 	    var updateMember = "${loginmember.account}";   
+ 	    var updateTitle = $("#updateTitle").val();
+ 		var updateGenre = $("#updateGenre").val();
+ 		var updateContent = $("#updateTextArea").text();
 
+	   
+		   $.ajax({
+				url : "forumsUpdateArticle",
+				type : "POST",
+				dataType : "json",
+				data : {
+					
+					UpdateArticleId:upArticleID,
+					UpdateMember:updateMember,
+					UpdateTitle:updateTitle,
+					UpdateGenre:updateGenre,
+					UpdateContent:updateContent,
+				},
+				success : function(UpdateArticle) {
+					alert("ssssssssss");
+				}		
+			})	
+	  
+	   
+	  
+	}
+	
+
+   
+   
 	
 </script>
 
