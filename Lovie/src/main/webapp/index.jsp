@@ -54,7 +54,6 @@
 					<li><a href=<c:url value="/theaters"/>>戲院</a></li>
 					<li><a href=<c:url value="/members"/>>會員</a></li>
 					<li><a href=<c:url value="/forums"/>>討論</a></li>
-					<li><a href=<c:url value="/interests"/>>感興趣</a></li>
 					<li><a href=<c:url value="/carts"/>>商城</a></li>
 				</ul>
             </div>

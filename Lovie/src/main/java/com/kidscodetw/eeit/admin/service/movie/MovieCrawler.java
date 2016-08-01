@@ -28,41 +28,63 @@ import com.kidscodetw.eeit.entity.movie.MovieBean;
 @RequestMapping("/admin/movie/movieCrawler")
 public class MovieCrawler {
 
+	
+	public static Map<String, String> MOVIE_MAP;
+	
+
 	@Autowired
 	private MovieDAO movieDAO;
-	@RequestMapping(method=RequestMethod.GET)
-	protected void doGet(HttpServletRequest request, HttpServletResponse response){
+
+	@RequestMapping(method = RequestMethod.GET)
+	protected void doGet(HttpServletRequest request,
+			HttpServletResponse response) {
 		response.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html");
-		Map<String,String> movie_map = getMovieMap();
-		List<MovieBean> list_mb = movieDAO.select();
-		for(MovieBean mb: list_mb){
-			if(movie_map.containsKey(mb.getName())){
-				movie_map.remove(mb.getName());
-			}
-		}
+		MOVIE_MAP = getMovieMap();
+		remove_MOVIE_MAP_duplicate();
 		PrintWriter out;
 		try {
 			out = response.getWriter();
-		
-		if(movie_map.size()==0){
-			out.write("no");
-			return;
-		}
-		out.write("<h2>準備新增:"+movie_map.size()+"部電影"+"</h2><br />");
-		
-		Iterator iter = movie_map.entrySet().iterator();
-		while(iter.hasNext()){
-			Map.Entry<String, String> entry = (Map.Entry<String, String>) iter.next();
-			out.write(entry.getKey()+"<br />");
-		}
-		
+
+			if (MOVIE_MAP.size() == 0) {
+				out.write("no");
+				return;
+			}
+			
+			
+			Map<String,String> temp_map = new HashMap<String, String>(MOVIE_MAP);
+			Iterator iter = temp_map.entrySet().iterator();
+			while (iter.hasNext()) {
+				Map.Entry<String, String> entry = (Map.Entry<String, String>) iter.next();
+				MovieBean mb = getMovieContext(entry.getValue());
+				if(mb.getName()!=entry.getKey()){
+					MOVIE_MAP.remove(entry.getKey());
+					MOVIE_MAP.put(mb.getName(), entry.getValue());
+				}
+			}
+			
+			remove_MOVIE_MAP_duplicate();
+			out.write("<h2>準備新增:" + MOVIE_MAP.size() + "部電影" + "</h2><br />");
+			Iterator iter2 = MOVIE_MAP.entrySet().iterator();
+			while (iter2.hasNext()) {
+				Map.Entry<String, String> entry = (Map.Entry<String, String>) iter2.next();
+				out.write(entry.getKey() + "<br />");
+			}
+
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
 	
-	
+	public void remove_MOVIE_MAP_duplicate(){
+		List<MovieBean> list_mb = movieDAO.select();
+		for (MovieBean mb : list_mb) {
+			if (MOVIE_MAP.containsKey(mb.getName())) {
+				MOVIE_MAP.remove(mb.getName());
+			}
+		}
+	}
+
 	public Map<String, String> getMovieMap() {
 		Map<String, String> movie_map = null;
 		String movieListUrl = "http://www.atmovies.com.tw/movie/now/";
@@ -72,9 +94,7 @@ public class MovieCrawler {
 			Elements links = doc.select("ul.FilmListAll2 >li>a");
 			movie_map = new HashMap<String, String>();
 			for (Element link : links) {
-				if(!link.text().equals("北京遇上西雅圖2") && !link.text().equals("美國隊長3")){
-					movie_map.put(link.text(), link.attr("href"));
-				}
+				movie_map.put(link.text(), link.attr("href"));
 			}
 			return movie_map;
 
@@ -85,32 +105,35 @@ public class MovieCrawler {
 
 	}
 
-	
 	public MovieBean getMovieContext(String movieLink) {
-		
+
 		MovieBean mb = null;
-		String movieUrl = "http://www.atmovies.com.tw"+movieLink;
+		String movieUrl = "http://www.atmovies.com.tw" + movieLink;
 		String mTrailer;
 
 		try {
 			Document doc = Jsoup.connect(movieUrl).timeout(5000).get();
 			// get mName
 			Elements mName_row = doc.select("div.filmTitle");
-			String mName = mName_row.get(0).toString().split("--> ")[1].split("\n")[0].split(" ")[0];
+			String mName = mName_row.get(0).toString().split("--> ")[1]
+					.split("\n")[0].split(" ")[0];
 
 			// get mIntro
 			Elements mIntro_row = doc.select("div#filmTagBlock>span:eq(2)");
-			String mIntro = mIntro_row.get(0).toString().split("\n")[0].substring(7);
+			String mIntro = mIntro_row.get(0).toString().split("\n")[0]
+					.substring(7);
 
 			// get mStartTime
-			Elements mStartTime_row = doc.select("div#filmTagBlock>span:eq(2)>ul>li:eq(1)");
+			Elements mStartTime_row = doc
+					.select("div#filmTagBlock>span:eq(2)>ul>li:eq(1)");
 			Pattern p = Pattern.compile("(\\d\\d\\d\\d/\\d\\d/\\d\\d)");
 			Matcher m = p.matcher(mStartTime_row.html());
 			String mStartTime = "";
 			if (m.find()) {
 				mStartTime = m.group();
 			} else {
-				mStartTime_row = doc.select("div#filmTagBlock>span:eq(2)>ul>li:eq(1)");
+				mStartTime_row = doc
+						.select("div#filmTagBlock>span:eq(2)>ul>li:eq(1)");
 				Pattern p2 = Pattern.compile("(\\d\\d\\d\\d/\\d\\d/\\d\\d)");
 				Matcher m2 = p2.matcher(mStartTime_row.html());
 				if (m.find()) {
@@ -118,8 +141,10 @@ public class MovieCrawler {
 				}
 			}
 			// get mFilmLength
-			Elements mFilmLength_row = doc.select("div#filmTagBlock>span:eq(2)>ul>li:eq(0)");
-			String mFilmLength = mFilmLength_row.get(0).toString().split("：")[1].split("<")[0];
+			Elements mFilmLength_row = doc
+					.select("div#filmTagBlock>span:eq(2)>ul>li:eq(0)");
+			String mFilmLength = mFilmLength_row.get(0).toString().split("：")[1]
+					.split("<")[0];
 
 			// get mPhotoUrl
 			Elements mPhotoUrl_row = doc.select("div#filmTagBlock>span>a>img");
@@ -176,6 +201,8 @@ public class MovieCrawler {
 		return null;
 	}
 	
-	
-	
+	public static Map<String,String> getMOVIE_MAP(){
+		return MOVIE_MAP;
+	}
+
 }

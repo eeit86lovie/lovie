@@ -32,7 +32,7 @@
             </ul>
         </div>
         <div class="right" id="chatappend">
-            <div class="top" ><span>To: <input type="text" id="receiver" class="name"></span></span></div>
+            <div class="top" ><span>To: <span data-id="" id="receiver" class="name"></span></span></div>
             
             <div class="write">
                 <a href="javascript:;" class="write-link attach"></a>
@@ -89,7 +89,8 @@
 		}
 		if(document.getElementById(fixedPerson+'_chat')==null){
 			person_div = $('<div></div>').attr('class', 'chat').attr('id', fixedPerson+'_chat').attr('data-chat',fixedPerson);
-			var dateString = moment.unix(person['timestamp']).format("MM/DD/YYYY hh:mm A");
+			var date = new Date(person['timestamp'])
+			var dateString = date.getMonth()+1 +'/'+date.getDate()+' '+ date.getHours()+':'+date.getMinutes() 
 			time_div = $('<div></div>').attr('class', 'conversation-start').html("<span>"+dateString+"</span>");
 			if(person['sender']==${loginmember.account}){
 				message_div = $('<div></div>').attr('class', 'bubble you').text(person['message'])
@@ -138,14 +139,16 @@
 			sender_li = $('<li></li>').attr('class', 'person').attr('id',fixedPerson).attr('data-chat',fixedPerson).attr('onclick', 'personClick(this)');
 			sender_img = $('<img></img>').attr('src','http://localhost:8080/Lovie/photo/member/account/'+fixedPerson);
 			sender_span_name = $('<span></span>').attr('class', 'name').text(nickname);
-			var dateString = moment.unix(person['timestamp']).format("hh:mm A");
-			sender_span_time = $('<span></span>').attr('class', 'tim	e').text(dateString);
+			var date = new Date(person['timestamp']);
+			var dateString = date.getHours()+':'+date.getMinutes();
+			sender_span_time = $('<span></span>').attr('class', 'time').text(dateString);
 			sender_span_preview = $('<span></span>').attr('class', 'preview').text(person['message'])
 			sender_li.append(sender_img).append(sender_span_name).append(sender_span_time).append(sender_span_preview);
 			$('#peopleappend').append(sender_li);
 		}else{
 			$('#'+fixedPerson+' .preview').html(person['message']);
-			var dateString = moment.unix(person['timestamp']).format("hh:mm A");
+			var date = new Date(person['timestamp']);
+			var dateString = date.getHours()+':'+date.getMinutes();
 			$('#'+fixedPerson+' .time').html(dateString);
 		}
 	}
@@ -154,7 +157,7 @@
 		var message = $('#inputText').val();
 		$('#inputText').val("");
 		var sender = ${loginmember.account};
-		var receiver = $('#receiver').text();
+		var receiver = $('#receiver').attr('data-id');
 		stompClient.send("/app/chat", {}, JSON.stringify({ 'receiver': receiver , 'message':message}));
 		
 	}
@@ -170,6 +173,7 @@
             $('.left .person').removeClass('active');
             $(object).addClass('active');
             $('.chat[data-chat = '+findChat+']').addClass('active-chat');
+            $('#receiver').attr('data-id',findChat);
         }
     	};
 	
@@ -178,9 +182,20 @@
     <script>
     function firstLoad(){
     	var firstPerson = $('.right div:nth-child(2)').attr('data-chat')
+    	var nickname;
+    	$.ajax({
+				    url: '${pageContext.request.contextPath}/member/nickname/'+firstPerson,
+				    type: 'GET',
+				    async: false,
+				    success: function(response) {
+				        nickname = response['nickname'];
+				    }
+				  });
 	    $('.chat[data-chat='+firstPerson+']').addClass('active-chat');
 	    $('.person[data-chat='+firstPerson+']').addClass('active');
-	    $('#receiver').text(firstPerson);
+	    $('#receiver').attr('data-id',firstPerson);
+	    $('#receiver').text(nickname);
+	    
     }
     
     
