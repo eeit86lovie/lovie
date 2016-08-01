@@ -745,8 +745,7 @@ function add(){
 		        	articleUDR_ul.append(articleDelete);
 		        }else{
 		        	
-		        	if(havereport(articleJson[i].id)==0){
-		        		
+		        	
 		        		articleReport = $("<li></li>");
 			        	var reportButton = document.createElement("button");
 		 				var reportButton_Text = document.createTextNode("檢舉文章");
@@ -756,12 +755,7 @@ function add(){
 		 				reportButton.setAttribute("href", "#Report_Article");
 			        	articleReport.append(reportButton);
 			        	articleUDR_ul.append(articleReport);
-		        	}else{
-		        		var haveReport_div = document.createElement("div");
-		 				var haveReport_Text = document.createTextNode("已檢舉");
-		 				haveReport_div.appendChild(haveReport_Text);
-		 				articleUDR_div.append(haveReport_div);
-		        	}
+		        	
 		        	
 		        }						
 				
@@ -897,7 +891,7 @@ function add(){
 	  		
 	  		}
 	  		
-	  	
+	  	 
 	  		
 	  		
 	  		
@@ -921,16 +915,13 @@ function add(){
 	  		Article_addReply_div.append(replybutton);
 	  		
 	  		allarticle.append(article_header_div);//photo member pubTime title genre	 		
-			allarticle.append(Article_content_div);//文章			
-			//allarticle.append(testButton);//---------------------------------------------------測式按鈕			
-			//allarticle.append(testButton_div);//---------------------------------------------------測式按鈕div						
-			allarticle.append(articleUDR_div);//---------------------------------------------------測式按鈕div						
+			allarticle.append(Article_content_div);//文章									
+			allarticle.append(articleUDR_div);//檢舉 新增 刪除div						
 			allarticle.append(Article_editTime_div);
 			allarticle.append(ALLbutton_div);//縮放文章 Like DisLike 留言人數 按鈕
 			allarticle.append(Article_addReply_div);//留言按鈕加文字框
-	 		allarticle.append(Article_replyarea_div);//新增留言放這
-	 		
-	 		
+	 		allarticle.append(Article_replyarea_div);//新增留言放這	 		
+	 		havereport(articleJson[i].id);//放入已檢舉
 	 		
 	 		if(articleJson.length == 1){
 	 			$("#box").prepend(allarticle);
@@ -1289,6 +1280,7 @@ function add(){
 							$("#Report_Article").hide();
 							alert("檢舉失敗");
 						}
+						havereport(report_Article_ID);
 					}		
 				})			
 			
@@ -1372,27 +1364,25 @@ function add(){
 
    
    function havereport(article_ID){
-	   var haveRepoetArticleID = 0;
+	   
+	   
 	   $.ajax({
 			url : "forumsHaveReport",
 			type : "POST",
 			dataType : "json",
-			data : {
-	
-				Report_Have_Member:"${loginmember.account}",
-			
-			},
 			success : function(haveReportResult) {
 				
 				for(o =0;o<haveReportResult.length;o++){
-					if(haveReportResult[o].report == 1 && haveReportResult[o].articleID == article_ID){
-						haveRepoetArticleID = 1;
+					if(haveReportResult[o].memberAccount == "${loginmember.account}" && haveReportResult[o].articleID == article_ID){
+						$("#"+"articleUDR_ul"+haveReportResult[o].articleID).empty();						
+						$("#"+"articleUDR_div"+haveReportResult[o].articleID).append($("<div></div>").append("已檢舉"));
+						
 					}
 				}
 				
 			}		
 		})	
-     return haveRepoetArticleID;
+		
    }
    
    

@@ -65,7 +65,16 @@ public class ArticleRankServlet {
 		if(articleRankDAO.select_Rank_Primarykey(LikeArticleId, LikeMember).isEmpty()){						
 			articleRankDAO.insert(arb);
 		}else{
-			articleRankDAO.update(arb);
+			
+			List<ArticleRankBean> LikeResult = articleRankDAO.select_Rank_Primarykey(LikeArticleId, LikeMember);
+			LikeResult.get(0).setArticleID(LikeArticleId);
+			LikeResult.get(0).setBad(LikeResult.get(0).getBad());
+			LikeResult.get(0).setGood(Like);
+			LikeResult.get(0).setMemberAccount(LikeMember);
+			LikeResult.get(0).setReport(LikeResult.get(0).getReport());
+			LikeResult.get(0).setReportReason(LikeResult.get(0).getReportReason());			
+			articleRankDAO.update(LikeResult.get(0));
+		
 		}		
 		List<ArticleRankBean> articleLikeResult = articleRankDAO.select_totle_good(LikeArticleId, 1);
 		return articleLikeResult;
@@ -87,7 +96,14 @@ public class ArticleRankServlet {
 		if(articleRankDAO.select_Rank_Primarykey(DisLikeArticleId, DisLikeMember).isEmpty()){						
 			articleRankDAO.insert(arb);
 		}else{
-			articleRankDAO.update(arb);
+			List<ArticleRankBean> disLikeResult = articleRankDAO.select_Rank_Primarykey(DisLikeArticleId, DisLikeMember);
+			disLikeResult.get(0).setArticleID(DisLikeArticleId);
+			disLikeResult.get(0).setBad(DisLike);
+			disLikeResult.get(0).setGood(disLikeResult.get(0).getGood());
+			disLikeResult.get(0).setMemberAccount(DisLikeMember);
+			disLikeResult.get(0).setReport(disLikeResult.get(0).getReport());
+			disLikeResult.get(0).setReportReason(disLikeResult.get(0).getReportReason());			
+			articleRankDAO.update(disLikeResult.get(0));
 		}		
 		
 		List<ArticleRankBean> articleDisLikeResult = articleRankDAO.select_totle_bad(DisLikeArticleId, 1);

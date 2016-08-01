@@ -126,7 +126,15 @@ public class ArticleUpdateDeleteReport {
 					articleRankDAO.insert(arb);
 					haveReport = 1;
 				}else{
-					articleRankDAO.update(arb);
+					List<ArticleRankBean> RankResule = articleRankDAO.select_Rank_Primarykey(Report_Article_ID, Report_Member);
+					
+					RankResule.get(0).setArticleID(Report_Article_ID);
+					RankResule.get(0).setBad(RankResule.get(0).getBad());
+					RankResule.get(0).setGood(RankResule.get(0).getGood());
+					RankResule.get(0).setMemberAccount(Report_Member);
+					RankResule.get(0).setReport(1);
+					RankResule.get(0).setReportReason(Report_content);					
+					articleRankDAO.update(RankResule.get(0));
 					haveReport = 1;
 				}		
 				
@@ -137,12 +145,11 @@ public class ArticleUpdateDeleteReport {
 		
 	
 		
-		@RequestMapping(value = "forumsHaveReport", params = { "Report_Have_Member" }, method = RequestMethod.POST)
+		@RequestMapping(value = "forumsHaveReport", method = RequestMethod.POST)
 		@ResponseBody
-		public  List<ArticleRankBean> forumsHaveReport(
-				@RequestParam("Report_Have_Member") String Report_Have_Member) {
+		public  List<ArticleRankBean> forumsHaveReport() {
 		
-				List<ArticleRankBean> haveReportResult = articleRankDAO.select_memberAccount(Report_Have_Member);						
+				List<ArticleRankBean> haveReportResult = articleRankDAO.select_report(1);						
 				return haveReportResult;
 		}
 }
