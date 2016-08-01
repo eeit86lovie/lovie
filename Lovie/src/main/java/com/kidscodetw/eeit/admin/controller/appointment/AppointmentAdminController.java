@@ -52,10 +52,12 @@ public class AppointmentAdminController {
     public void UpdateStatus(@RequestParam("id") Integer id,@RequestParam("status") Integer status,HttpServletResponse response) {
 		try {
 			AppointmentBean2 appointmentBean = appointmentService2.select(id);
+			if (appointmentBean != null)
+			{	
 			appointmentBean.setStatus(status);
 			AppointmentBean2 resu = appointmentService2.update(appointmentBean);
 			if (status == 0 || status == 9) //狀態為0.取消 9.封存 , 對於AppointmentRequest也要更改狀態為'status'=9管理員取消
-			{  appointmentRequestService.updatestatus(id, 9); }
+			{  appointmentRequestService.updatestatusByAid(id, 9); }
 			PrintWriter out;
 			try {
 				out = response.getWriter();
@@ -65,6 +67,7 @@ public class AppointmentAdminController {
 				   out.println(false);
 			} catch (IOException e) {
 				e.printStackTrace();
+			}
 			}
 		} catch (NumberFormatException e) {
 			e.printStackTrace();

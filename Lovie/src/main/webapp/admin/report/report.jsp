@@ -54,7 +54,7 @@
 				      	onClick="form1.submit();">查询</button>
 				      <button type="reset" class="btn btn-default">清除</button>
 				  </div>
-				  </div>
+				  </div></div>
 				  </fieldset>
 				</form>
 			</div>

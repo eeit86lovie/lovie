@@ -16,6 +16,8 @@ public class AppointmentDAO2Hibernate implements AppointmentDAO2 {
 	private static final String SELECT_ALL = "from AppointmentBean2";
 	private static final String SELECT_BY_MEMBER = "from AppointmentBean2 where memberId=:memberId";
 	private static final String SELECT_BY_SHOWTIME = "from AppointmentBean2 where showtimeId=:showtimeId";
+	private static final String UPDATESTATUS_BY_ID = "update AppointmentBean2 set status=:status where id=:appointmentID";
+
 	private SessionFactory sessionFactory;
 	
 	public AppointmentDAO2Hibernate(SessionFactory sessionFactory) {
@@ -80,6 +82,16 @@ public class AppointmentDAO2Hibernate implements AppointmentDAO2 {
 		}
 		return (AppointmentBean2) this.getSession().get(AppointmentBean2.class, bean.getId());
 	}
+	
+	@Override
+	public Integer updatestatusByAid(Integer appointmentID, Integer status) {
+		   Query query = getSession().createQuery(UPDATESTATUS_BY_ID);
+		   query.setParameter("appointmentID", appointmentID);
+		   query.setParameter("status", status);
+		   int updateCount = query.executeUpdate();
+		   return updateCount;
+	}
+
 
 	@Override
 	public List<AppointmentsBean> selectcal(Integer memberId,Date showstart,Date showend) {
@@ -133,7 +145,7 @@ public class AppointmentDAO2Hibernate implements AppointmentDAO2 {
 					"	  where showtimeDate between '"+new java.sql.Date(showstart.getTime())+"'"+
 					"         and '"+new java.sql.Date(showend.getTime())+"' ) D 	"+
 					"	 on showtimeId = D.id	) x";	
-			System.out.println(SELECT_CAL);
+			//System.out.println(SELECT_CAL);
 			SQLQuery query = getSession().createSQLQuery(SELECT_CAL);
 			query.addEntity(AppointmentsBean.class);
 			result = query.list();

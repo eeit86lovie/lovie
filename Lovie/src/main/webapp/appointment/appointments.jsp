@@ -32,12 +32,12 @@
 <div class="container">
 <div class="row"><div class="col-md-12">
   <ul class="nav nav-tabs nav-justified">
-  <li><img src="image/icon/logo.png" style="width:90px;float:right;padding-right:20px;"></img>
+  <li><img src="${pageContext.request.contextPath}/image/icon/logo.png" style="width:90px;float:right;padding-right:20px;"></img>
   <div style="color:red">會員:${loginmember.account}${loginmember.nickname}</div>
   </li>
-    <li class="active"><a href="appointments">一週約會通知</a></li>
-    <li><a href="appointmentb">申請的約會</a></li>
-    <li><a href="appointmenta">邀請的約會</a></li>
+    <li class="active"><a href="${pageContext.request.contextPath}/appointments">一週約會通知</a></li>
+    <li><a href="${pageContext.request.contextPath}/appointmentb">申請的約會</a></li>
+    <li><a href="${pageContext.request.contextPath}/appointmenta">邀請的約會</a></li>
   </ul>
   <div class="tab-content">
   <div id="menu1" class="tab-pane fade in active">
@@ -56,7 +56,6 @@
 		<span style='color:#00CACA;'>申請中</span>
 		</div>
 	</div>
-	
   </div>
   </div>
 </div></div>

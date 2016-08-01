@@ -15,13 +15,13 @@
         border-radius: 3px;
 }
 #container02,#container03{
-	width: 453px;
+	//width: 453px;  //chrome 解析度110%
 }
 #container02{
-	margin-left: 10px;
+	//margin-left: 10px; //chrome 解析度110%
 }
 #container03{
-	margin-left: -12px;
+	//margin-left: -12px; //chrome 解析度110%
 }
 </style>
 </head>

@@ -9,19 +9,13 @@ import com.kidscodetw.eeit.entity.appointment.AppointmentsBean;
 public interface AppointmentDAO2 {
 
 	public abstract List<AppointmentBean2> select();
-	
 	public abstract AppointmentBean2 select(Integer id);
-
 	public abstract List<AppointmentBean2> selectByShowtimeId(Integer showtimeId);
-	
 	public abstract List<AppointmentBean2> selectByMemberId(Integer memberId);
-
 	public abstract AppointmentBean2 insert(AppointmentBean2 bean);
-
+	public abstract Integer updatestatusByAid(Integer appointmentID, Integer status);
 	public abstract AppointmentBean2 update(AppointmentBean2 bean);
-	
 	public abstract boolean delete(Integer id);
-	
 	public abstract List<AppointmentsBean> selectcal(Integer memberId,Date showstart,Date showend);
 
 }

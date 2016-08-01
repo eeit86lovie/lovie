@@ -60,6 +60,10 @@ public class AppointmentService2 {
 		return result;
 	}
 	
+	public Integer updatestatusByAid(Integer appointmentID, Integer status) {
+		return appointmentDAO.updatestatusByAid(appointmentID, status);
+	}	
+
 	public boolean delete(Integer id){
 		boolean result = false;
 		if(id!=0){
