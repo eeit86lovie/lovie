@@ -18,7 +18,7 @@
     
   </head>
 
-  <body>
+  <body onload="connect()">
 
     <div class="wrapper">
     <div class="container">
@@ -31,14 +31,14 @@
                 
             </ul>
         </div>
-        <div class="right">
-            <div class="top" id="chatappend"><span>To: <span class="name">Dog Woofson</span></span></div>
+        <div class="right" id="chatappend">
+            <div class="top" ><span>To: <span data-id="" id="receiver" class="name"></span></span></div>
             
             <div class="write">
                 <a href="javascript:;" class="write-link attach"></a>
-                <input type="text" />
+                <input type="text" id="inputText"/>
                 <a href="javascript:;" class="write-link smiley"></a>
-                <a href="javascript:;" class="write-link send"></a>
+                <a href="#" onclick="sendMessage()" class="write-link send"></a>
             </div>
         </div>
     </div>
@@ -49,7 +49,6 @@
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.1.1/sockjs.min.js"></script>
     	<script src="//cdn.bootcss.com/stomp.js/2.3.3/stomp.js"></script>
     	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.14.1/moment.min.js"></script>
-        <script src="${pageContext.request.contextPath }/chat/js/index.js"></script>
 		<script src="${pageContext.request.contextPath }/chat/js/chat.js"></script>
     
     <script>
@@ -59,8 +58,10 @@
         success: function(response) {
            	for(var i=0; i<response.length;i++){
            		appendPeople(response[i]);
-           		appendRight(response[i])
+           		appendRight(response[i]);
+           		
            	}
+           	firstLoad();
         }
       });
     
@@ -86,16 +87,28 @@
 		}else{
 			fixedPerson = person['sender']
 		}
-		person_div = $('<div></div>').attr('class', 'chat').attr('data-chat',fixedPerson);
-		var dateString = moment.unix(person['timestamp']).format("MM/DD/YYYY hh:mm A");
-		time_div = $('<div></div>').attr('class', 'conversation-start').html("<span>"+dateString+"</span>");
-		if(person['sender']==${loginmember.account}){
-			message_div = $('<div></div>').attr('class', 'bubble you').text(person['message'])
+		if(document.getElementById(fixedPerson+'_chat')==null){
+			person_div = $('<div></div>').attr('class', 'chat').attr('id', fixedPerson+'_chat').attr('data-chat',fixedPerson);
+			var date = new Date(person['timestamp'])
+			var dateString = date.getMonth()+1 +'/'+date.getDate()+' '+ date.getHours()+':'+date.getMinutes() 
+			time_div = $('<div></div>').attr('class', 'conversation-start').html("<span>"+dateString+"</span>");
+			if(person['sender']==${loginmember.account}){
+				message_div = $('<div></div>').attr('class', 'bubble you').text(person['message'])
+			}else{
+				message_div = $('<div></div>').attr('class', 'bubble me').text(person['message'])
+			}
+			person_div.append(time_div).append(message_div);
+			person_div.insertBefore($('.write'));
 		}else{
-			message_div = $('<div></div>').attr('class', 'bubble me').text(person['message'])
+			if(fixedPerson==person['sender']){
+				appendMessage = $('<div></div').attr('class', 'bubble you').text(person['message']);
+				$('#'+fixedPerson+'_chat').append(appendMessage);
+			}else if(fixedPerson==person['receiver']){
+				appendMessage = $('<div></div').attr('class', 'bubble me').text(person['message']);
+				$('#'+fixedPerson+'_chat').append(appendMessage);
+			}
+			
 		}
-		person_div.append(time_div).append(message_div);
-		$('#chatappend').append(person_div);
 		
 	}
 	
@@ -107,32 +120,86 @@
 //
 	function appendPeople(person){
 		var fixedPerson;
-		if(person['sender']!=${loginmember.account}){
+		var nickname;
+		if(person['sender']==${loginmember.account}){
 			fixedPerson = person['receiver'];
 		}else{
 			fixedPerson = person['sender'];
 		}
-		checkPersonInList(fixedPerson)
-		if($('.person').attr('data-chat')!=person['sender'] && person['sender']!=${loginmember.account}){
-			sender_li = $('<li></li>').attr('class', 'person').attr('data-chat',person['sender']);
-			sender_img = $('<img></img>').attr('src','http://localhost:8080/Lovie/photo/member/account/'+person['sender']);
-			sender_span_name = $('<span></span>').attr('class', 'name').text(person['sender']);
-			var dateString = moment.unix(person['timestamp']).format("hh:mm A");
+		
+		if(document.getElementById(fixedPerson)==null){
+			 $.ajax({
+				    url: '${pageContext.request.contextPath}/member/nickname/'+fixedPerson,
+				    type: 'GET',
+				    async: false,
+				    success: function(response) {
+				        nickname = response['nickname'];
+				    }
+				  });
+			sender_li = $('<li></li>').attr('class', 'person').attr('id',fixedPerson).attr('data-chat',fixedPerson).attr('onclick', 'personClick(this)');
+			sender_img = $('<img></img>').attr('src','http://localhost:8080/Lovie/photo/member/account/'+fixedPerson);
+			sender_span_name = $('<span></span>').attr('class', 'name').text(nickname);
+			var date = new Date(person['timestamp']);
+			var dateString = date.getHours()+':'+date.getMinutes();
 			sender_span_time = $('<span></span>').attr('class', 'time').text(dateString);
 			sender_span_preview = $('<span></span>').attr('class', 'preview').text(person['message'])
 			sender_li.append(sender_img).append(sender_span_name).append(sender_span_time).append(sender_span_preview);
 			$('#peopleappend').append(sender_li);
+		}else{
+			$('#'+fixedPerson+' .preview').html(person['message']);
+			var date = new Date(person['timestamp']);
+			var dateString = date.getHours()+':'+date.getMinutes();
+			$('#'+fixedPerson+' .time').html(dateString);
 		}
 	}
 	
-	function checkPersonInList(fixedPerson){
-		if($('.people .li').hasAttr('data-chat', fixedPerson)){
-			alert('yes')
-		}else{
-			alert('no')	
-		}
+	function sendMessage(){
+		var message = $('#inputText').val();
+		$('#inputText').val("");
+		var sender = ${loginmember.account};
+		var receiver = $('#receiver').attr('data-id');
+		stompClient.send("/app/chat", {}, JSON.stringify({ 'receiver': receiver , 'message':message}));
+		
 	}
+	
+	function personClick(object){
+    	if ($(object).hasClass('.active')) {
+            return false;
+        } else {
+            var findChat = $(object).attr('data-chat');
+            var personName = $(object).find('.name').text();
+            $('.right .top .name').html(personName);
+            $('.chat').removeClass('active-chat');
+            $('.left .person').removeClass('active');
+            $(object).addClass('active');
+            $('.chat[data-chat = '+findChat+']').addClass('active-chat');
+            $('#receiver').attr('data-id',findChat);
+        }
+    	};
+	
+
     </script>
+    <script>
+    function firstLoad(){
+    	var firstPerson = $('.right div:nth-child(2)').attr('data-chat')
+    	var nickname;
+    	$.ajax({
+				    url: '${pageContext.request.contextPath}/member/nickname/'+firstPerson,
+				    type: 'GET',
+				    async: false,
+				    success: function(response) {
+				        nickname = response['nickname'];
+				    }
+				  });
+	    $('.chat[data-chat='+firstPerson+']').addClass('active-chat');
+	    $('.person[data-chat='+firstPerson+']').addClass('active');
+	    $('#receiver').attr('data-id',firstPerson);
+	    $('#receiver').text(nickname);
+	    
+    }
     
+    
+    
+    </script>
   </body>
 </html>

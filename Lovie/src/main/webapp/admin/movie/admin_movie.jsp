@@ -158,7 +158,7 @@ td{
 				var update_loading_icon2 = document.getElementById("update_loading_icon2");
 				xhr = new XMLHttpRequest();
 				xhr.onreadystatechange = callback;
-				xhr.open("get", "movieCrawlerConfirm.do");
+				xhr.open("get", "movieCrawlerConfirm");
 				update_confirm_button.setAttribute("style", "display:none")
 				update_loading_icon2.setAttribute("style", "width:100px;display:block")
 				xhr.send();

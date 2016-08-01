@@ -11,12 +11,12 @@ import com.kidscodetw.eeit.jdbc.MovieDAOJdbc;
 
 public class MoviePhotoToDB {
 
-	public static void main(String[] args) {
-		new MoviePhotoToDB().getLink();
+//	public static void main(String[] args) {
+//		new MoviePhotoToDB().getLink();
+//
+//	}
 
-	}
-
-	public void getLink() {
+	public static void getLink() {
 		MovieDAO movieDAO = new MovieDAOJdbc();
 		MovieBean tempBean = null;
 		Map<Integer, byte[]> photos = movieDAO.selectPhotos();

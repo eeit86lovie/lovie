@@ -51,46 +51,28 @@
     <form>
         <label>文章標題</label> <input type="text" id="username"><br>
         <p id ="error_title"></p>
-       <label>文章分類</label>
-       <select id="ArticleGenre">
-　		<option value="好雷">好雷</option>
-　		<option value="負雷">負雷</option>
-　		<option value="新聞">新聞</option>
-　		<option value="討論">討論</option>
-　		<option value="問片">問片</option>
-　		<option value="其他">其他</option>
-　	  </select><br>
+        
+        <label>文章分類</label>
+        <select id="ArticleGenre">
+	　		<option value="好雷">好雷</option>
+	　		<option value="負雷">負雷</option>
+	　		<option value="新聞">新聞</option>
+	　		<option value="討論">討論</option>
+	　		<option value="問片">問片</option>
+	　		<option value="其他">其他</option>
+	　	</select><br>
 
         <label>文章內容</label><TextArea type="text" id="textArea"></TextArea><br>
         <p id="error_content"></p>
         
         <div class="action_btns">
-
-            <div class="one_half last">
-                
-                <div class="center"><input class="btn btn_red" type="button" name="loginbtn" id="loginbtn" onclick="clickLightButton()"  value="發文" ></div>
+			<div class="one_half last">
+            	<div class="center"><input class="btn btn_red" type="button" name="loginbtn" id="loginbtn" onclick="clickLightButton()"  value="發文" ></div>
             </div>
         </div>
     </form>
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-</div>
-   
+           
+     </div>   
 </div>
     </section>
 </div>
