@@ -209,9 +209,9 @@ body {
 }
 
 
-input[type=checkbox] {
-    display: none;
-}
+ input[type=checkbox] {
+     display: none; 
+ } 
 
 
 
@@ -353,6 +353,10 @@ margin-top:50px;
 
 
 }
+
+.articleUDR_ul_div{
+  display: none;
+}
 </style>
 
 
@@ -393,12 +397,12 @@ margin-top:50px;
 
 
 <div>
-	<a id="xxx_trigger" href="#xxx" class="btn" onclick="testButton()">我要發表文章</a>
+	<a id="Update_Article_trigger" href="#Update_Article" class="btn" onclick="updateButton()"></a>
 </div>
 
-<div id="xxx" class="popupContainer" style="display:none;">
+<div id="Update_Article" class="popupContainer" style="display:none;">
 	<header class="popupHeader">
-		<span class="header_title">發表文章</span>
+		<span class="header_title">修改文章</span>
 		
 	</header>
 
@@ -407,7 +411,7 @@ margin-top:50px;
       <div class="user_login">
     <form>
         <label>文章標題</label> <input type="text" id="updateTitle"><br>
-        <p id ="error_title"></p>
+        <p id ="error_update_title"></p>
         
         <label>文章分類</label>
         <select id="updateGenre">
@@ -420,7 +424,7 @@ margin-top:50px;
 	　	</select><br>
 
         <label>文章內容</label><TextArea type="text" id="updateTextArea"></TextArea><br>
-        <p id="error_content"></p>
+        <p id="error_update_content"></p>
         
         <div class="action_btns">
 			<div class="one_half last">
@@ -433,6 +437,48 @@ margin-top:50px;
 </div>
     </section>
 </div>
+
+
+
+
+<div>
+	<a id="Report_Article_trigger" href="#Report_Article" class="btn" onclick="reportButton()"></a>
+</div>
+
+
+
+<div id="Report_Article" class="popupContainer" style="display:none;">
+	<header class="popupHeader">
+		<span class="header_title">檢舉文章</span>
+		
+	</header>
+
+    <section class="popupBody">
+    
+      <div class="user_login">
+    <form>
+        <label>文章標題</label> <input type="text" id="reportTitle"><br>
+        
+        
+        
+        <label>檢舉內容</label><TextArea type="text" id="reportContent"></TextArea><br>
+        <p id="error_report_content"></p>
+        
+        <div class="action_btns">
+			<div class="one_half last">
+            	<div class="center"><input class="btn btn_red" type="button" name="reportbtn" id="reportbtn" value="發文" onclick="clickReportButton()" ></div>
+            </div>
+        </div>
+    </form>
+           
+     </div>   
+</div>
+    </section>
+</div>
+
+
+
+
 
 
 	<script>
@@ -638,6 +684,7 @@ function add(){
 				hideReply_div.append(hidelabel);
 					
 				
+				
 							
 				var like_Button = document.createElement('input');//Like
 				
@@ -648,12 +695,78 @@ function add(){
 				
 				//--------------------------------------------------------------------------------------------------------------------
 
-				var testButton = document.createElement("button");
-				var testButton_Text = document.createTextNode("測式按鈕");
-				testButton.id = "testButton"+articleJson[i].id;
-				testButton.setAttribute("onclick", "testButton(this)");
-				testButton.setAttribute("href", "#xxx");
-				testButton.appendChild(testButton_Text);
+// 				var testButton = document.createElement("button");
+// 				var testButton_Text = document.createTextNode("測式按鈕");
+// 				testButton.id = "testButton"+articleJson[i].id;
+// 				testButton.setAttribute("onclick", "testButton(this)");
+// 				//testButton.setAttribute("href", "#xxx");
+// 				testButton.appendChild(testButton_Text);
+// 				var testButton_div = $("<div id='"+'testButton_div'+articleJson[i].id+"'></div>");
+				
+				
+				var articleUDR = document.createElement('input');//Update Delete Report
+				articleUDR.type = "checkbox";
+				articleUDR.id = "articleUDR"+articleJson[i].id;
+				
+				articleUDR.className ="hideReply_checkBox";
+				articleUDR.name ="hideReply_checkBox";
+				var articleUDRlabel = document.createElement('label');
+				articleUDRlabel.setAttribute("for", articleUDR.id );				
+				var articleUDRspan = document.createElement('span');
+				articleUDRspan.className ="hidespan";
+				articleUDRlabel.appendChild(articleUDRspan);
+				
+				
+				articleUDR.setAttribute("onchange", "articleUDR(this)");
+				var articleUDR_div =$("<div id='"+'articleUDR_div'+articleJson[i].id+"'></div>").append(articleUDR);
+				var articleUDR_ul = $("<ul id='"+'articleUDR_ul'+articleJson[i].id+"'></ul>");
+				var articleUDR_ul_div = $("<div class='articleUDR_ul_div' id='"+'articleUDR_ul_div'+articleJson[i].id+"'></div>");
+				articleUDR_div.append(articleUDRlabel);
+				
+				
+				if(articleJson[i].memberAccount == "${loginmember.account}"){
+		        	articleUpdate = $("<li></li>");
+		        	var updateButton = document.createElement("button");
+	 				var updateButton_Text = document.createTextNode("修改文章");
+	 				updateButton.appendChild(updateButton_Text);
+	 				updateButton.id = "updateButton"+articleJson[i].id;
+	 				updateButton.setAttribute("onclick", "updateButton(this)");
+	 				updateButton.setAttribute("href", "#Update_Article");
+		        	articleUpdate.append(updateButton);
+		        	articleUDR_ul.append(articleUpdate);
+		        	
+		        	articleDelete = $("<li></li>");
+		        	var deleteButton = document.createElement("button");
+	 				var deleteButton_Text = document.createTextNode("刪除文章");
+	 				deleteButton.appendChild(deleteButton_Text);
+	 				deleteButton.id = "deleteButton"+articleJson[i].id;
+	 				deleteButton.setAttribute("onclick", "deleteButton(this)");
+		        	articleDelete.append(deleteButton);
+		        	articleUDR_ul.append(articleDelete);
+		        }else{
+		        	
+		        	if(havereport(articleJson[i].id)==0){
+		        		
+		        		articleReport = $("<li></li>");
+			        	var reportButton = document.createElement("button");
+		 				var reportButton_Text = document.createTextNode("檢舉文章");
+		 				reportButton.appendChild(reportButton_Text);
+		 				reportButton.id = "reportButton"+articleJson[i].id;
+		 				reportButton.setAttribute("onclick", "reportButton(this)");
+		 				reportButton.setAttribute("href", "#Report_Article");
+			        	articleReport.append(reportButton);
+			        	articleUDR_ul.append(articleReport);
+		        	}else{
+		        		var haveReport_div = document.createElement("div");
+		 				var haveReport_Text = document.createTextNode("已檢舉");
+		 				haveReport_div.appendChild(haveReport_Text);
+		 				articleUDR_div.append(haveReport_div);
+		        	}
+		        	
+		        }						
+				
+				articleUDR_ul_div.append(articleUDR_ul)
+				articleUDR_div.append(articleUDR_ul_div);
 				
 				
 				//--------------------------------------------------------------------------------------------------------------------
@@ -809,7 +922,9 @@ function add(){
 	  		
 	  		allarticle.append(article_header_div);//photo member pubTime title genre	 		
 			allarticle.append(Article_content_div);//文章			
-			allarticle.append(testButton);//---------------------------------------------------測式按鈕			
+			//allarticle.append(testButton);//---------------------------------------------------測式按鈕			
+			//allarticle.append(testButton_div);//---------------------------------------------------測式按鈕div						
+			allarticle.append(articleUDR_div);//---------------------------------------------------測式按鈕div						
 			allarticle.append(Article_editTime_div);
 			allarticle.append(ALLbutton_div);//縮放文章 Like DisLike 留言人數 按鈕
 			allarticle.append(Article_addReply_div);//留言按鈕加文字框
@@ -926,6 +1041,17 @@ function add(){
  			  $("#"+"replyarea"+ReplyTextObject.id.substring(4)).slideDown(1000)
  			
  		  }
+	}
+	
+	
+	function articleUDR(articleUDRObject){
+		var articleUDR_id = articleUDRObject.id.substring(10);
+		
+		if(document.getElementById("articleUDR"+articleUDR_id).checked){
+			$("#"+"articleUDR_ul_div"+articleUDR_id).show();
+		}else{
+			$("#"+"articleUDR_ul_div"+articleUDR_id).hide();
+		}
 	}
 	
 	
@@ -1046,22 +1172,41 @@ function add(){
 	
 	
 	
-	function testButton(testButtonObject){
-		var article_ID = testButtonObject.id.substring(10);
-		//deleteAreicle(article_ID);
-		$("#"+testButtonObject.id).leanModal({top : 200, overlay : 0.6, closeButton: ".btn btn_red"});//修改文章用
-		
-		var id = updateArticle(article_ID);
-		
+	function updateButton(updateButtonObject){
+		var article_ID = updateButtonObject.id.substring(12);
+		$("#"+updateButtonObject.id).leanModal({top : 200, overlay : 0.6, closeButton: ".btn btn_red"});//修改文章用
+		updateArticle(article_ID);
 	
+	}
+	
+	
+	function reportButton(reportButtonObject){
+		var article_ID = reportButtonObject.id.substring(12);
+		$("#"+reportButtonObject.id).leanModal({top : 200, overlay : 0.6, closeButton: ".btn btn_red"});//檢舉文章用
+		$.ajax({
+			url : "forumsSelectUpdate",
+			type : "POST",
+			dataType : "json",
+			data : {
+				Article_ID:article_ID,
+			},
+			success : function(selectUpdateArticlejson) {
+				var reportTitle = $("#reportTitle").val(selectUpdateArticlejson.title);
+				$("#reportbtn").attr("name",selectUpdateArticlejson.id);
+			}		
+		})				
+		
+		
+		
 	}
 	
 	
 	
 	
 	
-	function deleteAreicle(article_ID){
+	function deleteButton(deleteButtonObject){
 		
+		var article_ID = deleteButtonObject.id.substring(12);
 		$.ajax({
 			url : "forumsDelete",
 			type : "POST",
@@ -1102,7 +1247,59 @@ function add(){
    }	   
 	   
    
-   
+
+	function clickReportButton(){
+		
+		var report_Member = "${loginmember.account}"; 
+		var report_Article_ID = $("#reportbtn").prop("name");
+		var report_content = $("#reportContent").val();				
+		
+		
+		var error_report_content = 0;			
+			
+			
+			if(report_content==""){
+				$("#error_report_content").empty();
+				$("#error_report_content").append("請輸入檢舉內容");
+				var error_report_content = 1;
+			}else{
+				$("#error_report_content").empty();
+			}
+			
+			
+			if(error_report_content == 0){
+				$.ajax({
+					url : "forumsReport",
+					type : "POST",
+					
+					data : {
+						Report_Member:report_Member,
+						Report_Article_ID:report_Article_ID,
+						Report_content:report_content,
+					},
+					success : function(haveReport) {
+						if(haveReport==1){
+							$("#reportContent").val("");
+							$("#lean_overlay").hide();
+							$("#Report_Article").hide();
+							alert("檢舉成功");					
+						}else{
+							$("#reportContent").val("")
+							$("#lean_overlay").hide();
+							$("#Report_Article").hide();
+							alert("檢舉失敗");
+						}
+					}		
+				})			
+			
+			}	
+		
+		
+		
+		
+		
+	}
+	
    
    function clickUpdate(){
 	    
@@ -1110,31 +1307,93 @@ function add(){
  	    var updateMember = "${loginmember.account}";   
  	    var updateTitle = $("#updateTitle").val();
  		var updateGenre = $("#updateGenre").val();
- 		var updateContent = $("#updateTextArea").text();
-
-	   
-		   $.ajax({
-				url : "forumsUpdateArticle",
-				type : "POST",
-				dataType : "json",
-				data : {
-					
-					UpdateArticleId:upArticleID,
-					UpdateMember:updateMember,
-					UpdateTitle:updateTitle,
-					UpdateGenre:updateGenre,
-					UpdateContent:updateContent,
-				},
-				success : function(UpdateArticle) {
-					alert("ssssssssss");
-				}		
-			})	
-	  
-	   
+ 		var updateContent = $("#updateTextArea").val();
+		
+		var error_update_title = 0;
+		var error_update_content = 0;
+	
+				if(updateTitle==""){
+					$("#error_update_title").empty();
+					$("#error_update_title").append("請輸入標題");
+					var error_update_title = 1;
+				}else{
+					$("#error_update_title").empty();
+				}
+				
+				if(updateContent==""){
+					$("#error_update_content").empty();
+					$("#error_update_content").append("請輸入內容");
+					var error_update_content = 1;
+				}else{
+					$("#error_update_content").empty();
+				}
+				
+				
+				if(error_update_title == 0 && error_update_content == 0){
+					$.ajax({
+						url : "forumsUpdateArticle",
+						type : "POST",
+						dataType : "json",
+						data : {
+							
+							UpdateArticleId:upArticleID,
+							UpdateMember:updateMember,
+							UpdateTitle:updateTitle,
+							UpdateGenre:updateGenre,
+							UpdateContent:updateContent,
+						},
+						success : function(UpdateArticle) {
+							
+							var updateGenre = $("#"+"BOX01"+UpdateArticle.id).find(".genre")
+							var updateTitle = $("#"+"BOX01"+UpdateArticle.id).find(".title")
+							var updateContent = $("#"+"BOX01"+UpdateArticle.id).find(".content")
+							
+							
+							updateGenre.empty();
+							updateGenre.append(UpdateArticle.genre);
+							
+							updateTitle.empty();
+							updateTitle.append(UpdateArticle.title);
+							
+							updateContent.empty();
+							updateContent.append(UpdateArticle.content);
+							
+							$("#lean_overlay").hide();
+							$("#Update_Article").hide();
+							
+						}		
+					})	
+				
+				}	
+			
 	  
 	}
 	
 
+   
+   function havereport(article_ID){
+	   var haveRepoetArticleID = 0;
+	   $.ajax({
+			url : "forumsHaveReport",
+			type : "POST",
+			dataType : "json",
+			data : {
+	
+				Report_Have_Member:"${loginmember.account}",
+			
+			},
+			success : function(haveReportResult) {
+				
+				for(o =0;o<haveReportResult.length;o++){
+					if(haveReportResult[o].report == 1 && haveReportResult[o].articleID == article_ID){
+						haveRepoetArticleID = 1;
+					}
+				}
+				
+			}		
+		})	
+     return haveRepoetArticleID;
+   }
    
    
 	

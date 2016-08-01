@@ -8,38 +8,38 @@
 
 <style type="text/css">
 
-.container:active .selector { 
-    display:block;
-	 
-    } 
-
-.title { 
-    width:100px;
+ul { 
+	list-style-type:none;
+	width:50px;
 	height:30px;
-	background-color:#CCC;
+	background-color:#C63300;
 	font-size:18px;
 	line-height:30px;
 	text-align:center;
-	 
+	position:relative;
+	top:20px;
+	left:50px; 
     } 
-
-.selector { 
+li{
+	list-style-type:none;
+	width:50px;
+	height:30px;
+	background-color:#CCC;
+}
+.aa { 
     display:none; 
     position:absolute;
 	padding-top:24px; 
     } 
  
-.selector:hover { 
+.aa:hover { 
 	display:block;
     } 
-
-.selector span { 
+ul:active .aa { 
     display:block;
-	width:100px;
+	width:50px;
 	height:30px;
-	background-color:#CCC;
 	font-size:18px;
-	line-height:30px;
 	text-align:center; 
     }
 </style>
@@ -47,17 +47,10 @@
 </head>
 <body>
 
-<div class="container"> 
-
-    <div class="selector"> 
-
-        <span>選項</span> 
-        <span>其他</span> 
-    </div> 
- 
-    <div class="title">按鈕</div> 
-
-</div>
+<ul>按鈕
+       <li class="aa">選項</li> 
+       <li class="aa">其他</li> 
+</ul>
 
 
 </body>

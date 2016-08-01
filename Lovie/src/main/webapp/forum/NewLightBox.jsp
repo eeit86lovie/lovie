@@ -77,24 +77,6 @@
     </section>
 </div>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 <script>
 
 function checkLogin(){
