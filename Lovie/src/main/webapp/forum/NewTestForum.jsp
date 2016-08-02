@@ -8,6 +8,8 @@
 <c:import charEncoding="UTF-8" url="/meta.jsp"></c:import>
 <script src="${pageContext.request.contextPath}/js/jquery-ui/jquery-ui.js"></script>
 <script src="${pageContext.request.contextPath}/js/jquery.leanModal.min.js"></script>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/selectLike/selectLike.css">
+<script src="${pageContext.request.contextPath}/js/jquery.hoverCarousel.js"></script>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 
@@ -366,8 +368,6 @@ margin-top:50px;
 
 <body>
 	<c:import charEncoding="UTF-8" url="/header.jsp"></c:import>
-
-
 	<c:import charEncoding="UTF-8" url="/forum/NewLightBox.jsp"></c:import>
 		
 	
@@ -477,6 +477,18 @@ margin-top:50px;
 </div>
 
 
+
+<div id="myNav" class="overlay">
+  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
+  <div class="carousel right">
+  <div class="indicator"></div>
+  <div class="wrap">
+    <ul id="selectLike_ul">      
+    </ul>
+  </div>
+</div>
+  </div>
+</div>
 
 
 
@@ -686,10 +698,7 @@ function add(){
 				
 				
 							
-				var like_Button = document.createElement('input');//Like
 				
-				
-				var countLike_div = $("<div onclick='selectRankPeople(this)' class='countLike_div' id='"+'countLike_div'+articleJson[i].id+"'></div>");
 				
 				
 				
@@ -766,7 +775,8 @@ function add(){
 				//--------------------------------------------------------------------------------------------------------------------
 				
 				
-				
+				var like_Button = document.createElement('input');//Like
+				var countLike_div = $("<div onclick='selectLikePeople(this)' class='countLike_div' id='"+'countLike_div'+articleJson[i].id+"'></div>");
 				like_Button.type = "checkbox";
 				like_Button.id = "like_Button"+articleJson[i].id;
 				like_Button.name = "like_checkBox";
@@ -780,7 +790,7 @@ function add(){
 				
 				
 				var disLike_Button = document.createElement('input');//DisLike
-				var countDisLike_div = $("<div class='countDisLike_div' id='"+'countDisLike_div'+articleJson[i].id+"'></div>");
+				var countDisLike_div = $("<div onclick='selectDisLikePeople(this)' class='countDisLike_div' id='"+'countDisLike_div'+articleJson[i].id+"'></div>");
 				disLike_Button.type = "checkbox";
 				disLike_Button.id = "disLike_Button"+articleJson[i].id;
 				disLike_Button.name = "dislike_checkBox";
@@ -861,7 +871,8 @@ function add(){
 						if(allLikejson[m].bad == 1 && allLikejson[m].memberAccount == "${loginmember.account}"){
 							myself = "你和其他"
 							disLike_Button.checked="checked";
-							justIDisLike++
+							justIDisLike++;
+							
 						}else if(allLikejson[m].bad == 1){
 							countDisLike++;
 						}
@@ -1386,6 +1397,94 @@ function add(){
    }
    
    
+   
+   function closeNav() {
+	    document.getElementById("myNav").style.height = "0%";
+   }
+   
+   function selectLikePeople(selectLikePeopleObject){
+	   $("#selectLike_ul").empty();
+	   document.getElementById("myNav").style.height = "40%";
+		
+		$.ajax({
+			url : "forumsAllLike",
+			type : "post",
+			dataType : "json",
+			success : function(allLikejson) {
+				
+				var article_ID = selectLikePeopleObject.id.substring(13);
+				
+				
+				for(m =0; m<allLikejson.length;m++){
+					if(allLikejson[m].articleID==article_ID){
+						if(allLikejson[m].good == 1){
+							var li_Rank = $("<li></li>");											
+							var rankPeople_div = $("<div ></div>");
+							var rankPeopleName_div = $("<div></div>").append(getmemberPhoto(allLikejson[m].memberAccount).nickname);
+							var rankPeople_img = document.createElement("img");
+							rankPeople_img.className ="rankPeople_img";
+							rankPeople_img.src = getmemberPhoto(allLikejson[m].memberAccount).photoUrl;
+				
+							rankPeople_div.append(rankPeople_img);
+							rankPeople_div.append(rankPeopleName_div);	
+							
+							li_Rank.append(rankPeople_div);
+							
+														
+							$("#selectLike_ul").append(li_Rank);
+						}
+						
+						
+					}
+				
+				}
+				
+			}					
+		})
+		
+
+	}
+   
+   
+   function selectDisLikePeople(selectDisLikePeopleObject){
+	   $("#selectLike_ul").empty();
+	   document.getElementById("myNav").style.height = "40%";
+		
+		$.ajax({
+			url : "forumsAllLike",
+			type : "post",
+			dataType : "json",
+			success : function(allLikejson) {
+				
+				var article_ID = selectDisLikePeopleObject.id.substring(16);
+				
+				
+				for(m =0; m<allLikejson.length;m++){
+					if(allLikejson[m].articleID==article_ID){
+						if(allLikejson[m].bad == 1){
+							var li_Rank = $("<li></li>");											
+							//var rankPeople_div = $("<div ></div>");
+							//var rankPeopleName_div = $("<div></div>").append(getmemberPhoto(allLikejson[m].memberAccount).nickname);
+							var rankPeople_img = document.createElement("img");
+							rankPeople_img.className ="rankPeople_img";
+							rankPeople_img.src = getmemberPhoto(allLikejson[m].memberAccount).photoUrl;
+				
+							li_Rank.append(rankPeople_img);
+							//rankPeople_div.append(rankPeopleName_div);
+							//a_Rank.appendChild(rankPeople_img);	
+							$("#selectLike_ul").append(li_Rank);
+						}
+						
+						
+					}
+				
+				}
+				
+			}					
+		})
+		
+
+	}
 	
 </script>
 
