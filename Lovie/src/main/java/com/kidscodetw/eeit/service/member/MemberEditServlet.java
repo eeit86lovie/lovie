@@ -21,12 +21,9 @@ public class MemberEditServlet extends HttpServlet {
 	
 	private static final long serialVersionUID = 1L;
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String password;
-		String email;
 		String nickname;
 		String city;
 		String district;
-		String birthday;
 		String intro;
 		
 		request.setCharacterEncoding("UTF-8");

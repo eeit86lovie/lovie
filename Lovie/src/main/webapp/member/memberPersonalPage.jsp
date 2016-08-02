@@ -85,11 +85,11 @@ color:black;
  </div>
  
 <div id="dialog-form" title="編輯個人檔案"><!--彈跳視窗的內容-->
-<form>
+<form id="advanceForm">
   <div class="col-md-12" style="font-weight:bold;text-align:center;">個人檔案進階編輯</div>
   <div class="col-md-12" ><br></div>
-  <div class="col-md-12" ><b class="memberColumn">修改密碼：</b><input type="password" id="password1"/></div>
-  <div class="col-md-12" ><b class="memberColumn">再次確認新密碼：</b><input type="password" id="password2"/></div>
+  <div class="col-md-12" ><b class="memberColumn" style="display: block;">修改密碼：</b><input type="password" id="password1" onblur="changePassword()" style="display:inline;"/><span style="color:red;display:none" id="wrongPassword">  密碼需一致</span></div>
+  <div class="col-md-12" ><b class="memberColumn">再次確認新密碼：</b><input type="password" id="password2" onblur="changePassword()"/></div>
   <div class="col-md-12" ><b class="memberColumn">信箱：</b><input type="email" id="email" value='${oneMember.email}' /></div>
   <div class="col-md-12" ><b class="memberColumn">手機：</b><input id=phone value="${oneMember.phone}"/></div>
   <div class="col-md-12" ><b class="memberColumn">生日：</b><br><input type="text" id="datepicker" disabled="value"></div>
@@ -161,7 +161,7 @@ function city_edit(member_col){
 	var districttext=member_col.childNodes[2].innerHTML;
 	var cityText=$('<span id="twzipcode"></span>')
 		$("#"+member_col.id).replaceWith(cityText);
-	console.log(districttext)
+	console.log(districttext+"????")
 		$('#twzipcode').twzipcode({
 			'countySel':text,
 			'districtSel':districttext})
@@ -190,9 +190,8 @@ $('body').on('change','#imgInp',function(event){
 })
 
 $('#uesrPic').click(function(){
-	loginmemberId="${loginmember.id}"
+// 	loginmemberId="${loginmember.id}"
 	var formData = new FormData();
-	
 	formData.append('file', files[0]);
 //不要傳送太大的檔案，會error
 		$.ajax({
@@ -265,7 +264,7 @@ $(function () {
             $(this).parent().children().children('.ui-dialog-titlebar-close').hide();
         },
         buttons: {
-            "確認": function(){},
+            "確認":updateData ,
             "取消": function () {
                 dialog.dialog("close");
             }
@@ -284,6 +283,27 @@ $(function () {
     $("#advancedEdit").button().on("click", function () {
         dialog.dialog("open");
     });
+    function updateData(){
+        	var formElement = document.getElementById("advanceForm");
+        	var formData1 = new FormData(formElement);
+//         	formData1.append('password1', document.getElementById("password1").value);
+//         	formData1.append('password2', document.getElementById("password2").value);
+//         	formData1.append('email', document.getElementById("email").value);
+//         	formData1.append('phone', document.getElementById("phone").value);
+//         	formData1.append('datepicker', document.getElementById("datepicker").value);
+        		$.ajax({
+        			url: "${pageContext.request.contextPath}/member/MemberUpdateAdvanceData/updateData",
+        			type: 'post',
+        			data: formData1,
+        			processData: false,
+        			contentType: false,
+        			success: function(data){
+        				alert("成功！")
+        			},error: function(){
+        				alert("失敗Q_Q")
+        			}
+        		})	
+    }
 });
 
 //*************************************************************************************************************
@@ -298,7 +318,15 @@ $(function () {
           });
           
       });
-
+//****************************************************************************************************************
+//判斷密碼是否相同
+function changePassword(){
+if(document.getElementById("password1").value!=document.getElementById("password2").value){
+	document.getElementById("wrongPassword").style.display = "inline";
+}else{
+	document.getElementById("wrongPassword").style.display = "none";
+}
+}
 </script>
 
 </body>
