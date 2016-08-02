@@ -1,5 +1,6 @@
 package com.kidscodetw.eeit.dao.member;
 
+import java.io.InputStream;
 import java.util.List;
 
 import org.hibernate.Query;
@@ -93,6 +94,12 @@ public class MemberDAOHibernate implements MemberDAO {
 				bean.getId());
 		return a;
 		
+	}
+
+	@Override
+	public MemberBean updatePhotos(MemberBean bean, InputStream is, Long size) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

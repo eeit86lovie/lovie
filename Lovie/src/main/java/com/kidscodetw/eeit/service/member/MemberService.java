@@ -1,5 +1,6 @@
 package com.kidscodetw.eeit.service.member;
 
+import java.io.InputStream;
 import java.util.List;
 
 import com.kidscodetw.eeit.dao.member.MemberDAO;
@@ -97,6 +98,11 @@ public class MemberService implements MemberDAO{
 	public MemberBean updatePhotos(byte[] file, MemberBean bean) {
 		return memberDAO.updatePhotos(file, bean);
 		
+	}
+
+	@Override
+	public MemberBean updatePhotos(MemberBean bean, InputStream is, Long size) {
+		return null;
 	}
 
 	

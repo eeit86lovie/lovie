@@ -96,7 +96,6 @@ function member_edit(member_col){//呼叫的member欄位物件,onclick時觸發
 	
 	var loginmemberId=${loginmember.id}
 	var text = member_col.innerHTML.replace(/<br>/gi,"\n");
-	console.log(text)
 	var editableText = $('<input type="text" value="'+text+'" " name="'+member_col.id+'" id="'+member_col.id+'"/>');
 	var introText=$('<textarea cols="40" rows="5" style="width:auto;"id="intro">'+text+'</textarea>')
 	if(member_col.id=="intro")
@@ -180,7 +179,7 @@ $('#uesrPic').click(function(){
 	var formData = new FormData();
 	
 	formData.append('file', files[0]);
-	formData.append('id', loginmemberId);
+//不要傳送太大的檔案，會error
 		$.ajax({
 			url: "${pageContext.request.contextPath}/member/MemberChangePhoto/insertPhoto",
 			type: 'post',
@@ -188,9 +187,9 @@ $('#uesrPic').click(function(){
 			processData: false,
 			contentType: false,
 			success: function(data){
+				alert("圖片更新成功！")
 			},error: function(){
-				
-// 				alertify.alert('檔案格式異常').set('title', '警告');
+				alert("圖片更新失敗，請再試一次")
 			}
 		})	
 

@@ -1,5 +1,6 @@
 package com.kidscodetw.eeit.dao.member;
 
+import java.io.InputStream;
 import java.util.List;
 
 import com.kidscodetw.eeit.entity.member.MemberBean;
@@ -24,6 +25,8 @@ public interface MemberDAO {
 	public abstract void updatePhotos(String link, Integer id);
 	
 	public abstract MemberBean updatePhotos(byte[] file, MemberBean bean);
+	
+	public abstract MemberBean updatePhotos(MemberBean bean,InputStream is,Long size);
 	
 
 }
