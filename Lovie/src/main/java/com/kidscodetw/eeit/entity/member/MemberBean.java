@@ -2,8 +2,12 @@ package com.kidscodetw.eeit.entity.member;
 
 import java.io.Serializable;
 
+import javax.persistence.Column;
+
+import org.hibernate.annotations.Table;
 
 
+@Table(appliesTo = "Member")
 public class MemberBean implements Serializable{
 	
 	private Integer id;
@@ -35,6 +39,7 @@ public class MemberBean implements Serializable{
 	
 	public String toString(){
 		return "model.MemberBean[id:"+id+", "+"account:"+account+ ", "+"password:"+password+ ", "+"gender:"+gender+ ", "+"email:"+email+ ", "+"nickname:"+nickname+ ", "+"city:"+city+ ", "+"district:"+district+ ", "+"phone:"+phone+ ", "+"privilege:"+privilege+ ", "+"photoUrl:"+photoUrl+ ", "+"birthday:"+birthday+ ", "+"friendNum:"+friendNum+ ", "+"commentPoint:"+commentPoint+ ", "+"intro:"+intro+ ", "+"constellation:"+constellation+ ", "+"registeredTime:"+registeredTime+ ", "+"lastOnTime:"+lastOnTime;
+//		return "model.MemberBean[photo:"+photo;
 	}
 	
 	public Integer getId() {
@@ -97,6 +102,7 @@ public class MemberBean implements Serializable{
 	public void setPrivilege(Integer privilege) {
 		this.privilege = privilege;
 	}
+	@Column(name = "photo")
 	public byte[] getPhoto() {
 		return photo;
 	}

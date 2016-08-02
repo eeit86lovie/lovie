@@ -89,8 +89,9 @@ public class MemberDAOHibernate implements MemberDAO {
 			bean.setPhoto(file);
 			this.getSession().saveOrUpdate(bean);
 		}
-		return (MemberBean) this.getSession().get(MemberBean.class,
+		MemberBean a= (MemberBean) this.getSession().get(MemberBean.class,
 				bean.getId());
+		return a;
 		
 	}
 

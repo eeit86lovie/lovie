@@ -34,7 +34,7 @@
 <form>
   <div class="col-md-12" style="font-weight:bold;text-align:center;">${oneMember.nickname}的個人首頁</div>
   <div class="col-md-12" ><br></div>
-  <div class="col-md-3"><img id="blah" style="border:5px solid #acd6ff;border-radius:15px;width:100%" src="${oneMember.photoUrl}"></div>
+  <div class="col-md-3"><img id="blah" style="border:5px solid #acd6ff;border-radius:15px;width:100%" src="${pageContext.request.contextPath}/photo/member/${oneMember.id}"></div>
   <div class="col-md-9" ></div>
   <div class="col-md-9" ><b class="memberColumn">暱稱：</b><span id="nickname" onclick="member_edit(this)">${oneMember.nickname}</span></div>
   <div class="col-md-9" ><b class="memberColumn">年齡：</b>${memberAge}歲</div>
@@ -84,7 +84,9 @@ if("${loginmember.id}"=="${oneMember.id}"&&"${oneMember.id}"!=""){
 		      $('#blah').attr('src', e.target.result);
 		    }
 		    reader.readAsDataURL(input.files[0]);
+		    
 		  }
+		  
 		}
 
 		$("#imgInp").change(function(){
@@ -179,19 +181,18 @@ $('#uesrPic').click(function(){
 	
 	formData.append('file', files[0]);
 	formData.append('id', loginmemberId);
-// 		$.ajax({
-// 			url: "${pageContext.request.contextPath}/member/MemberChangePhoto/insertPhoto",
-// 			type: 'post',
-// 			data: formData,
-// 			processData: false,
-// 			contentType: false,
-// 			success: function(data){
-			
-// 			},error: function(){
+		$.ajax({
+			url: "${pageContext.request.contextPath}/member/MemberChangePhoto/insertPhoto",
+			type: 'post',
+			data: formData,
+			processData: false,
+			contentType: false,
+			success: function(data){
+			},error: function(){
 				
-// // 				alertify.alert('檔案格式異常').set('title', '警告');
-// 			}
-// 		})	
+// 				alertify.alert('檔案格式異常').set('title', '警告');
+			}
+		})	
 
 })
 

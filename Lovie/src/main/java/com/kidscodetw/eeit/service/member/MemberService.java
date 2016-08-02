@@ -96,6 +96,7 @@ public class MemberService implements MemberDAO{
 	@Override
 	public MemberBean updatePhotos(byte[] file, MemberBean bean) {
 		return memberDAO.updatePhotos(file, bean);
+		
 	}
 
 	
