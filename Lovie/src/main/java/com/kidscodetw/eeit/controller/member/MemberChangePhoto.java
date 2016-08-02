@@ -23,7 +23,7 @@ import com.kidscodetw.eeit.jdbc.MemberDAOJdbc;
 import com.kidscodetw.eeit.service.member.MemberService;
 
 @Controller
-@RequestMapping("/mem/MemberChangePhoto")
+@RequestMapping("/member/MemberChangePhoto")
 public class MemberChangePhoto {
 	@Autowired
 	private MemberDAO memberDAO;

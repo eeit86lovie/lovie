@@ -90,8 +90,8 @@ color:black;
   <div class="col-md-12" ><br></div>
   <div class="col-md-12" ><b class="memberColumn" style="display: block;">修改密碼：</b><input type="password" id="password1" onblur="changePassword()" style="display:inline;"/><span style="color:red;display:none" id="wrongPassword">  密碼需一致</span></div>
   <div class="col-md-12" ><b class="memberColumn">再次確認新密碼：</b><input type="password" id="password2" onblur="changePassword()"/></div>
-  <div class="col-md-12" ><b class="memberColumn">信箱：</b><input type="email" id="email" value='${oneMember.email}' /></div>
-  <div class="col-md-12" ><b class="memberColumn">手機：</b><input id=phone value="${oneMember.phone}"/></div>
+  <div class="col-md-12" ><b class="memberColumn">信箱：</b><input type="email" id="email" value='${oneMember.email}' onblur="checkEmail()" /></div>
+  <div class="col-md-12" ><b class="memberColumn">電話：</b><input id=phone value="${oneMember.phone}"/></div>
   <div class="col-md-12" ><b class="memberColumn">生日：</b><br><input type="text" id="datepicker" disabled="value"></div>
  </form>
 </div>
@@ -264,7 +264,10 @@ $(function () {
             $(this).parent().children().children('.ui-dialog-titlebar-close').hide();
         },
         buttons: {
-            "確認":updateData ,
+            "確認":{
+            	text:"確定",
+            	id:"checkButton",
+            	click:updateData },
             "取消": function () {
                 dialog.dialog("close");
             }
@@ -284,13 +287,13 @@ $(function () {
         dialog.dialog("open");
     });
     function updateData(){
-        	var formElement = document.getElementById("advanceForm");
-        	var formData1 = new FormData(formElement);
-//         	formData1.append('password1', document.getElementById("password1").value);
-//         	formData1.append('password2', document.getElementById("password2").value);
-//         	formData1.append('email', document.getElementById("email").value);
-//         	formData1.append('phone', document.getElementById("phone").value);
-//         	formData1.append('datepicker', document.getElementById("datepicker").value);
+//         	var formElement = document.getElementById("advanceForm");
+        	var formData1 = new FormData();
+        	formData1.append('password1', document.getElementById("password1").value);
+        	formData1.append('password2', document.getElementById("password2").value);
+        	formData1.append('email', document.getElementById("email").value);
+        	formData1.append('phone', document.getElementById("phone").value);
+        	formData1.append('datepicker', document.getElementById("datepicker").value);
         		$.ajax({
         			url: "${pageContext.request.contextPath}/member/MemberUpdateAdvanceData/updateData",
         			type: 'post',
@@ -298,7 +301,8 @@ $(function () {
         			processData: false,
         			contentType: false,
         			success: function(data){
-        				alert("成功！")
+        				alert("更新成功")
+        				dialog.dialog( "close" );
         			},error: function(){
         				alert("失敗Q_Q")
         			}
@@ -319,14 +323,30 @@ $(function () {
           
       });
 //****************************************************************************************************************
-//判斷密碼是否相同
+//進階表單內容驗證
+//確定密碼相同
 function changePassword(){
 if(document.getElementById("password1").value!=document.getElementById("password2").value){
 	document.getElementById("wrongPassword").style.display = "inline";
+	document.getElementById("checkButton").disabled=true;
 }else{
 	document.getElementById("wrongPassword").style.display = "none";
+	document.getElementById("checkButton").disabled=false;
 }
 }
+//email格式
+var emailRule = /^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z]+$/;
+ 
+//validate ok or not
+function checkEmail(){
+	if(document.getElementById("email").value!=""&&document.getElementById("email").value.search(emailRule)!= -1){
+		document.getElementById("checkButton").disabled=false;
+	}else{
+		document.getElementById("checkButton").disabled=true;
+	}
+}
+
+
 </script>
 
 </body>

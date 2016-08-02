@@ -37,12 +37,12 @@ public class MemberUpdateAdvanceData {
 			@RequestParam String phone,
 			@RequestParam String datepicker,
 			Model model){
+		System.out.println("進入");
 		MemberBean bean=((MemberBean)session.getAttribute("loginmember"));
 		if(password1.equals(password2)){
 			bean.setPassword(password1);
 		}
-
-		return bean;
+		return memberDAO.update(bean);
 		
 	}
 	
