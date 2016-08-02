@@ -6,6 +6,15 @@
 <head>
 
 <style>
+    label, input { display:block; }
+    input.text { margin-bottom:12px; width:95%; padding: .4em; }
+    fieldset { padding:0; border:0; margin-top:25px; }
+    h1 { font-size: 1.2em; margin: .6em 0; }
+    div#users-contain { width: 350px; margin: 20px 0; }
+    div#users-contain table { margin: 1em 0; border-collapse: collapse; width: 100%; }
+    div#users-contain table td, div#users-contain table th { border: 1px solid #eee; padding: .6em 10px; text-align: left; }
+    .ui-dialog .ui-state-error { padding: .3em; }
+    .validateTips { border: 1px solid transparent; padding: 0.3em; }
 .row {
 	border: #CC0000 1px dotted;
 	border-radius: 15px;
@@ -15,7 +24,7 @@
 }
 .edit {
 	border-radius: 8px;
-	background-color:#ed647d;
+	background-color:#F88;
 	color:white;
 	border:0px;
 }
@@ -23,12 +32,24 @@
 .memberColumn {
 	color: #CC6600
 }
+
+.ui-datepicker-month{
+color:black;
+}
+.ui-datepicker-year{
+color:black;
+}
+
+
 </style>
+
 <c:import charEncoding="UTF-8" url="/meta.jsp"></c:import>
+
 <title>會員個人頁面</title>
 </head>
 <body>
 <c:import charEncoding="UTF-8" url="/header.jsp"></c:import>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/jquery-ui.theme.min.css" />
 <div class="container">
 <div class="row" >
 <form>
@@ -53,8 +74,7 @@
   <div class="col-md-2" ></div>
    <div class="col-md-12" ><br></div>
   <div class="col-md-10" ><b class="memberColumn">喜歡的電影類型：</b>喜劇|奇幻|驚悚</div>
-<!--   <div class="col-md-2" ><button class="edit" id=uesrBasic style="display:none;float:right;" >編輯</button></div> -->
-  <div class="col-md-2" ><button class="edit" id=uesrAdvanced style="display:none">進階編輯</button></div>
+  <div class="col-md-2" ><button  type="button" id=advancedEdit style="display:none">進階編輯</button></div>
   <div class="col-md-12" ><br></div>
  <div class="col-md-5" style="font-size:20%;color:black">註冊日期：${oneMember.registeredTime}</div>
  <div class="col-md-3"></div>
@@ -63,7 +83,18 @@
 
  </form>
  </div>
-
+ 
+<div id="dialog-form" title="編輯個人檔案"><!--彈跳視窗的內容-->
+<form>
+  <div class="col-md-12" style="font-weight:bold;text-align:center;">個人檔案進階編輯</div>
+  <div class="col-md-12" ><br></div>
+  <div class="col-md-12" ><b class="memberColumn">修改密碼：</b><input type="password" id="password1"/></div>
+  <div class="col-md-12" ><b class="memberColumn">再次確認新密碼：</b><input type="password" id="password2"/></div>
+  <div class="col-md-12" ><b class="memberColumn">信箱：</b><input type="email" id="email" value='${oneMember.email}' /></div>
+  <div class="col-md-12" ><b class="memberColumn">手機：</b><input id=phone value="${oneMember.phone}"/></div>
+  <div class="col-md-12" ><b class="memberColumn">生日：</b><br><input type="text" id="datepicker" disabled="value"></div>
+ </form>
+</div>
 </div>
 
 <c:import charEncoding="UTF-8" url="/footer.jsp"></c:import>
@@ -75,7 +106,7 @@
 if("${loginmember.id}"=="${oneMember.id}"&&"${oneMember.id}"!=""){
 	document.getElementById("pic").style.display = "block";
 	document.getElementById("uesrPic").style.display = "block";
-	document.getElementById("uesrAdvanced").style.display = "block";
+	document.getElementById("advancedEdit").style.display = "block";
 	
 	function readURL(input) {
 		  if (input.files && input.files[0]) {
@@ -122,22 +153,6 @@ function member_edit(member_col){//呼叫的member欄位物件,onclick時觸發
 		}
 	}
 			)
-// 	$("#"+member_col.id).keydown(function(event){
-// 		if(event.which==13&&member_col.id!="intro"){//代表按下enter
-// 			var after_text = $("#"+member_col.id).val();
-// 			var member_id = member_col.id;
-// 			xhr = new XMLHttpRequest();
-// 			xhr.onreadystatechange = callback;
-// 			xhr.open("get", "memberEdit.do?id="+loginmemberId+"&type="+member_id+"&value="+after_text);
-// 			xhr.send();
-// 			function callback() {
-// 				if(xhr.readyState==4 && xhr.status==200){
-// 					$("#"+member_id).replaceWith('<span id="'+member_id+'" onclick="member_edit(this)">'+after_text+'</span>')
-// 				}
-// 			}
-// 		}
-		
-// 	})
 }
 
 function city_edit(member_col){
@@ -195,7 +210,95 @@ $('#uesrPic').click(function(){
 
 })
 
-		}
+}
+
+//**************************************************************************************************************************
+//以下是跳出來的選單
+
+    jQuery("#dialog").prev('.ui-dialog-titlebar').css("background", "red");
+$(function () {
+    var dialog, form,
+      // From http://www.whatwg.org/specs/web-apps/current-work/multipage/states-of-the-type-attribute.html#e-mail-state-%28type=email%29
+      emailRegex = /^[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/,
+      name = $("#name"),
+      email = $("#email"),
+      password = $("#password"),
+      allFields = $([]).add(name).add(email).add(password),
+      tips = $(".validateTips");
+
+    function updateTips(t) {
+        tips
+          .text(t)
+          .addClass("ui-state-highlight");
+        setTimeout(function () {
+            tips.removeClass("ui-state-highlight", 1500);
+        }, 500);
+    }
+
+    function checkLength(o, n, min, max) {
+        if (o.val().length > max || o.val().length < min) {
+            o.addClass("ui-state-error");
+            updateTips("Length of " + n + " must be between " +
+              min + " and " + max + ".");
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    function checkRegexp(o, regexp, n) {
+        if (!(regexp.test(o.val()))) {
+            o.addClass("ui-state-error");
+            updateTips(n);
+            return false;
+        } else {
+            return true;
+        }
+    }
+    dialog = $("#dialog-form").dialog({
+        autoOpen: false,
+        height: 400,
+        width: 350,
+        modal: true,
+        closeOnEscape: false,//按ESC不能關閉
+        open: function(event, ui) {
+            $(this).parent().children().children('.ui-dialog-titlebar-close').hide();
+        },
+        buttons: {
+            "確認": function(){},
+            "取消": function () {
+                dialog.dialog("close");
+            }
+        },
+        close: function () {
+            form[0].reset();
+            allFields.removeClass("ui-state-error");
+        }
+    });
+
+    form = dialog.find("form").on("submit", function (event) {
+        event.preventDefault();
+        addUser();
+    });
+
+    $("#advancedEdit").button().on("click", function () {
+        dialog.dialog("open");
+    });
+});
+
+//*************************************************************************************************************
+//以下是跳出選單中的生日下拉式選單
+      $(function () {
+          $("#datepicker").datepicker({
+              changeMonth: true,
+              changeYear: true,
+              showOn: "button",
+              buttonImage: "http://jqueryui.com/resources/demos/datepicker/images/calendar.gif",
+              buttonImageOnly: true
+          });
+          
+      });
+
 </script>
 
 </body>
