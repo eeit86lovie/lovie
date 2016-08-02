@@ -15,35 +15,116 @@ body {font-family: 'Source Sans Pro', sans-serif; font-size: 14px; color: #666;}
 
 .popupContainer{
 	position:absolute;
-	width:330px;
-	height: auto;
-	left:45%;
-	top:80px;
+	width:510px;
+	overflow: hidden;
 	background: #FFF;
+	border-radius:5px;
+	-moz-border-radius:5px;
+	-webkit-border-radius:5px;
 }
 
 #modal_trigger {margin:100px auto; width:100px; display:block;}
 
-.btn {padding:10px 20px; background: #F4F4F2;}
-.btn_red {background: #ED6347; color: #FFF;}
+.action_btns{
+}
 
-.btn:hover {background: #E4E4E2;}
-.btn_red:hover {background: #C12B05;}
 
-a.btn {color:#666; text-align: center; text-decoration: none;}
+.btn btn_red {
+	width:360px;
+	right:100px; 
+	position:relative; 
+	right:-500px; 
+	top:50px;  
+	color: #FFF;
+	text-align: center;
+	background-color: #ED6347;}
+.btn{}
+.btn:hover {background: #ED6347 ;color: #FFF; text-align: center;}
+
+
+
+a.btn {color:#ED6347; text-align: center; text-decoration: none;}
 a.btn_red {color: #FFF;}
 
 .one_half {width:50%; display: block; float:left;}
 .one_half.last {width:45%; margin-left:5%;}
 
 /* Popup Styles*/
-.popupHeader {font-size:16px; text-transform: uppercase;}
-.popupHeader {background:#F4F4F2; position:relative; padding:10px 20px; border-bottom:1px solid #DDD; font-weight:bold;}
-.popupHeader .modal_close {position: absolute; right: 0; top:0; padding:10px 15px; background:#E4E4E2; cursor: pointer; color:#aaa; font-size:16px;}
+.popupHeader {
+	text-transform: uppercase; 
+	border-top-right-radius:5px; 
+	-moz-border-top-right-radius:5px; 
+	-webkit-border-top-right-radius:5px;
+	background:  #FF9797  ; 
+	position:relative; 
+	padding:10px 20px; 
+	border-bottom:2px solid   #ff7575  ; 
+	font-weight:bold; 
+	color:#fff; 
+	font-size:20px;
+	text-align: center;
+	}
+	
+.popupHeader .modal_close {position: absolute; right: 0; top:0; padding:10px 15px; background:#E4E4E2; cursor: pointer; color:#fff; font-size:16px;text-align: center;}
 
-.popupBody {padding:20px;}
+.popupBody {padding:10px;}
 
+/*popup content*/
+.articleGenre{ 
+	position:relative; 
+	float:left;
+	border:0.5px solid  #d0d0d0;  
+	border-radius:5px; 
+	-moz-border-radius:5px; 
+	-webkit-border-radius:5px; 
+	font-size:12px;
+	width:50px ; 
+	height:38px;
+	}
+	
+.articleTitle{
+	width:5px;
+	position:relative; 
+	float:left; 
+	left:50px;
+	top:-38px;
+	border:0.5px solid   #F0F0F0 ;
+	border-radius:5px; 
+	-moz-border-radius:5px; 
+	-webkit-border-radius:5px;
+	margin-left:5px;
+	}
+	
+.articleTextArea{ 
+	width:490px;
+	height:100px;
+	float:right;
+	position:relative; 
+	right:0; 
+	top:-20px; 
+	clear:both; 
+	overflow: hidden;
+	border:0.5px solid   #d0d0d0; 
+	border-radius:5px; 
+	-moz-border-radius:5px; 
+	-webkit-border-radius:5px; 
+	}
+.error_title{
+	color:#c91924;
+	font-size:10px;
+	float:right;
+	position:relative; 
+	right:5px;
+	top:5px; 
+}
 
+.error_content{
+	color:#c91924;
+	font-size:10px;
+	float:left;
+	position:relative; 
+	top:15px;
+}
 /* Social Login Form */
 .social_login {}
 .social_login .social_box {display:block; clear:both; padding:10px; margin-bottom: 10px; background: #F4F4F2; overflow: hidden;}
@@ -55,7 +136,6 @@ a.btn_red {color: #FFF;}
 
 .centeredText {text-align: center; margin: 20px 0; clear: both; overflow: hidden; text-transform: uppercase;}
 
-.action_btns {clear:both; overflow: hidden;}
 .action_btns a {display: block;}
 
 /* User Login Form */

@@ -7,15 +7,6 @@
 <title>Insert title here</title>
 
 <style type="text/css">
-/* Dropdown Button */
-.dropbtn {
-    background-color: #4CAF50;
-    color: white;
-    padding: 16px;
-    font-size: 16px;
-    border: none;
-    cursor: pointer;
-}
 
 /* The container <div> - needed to position the dropdown content */
 .dropdown {
@@ -25,7 +16,7 @@
 
 /* Dropdown Content (Hidden by Default) */
 .dropdown-content {
-    display: none;
+ 
     position: absolute;
     background-color: #f9f9f9;
     min-width: 160px;
@@ -58,20 +49,67 @@
 </head>
 <body>
 <div class="dropdown">
-  
-  <input type="checkbox" class="dropbtn">
   <div class="dropdown-content" id="dropdown-content">
-    <a href="#">Link 1</a>
+    <a href="#">
+    <p>搜尋作者</p><br>
+    <input type="text" id="suchMember">
+    <button id="suchMemberButton" onclick= "suchmember()">搜尋</button>
+    </a>
     <a href="#">Link 2</a>
     <a href="#">Link 3</a>
+    <a href="#">Link 4</a>
+    <a href="#">Link 5</a>
+    <a href="#">Link 6</a>
+    <a href="#">Link 7</a>
+    <a href="#">Link 8</a>
+    <a href="#">Link 9</a>
+    <a href="#">Link 10</a>
+    <a href="#">Link 11</a>
+    <a href="#">Link 12</a>
+    
   </div>
 </div>
 
 
 <script>
-function clickDropbtn(){
-	$("dropdown-content").hide();
-	
+
+function suchmember(){
+	$("#box").empty();
+	var memberAccount = $("#suchMember").val();
+	var selectMemberArticleJson;
+	var memberJson;
+
+	$.ajax({
+		url : "forumsMember",
+		type : "post",
+		dataType : "json",
+		success : function(memberjson) {
+			memberJson = memberjson;
+			$.ajax({
+				url : "forumsSelectreply",
+				type : "post",
+				dataType : "json",
+				success : function(selectReplyjson) {
+					$.ajax({
+						url : "forums/"+ memberAccount,
+						type : "get",		
+						dataType : "json",
+						success : function(selectMemberArticlejson) {			
+							$.ajax({
+								url : "forumsAllLike",
+								type : "post",
+								dataType : "json",
+								success : function(allLikejson) {
+									selectMemberArticleJson = selectMemberArticlejson;
+			 						createArticle(selectMemberArticlejson,selectReplyjson,allLikejson);
+								}					
+							})
+						}					
+					})
+				}		
+			})	
+		}	
+	})
 }
 
 </script>

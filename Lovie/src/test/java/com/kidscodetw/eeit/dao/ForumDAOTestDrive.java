@@ -35,8 +35,8 @@ public class ForumDAOTestDrive {
 	@Transactional
 	@Rollback(true)
 	public void select_ID() {
-		ForumBean fb = forumDAO.select_id(69);
-		Assert.isTrue(fb.getMemberAccount().equals("3122663"), "select_ID fail");
+		ForumBean fb = forumDAO.select_id(70);
+		Assert.isTrue(fb.getMemberAccount().equals("3122131"), "select_ID fail");
 	}
 
 	@Test
@@ -67,10 +67,10 @@ public class ForumDAOTestDrive {
 	@Transactional
 	@Rollback(true)
 	public void update() {
-		ForumBean fb = forumDAO.select_id(69);
+		ForumBean fb = forumDAO.select_id(70);
 		fb.setContent("haha");
 		forumDAO.update(fb);
-		String result = forumDAO.select_id(69).getContent();
+		String result = forumDAO.select_id(70).getContent();
 		Assert.isTrue(result.equals("haha"), "update fail");
 
 	}
@@ -83,4 +83,30 @@ public class ForumDAOTestDrive {
 		Assert.isNull(forumDAO.select_id(70), "delete fail");
 	}
 
+	
+	@Test
+	@Transactional
+	@Rollback(true)
+	public void select_genre() {
+		List<ForumBean> fb = forumDAO.select_genre("負雷");
+		Assert.notEmpty(fb, "select_genre fail");
+	}
+	
+	@Test
+	@Transactional
+	@Rollback(true)
+	public void select_title() {
+		List<ForumBean> fb = forumDAO.select_title("c");
+		Assert.notEmpty(fb, "select_title fail");
+	}
+	
+	
+	@Test
+	@Transactional
+	@Rollback(true)
+	public void select_content() {
+		List<ForumBean> fb = forumDAO.select_content("哈哈哈");
+		Assert.notEmpty(fb, "select_content fail");
+	}
+	
 }

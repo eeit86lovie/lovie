@@ -62,4 +62,28 @@ public class ForumService {
 		return result;
 	}
 
+	public List<ForumBean> select_genre(String genre){
+		List<ForumBean> result = null;
+		if(genre!=null && genre.length()!=0){
+			result = forumDAO.select_genre(genre);
+		}
+		return result;
+	}
+	
+	public List<ForumBean> select_title(String searchKey){
+		List<ForumBean> result = null;
+		if(searchKey!=null && searchKey.length()!=0){
+			result = forumDAO.select_title(searchKey);
+		}
+		return result;
+	}
+	
+	public List<ForumBean> select_content(String searchKey){
+		List<ForumBean> result = null;
+		if(searchKey!=null && searchKey.length()!=0){
+			result = forumDAO.select_content(searchKey);
+		}
+		return result;
+	}
+	
 }

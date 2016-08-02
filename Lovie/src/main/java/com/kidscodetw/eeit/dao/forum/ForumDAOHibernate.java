@@ -18,6 +18,11 @@ public class ForumDAOHibernate implements ForumDAO {
 	private static final String INSERT = "INSERT INTO Article(memberAccount,title,photo,content,genre) VALUES (?,?,?,?,?)";
 	private static final String UPDATE = "UPDATE ForumBean SET title =COALESCE(?, title),photo =COALESCE(?, photo), content = COALESCE(?, content) ,genre = COALESCE(?, genre) , editTime =? WHERE id=?";
 	private static final String DELETE = "DELETE FROM ForumBean WHERE id=?";
+	private static final String SELECT_BY_GENRE = "FROM ForumBean WHERE genre = ?";
+	private static final String SELECT_BY_TITLE = "FROM ForumBean WHERE title like :searchKey";
+	private static final String SELECT_BY_CONTENT = "FROM ForumBean WHERE content like :searchKey";
+	
+	
 	private SessionFactory sessionFactory;
 	
 	
@@ -105,6 +110,36 @@ public class ForumDAOHibernate implements ForumDAO {
 		count = query.executeUpdate();
 			
 		return count;
+	}
+
+	@Override
+	public List<ForumBean> select_genre(String genre) {
+		List<ForumBean> fb = null;
+		Query query = getSession().createQuery(SELECT_BY_GENRE);
+		query.setParameter(0, genre);
+		fb = query.list();
+				
+		return fb;
+	}
+
+	@Override
+	public List<ForumBean> select_title(String searchKey) {
+		List<ForumBean> fb = null;
+		Query query = getSession().createQuery(SELECT_BY_TITLE);
+		query.setParameter("searchKey", "%" + searchKey + "%");
+		fb = query.list();
+				
+		return fb;
+	}
+
+	@Override
+	public List<ForumBean> select_content(String searchKey) {
+		List<ForumBean> fb = null;
+		Query query = getSession().createQuery(SELECT_BY_CONTENT);
+		query.setParameter("searchKey", "%" + searchKey + "%");
+		fb = query.list();
+				
+		return fb;
 	}
 
 	
