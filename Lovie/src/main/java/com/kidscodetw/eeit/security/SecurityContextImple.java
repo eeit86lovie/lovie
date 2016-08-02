@@ -15,6 +15,7 @@ public class SecurityContextImple extends SecurityContextImpl{
 
 	public void setMemberBean(MemberBean memberBean){
 		this.memberBean = memberBean;
+		
 	}
 	
 	public MemberBean getMemberBean(){

@@ -228,6 +228,7 @@ body {
   display: flex;
 }
 .container .right .chat.active-chat .bubble {
+	min-height:40px;
   -moz-transition-timing-function: cubic-bezier(0.4, -0.04, 1, 1);
   -o-transition-timing-function: cubic-bezier(0.4, -0.04, 1, 1);
   -webkit-transition-timing-function: cubic-bezier(0.4, -0.04, 1, 1);

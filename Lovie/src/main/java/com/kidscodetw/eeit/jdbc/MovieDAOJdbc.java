@@ -89,7 +89,7 @@ public class MovieDAOJdbc implements MovieDAO{
 			}
 		} catch (MalformedURLException e) {
 			e.printStackTrace();
-		} catch (IOException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}finally {
 			

@@ -37,7 +37,7 @@ public class MovieCrawlerConfirm {
 	private MovieDAO movieDAO;
 
 	@RequestMapping(method = RequestMethod.GET)
-	protected void doGet(HttpServletRequest request,
+	protected String doGet(HttpServletRequest request,
 			HttpServletResponse response) {
 		response.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html");
@@ -45,7 +45,7 @@ public class MovieCrawlerConfirm {
 		try {
 			out = response.getWriter();
 
-			Map<String, String> movie_map = getMovieMap();
+			Map<String, String> movie_map = MovieCrawler.getMOVIE_MAP();
 			List<MovieBean> list_mb = movieDAO.select();
 			for (MovieBean mb : list_mb) {
 				if (movie_map.containsKey(mb.getName())) {
@@ -77,7 +77,7 @@ public class MovieCrawlerConfirm {
 			e.printStackTrace();
 		}
 		MoviePhotoToDB.getLink();
-		new MovieMapGetMovieGenre().getMovieGenres();
+		return "/admin/movie/MovieMapGetMovieGenre";
 	}
 
 	// Map<MovieName, MovieLink>

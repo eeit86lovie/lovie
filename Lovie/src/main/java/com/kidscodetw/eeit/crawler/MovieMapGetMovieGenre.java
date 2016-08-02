@@ -13,6 +13,7 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.kidscodetw.eeit.admin.service.movie.MovieCrawler;
 import com.kidscodetw.eeit.dao.movie.GenreDAO;
@@ -33,9 +34,9 @@ public class MovieMapGetMovieGenre {
 	@Autowired
 	private MovieGenreDAO movieGenreDAO;
 	
+	@RequestMapping("/admin/movie/MovieMapGetMovieGenre")
 	public void getMovieGenres() {
 		Integer genreID = null;
-		MovieMapGetMovieGenre getmovie_dao = new MovieMapGetMovieGenre();
 		Map<String, String>MOVIE_MAP = MovieCrawler.getMOVIE_MAP();
 		List<String> genreList = new ArrayList<String>();
 		Iterator iter = MOVIE_MAP.entrySet().iterator();
@@ -45,7 +46,7 @@ public class MovieMapGetMovieGenre {
 			mb_list.add(movieDAO.select(entry.getKey()));
 		}
 		for(MovieBean mb : mb_list){
-			genreList = getmovie_dao.getGenreList(mb.getName());
+			genreList = this.getGenreList(mb.getName());
 			for(String genreName: genreList){
 				MovieGenreBean mgb = new MovieGenreBean();
 				mgb.setMovieId(mb.getId());

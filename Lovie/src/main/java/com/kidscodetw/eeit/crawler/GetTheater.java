@@ -35,7 +35,7 @@ public class GetTheater {
 
 			Connection conn = null;
 			conn = CommonUtil.connectMysql();
-			String sqlString = "INSERT INTO Theater (tLink,tName,tPhone,tWebsite,tAddress) VALUES(?,?,?,?,?)";
+			String sqlString = "INSERT INTO Theater (link,name,phone,websiteUrl,address) VALUES(?,?,?,?,?)";
 			PreparedStatement ps = conn.prepareStatement(sqlString);
 			while (m.find()) {
 				ps.setString(1, m.group(1));

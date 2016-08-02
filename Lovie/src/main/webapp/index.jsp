@@ -27,6 +27,35 @@
 	
 }
 
+.ghost-button {
+ 
+ color: #000;
+ background: #fff;
+ border: 1px solid #000;
+ font-size: 17px;
+ padding: 7px 12px;
+ font-weight: normal;
+ margin: 6px 0;
+ margin-right: 12px;
+ display: inline-block;
+ text-decoration: none;
+ font-family: 'Open Sans', sans-serif;
+ min-width: 120px;
+ margin-top:200px;
+}
+
+.ghost-button:hover, .ghost-button:active {
+  color:#fff;
+  background:#000;
+  text-decoration: none;
+}
+
+#page-top{
+	background-image: url("image/index/entity.jpg");
+	height:800px;
+	
+}
+
 </style>
 <title>Lovie 電影交友網</title>
 </head>
@@ -63,9 +92,8 @@
     </nav>
 	
 	</header>
-
-	<img id="page-top" src="image/index/entity.jpg"> 
 	
+	<div id="page-top"> <a class="ghost-button" href="#">Ghost button text </a> </div> 
 	
 	<div class="index_content2"></div>
 	
