@@ -1,8 +1,8 @@
 package com.kidscodetw.eeit.security;
 
-import java.security.Principal;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -42,11 +42,14 @@ public class MyUserDetailsService implements UserDetailsService {
 	public UserDetails loadUserByUsername(String account)
 			throws UsernameNotFoundException {
 		UserDetails userDetails = null;
-		MemberBean memberBean = memberDAO.select(account);
+		MemberBean memberBean1 = memberDAO.select(account);
+		memberBean1.setLoginTimes(memberBean1.getLoginTimes()+1);
+		MemberBean memberBean = memberDAO.update(memberBean1);
 		if (memberBean != null) {
 			Collection<GrantedAuthority> authList = getAuthorities(memberBean.getPrivilege());
 			userDetails = new User(account, memberBean.getPassword(), true,
 					true, true, true, authList);
+			
 		}
 		SecurityContextImple context = new SecurityContextImple();
 		context.setMemberBean(memberBean);
