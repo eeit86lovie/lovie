@@ -5,6 +5,59 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+
+<style type="text/css">
+
+ input[type=checkbox] {
+     display: none; 
+ } 
+input[name="hideReply_checkBox"] + label span{
+    display:inline-block;
+    width:50px;
+    height:50px;
+    margin:-1px 4px 0 0;
+    vertical-align:middle;   
+    background:url('${pageContext.request.contextPath}/image/unhideReply.gif');
+    background-size: 50% 50%;
+    background-repeat:no-repeat;
+    cursor:pointer;   
+}
+input[name="hideReply_checkBox"]:checked + label span{
+    background:url('${pageContext.request.contextPath}/image/hideReply.gif');
+    background-size: 50% 50%;
+    background-repeat:no-repeat;
+}
+input[name="like_checkBox"] + label span{
+    display:inline-block;
+    width:50px;
+    height:50px;    
+    background:url('${pageContext.request.contextPath}/image/Noclick_like.gif');
+    background-size: 50% 50%;
+    background-repeat:no-repeat;
+    cursor:pointer;   
+}
+input[name="like_checkBox"]:checked + label span{
+    background:url('${pageContext.request.contextPath}/image/like.gif');
+    background-size: 50% 50%;
+    background-repeat:no-repeat;
+}
+input[name="dislike_checkBox"] + label span{
+    display:inline-block;
+    width:50px;
+    height:50px;    
+    background:url('${pageContext.request.contextPath}/image/Noclick_dislike.gif');
+    background-size: 50% 50%;
+    background-repeat:no-repeat;
+    cursor:pointer;      
+}
+input[name="dislike_checkBox"]:checked + label span{
+    background:url('${pageContext.request.contextPath}/image/dislike.gif');
+    background-size: 50% 50%;
+    background-repeat:no-repeat;
+}
+
+</style>
+
 </head>
 <body>
 
@@ -257,11 +310,10 @@ function add(){
 	  		img.src = getmemberPhoto(articleJson[i].memberAccount).photoUrl;
 	  		img.className = "photo_div";
 	  		var Article_photo_div = $("<div></div>").append(img);
-	  		var Article_member_div = $("<div class='member'></div>").append(linkMember);
-	  		
-	  		
-			var Article_genre_div = $("<div class='genre'></div>").append(article_genre_Text);
-	  		var Article_title_div = $("<div class='title'></div>").append(article_title_Text);
+	  		var Article_member_div = $("<div class='member'></div>").append(linkMember);	  		
+	  		var Article_genre_p = $("<p class='genre_p'></p>").append(article_genre_Text);
+	  		var Article_genre_div = $("<div class='genre'></div>").append(Article_genre_p);	  		
+			var Article_title_div = $("<div class='title'></div>").append(article_title_Text);
 	  		var Article_content_div = $("<div class='content'></div>").append(article_content_Text);
 	  		var Article_pubTime_div = $("<div class='pubTime'></div>").append(article_pubTime_Text);
 	  		var Article_editTime_div = $("<div class='editTime'></div>").append(article_editTime_Text);
@@ -799,7 +851,7 @@ function add(){
 						},
 						success : function(UpdateArticle) {
 							
-							var updateGenre = $("#"+"BOX01"+UpdateArticle.id).find(".genre")
+							var updateGenre = $("#"+"BOX01"+UpdateArticle.id).find(".genre_p")
 							var updateTitle = $("#"+"BOX01"+UpdateArticle.id).find(".title")
 							var updateContent = $("#"+"BOX01"+UpdateArticle.id).find(".content")
 							

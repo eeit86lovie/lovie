@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -51,21 +52,52 @@
 <div class="dropdown">
   <div class="dropdown-content" id="dropdown-content">
     <a href="#">
-    <p>搜尋作者</p><br>
-    <input type="text" id="searchMember">
-    <button id="searchMemberButton" onclick= "searchmember()">搜尋</button>
+    	<button id="searchMyArticleButton" onclick= "searchMyArticle()">我的文章</button>
     </a>
+    
     <a href="#">
-    <p>搜尋標題</p><br>
-    <input type="text" id="searchTitle">
-    <button id="searchTitleButton" onclick= "searchTitle()">搜尋</button>
+    	<p>搜尋作者</p><br>
+	    <input type="text" id="searchMember">
+	    <button id="searchMemberButton" onclick= "searchmember()">搜尋</button>
     </a>
-    <a href="#">Link 3</a>
-    <a href="#">Link 4</a>
-    <a href="#">Link 5</a>
-    <a href="#">Link 6</a>
-    <a href="#">Link 7</a>
-    <a href="#">Link 8</a>
+    
+    <a href="#">
+    	<p>搜尋標題</p><br>
+	    <input type="text" id="searchTitle">
+	    <button id="searchTitleButton" onclick= "searchTitle()">搜尋</button>
+    
+    </a> <a href="#">
+	    <p>依類別搜尋</p><br>
+	    <select id="searchGenre">
+	　		<option value="好雷">好雷</option>
+	　		<option value="負雷">負雷</option>
+	　		<option value="新聞">新聞</option>
+	　		<option value="討論">討論</option>
+	　		<option value="問片">問片</option>
+	　		<option value="其他">其他</option>
+	　	</select><br>
+	    <button id="searchGenreButton" onclick= "searchGenre()">搜尋</button>
+    </a>    
+    
+    <a href="#">
+    	<p>搜尋內容關鍵字</p><br>
+	    <input type="text" id="searchContent">
+	    <button id="searchContentButton" onclick= "searchContent()">搜尋</button>
+    </a>
+    
+    
+    
+    <a href="#">
+        <button id="searchMyLikeButton" onclick= "searchMyLike()">我所喜歡的文章</button>  
+    </a>
+    
+    
+    <a href="#">
+        <button id="searchMyDisLikeButton" onclick= "searchMyDisLike()">我所不喜歡的文章</button> 
+    </a>
+    
+    
+    
     <a href="#">Link 9</a>
     <a href="#">Link 10</a>
     <a href="#">Link 11</a>
@@ -85,6 +117,35 @@ function searchmember(){
 function searchTitle(){
 	var searchedTitle = $('#searchTitle').val();
 	window.location.assign("http://localhost:8080/Lovie/forumsTitle/"+searchedTitle);
+}
+
+
+function searchMyArticle(){
+	var searchMyArticle = "${loginmember.account}";
+	window.location.assign("http://localhost:8080/Lovie/forumsOneMember/"+ searchMyArticle);
+}
+
+
+function searchGenre(){
+	var searchGenre = $("#searchGenre").val();
+	window.location.assign("http://localhost:8080/Lovie/forumsArticleGenre/"+ searchGenre);
+}
+
+
+function searchContent(){
+	var searchContent = $("#searchContent").val();
+	window.location.assign("http://localhost:8080/Lovie/forumsArticleContent/"+ searchContent);
+}
+
+
+function searchMyLike(){
+	var searchMyLike = "${loginmember.account}";
+	window.location.assign("http://localhost:8080/Lovie/forumsArticleMyLike/"+ searchMyLike);
+}
+
+function searchMyDisLike(){
+	var searchMyDisLike = "${loginmember.account}";
+	window.location.assign("http://localhost:8080/Lovie/forumsArticleMyDisLike/"+ searchMyDisLike);
 }
 
 
