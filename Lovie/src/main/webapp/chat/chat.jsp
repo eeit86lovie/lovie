@@ -14,7 +14,60 @@
     
         <link rel="stylesheet" href="${pageContext.request.contextPath }/chat/css/style.css">
     
-    
+    <style>
+
+
+/* The CSS */
+select {
+    padding:3px;
+    margin: 0;
+    -webkit-border-radius:4px;
+    -moz-border-radius:4px;
+    border-radius:4px;
+    -webkit-box-shadow: 0 3px 0 #ccc, 0 -1px #fff inset;
+    -moz-box-shadow: 0 3px 0 #ccc, 0 -1px #fff inset;
+    box-shadow: 0 3px 0 #ccc, 0 -1px #fff inset;
+    background: #f8f8f8;
+    color:#888;
+    border:none;
+    outline:none;
+    display: inline-block;
+    -webkit-appearance:none;
+    -moz-appearance:none;
+    appearance:none;
+    cursor:pointer;
+}
+
+/* Targetting Webkit browsers only. FF will show the dropdown arrow with so much padding. */
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+    select {padding-right:18px}
+}
+
+label {position:relative}
+label:after {
+    content:'<>';
+    font:11px "Consolas", monospace;
+    color:#aaa;
+    -webkit-transform:rotate(90deg);
+    -moz-transform:rotate(90deg);
+    -ms-transform:rotate(90deg);
+    transform:rotate(90deg);
+    right:8px; top:2px;
+    padding:0 0 2px;
+    border-bottom:1px solid #ddd;
+    position:absolute;
+    pointer-events:none;
+}
+label:before {
+    content:'';
+    right:6px; top:0px;
+    width:20px; height:20px;
+    background:#f8f8f8;
+    position:absolute;
+    pointer-events:none;
+    display:block;
+}
+    </style>
     
   </head>
 
@@ -24,8 +77,14 @@
     <div class="container">
         <div class="left">
             <div class="top">
-                <input type="text" />
-                <a href="javascript:;" class="search"></a>
+                <label>
+				    <select id="appendFriend">
+				    <option>選擇好友</option>
+				    <c:forEach items="${friends}" var="friend">
+				    	<option onselect="chooseFriend(this)" value="${friend.account }">${friend.nickname }</option>
+				    </c:forEach>
+				    </select>
+				</label>
             </div>
             <ul class="people" id="peopleappend">
                 
@@ -199,6 +258,12 @@
     }
     
     
+    
+    function chooseFriend(friend){
+    	alert('1')
+//     	$('#receiver').attr("data-id", friend.value)
+    	
+    }
     
     </script>
   </body>

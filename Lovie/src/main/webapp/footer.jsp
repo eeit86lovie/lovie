@@ -79,44 +79,14 @@
 		});
 		
 		
-		<c:if test="${empty LoginOK }">
-		/**************login**********/
-		$('input[type="submit"]').mousedown(function(){
-			  $(this).css('background', '#2ecc71');
-			});
-			$('input[type="submit"]').mouseup(function(){
-			  $(this).css('background', '#1abc9c');
-			});
-
-			$('#loginform').click(function(){
-			  $('.login').fadeToggle('slow');
-			  $(this).toggleClass('green');
-			});
-
-
-
-			$(document).mouseup(function (e)
-			{
-			    var container = $(".login");
-
-			    if (!container.is(e.target) // if the target of the click isn't the container...
-			        && container.has(e.target).length === 0) // ... nor a descendant of the container
-			    {
-			        container.hide();
-			        $('#loginform').removeClass('green');
-			    }
-			});
-			
-			
 		
-		</c:if>
 		
 		<sec:authorize access="!hasRole('USER') and !hasRole('GOLD') and !hasRole('ADMIN')">
 			var socket = new SockJS('/Lovie/stomp');
 	        stompClient = Stomp.over(socket);
 	        stompClient.connect({}, function(frame) {
 	            //setConnected(true);
-	            console.log('Connected: ' + frame);
+	            //console.log('Connected: ' + frame);
 	            stompClient.subscribe('/topic/guest', function(message){
 	            	showBroadcast(JSON.parse(message.body).message);
 	            });
@@ -129,7 +99,7 @@
 	        stompClient = Stomp.over(socket);
 	        stompClient.connect({}, function(frame) {
 	            //setConnected(true);
-	            console.log('Connected: ' + frame);
+	            //console.log('Connected: ' + frame);
 	            stompClient.subscribe('/topic/user', function(message){
 	            	showBroadcast(JSON.parse(message.body).message);
 	            });
@@ -141,7 +111,7 @@
 	        stompClient = Stomp.over(socket);
 	        stompClient.connect({}, function(frame) {
 	            //setConnected(true);
-	            console.log('Connected: ' + frame);
+	            //console.log('Connected: ' + frame);
 	            stompClient.subscribe('/topic/gold', function(message){
 	            	showBroadcast(JSON.parse(message.body).message);
 	            });

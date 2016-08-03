@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -52,9 +53,19 @@
 
 #page-top{
 	background-image: url("image/index/entity.jpg");
-	height:800px;
+	height:70%;
 	
 }
+
+#login1{
+	margin-left:100px;
+}
+
+#menu{
+	background-color: white;
+}
+
+
 
 </style>
 <title>Lovie 電影交友網</title>
@@ -84,6 +95,38 @@
 					<li><a href=<c:url value="/members"/>>會員</a></li>
 					<li><a href=<c:url value="/forums"/>>討論</a></li>
 					<li><a href=<c:url value="/products"/>>商城</a></li>
+					<sec:authorize access="!hasRole('ROLE_ADMIN') and !hasRole('ROLE_GOLD') and !hasRole('ROLE_USER')">
+						<li id="login1"><a href=<c:url value="/login"/>>登入 | 註冊</a></li>
+					</sec:authorize>
+					<sec:authorize access="hasRole('ROLE_ADMIN') or hasRole('ROLE_GOLD') or hasRole('ROLE_USER')">
+				
+				
+					<div class="member_nav" style="float:right;margin-left:100px">
+						<div>
+							 <div id="memberPic" >
+							 <img src=${pageContext.request.contextPath}/photo/member/${loginmember.id} height="40" />
+
+								<ul id="menu" style="display:none;position:absolute;z-index:1;">
+									<li><div><a href='${pageContext.request.contextPath}/member/profile/${loginmember.id}'>個人首頁</a></div></li>
+									<li><div>我的朋友</div></li>
+									<li><div>有興趣的對象</div></li>
+									<li><div>我的邀請</div></li>
+									<li><div>我的請求</div></li>
+									<li><div>訊息通知</div></li>
+									<li><div><a href="${pageContext.request.contextPath}/chat/" target="_blank">聊天</a></div></li>
+									<sec:authorize access="hasRole('ADMIN')">
+									<li id="backstage" style="display: none"><div>
+									<a href='${pageContext.request.contextPath}/admin/index.jsp'>管理頁面</a>
+									</div></li>
+									</sec:authorize>
+
+									</ul>
+								</div>
+								<a href='${pageContext.request.contextPath }/logout'>登出</a>
+						</div>
+					</div>
+					
+				</sec:authorize>
 				</ul>
             </div>
             <!-- /.navbar-collapse -->
@@ -93,9 +136,23 @@
 	
 	</header>
 	
-	<div id="page-top"> <a class="ghost-button" href="#">Ghost button text </a> </div> 
+	<div id="page-top">  </div> 
 	
-	<div class="index_content2"></div>
+<!-- 	<div class="index_content2"></div> -->
+	<script>
+		$("#memberPic").hover(function() {
+			document.getElementById("menu").style.display = "block";
+		}, function() {
+			document.getElementById("menu").style.display = "none";
+		})
+	$(function() {
+		$("#menu").menu();
+	});
+	var privilege="${loginmember.privilege}"
+	if(privilege==3){
+		document.getElementById("backstage").style.display = "block";
+	}
+	</script>
 	
 	<c:import charEncoding="UTF-8" url="footer.jsp"></c:import>
 <script src="js/jquery.easing.min.js"></script>

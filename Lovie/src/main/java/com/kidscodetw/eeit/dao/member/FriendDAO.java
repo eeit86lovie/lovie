@@ -8,8 +8,6 @@ import com.kidscodetw.eeit.entity.member.FriendBean;
 
 public interface FriendDAO {
 
-	public abstract Session getSession();
-
 	// 取得所有名單
 	public abstract List<FriendBean> selectAll();
 

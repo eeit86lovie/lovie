@@ -14,7 +14,6 @@ public class FriendDAOHibernate implements FriendDAO {
 		this.sessionFactory = sessionFactory;
 	}
 
-	@Override
 	public Session getSession() {
 		return sessionFactory.getCurrentSession();
 	}

@@ -9,12 +9,12 @@
 		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
 		http://www.springframework.org/schema/websocket http://www.springframework.org/schema/websocket/spring-websocket.xsd">
 
-	<!-- <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource"> -->
-	<!-- <property name="driverClassName" value="com.mysql.jdbc.Driver"></property> -->
-	<!-- <property name="url" value="jdbc:mysql://eeit.kidscodetw.com:3306/eeit86?characterEncoding=utf8"></property> -->
-	<!-- <property name="username" value="eeit86"></property> -->
-	<!-- <property name="password" value="eeit86"></property> -->
-	<!-- </bean> -->
+<!-- 	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource"> -->
+<!-- 	<property name="driverClassName" value="com.mysql.jdbc.Driver"></property> -->
+<!-- 	<property name="url" value="jdbc:mysql://eeit.kidscodetw.com:3306/eeit86?characterEncoding=utf8"></property> -->
+<!-- 	<property name="username" value="eeit86"></property> -->
+<!-- 	<property name="password" value="eeit86"></property> -->
+<!-- 	</bean> -->
 
 	<bean id="dataSource" class="org.springframework.jndi.JndiObjectFactoryBean">
 		<property name="jndiName" value="java:comp/env/jdbc/eeit86"></property>
@@ -214,6 +214,14 @@
 	</bean>
 	<bean id="reportService" class="com.kidscodetw.eeit.service.report.ReportService">
 		<constructor-arg ref="reportDAO"></constructor-arg>
+	</bean>	
+	
+	<!-- 	FriendDAO -->
+	<bean id="friendDAOHibernate" class="com.kidscodetw.eeit.dao.member.FriendDAOHibernate">
+		<constructor-arg ref="sessionFactory"></constructor-arg>
+	</bean>
+	<bean id="friendDAO" class="com.kidscodetw.eeit.service.member.FriendService">
+		<constructor-arg ref="friendDAOHibernate"></constructor-arg>
 	</bean>	
 	
 	
