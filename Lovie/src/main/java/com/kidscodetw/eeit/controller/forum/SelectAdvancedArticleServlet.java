@@ -31,6 +31,11 @@ public class SelectAdvancedArticleServlet {
 		return "/forum/OneMemberForum.jsp";
 	}
 	
+	@RequestMapping(value = "forumsSelectTitle", method = RequestMethod.GET)
+	public String forumAdvanced4() {
+		return "/forum/selectTitleForum.jsp";
+	}
+	
 	@RequestMapping(value = "forumsSelectILike", method = RequestMethod.GET)
 	public String forumAdvanced2() {
 		return "forum/NewTestForum.jsp";
@@ -42,22 +47,46 @@ public class SelectAdvancedArticleServlet {
 	}
 	
 	
+	
+	
+	
+	//在OneMemberForum.jsp做ajax
 	@RequestMapping(value = "forumsSelectOneMember", params = { "MemberAccount" }, method = RequestMethod.POST)
 	@ResponseBody
-	public List<ForumBean> selectUpdate(
+	public List<ForumBean> selectOneMember(
 			@RequestParam("MemberAccount") String MemberAccount) {	
 		List<ForumBean> selectMemberArticlejson = forumDAO.select_memberAccount(MemberAccount);
-		System.out.println(selectMemberArticlejson);
 		return selectMemberArticlejson;
 	}
-							 
+	
+	//導向OneMemberForum.jsp
 	@RequestMapping(value = "forumsOneMember/{MemberAccount}", method = RequestMethod.GET)
-	public String selectUpdate(@PathVariable("MemberAccount") String MemberAccount, Model model) {
+	public String selectOneMember(@PathVariable("MemberAccount") String MemberAccount, Model model) {
 		model.addAttribute("memberAccount", MemberAccount);
 		return "/forum/OneMemberForum.jsp";
 	}
 	
-//$ajax url: forums/${memberAccount}/getArticle
+
+	//在selectTitleForum.jsp做ajax
+	@RequestMapping(value = "forumsSelectTitle", params = { "Title" }, method = RequestMethod.POST)
+	@ResponseBody
+	public List<ForumBean> selectTitle(
+			@RequestParam("Title") String Title) {	
+		List<ForumBean> selectTitleArticlejson = forumDAO.select_title(Title);
+		return selectTitleArticlejson;
+	}
+	
+	//導向selectTitleForum.jsp
+	@RequestMapping(value = "forumsTitle/{Title}", method = RequestMethod.GET)
+	public String selectTitle(@PathVariable("Title") String Title, Model model) {
+		model.addAttribute("title", Title);
+		return "/forum/selectTitleForum.jsp";
+	}
+
+	
+	
+	
+	
 
 
 	

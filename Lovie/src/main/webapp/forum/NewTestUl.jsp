@@ -52,10 +52,14 @@
   <div class="dropdown-content" id="dropdown-content">
     <a href="#">
     <p>搜尋作者</p><br>
-    <input type="text" id="suchMember">
-    <button id="suchMemberButton" onclick= "suchmember2()">搜尋</button>
+    <input type="text" id="searchMember">
+    <button id="searchMemberButton" onclick= "searchmember()">搜尋</button>
     </a>
-    <a href="#">Link 2</a>
+    <a href="#">
+    <p>搜尋標題</p><br>
+    <input type="text" id="searchTitle">
+    <button id="searchTitleButton" onclick= "searchTitle()">搜尋</button>
+    </a>
     <a href="#">Link 3</a>
     <a href="#">Link 4</a>
     <a href="#">Link 5</a>
@@ -72,11 +76,16 @@
 
 
 <script>
-function suchmember2(){
-	var searchedMember = $('#suchMember').val();
-	window.location.assign("http://localhost:8080/Lovie/forumsOneMember/"+searchedMember);
+function searchmember(){
+	var searchedMember = $('#searchMember').val();
+	window.location.assign("http://localhost:8080/Lovie/forumsOneMember/"+ searchedMember);
 }
 
+
+function searchTitle(){
+	var searchedTitle = $('#searchTitle').val();
+	window.location.assign("http://localhost:8080/Lovie/forumsTitle/"+searchedTitle);
+}
 
 
 </script>
