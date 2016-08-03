@@ -102,4 +102,16 @@ public class DataTransfer {
 
 		return result;
 	}
+	public static String changeNumToPrivilege(MemberBean memberBean){
+		Integer Num=memberBean.getPrivilege();
+		String privilege=null;
+		if(Num==1){
+			privilege="普通會員";
+		}else if(Num==2){
+			privilege="黃金會員";
+		}else{
+			privilege="管理員";
+		}
+		return privilege;
+	}
 }

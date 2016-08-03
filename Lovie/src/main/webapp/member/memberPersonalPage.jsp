@@ -63,8 +63,8 @@ color:black;
   <div class="col-md-9" ><b class="memberColumn">星座：</b>${oneMember.constellation}</div>
   <div class="col-md-9" ><b class="memberColumn">所在地：</b><span id="city" onclick="city_edit(this)"><span>${oneMember.city}</span>  <span>${oneMember.district}</span></span></div>
   <div class="col-md-9" ><b class="memberColumn">好友數：</b>${oneMember.friendNum}</div>
-  <div class="col-md-9" ><b class="memberColumn">會員等級：</b>鑽石會員</div>
-  <div class="col-md-9" ><b class="memberColumn">會員發文總數：</b>${article}</div>
+  <div class="col-md-9" ><b class="memberColumn">會員等級：</b>${memberPrivilege}</div>
+  <div class="col-md-9" ><b class="memberColumn">會員發文總數：</b><a href='${pageContext.request.contextPath}/forumsOneMember/${oneMember.account}'>${article}</a></div>
   <div class="col-md-9" id="pic" style="display:none"><b class="memberColumn">頭像：</b><input id="imgInp" style="margin-top:5px;display:inline" type="file"></input></div>
   <div class="col-md-9" ><button class="edit" id=uesrPic style="margin-top:5px;display:none">確認上傳圖片</button> </div>
   <div class="col-md-12" > </div>
