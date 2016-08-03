@@ -132,7 +132,7 @@
 	    <c:if test ="${oneAppointmentR.bstatus == 2}">2.否</c:if>
 	    <c:if test ="${oneAppointmentR.bstatus == 7}">7.取消(申請者)</c:if>
 	    <c:if test ="${oneAppointmentR.bstatus == 8}">8.取消(邀請者)</c:if>
-	    <c:if test ="${oneAppointmentR.bstatus == 9}">9.取消(管理員</c:if>
+	    <c:if test ="${oneAppointmentR.bstatus == 9}">9.取消(管理員)</c:if>
 	  </div>
 	 </div>
      <c:if test ="${oneAppointmentR.bstatus == 0 || oneAppointmentR.bstatus == 1}">

@@ -5,6 +5,9 @@ import java.util.List;
 
 import com.kidscodetw.eeit.dao.appointment.AppointmentDAO2;
 import com.kidscodetw.eeit.entity.appointment.AppointmentBean2;
+import com.kidscodetw.eeit.entity.appointment.AppointmentaBean;
+import com.kidscodetw.eeit.entity.appointment.AppointmentaeditBean;
+import com.kidscodetw.eeit.entity.appointment.AppointmentbBean;
 import com.kidscodetw.eeit.entity.appointment.AppointmentsBean;
 
 public class AppointmentService2 {
@@ -64,6 +67,14 @@ public class AppointmentService2 {
 		return appointmentDAO.updatestatusByAid(appointmentID, status);
 	}	
 
+	public Integer updateacceptedByAid(Integer appointmentID, String content, Integer acceptedMemberId) {
+		return appointmentDAO.updateacceptedByAid(appointmentID, content, acceptedMemberId);
+	}		
+
+	public Integer updatestatusto0ByAid(Integer appointmentID) {
+		return appointmentDAO.updatestatusto0ByAid(appointmentID);
+	}		
+
 	public boolean delete(Integer id){
 		boolean result = false;
 		if(id!=0){
@@ -79,4 +90,13 @@ public class AppointmentService2 {
 		}
 		return result;	
 	}
+	
+	public List<AppointmentaBean> selectByMid(Integer memberId) {
+		return appointmentDAO.selectByMid(memberId);
+	}
+
+	public AppointmentaeditBean selectByAidMid(Integer appointmentID,Integer memberId) {
+		return appointmentDAO.selectByAidMid(appointmentID, memberId);
+	}
+
 }

@@ -1,20 +1,11 @@
 package com.kidscodetw.eeit.entity.appointment;
 
 import java.io.Serializable;
+import java.sql.Timestamp;
 
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-
-import org.hibernate.annotations.NotFound;
-import org.hibernate.annotations.NotFoundAction;
-
-import com.kidscodetw.eeit.entity.member.MemberBean;
-import com.kidscodetw.eeit.entity.movie.ShowtimeBean;
-import java.sql.Timestamp;
 
 @Entity
 @Table(name = "AppointmentRequest")
