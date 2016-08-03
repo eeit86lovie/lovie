@@ -31,7 +31,7 @@ public class MemberBean implements Serializable{
 	private String registeredTime;
 	private String lastOnTime;
 	private String privilegeExp;
-	private int age;
+	private Integer age;
 	
 
 

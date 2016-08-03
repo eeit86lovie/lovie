@@ -98,7 +98,6 @@ public class MemberDAOHibernate implements MemberDAO {
 
 	@Override
 	public MemberBean updatePhotos(MemberBean bean, InputStream is, Long size) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 

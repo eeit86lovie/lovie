@@ -37,6 +37,7 @@
 		<mapping resource="com/kidscodetw/eeit/entity/appoint/appointment.hbm.xml" />
 		<mapping resource="com/kidscodetw/eeit/entity/member/member.hbm.xml" />
 		<mapping resource="com/kidscodetw/eeit/entity/member/memberRole.hbm.xml" />
+		<mapping resource="com/kidscodetw/eeit/entity/member/friend.hbm.xml" />
         <mapping resource="com/kidscodetw/eeit/entity/cart/product.hbm.xml" />
 		<mapping resource="com/kidscodetw/eeit/entity/cart/tradedetail.hbm.xml" />
         <mapping resource="com/kidscodetw/eeit/entity/cart/bill.hbm.xml" />
@@ -48,6 +49,9 @@
         <mapping class="com.kidscodetw.eeit.entity.appointment.AppointmentsBean" />
         <mapping class="com.kidscodetw.eeit.entity.appointment.AppointmentbBean" />
         <mapping class="com.kidscodetw.eeit.entity.appointment.AppointmentbeditBean" />
+        <mapping class="com.kidscodetw.eeit.entity.appointment.AppointmentaeditBean" />
+        <mapping class="com.kidscodetw.eeit.entity.appointment.AppointmentareditBean" />
+        <mapping class="com.kidscodetw.eeit.entity.appointment.AppointmentaBean" />
         <mapping class="com.kidscodetw.eeit.entity.appointment.AppointmentRequestBean" />
         <mapping class="com.kidscodetw.eeit.entity.report.Chart1Bean" />
         <mapping class="com.kidscodetw.eeit.entity.report.Chart2Bean" />
