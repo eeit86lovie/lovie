@@ -90,7 +90,7 @@
   <div style="color:red">會員:${loginmember.account}${loginmember.nickname}</div>
     <li><a href="${pageContext.request.contextPath}/appointments">一週約會通知</a></li>
     <li><a href="${pageContext.request.contextPath}/appointmentb">申請的約會</a></li>
-    <li class="active"><a href="${pageContext.request.contextPath}/appointmenta">邀請的約會</a></li>
+    <li class="active"><a href="${pageContext.request.contextPath}/appointmenta">邀請的約會(修改)</a></li>
   </ul>
   <div class="tab-content">
   <div id="menu1" class="tab-pane fade in active">
