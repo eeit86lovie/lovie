@@ -16,6 +16,12 @@ public interface ForumDAO {
 	
 	List<ForumBean> select_NEXT(int count);
 	
+	List<ForumBean> select_genre(String genre);
+	
+	List<ForumBean> select_title(String searchKey);
+	
+	List<ForumBean> select_content(String searchKey);
+	
 	ForumBean select_id(Integer id);
 	
 	List<ForumBean> select_memberAccount(String memberAccount);

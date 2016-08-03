@@ -49,21 +49,20 @@
     
       <div class="user_login">
     <form>
-        <label>文章標題</label> <input type="text" id="username"><br>
-        <p id ="error_title"></p>
-        
-        <label>文章分類</label>
-        <select id="ArticleGenre">
+    
+    	<select id="ArticleGenre" class="articleGenre">
 	　		<option value="好雷">好雷</option>
 	　		<option value="負雷">負雷</option>
 	　		<option value="新聞">新聞</option>
 	　		<option value="討論">討論</option>
 	　		<option value="問片">問片</option>
 	　		<option value="其他">其他</option>
-	　	</select><br>
-
-        <label>文章內容</label><TextArea type="text" id="textArea"></TextArea><br>
-        <p id="error_content"></p>
+	　	</select>
+        <input type="text" id="username" class="articleTitle">
+        <p id ="error_title" class="error_title"></p>
+       
+        <TextArea type="text" id="textArea" class="articleTextArea"></TextArea><br>
+        <p id="error_content" class="error_content"></p>
         
         <div class="action_btns">
 			<div class="one_half last">

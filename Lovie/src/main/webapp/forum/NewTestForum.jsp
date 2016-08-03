@@ -8,6 +8,8 @@
 <c:import charEncoding="UTF-8" url="/meta.jsp"></c:import>
 <script src="${pageContext.request.contextPath}/js/jquery-ui/jquery-ui.js"></script>
 <script src="${pageContext.request.contextPath}/js/jquery.leanModal.min.js"></script>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/selectLike/selectLike.css">
+<script src="${pageContext.request.contextPath}/js/jquery.hoverCarousel.js"></script>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 
@@ -32,12 +34,11 @@ body {
 
 .BOX01 .article_header_div{
 	width: 770px;
-	height:250px;
-	float: left;
+	height:80px;
 	margin:5px 5px;
-	height:50px;
 	margin-buttom:2px;
 	background-color: #FFFFFF;
+	z-index:-1;
 }
 
 .BOX01 .article_header_div .photo_div {
@@ -47,38 +48,41 @@ body {
     -moz-border-radius: 5px;
     -webkit-border-radius: 5px;
     float:left;
-	margin-left:12px;
+	position:relative;
+	left:12px;
 	margin-top:12px;
 	display:inline;
 }
 
 .BOX01 .article_header_div .member {
-	width: 300px;
+	width: 200px;
 	height:30px;
-	margin:2px 3px 3px 10px;
 	font-size: 26px;
 	color:#1E90FF;
 	font-weight: bold;
 	float:left;
-	margin-left:12px;
+	position:relative;
+	left:18px;
 	margin-top:8px;
-
 }
 
 .BOX01 .article_header_div .genre{
-	width: 80px;
+	width: 150px;
+	height:50px;
 	font-size: 24px;
-	float:left;
-	margin-top: 15px;
-	margin-left: 35px;
+	position:relative;
+	left:20px;
+	top:20px;
+	
 	font-weight: bold;
 }
 
 .BOX01 .article_header_div .title {
-	width: 500px;
-	font-size: 24px;
-	margin-left: 5px;
-	float:left;
+	position:relative;
+    top: -12px;
+    left:100px;
+    width: 300px;
+    height: 200px;
 	font-weight: bold;
 
 }
@@ -88,7 +92,7 @@ body {
 	clear:both;
 	margin:10px 15px;
 	background-color:#FFFFFF ;
-	margin-top:150px;
+	margin-top:30px;
 	overflow: hidden;
 	text-align: justify;
 	font-size: 18px;
@@ -102,16 +106,20 @@ body {
 }
 
 .pubTime {
-	width: 300px;
-	margin: 20px 20px;
-	float: right;
+	width: 200px;
+	float:left;
+	position:relative;
+	top:20px;
+	left:220px;
 	text-align:right;
 }
 
 .editTime {
 	width: 300px;
-	margin: 0 20px 0 670px;
+	position:relative;
 	float: right;
+	right:20px;
+	top:-90px;
 	text-align:right;
 }
 
@@ -119,16 +127,20 @@ body {
 	weight: 30px;
 	height: 26px;
 	border: #ADADAD 1px solid;
+	color:#FFF;
 	border-radius: 5px;
 	-moz-border-radius: 5px;
 	-webkit-border-radius: 5px;
-	background-Color: lightgreen;
-	margin-top:20px;
+	background-Color: #FF9797;
+	position:relative;
+	float: right;
+	right:20px;
+	top:20px;
 }
 
 .replyText {
-	width: 650px;
-	margin: 20px 15px 20px 15px;
+	width: 700px;
+	margin: 20px 5px 20px 5px;
 	height: 26px;
 	border: #ADADAD 1px solid;
 	border-radius: 5px;
@@ -235,16 +247,16 @@ input[name="hideReply_checkBox"]:checked + label span{
 
 input[name="like_checkBox"] + label span{
     display:inline-block;
-    width:50px;
-    height:50px;    
-    background:url('${pageContext.request.contextPath}/image/Noclick_like.gif');
+    width:60px;
+    height:60px;    
+    background:url('${pageContext.request.contextPath}/image/like.gif');
     background-size: 50% 50%;
     background-repeat:no-repeat;
     cursor:pointer;   
 }
 
 input[name="like_checkBox"]:checked + label span{
-    background:url('${pageContext.request.contextPath}/image/like.gif');
+    background:url('${pageContext.request.contextPath}/image/Noclick_like.gif');
     background-size: 50% 50%;
     background-repeat:no-repeat;
 }
@@ -252,8 +264,8 @@ input[name="like_checkBox"]:checked + label span{
 
 input[name="dislike_checkBox"] + label span{
     display:inline-block;
-    width:50px;
-    height:50px;    
+    width:60px;
+    height:60px;    
     background:url('${pageContext.request.contextPath}/image/Noclick_dislike.gif');
     background-size: 50% 50%;
     background-repeat:no-repeat;
@@ -267,8 +279,8 @@ input[name="dislike_checkBox"]:checked + label span{
 }
 
 .replyCountimg{
-    width:25px;
-    height:25px;
+    width:40px;
+    height:33px;
 }
 
 .countReplyimg_div{
@@ -276,10 +288,7 @@ input[name="dislike_checkBox"]:checked + label span{
 	height:25px;
 	float: left;
 	margin-left:5px;
-	border: #ADADAD 1px solid;
-	border-radius: 2px;
-	-moz-border-radius: 2px;
-	-webkit-border-radius: 2px;
+
 }
 
 
@@ -288,10 +297,6 @@ input[name="dislike_checkBox"]:checked + label span{
 	height:25px;
 	float: left;
 	margin-left: 15px;
-	border: #ADADAD 1px solid;
-	border-radius: 2px;
-	-moz-border-radius: 2px;
-	-webkit-border-radius: 2px;
 }
 
 .disLike_Button_div{
@@ -299,21 +304,15 @@ input[name="dislike_checkBox"]:checked + label span{
 	height:25px;
 	float: left;
 	margin-left:5px;
-	border: #ADADAD 1px solid;
-	border-radius: 2px;
-	-moz-border-radius: 2px;
-	-webkit-border-radius: 2px;
 }
 
 .hideReply_div{
 	width:30px;
 	height:25px;
-	float: left;
-	margin-left: 5px;
-	border: #ADADAD 1px solid;
-	border-radius: 2px;
-	-moz-border-radius: 2px;
-	-webkit-border-radius: 2px;
+	position:relative;
+	float: right;
+	right:300px;
+	top:0;
 }
 
 
@@ -331,23 +330,26 @@ margin-top:50px;
 }
 
 .countLike_div{
-	width:60px;
+	width:120px;
 	height:25px;
+	line-height:25px;
 	float: left;
 	margin-left:5px;
 }
 
 .countDisLike_div{
-	width:60px;
+	width:120px;
 	height:25px;
 	float: left;
 	margin-left:5px;
+	line-height:25px;
 
 }
 
 .countReply_div{
-	width:60px;
+	width:80px;
 	height:25px;
+	line-height:25px;
 	float: left;
 	margin-left:5px;
 
@@ -357,7 +359,68 @@ margin-top:50px;
 .articleUDR_ul_div{
   display: none;
 }
+
+
+.articleUDR_div{
+	width: 20px;
+	height:20px;
+	position:relative;
+	top:20px;
+	right:20px;
+	float: right;
+}
+
+.articleUDR_ul {
+}
+
+ul {
+	list-style-type:none;
+	margin:0;
+	padding:0;
+}
+
+
+.articleUDR_div ul li button {
+    position:relative;
+	right:0;
+	top:-20px;
+	float:right;
+	width:100px;
+	height:40px;
+	color: #7B7B7B ;
+	border-radius:5px;
+	-moz-border-radius:5px;
+	-webkit-border-radius:5px;
+	background-color: #fff;
+	-moz-box-shadow: 0px 0px 2px 2px #ffffff; 
+ 	-webkit-box-shadow: 0px 0px 2px 2px #ffffff; 
+ 	box-shadow: 0px 0px 2px 2px #ffffff;
+ 	text-align: center;
+	
+}
+
+span .hidespan{
+	padding-top:20px;
+}
+
+.haveReport{
+	position:relative;
+	right:0;
+	top:-20px;
+	float:right;
+	width:60px;
+	height:20px;
+	color: #ffffff ;
+	border-radius:5px;
+	-moz-border-radius:5px;
+	-webkit-border-radius:5px;
+	background-color: #FF5151;
+	font-weight: bold;
+	text-align: center;
+}
+
 </style>
+
 
 
 
@@ -366,8 +429,6 @@ margin-top:50px;
 
 <body>
 	<c:import charEncoding="UTF-8" url="/header.jsp"></c:import>
-
-
 	<c:import charEncoding="UTF-8" url="/forum/NewLightBox.jsp"></c:import>
 		
 	
@@ -378,10 +439,9 @@ margin-top:50px;
 	<div class="row">
    
 		
-		<div class="col-md-2"></div>
-		
-		
-		
+		<div class="col-md-2">
+			<c:import charEncoding="UTF-8" url="/forum/NewTestUl.jsp"></c:import>
+		</div>
 		
 		<div class="col-md-8">			
 			<div id="box">
@@ -410,11 +470,11 @@ margin-top:50px;
     
       <div class="user_login">
     <form>
-        <label>文章標題</label> <input type="text" id="updateTitle"><br>
+       <input type="text" id="updateTitle" class="articleTitle"><br>
         <p id ="error_update_title"></p>
         
-        <label>文章分類</label>
-        <select id="updateGenre">
+        
+        <select id="updateGenre" class="articleGenre">
 	　		<option value="好雷">好雷</option>
 	　		<option value="負雷">負雷</option>
 	　		<option value="新聞">新聞</option>
@@ -478,6 +538,18 @@ margin-top:50px;
 
 
 
+<div id="myNav" class="overlay">
+  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
+  <div class="carousel right">
+  <div class="indicator"></div>
+  <div class="wrap">
+    <ul id="selectLike_ul">      
+    </ul>
+  </div>
+</div>
+  </div>
+</div>
+
 
 
 
@@ -520,10 +592,6 @@ function scroll(){
 
 var articleJson;
 var memberJson;
-
-
-
-
 
 $.ajax({
 	url : "forumsMember",
@@ -686,10 +754,7 @@ function add(){
 				
 				
 							
-				var like_Button = document.createElement('input');//Like
 				
-				
-				var countLike_div = $("<div onclick='selectRankPeople(this)' class='countLike_div' id='"+'countLike_div'+articleJson[i].id+"'></div>");
 				
 				
 				
@@ -718,8 +783,8 @@ function add(){
 				
 				
 				articleUDR.setAttribute("onchange", "articleUDR(this)");
-				var articleUDR_div =$("<div id='"+'articleUDR_div'+articleJson[i].id+"'></div>").append(articleUDR);
-				var articleUDR_ul = $("<ul id='"+'articleUDR_ul'+articleJson[i].id+"'></ul>");
+				var articleUDR_div =$("<div class='articleUDR_div' id='"+'articleUDR_div'+articleJson[i].id+"'></div>").append(articleUDR);
+				var articleUDR_ul = $("<ul class='articleUDR_ul' id='"+'articleUDR_ul'+articleJson[i].id+"'></ul>");
 				var articleUDR_ul_div = $("<div class='articleUDR_ul_div' id='"+'articleUDR_ul_div'+articleJson[i].id+"'></div>");
 				articleUDR_div.append(articleUDRlabel);
 				
@@ -766,7 +831,8 @@ function add(){
 				//--------------------------------------------------------------------------------------------------------------------
 				
 				
-				
+				var like_Button = document.createElement('input');//Like
+				var countLike_div = $("<div onclick='selectLikePeople(this)' class='countLike_div' id='"+'countLike_div'+articleJson[i].id+"'></div>");
 				like_Button.type = "checkbox";
 				like_Button.id = "like_Button"+articleJson[i].id;
 				like_Button.name = "like_checkBox";
@@ -780,7 +846,7 @@ function add(){
 				
 				
 				var disLike_Button = document.createElement('input');//DisLike
-				var countDisLike_div = $("<div class='countDisLike_div' id='"+'countDisLike_div'+articleJson[i].id+"'></div>");
+				var countDisLike_div = $("<div onclick='selectDisLikePeople(this)' class='countDisLike_div' id='"+'countDisLike_div'+articleJson[i].id+"'></div>");
 				disLike_Button.type = "checkbox";
 				disLike_Button.id = "disLike_Button"+articleJson[i].id;
 				disLike_Button.name = "dislike_checkBox";
@@ -861,7 +927,8 @@ function add(){
 						if(allLikejson[m].bad == 1 && allLikejson[m].memberAccount == "${loginmember.account}"){
 							myself = "你和其他"
 							disLike_Button.checked="checked";
-							justIDisLike++
+							justIDisLike++;
+							
 						}else if(allLikejson[m].bad == 1){
 							countDisLike++;
 						}
@@ -898,6 +965,7 @@ function add(){
 	  		var article_header_div = $("<div class='article_header_div'></div>").append(Article_photo_div);
 	  		article_header_div.append(Article_member_div);
 	  		article_header_div.append(Article_pubTime_div);
+	  		article_header_div.append(articleUDR_div);//檢舉 新增 刪除div	
 	  		article_header_div.append(Article_genre_div);
 	  		article_header_div.append(Article_title_div);
 	  		
@@ -916,10 +984,11 @@ function add(){
 	  		
 	  		allarticle.append(article_header_div);//photo member pubTime title genre	 		
 			allarticle.append(Article_content_div);//文章									
-			allarticle.append(articleUDR_div);//檢舉 新增 刪除div						
-			allarticle.append(Article_editTime_div);
+				
+			
 			allarticle.append(ALLbutton_div);//縮放文章 Like DisLike 留言人數 按鈕
 			allarticle.append(Article_addReply_div);//留言按鈕加文字框
+			allarticle.append(Article_editTime_div);
 	 		allarticle.append(Article_replyarea_div);//新增留言放這	 		
 	 		havereport(articleJson[i].id);//放入已檢舉
 	 		
@@ -1375,7 +1444,7 @@ function add(){
 				for(o =0;o<haveReportResult.length;o++){
 					if(haveReportResult[o].memberAccount == "${loginmember.account}" && haveReportResult[o].articleID == article_ID){
 						$("#"+"articleUDR_ul"+haveReportResult[o].articleID).empty();						
-						$("#"+"articleUDR_div"+haveReportResult[o].articleID).append($("<div></div>").append("已檢舉"));
+						$("#"+"articleUDR_div"+haveReportResult[o].articleID).append($("<div class ='haveReport'></div>").append("已檢舉"));
 						
 					}
 				}
@@ -1386,6 +1455,94 @@ function add(){
    }
    
    
+   
+   function closeNav() {
+	    document.getElementById("myNav").style.height = "0%";
+   }
+   
+   function selectLikePeople(selectLikePeopleObject){
+	   $("#selectLike_ul").empty();
+	   document.getElementById("myNav").style.height = "40%";
+		
+		$.ajax({
+			url : "forumsAllLike",
+			type : "post",
+			dataType : "json",
+			success : function(allLikejson) {
+				
+				var article_ID = selectLikePeopleObject.id.substring(13);
+				
+				
+				for(m =0; m<allLikejson.length;m++){
+					if(allLikejson[m].articleID==article_ID){
+						if(allLikejson[m].good == 1){
+							var li_Rank = $("<li></li>");											
+							var rankPeople_div = $("<div ></div>");
+							var rankPeopleName_div = $("<div></div>").append(getmemberPhoto(allLikejson[m].memberAccount).nickname);
+							var rankPeople_img = document.createElement("img");
+							rankPeople_img.className ="rankPeople_img";
+							rankPeople_img.src = getmemberPhoto(allLikejson[m].memberAccount).photoUrl;
+				
+							rankPeople_div.append(rankPeople_img);
+							rankPeople_div.append(rankPeopleName_div);	
+							
+							li_Rank.append(rankPeople_div);
+							
+														
+							$("#selectLike_ul").append(li_Rank);
+						}
+						
+						
+					}
+				
+				}
+				
+			}					
+		})
+		
+
+	}
+   
+   
+   function selectDisLikePeople(selectDisLikePeopleObject){
+	   $("#selectLike_ul").empty();
+	   document.getElementById("myNav").style.height = "40%";
+		
+		$.ajax({
+			url : "forumsAllLike",
+			type : "post",
+			dataType : "json",
+			success : function(allLikejson) {
+				
+				var article_ID = selectDisLikePeopleObject.id.substring(16);
+				
+				
+				for(m =0; m<allLikejson.length;m++){
+					if(allLikejson[m].articleID==article_ID){
+						if(allLikejson[m].bad == 1){
+							var li_Rank = $("<li></li>");											
+							//var rankPeople_div = $("<div ></div>");
+							//var rankPeopleName_div = $("<div></div>").append(getmemberPhoto(allLikejson[m].memberAccount).nickname);
+							var rankPeople_img = document.createElement("img");
+							rankPeople_img.className ="rankPeople_img";
+							rankPeople_img.src = getmemberPhoto(allLikejson[m].memberAccount).photoUrl;
+				
+							li_Rank.append(rankPeople_img);
+							//rankPeople_div.append(rankPeopleName_div);
+							//a_Rank.appendChild(rankPeople_img);	
+							$("#selectLike_ul").append(li_Rank);
+						}
+						
+						
+					}
+				
+				}
+				
+			}					
+		})
+		
+
+	}
 	
 </script>
 

@@ -63,7 +63,7 @@
 // 				var cell1  = $("<div></div>").append(img)
 				var cell2  = $("<div></div>").text(member.nickname)
 				var cell3  = $("<div></div>").text(member.city)
-				var cell4  = $("<div></div>").text(member.birthday+"歲")
+				var cell4  = $("<div></div>").text(member.age+"歲")
 
 				var row = $("<li class='item'></li>").append([cell1,cell2,cell3,cell4])
 				flag.append(row);

@@ -30,6 +30,7 @@ public class MemberDAOJdbc implements MemberDAO {
 			+ " district= COALESCE(?,district), privilege= COALESCE(?,privilege),photoUrl= COALESCE(?,photoUrl), birthday= COALESCE(?,birthday),"
 			+ " friendNum= COALESCE(?,friendNum), commentPoint= COALESCE(?,commentPoint), intro= COALESCE(?,intro), constellation= COALESCE(?,constellation),"
 			+ " lastOnTime= COALESCE(?,lastOnTime) WHERE id = ?";
+	private final static String UPDATEPHOTO="UPDATE Member set photo=? Where id=?";
 			
 	//update: 1.password 2.gender 3.email 4.nickname 5.city 6.district 7.privilege 8.birthday 9.friendNum 10.commentPoint 
 	//        11.intro 12.constellation 13.lastOnTime 14.id
@@ -88,7 +89,6 @@ public class MemberDAOJdbc implements MemberDAO {
 				int result = pstat.executeUpdate();
 				System.out.println(result);
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		} catch (MalformedURLException e) {
@@ -650,6 +650,57 @@ public class MemberDAOJdbc implements MemberDAO {
 	public MemberBean updatePhotos(byte[] file, MemberBean bean) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+//
+//	@Override
+//	public MemberBean updatePhotos(MemberBean bean, InputStream is, Long size) {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
+
+	@Override
+	public MemberBean updatePhotos(MemberBean bean, InputStream is, Long size) {
+		Connection conn = CommonUtil.connectMysql();
+		PreparedStatement pstat = null;
+		ResultSet rs = null;
+		MemberBean mb = null;
+		try {
+			
+			pstat = conn.prepareStatement(UPDATEPHOTO);
+			pstat.setBinaryStream(1, is,size);
+			pstat.setInt(2, bean.getId());
+			
+			int result = pstat.executeUpdate();
+			if(result==1){
+				return mb;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if (pstat != null) {
+				try {
+					pstat.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		
+		return mb;
 	}
 
 }

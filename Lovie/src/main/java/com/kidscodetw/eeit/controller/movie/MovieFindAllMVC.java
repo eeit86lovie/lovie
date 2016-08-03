@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -43,6 +44,7 @@ public class MovieFindAllMVC {
 		List<String> genreNames = getGenreNames();
 		String genre_name = "";
 		String temp = "";
+		String temp2="";
 		for (MovieBean mb : movieBeans) {
 			for (MovieGenreBean mgb : lmgb) {
 				if (mgb.getMovieId() == mb.getId()) {
@@ -50,8 +52,11 @@ public class MovieFindAllMVC {
 					genre_name = genre_name.concat(temp);
 					temp = "";
 				}
+
 				genreMap.put((Integer) mb.getId(), concatGenreName(genre_name));
+				
 			}
+			genre_name="";
 		}
 		model.addAttribute("genres", genreMap);
 		return "movie/allmovies.jsp";
@@ -68,12 +73,14 @@ public class MovieFindAllMVC {
 		}
 	
 	public String concatGenreName(String genreName) {
+		
 		if (genreName != null && genreName.length() > 0
 				&& genreName.charAt(genreName.length() - 1) == ',') {
 			genreName = genreName.substring(0, genreName.length() - 1);
 		}
 		return genreName;
 	}
+	
 	
 	
 }
