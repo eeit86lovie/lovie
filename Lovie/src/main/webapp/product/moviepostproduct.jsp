@@ -1,52 +1,64 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+
+<!-- Bootstrap Core CSS -->
+<link
+	href="${pageContext.request.contextPath}/admin/bower_components/bootstrap/dist/css/bootstrap.min.css"
+	rel="stylesheet">
+
+<!-- Custom CSS -->
+<link href="${pageContext.request.contextPath}/dist/css/sb-admin-2.css"
+	rel="stylesheet">
+
+
+<!-- Custom Fonts -->
+<link
+	href="${pageContext.request.contextPath}/admin/bower_components/font-awesome/css/font-awesome.min.css"
+	rel="stylesheet" type="text/css">
+
+<!-- Bootstrap Core CSS -->
+<link href="${pageContext.request.contextPath}/css/bootstrap.min.css"
+	rel="stylesheet">
+
+<!-- Custom CSS -->
+<link href="${pageContext.request.contextPath}/css/shop-homepage.css"
+	rel="stylesheet">
+
+
+<!-- MetisMenu CSS -->
+<link
+	href="${pageContext.request.contextPath}/bower_components/metisMenu/dist/metisMenu.min.css"
+	rel="stylesheet">
+
+<!-- Timeline CSS -->
+<link href="${pageContext.request.contextPath}/css/timeline.css"
+	rel="stylesheet">
+
+
+
+
+
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <c:import charEncoding="UTF-8" url="/meta.jsp"></c:import>
 <title>商城購物</title>
 
 <style>
-.navbar-default{
- margin-top:-0.5cm;
-
+.navbar-default {
+	margin-top: -0.5cm;
 }
 
-.slide-image{
-display:block;
-margin: auto;
-width:1000px;
-height:1000px;
-max-width:1000px;
-max-height:3000px;
+.nav {
+	text-align: center;
 }
 
-.thumbnail img{
-width:180px;
-height:180px;
-
+.thumbnail {
+	text-align: center;
+	border: solid;
 }
-
-.nav{
-text-align:center;
-
-}
-
-.caption{
-
-
-text-align:center;
-
-
-}
-
-
-
-
-
-
 </style>
 
 
@@ -54,116 +66,210 @@ text-align:center;
 <c:import charEncoding="UTF-8" url="/header.jsp"></c:import>
 </head>
 <body>
- 
- 
-  <div class="row">
- 
- 
- <div id="wrapper">
-       <div class="navbar-default sidebar">
-                <div class="sidebar-nav navbar-collapse">
-                    <ul class="nav" id="side-menu">
-                        
-                         <li>
-                            <a href="/Lovie/product.do"><i class="my home"></i>回商城首頁 </a>
-                        </li>
-                        <li>
-                            <a href="/Lovie/memberproduct.do?category=1"><i class="buy member"></i>購買會員 </a>
-                        </li>
-                        <li>
-                            <a href="#"><i class=""></i> 電影週邊商品<span class="fa arrow"></span></a>
-                            <ul class="nav nav-second-level">
-                                <li>
-                                    <a href="/Lovie/doll.do?category=3">人物公仔</a>
-                                </li>
-                                <li>
-                                    <a href="/Lovie/clothesproduct.do?category=4">服飾</a>
-                                </li>
-                            </ul>
-                            <!-- /.nav-second-level -->
-                        </li>
-                        <li>
-                            <a href="tables.html"><i class="selectbill"></i>訂單查詢</a>
-                        </li>
-                        <li>
-                            <a href="forms.html"><i class="mylove"></i>我的最愛</a>
-                        </li>
-                        <li>
-                            <a href="#"><i class="customerservice"></i>回報客服</a>
-                           
-                            <!-- /.nav-second-level -->
-                        </li>
-                       
-                       
-                    </ul>
-                </div>
-                <!-- /.sidebar-collapse -->
-            </div>
-       </div>
-</div>
 
-<div id="page-wrapper">
-<div class="col-md-9">
+	
+	<div class="row">
 
-<c:forEach var="moviepostproducts" items="${Allmoviepostproduct}">
-<div class="col-md-4">
-					<div class="thumbnail">
-						<img src="../cart/images000.jpg" alt="">
-						<div class="caption">
-						    <p id="dollproductname">${moviepostproducts.name}</p>
-						    <p id="dollmoney">NT:${moviepostproducts.cost}元</p>
-				            <p id="dollproductcontent">${moviepostproducts.content}</p>
-							<p>
-								<a href="#" class="btn btn-primary">加入購物車</a>
-							</p>
+		<div class="navbar-default sidebar">
+			<div class="sidebar-nav navbar-collapse">
+				<ul class="nav" id="side-menu">
+					<li><a href="/Lovie/products" class="show">首頁</a></li>
 
-						</div>
-					</div>
+					<li><a href="/Lovie/product/memberproduct.jsp">購買會員</a></li>
 
-				</div>
-</c:forEach>
-</div>
+					<li><a href="/Lovie/product/moviepostproduct.jsp">電影海報</a></li>
+					<li><a href="/Lovie/product/dollproduct.jsp">人物公仔</a></li>
+					<li><a href="/Lovie/product/clothesproduct.jsp">服飾</a></li>
 
-</div>
-
-<!-- 以下為控制第一頁、前一頁、下一頁、最末頁 等超連結-->
-<table border="1">
-  <tr>
-    <td width='76'>
-        
-     </td>
-     <td width='76'>
-          
-     </td>
-     <td width='76'>
-            
-                <div id="pnext">
-                   <a href="DisplayPageProducts?pageNo=2">下一頁</a>&nbsp;&nbsp;&nbsp;
-                </div>
-            
-     </td>  
-     <td width='76'>
-            
-                <div id="plast">
-                    <a href="DisplayPageProducts?pageNo=5">最末頁</a>&nbsp;&nbsp;&nbsp;
-                </div>
-            
-     </td>
-     <td width='176' align="center">
-           第1頁 / 共5頁
-     </td>  
-</tr>
-</table>
+					<li><a href="/Lovie/product/cart.jsp"><i class="glyphicon glyphicon-shopping-cart"></i> 購物車</a></li>
+					<li><a href="/Lovie/product/tradedetail.jsp"><i class="selectbill"></i>訂單查詢</a></li>
+					<li><a href=""><i class="customerservice"></i>回報客服</a> <!-- /.nav-second-level -->
+					</li>
 
 
-  <script>
+				</ul>
+			</div>
+
+		</div>
+	</div>
 
 
 
 
+	<div id="page-wrapper">
 
-  </script>
-  
+	</div>
+
+	<script>
+
+	//電影海報
+	var movieposts = document.createDocumentFragment();
+	function moviepost(){
+
+		$.ajax({
+			type : "get",
+			url : "movieposts/2",
+			success : function(data) {
+				for (var i = 0; i<data.length; i++) {
+
+					var PostNameP = document.createElement("p");
+					var PostNameTextP = document.createTextNode(data[i].name);
+					PostNameP.appendChild(PostNameTextP);
+
+					var PostMoneyP = document.createElement("p");
+					var PostMoneyTextP = document.createTextNode(data[i].cost);
+					PostMoneyP.appendChild(PostMoneyTextP);
+
+					var PostContentP = document.createElement("p");
+					var PostContentTextP = document.createTextNode(data[i].content);
+					PostContentP.appendChild(PostContentTextP);
+
+
+					var PostBtnP = document.createElement("button");
+					PostBtnP.id = "PostBtnP"+JSON.stringify(data[i]['productid']);
+					PostBtnP.setAttribute('onclick', "addToCart(this)");
+					PostBtnP.className = "addtocart"
+					var PostBtnTextP = document.createTextNode("加入購物車");
+					PostBtnP.appendChild(PostBtnTextP);
+					
+					var PostSelect=document.createElement("select");
+					PostSelect.className="form-control input-sm";
+					PostSelect.id="PostSelectAmountdata"+JSON.stringify(data[i].productid);
+					
+					var PostOpt1=document.createElement("option");
+					PostOpt1.value=1;
+					var PostOPtText1=document.createTextNode(1);
+					PostOpt1.appendChild(PostOPtText1);
+					
+					var PostOpt2=document.createElement("option");
+					PostOpt2.value=2;
+					var PostOPtText2=document.createTextNode(2);
+					PostOpt2.appendChild(PostOPtText2);
+					
+					var PostOpt3=document.createElement("option");
+					PostOpt3.value=3;
+					var PostOPtText3=document.createTextNode(3);
+					PostOpt3.appendChild(PostOPtText3);
+					
+					var PostOpt4=document.createElement("option");
+					PostOpt4.value=4;
+					var PostOPtText4=document.createTextNode(4);
+					PostOpt4.appendChild(PostOPtText4);
+					
+					var PostOpt5=document.createElement("option");
+					PostOpt5.value=5;
+					var PostOPtText5=document.createTextNode(5);
+					PostOpt5.appendChild(PostOPtText5);
+	
+					var PostCaptionDiv = document.createElement("div");
+					PostCaptionDiv.className = "caption";
+					PostCaptionDiv.id = "postProduct";
+
+					var PostImgDiv = document.createElement("img");
+					PostImgDiv.setAttribute("src", "null");
+
+					var PostThumbnailDiv = document.createElement("div");
+					PostThumbnailDiv.className = "thumbnail";
+					PostThumbnailDiv.id = "postdiscount";
+
+					var PostColDiv = document.createElement("div")
+					PostColDiv.className = "col-sm-4 col-lg-4 col-md-4";
+					PostColDiv.id = "postproductshow";
+
+					PostCaptionDiv.appendChild(PostNameP);
+					PostCaptionDiv.appendChild(PostMoneyP);
+					PostCaptionDiv.appendChild(PostContentP);
+					PostSelect.appendChild(PostOpt1);
+					PostSelect.appendChild(PostOpt2);
+					PostSelect.appendChild(PostOpt3);
+					PostSelect.appendChild(PostOpt4);
+					PostSelect.appendChild(PostOpt5);
+					PostCaptionDiv.appendChild(PostSelect);
+					PostCaptionDiv.appendChild(PostBtnP);
+					PostThumbnailDiv.appendChild(PostImgDiv);
+					PostThumbnailDiv.appendChild(PostCaptionDiv);
+					PostColDiv.appendChild(PostThumbnailDiv);
+					movieposts.appendChild(PostColDiv);
+
+					var PostwrapperDiv = document.getElementById("page-wrapper");
+					PostwrapperDiv.appendChild(movieposts);
+
+				}
+
+			}
+
+		})
+	}
+
+		window.onload=moviepost();
+
+		function addToCart(addToCartObject){
+			var ProductId = addToCartObject.id.substring(8);
+	        var PostAmount=document.getElementById("PostSelectAmountdata"+addToCartObject.id.substring(8));
+			$.ajax({
+				type : "get",
+				url : "cart.do",
+				data : {
+					productId : ProductId,
+					amount:PostAmount.value
+				},
+				success : function(addproductbean) {
+			
+	                   alert("確定加入購物車");
+				}
+			});
+		
+		}
+
+		
+		
+	
+			
+		
+		
+		
+		
+		</script>
+
+
+
+
+
+
+
+	<!-- jQuery -->
+	<script
+		src="${pageContext.request.contextPath}/admin/bower_components/jquery/dist/jquery.min.js"></script>
+
+	<!-- Bootstrap Core JavaScript -->
+	<script
+		src="${pageContext.request.contextPath}/admin/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+
+
+	<!-- Metis Menu Plugin JavaScript -->
+	<script
+		src="${pageContext.request.contextPath}/admin/bower_components/metisMenu/dist/metisMenu.min.js"></script>
+
+	<!-- Flot Charts JavaScript -->
+	<script
+		src="${pageContext.request.contextPath}/admin/bower_components/flot/excanvas.min.js"></script>
+	<script
+		src="${pageContext.request.contextPath}/admin/bower_components/flot/jquery.flot.js"></script>
+	<script
+		src="${pageContext.request.contextPath}/admin/bower_components/flot/jquery.flot.pie.js"></script>
+	<script
+		src="${pageContext.request.contextPath}/admin/bower_components/flot/jquery.flot.resize.js"></script>
+	<script
+		src="${pageContext.request.contextPath}/admin/bower_components/flot/jquery.flot.time.js"></script>
+	<script
+		src="${pageContext.request.contextPath}/admin/bower_components/flot.tooltip/js/jquery.flot.tooltip.min.js"></script>
+	
+
+	<!-- Custom Theme JavaScript -->
+	<script src="${pageContext.request.contextPath}/dist/js/sb-admin-2.js"></script>
+
+
+
 </body>
-   <c:import charEncoding="UTF-8" url="/footer.jsp"></c:import>              
+<c:import charEncoding="UTF-8" url="/footer.jsp"></c:import>
 </html>
