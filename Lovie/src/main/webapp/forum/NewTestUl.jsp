@@ -53,7 +53,7 @@
     <a href="#">
     <p>搜尋作者</p><br>
     <input type="text" id="suchMember">
-    <button id="suchMemberButton" onclick= "suchmember()">搜尋</button>
+    <button id="suchMemberButton" onclick= "suchmember2()">搜尋</button>
     </a>
     <a href="#">Link 2</a>
     <a href="#">Link 3</a>
@@ -72,45 +72,12 @@
 
 
 <script>
-
-function suchmember(){
-	$("#box").empty();
-	var memberAccount = $("#suchMember").val();
-	var selectMemberArticleJson;
-	var memberJson;
-
-	$.ajax({
-		url : "forumsMember",
-		type : "post",
-		dataType : "json",
-		success : function(memberjson) {
-			memberJson = memberjson;
-			$.ajax({
-				url : "forumsSelectreply",
-				type : "post",
-				dataType : "json",
-				success : function(selectReplyjson) {
-					$.ajax({
-						url : "forums/"+ memberAccount,
-						type : "get",		
-						dataType : "json",
-						success : function(selectMemberArticlejson) {			
-							$.ajax({
-								url : "forumsAllLike",
-								type : "post",
-								dataType : "json",
-								success : function(allLikejson) {
-									selectMemberArticleJson = selectMemberArticlejson;
-			 						createArticle(selectMemberArticlejson,selectReplyjson,allLikejson);
-								}					
-							})
-						}					
-					})
-				}		
-			})	
-		}	
-	})
+function suchmember2(){
+	var searchedMember = $('#suchMember').val();
+	window.location.assign("http://localhost:8080/Lovie/forumsOneMember/"+searchedMember);
 }
+
+
 
 </script>
 

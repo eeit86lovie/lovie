@@ -11,6 +11,9 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/createForum/createForum.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/selectLike/selectLike.css">
 <script src="${pageContext.request.contextPath}/js/jquery.hoverCarousel.js"></script>
+
+
+
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 
@@ -27,7 +30,6 @@
 <body>
 	<c:import charEncoding="UTF-8" url="/header.jsp"></c:import>
 	<c:import charEncoding="UTF-8" url="/forum/NewLightBox.jsp"></c:import>
-	<c:import charEncoding="UTF-8" url="/forum/createForumFunction.jsp"></c:import>
 		
 	
 	
@@ -35,7 +37,7 @@
 	
 		
 	<div class="row">
-   
+   ${memberAccount}
 		
 		<div class="col-md-2">
 			<c:import charEncoding="UTF-8" url="/forum/NewTestUl.jsp"></c:import>
@@ -145,30 +147,14 @@
     </ul>
   </div>
 </div>
-  </div>
+</div>
 </div>
 
 
+<c:import charEncoding="UTF-8" url="/forum/createForumFunction.jsp"></c:import>
 
-
-	<script>
- 
-
- //window.onload = heidReplyDiv();
-
-// window.onscroll=function(){
-//     var sHeight = document.body.scrollTop;//滚动高度
-//     var wHeight = document.documentElement.clientHeight;//window 
-//     var dHeight = document.documentElement.offsetHeight;//整个文档高度
-//     if(dHeight-(sHeight+wHeight)<1000)
-//     {
-//     	add();
-//     	//setTimeout(function() { add(); }, 5000);
-    	
-//     }
-    
-// };
-var articleJson;
+<script>
+var selectMemberArticleJson;
 var memberJson;
 
 $.ajax({
@@ -183,17 +169,18 @@ $.ajax({
 			dataType : "json",
 			success : function(selectReplyjson) {
 				$.ajax({
-					url : "${pageContext.request.contextPath}/forums",
+					url : "${pageContext.request.contextPath}/forumsSelectOneMember",
 					type : "post",
+					data:{MemberAccount:"${memberAccount}"},
 					dataType : "json",
-					success : function(articlejson) {			
+					success : function(selectMemberArticlejson) {			
 						$.ajax({
 							url : "${pageContext.request.contextPath}/forumsAllLike",
 							type : "post",
 							dataType : "json",
 							success : function(allLikejson) {
-		 						articleJson = articlejson;
-		 						createArticle(articleJson,selectReplyjson,allLikejson);
+								selectMemberArticleJson = selectMemberArticlejson;
+		 						createArticle(selectMemberArticlejson,selectReplyjson,allLikejson);
 							}					
 						})
 					}					
@@ -202,13 +189,11 @@ $.ajax({
 		})	
 	}	
 })
-
-
-
-
-
-
+	
+	
+	
 </script>
+
 
 	<c:import charEncoding="UTF-8" url="/footer.jsp"></c:import>
 </body>
