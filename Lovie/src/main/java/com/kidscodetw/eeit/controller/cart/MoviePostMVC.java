@@ -1,6 +1,5 @@
 package com.kidscodetw.eeit.controller.cart;
 
-
 import java.util.List;
 
 import javax.ws.rs.core.MediaType;
@@ -18,10 +17,10 @@ import com.kidscodetw.eeit.dao.cart.TradeDetailDAO;
 import com.kidscodetw.eeit.entity.cart.ProductBean;
 
 @Controller
-//@RequestMapping("memberproducts")
-public class MemberProductMVC {
+//@RequestMapping("movieposts")
+public class MoviePostMVC {
 
-
+	
 	@Autowired
 	private ProductDAO productDAO;
 	@Autowired
@@ -30,26 +29,20 @@ public class MemberProductMVC {
 	private BillDAO billDAO;
 
 
-
 	// 顯示商品
-	@RequestMapping(value="/product/memberproducts/{categoryId}" ,method = RequestMethod.GET, produces=MediaType.APPLICATION_JSON)
+	@RequestMapping(value="/product/movieposts/{categoryId}" ,method = RequestMethod.GET, produces=MediaType.APPLICATION_JSON)
 	@ResponseBody
 	public List<ProductBean> getList(@PathVariable("categoryId")Integer categoryId) {
-		System.out.println("AAA");
-		List<ProductBean> memberProduct = productDAO.select_category(categoryId);
-		return memberProduct;
+		List<ProductBean> moviePost = productDAO.select_category(categoryId);
+		return  moviePost;
 	}
 	
 	
-	//刪除商品
-	@RequestMapping(value="/product/memberproducts}" ,method = RequestMethod.GET, produces=MediaType.APPLICATION_JSON)
-	@ResponseBody
-	public int delet(@PathVariable("productId")Integer productId) {
-		int memberProduct=productDAO.delet(productId);
-		return memberProduct;
-		
-	}
 	
-	//新增商品
+	
+	
+	
+	
+	
 	
 }
