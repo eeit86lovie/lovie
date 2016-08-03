@@ -5,6 +5,7 @@ import java.io.PrintWriter;
 import java.sql.Date;
 import java.util.Calendar;
 import java.util.List;
+import java.util.Set;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -19,6 +20,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kidscodetw.eeit.entity.appointment.AppointmentBean2;
+import com.kidscodetw.eeit.entity.appointment.AppointmentaBean;
+import com.kidscodetw.eeit.entity.appointment.AppointmentaeditBean;
+import com.kidscodetw.eeit.entity.appointment.AppointmentareditBean;
 import com.kidscodetw.eeit.entity.appointment.AppointmentbBean;
 import com.kidscodetw.eeit.entity.appointment.AppointmentbeditBean;
 import com.kidscodetw.eeit.entity.appointment.AppointmentsBean;
@@ -37,6 +41,7 @@ public class AppointmentsMVC {
 	@Autowired
 	AppointmentRequestService appointmentRequestService;
 	
+	//查詢(1)
 	@RequestMapping("appointments")
 	public String getAppointments(){
 		return "appointment/appointments.jsp";
@@ -59,24 +64,113 @@ public class AppointmentsMVC {
     	}
     }
 	
+	//查詢(a)
 	@RequestMapping("appointmenta")
 	public String getAppointmenta(){
 		return "appointment/appointmenta.jsp";
 	}
+
+	@RequestMapping("/appointmentajson")
+	public @ResponseBody List<AppointmentaBean> selectAByMid(HttpSession session) {
+    	MemberBean bean =  	(MemberBean) session.getAttribute("loginmember");
+    	if (bean != null)
+    	{
+	    	Integer memberId = bean.getId();
+			List<AppointmentaBean> appointment_list = appointmentService2.selectByMid(memberId);
+			return appointment_list;
+    	}else
+    	{   return null;  	}
+	}	
 	
+	@RequestMapping(value="/appointmentaedit/{appointmentID}", produces=MediaType.APPLICATION_JSON)
+	public String getAppointmentaedit(@PathVariable("appointmentID")Integer appointmentID, 
+			                          Model model,HttpSession session){
+    	MemberBean bean =  	(MemberBean) session.getAttribute("loginmember");
+    	if (bean != null)
+    	{
+    		Integer memberId = bean.getId();
+	    	if (memberId != null && appointmentID != null)
+	    	{
+		    	AppointmentaeditBean editbean = appointmentService2.selectByAidMid(appointmentID, memberId);
+		    	if (editbean != null)
+		    	{
+					model.addAttribute("oneAppointmentedit",editbean);
+		    	}
+	    	}
+    	}
+    	return "appointment/appointmentaedit.jsp";
+	}
+	
+	@RequestMapping("/appointmentaedit/appointmentAUpdate")
+    public void AppointmentAUpdate(@RequestParam("appointmentid") Integer appointmentID,
+    						  @RequestParam("acontent") String acontent,
+    						  @RequestParam("acancel") Boolean acancel,
+    		                  @RequestParam("astatus") Integer astatus,
+    		                  @RequestParam("radiomid") Integer radiomid,
+    		                  HttpServletResponse response,HttpSession session){
+	MemberBean bean =  	(MemberBean) session.getAttribute("loginmember");
+	if (bean != null)
+	{
+		Integer memberId = bean.getId();
+	if (memberId != null && appointmentID != null)
+	{
+		//說明：1.只有申請狀態為 [1.進行] 才可修改內容<br />
+		//    2.只有申請狀態為 [1.進行] 或 [2.成功] 才可進行取消
+		try {
+			//System.out.println(appointmentID+","+acontent+","+acancel+","+astatus+","+memberId+","+radiomid);
+			Boolean finres = true;
+		    //1.申請狀態為 [1:進行] && 沒有勾取消
+			//  (a)都沒有人申請,則只異動內容(-1),
+			//  (b)有人申請,
+			//    update app  內容,接受對像acceptedMemberId,時間acceptedTime,status=2.成功
+		    //    update appr status=2否  where appointmentID= ? and status in (0,1)
+		    //    update appr status=1是  where appointmentID= ? and requestMemberId= ? and status = 0
+			if (acancel != true && astatus == 1 )
+			{  System.out.println("aa");
+			   Integer res1 = appointmentService2.updateacceptedByAid(appointmentID, acontent, radiomid);
+			   if (res1 <= 0)
+				   finres = false;
+			}
+			
+		    //2.(申請狀態為 [1:進行]或[2.成功]) && 勾取消
+		    //    update app 狀態改為 [0.取消]
+		    //    update appr status=8取消(邀請者)  where appointmentID= ? and status in (0,1,2)
+			if (acancel == true && (astatus == 1 || astatus == 2)) 
+			{
+			    Integer res2 = appointmentService2.updatestatusto0ByAid(appointmentID);
+			    if (res2 <= 0)
+				   finres = false;
+			} 
+			PrintWriter out;
+			try {
+				out = response.getWriter();
+			    out.println(finres);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		} catch (NumberFormatException e) {
+			e.printStackTrace();
+		}
+		}
+	}		
+	return ;		
+    }
+	
+	//查詢(b)
 	@RequestMapping("appointmentb")
 	public String getAppointmentb(){
 		return "appointment/appointmentb.jsp";
 	}
 
+
 	@RequestMapping("/appointmentbjson")
-	public @ResponseBody List<AppointmentbBean> selectByMid(HttpSession session) {
+	public @ResponseBody List<AppointmentbBean> selectBByMid(HttpSession session) {
     	MemberBean bean =  	(MemberBean) session.getAttribute("loginmember");
     	if (bean != null)
     	{
-    	Integer memberId = bean.getId();
-		List<AppointmentbBean> appointmentr_list = appointmentRequestService.selectByMid(memberId);
-		return appointmentr_list;
+	    	Integer memberId = bean.getId();
+			List<AppointmentbBean> appointmentr_list = appointmentRequestService.selectByMid(memberId);
+			return appointmentr_list;
     	}else
     	{
     		return null;

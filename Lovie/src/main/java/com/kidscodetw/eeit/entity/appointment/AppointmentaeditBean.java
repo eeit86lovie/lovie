@@ -1,35 +1,47 @@
 package com.kidscodetw.eeit.entity.appointment;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Transient;
 
 @Entity
-public class AppointmentbeditBean implements Serializable{
+public class AppointmentaeditBean implements Serializable{
 	private static final long serialVersionUID = 1L;
    
 	@Id
 	private Integer id;
-	@Id
 	private Integer mId;
 	private Integer showtimeId;
+	private String pubTime;
 	private String showtimeData;
 	private String nickname;
 	private Integer gender;
 	private String birthday;
 	private String constellation;	
 	private String city;
-	private String district;	
-	private String bcontent;	
-	private Integer bstatus;
+	private String district;
+	private Integer age;
+	private String gendertxt;
 	private String acontent;	
 	private Integer astatus;
+	@Transient
+	private List<AppointmentareditBean> appointmentareditBeans = new ArrayList<AppointmentareditBean>();
+
 	public Integer getId() {
 		return id;
 	}
 	public void setId(Integer id) {
 		this.id = id;
+	}
+	public Integer getmId() {
+		return mId;
+	}
+	public void setmId(Integer mId) {
+		this.mId = mId;
 	}
 	public Integer getShowtimeId() {
 		return showtimeId;
@@ -37,17 +49,17 @@ public class AppointmentbeditBean implements Serializable{
 	public void setShowtimeId(Integer showtimeId) {
 		this.showtimeId = showtimeId;
 	}
+	public String getPubTime() {
+		return pubTime;
+	}
+	public void setPubTime(String pubTime) {
+		this.pubTime = pubTime;
+	}
 	public String getShowtimeData() {
 		return showtimeData;
 	}
 	public void setShowtimeData(String showtimeData) {
 		this.showtimeData = showtimeData;
-	}
-	public Integer getmId() {
-		return mId;
-	}
-	public void setmId(Integer mId) {
-		this.mId = mId;
 	}
 	public String getNickname() {
 		return nickname;
@@ -85,18 +97,6 @@ public class AppointmentbeditBean implements Serializable{
 	public void setDistrict(String district) {
 		this.district = district;
 	}
-	public String getBcontent() {
-		return bcontent;
-	}
-	public void setBcontent(String bcontent) {
-		this.bcontent = bcontent;
-	}
-	public Integer getBstatus() {
-		return bstatus;
-	}
-	public void setBstatus(Integer bstatus) {
-		this.bstatus = bstatus;
-	}
 	public String getAcontent() {
 		return acontent;
 	}
@@ -109,11 +109,32 @@ public class AppointmentbeditBean implements Serializable{
 	public void setAstatus(Integer astatus) {
 		this.astatus = astatus;
 	}
+	public Integer getAge() {
+		return age;
+	}
+	public void setAge(Integer age) {
+		this.age = age;
+	}
+	public String getGendertxt() {
+		return gendertxt;
+	}
+	public void setGendertxt(String gendertxt) {
+		this.gendertxt = gendertxt;
+	}
+	public List<AppointmentareditBean> getAppointmentareditBeans() {
+		return appointmentareditBeans;
+	}
+	public void setAppointmentareditBeans(List<AppointmentareditBean> appointmentareditBeans) {
+		this.appointmentareditBeans = appointmentareditBeans;
+	}
 	@Override
 	public String toString() {
-		return "AppointmentbeditBean [id=" + id + ", showtimeId=" + showtimeId + ", showtimeData=" + showtimeData
-				+ ", mId=" + mId + ", nickname=" + nickname + ", gender=" + gender + ", birthday=" + birthday
-				+ ", constellation=" + constellation + ", city=" + city + ", district=" + district + ", bcontent="
-				+ bcontent + ", bstatus=" + bstatus + ", acontent=" + acontent + ", astatus=" + astatus + "]";
+		return "AppointmentaeditBean [id=" + id + ", mId=" + mId + ", showtimeId=" + showtimeId + ", pubTime=" + pubTime
+				+ ", showtimeData=" + showtimeData + ", nickname=" + nickname + ", gender=" + gender + ", birthday="
+				+ birthday + ", constellation=" + constellation + ", city=" + city + ", district=" + district+ "," + age + "," + gendertxt
+				+ ", acontent=" + acontent + ", astatus=" + astatus + ", AppointmentareditBeans="  
+				+ (appointmentareditBeans==null?"":appointmentareditBeans.toString())
+				+ "]";
 	}
+
 }

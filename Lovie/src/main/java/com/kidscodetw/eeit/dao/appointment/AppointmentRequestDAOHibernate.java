@@ -80,7 +80,7 @@ public class AppointmentRequestDAOHibernate implements AppointmentRequestDAO {
 			"	    join" + 
 			"	    (select id,gender,nickname from eeit86.Member) E" + 
 			"		 on mId = E.id" + 
-			"	order by B.showtimeId desc ";
+			"	order by showtimeDate desc ";
 
 			//System.out.println(SELECT_ByMid);
 			SQLQuery query = getSession().createSQLQuery(SELECT_ByMid);

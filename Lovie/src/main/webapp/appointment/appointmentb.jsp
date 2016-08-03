@@ -138,7 +138,7 @@ $(document).ready(function() {
 			label : '狀態',
 			name : 'bstatus',
 			search:true, stype:'select', 
-			searchoptions: { value: "0:0:尚未回應;1:1.是;2:2.否;7:7.取消(申請者);8:8.取消(邀請者)"	,
+			searchoptions: { value: "0:0.尚未回應;1:1.是;2:2.否;7:7.取消(申請者);8:8.取消(邀請者)"	,
 				             sopt:['eq']},
 			width : 120,
 			fixed : true,
@@ -149,8 +149,8 @@ $(document).ready(function() {
 		sortname: 'showtimeDate',
 		sortorder: 'desc',
 		loadonce: true,
-		rowList: [3,5,10,20],
-		rowNum: 3,
+		rowList: [5,10,20],
+		rowNum: 5,
 		hidegrid: false,
 		viewrecords: true,
 		width: $("#jqGriddiv").width(),
@@ -207,7 +207,6 @@ $(document).ready(function() {
 		// options for the Delete Dailog
 		{});
 });
-
 </script>
 
 </body>
