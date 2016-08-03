@@ -6,12 +6,12 @@ import java.util.Date;
 import com.kidscodetw.eeit.entity.member.MemberBean;
 
 public class DataTransfer {
-	public static int changeBirthdayToAge(MemberBean memberBean) {
-			int intValue = Integer.parseInt(memberBean.getBirthday().substring(
-					0, 4));
-			Date today = Calendar.getInstance().getTime();
-			return today.getYear() + 1900 - intValue;
-	}
+//	public static int changeBirthdayToAge(MemberBean memberBean) {
+//			int intValue = Integer.parseInt(memberBean.getBirthday().substring(
+//					0, 4));
+//			Date today = Calendar.getInstance().getTime();
+//			return today.getYear() + 1900 - intValue;
+//	}
 	public static String genderTransfer(MemberBean memberBean){
 		String gender=null;
 		if(memberBean.getGender()==0)

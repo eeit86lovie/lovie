@@ -21,20 +21,13 @@ public class MemberListMVC {
 	@ResponseBody
 	public List<MemberBean> dispatch(@PathVariable("gender") Integer gender, Model model) {
 		if (gender.equals(1)) {
-			return changeBirthdayToAge(MemberGetListService.getAllGirls());
+			return MemberGetListService.getAllGirls();
 		}else if(gender.equals(0)){
-			return changeBirthdayToAge(MemberGetListService.getAllBoys());
+			return MemberGetListService.getAllBoys();
 		}
 		return null;
 	}
 	
-	private List<MemberBean> changeBirthdayToAge(List<MemberBean> memberBean){
-		for (MemberBean mb : memberBean) {
-			if(mb.getBirthday().length()<2)
-			mb.setBirthday(String.valueOf(DataTransfer.changeBirthdayToAge(mb))); 
-		}
-		return memberBean;
-	}
 }
 
 

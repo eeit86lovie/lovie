@@ -58,7 +58,7 @@ color:black;
   <div class="col-md-3"><img id="blah" style="border:5px solid #acd6ff;border-radius:15px;width:100%" src="${pageContext.request.contextPath}/photo/member/${oneMember.id}"></div>
   <div class="col-md-9" ></div>
   <div class="col-md-9" ><b class="memberColumn">暱稱：</b><span id="nickname" onclick="member_edit(this)">${oneMember.nickname}</span></div>
-  <div class="col-md-9" ><b class="memberColumn">年齡：</b>${memberAge}歲</div>
+  <div class="col-md-9" ><b class="memberColumn">年齡：</b>${oneMember.age}歲</div>
   <div class="col-md-9" ><b class="memberColumn">性別：</b>${gender}</div>
   <div class="col-md-9" ><b class="memberColumn">星座：</b>${oneMember.constellation}</div>
   <div class="col-md-9" ><b class="memberColumn">所在地：</b><span id="city" onclick="city_edit(this)"><span>${oneMember.city}</span>  <span>${oneMember.district}</span></span></div>
@@ -92,7 +92,7 @@ color:black;
   <div class="col-md-12" ><b class="memberColumn">再次確認新密碼：</b><input type="password" id="password2" onblur="changePassword()"/></div>
   <div class="col-md-12" ><b class="memberColumn">信箱：</b><input type="email" id="email" value='${oneMember.email}' onblur="checkEmail()" /></div>
   <div class="col-md-12" ><b class="memberColumn">電話：</b><input id=phone value="${oneMember.phone}"/></div>
-  <div class="col-md-12" ><b class="memberColumn">生日：</b><br><input type="text" id="datepicker" disabled="value"></div>
+  <div class="col-md-12" ><b class="memberColumn">生日：</b><br><input type="text" id="datepicker" disabled="value" value="${oneMember.birthday}"></div>
  </form>
 </div>
 </div>
@@ -303,6 +303,7 @@ $(function () {
         			success: function(data){
         				alert("更新成功")
         				dialog.dialog( "close" );
+        				window.location.reload();
         			},error: function(){
         				alert("失敗Q_Q")
         			}
@@ -312,15 +313,21 @@ $(function () {
 
 //*************************************************************************************************************
 //以下是跳出選單中的生日下拉式選單
+var birthday="${loginmember.birthday}"
+
       $(function () {
+    	  console.log(birthday)
           $("#datepicker").datepicker({
+        	  dateFormat:"yy-mm-dd",
+              defaultDate: birthday,
               changeMonth: true,
               changeYear: true,
               showOn: "button",
+              yearRange:"1950:2000",
               buttonImage: "http://jqueryui.com/resources/demos/datepicker/images/calendar.gif",
               buttonImageOnly: true
           });
-          
+//           $("#datepicker").datepicker().datepicker("setDate", birthday);
       });
 //****************************************************************************************************************
 //進階表單內容驗證
@@ -343,6 +350,7 @@ function checkEmail(){
 		document.getElementById("checkButton").disabled=false;
 	}else{
 		document.getElementById("checkButton").disabled=true;
+		alert("請輸入正確信箱")
 	}
 }
 

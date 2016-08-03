@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kidscodetw.eeit.dao.member.MemberDAO;
 import com.kidscodetw.eeit.entity.member.MemberBean;
+import com.kidscodetw.eeit.util.DataTransfer;
 
 @Controller
 @RequestMapping("/member/MemberUpdateAdvanceData")
@@ -37,12 +38,21 @@ public class MemberUpdateAdvanceData {
 			@RequestParam String phone,
 			@RequestParam String datepicker,
 			Model model){
-		System.out.println("進入");
 		MemberBean bean=((MemberBean)session.getAttribute("loginmember"));
-		if(password1.equals(password2)){
+		if(password1.equals(password2)&&!password1.trim().equals("")){
 			bean.setPassword(password1);
 		}
-		return memberDAO.update(bean);
+		if(!email.trim().equals("")){
+			bean.setEmail(email);
+			}
+		if(!phone.trim().equals("")){
+			bean.setPhone(phone);
+			}
+		bean.setBirthday(datepicker);
+		System.out.println(DataTransfer.changeBirthdayToConstellations(bean));
+		bean.setConstellation(DataTransfer.changeBirthdayToConstellations(bean));
+		memberDAO.update(bean);
+		return bean;
 		
 	}
 	

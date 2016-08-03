@@ -1,6 +1,7 @@
 package com.kidscodetw.eeit.entity.member;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import javax.persistence.Column;
 
@@ -30,8 +31,15 @@ public class MemberBean implements Serializable{
 	private String registeredTime;
 	private String lastOnTime;
 	private String privilegeExp;
+	private int age;
 	
 
+
+	public int getAge() {
+		Date myDate = new Date();
+		this.age=myDate.getYear() + 1900-Integer.parseInt(this.birthday.substring(0,4));
+		return age;
+	}
 
 	public MemberBean(){
 		
