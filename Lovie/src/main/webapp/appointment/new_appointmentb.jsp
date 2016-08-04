@@ -29,7 +29,7 @@
 }
 
 </style>
-<title>邀請新約會</title>
+<title>申請新約會</title>
 </head>
 <body>
 <c:import charEncoding="UTF-8" url="/header.jsp"></c:import>
@@ -139,6 +139,23 @@
       </div>
     </div>
   </div>
+  <div class="panel panel-default">
+    <div class="panel-heading" role="tab" id="headingTwo">
+      <h4 class="panel-title">
+        <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+		步驟3:選擇約會:
+        </a>
+      </h4>
+    </div>
+    <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+      <div class="panel-body">
+      <!-- 3 appointment beg -->
+
+        OOO 邀請 OOO 
+      <!-- 3 appointment end -->
+      </div>
+    </div>
+  </div>  
 </div>
 <!-- end sec-->
 </sec:authorize>

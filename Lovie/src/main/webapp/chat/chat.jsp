@@ -19,6 +19,7 @@
 
 /* The CSS */
 select {
+	min-width:150px;
     padding:3px;
     margin: 0;
     -webkit-border-radius:4px;
@@ -78,10 +79,10 @@ label:before {
         <div class="left">
             <div class="top">
                 <label>
-				    <select id="appendFriend">
+				    <select id="appendFriend" onchange="chooseFriend(this.options[this.options.selectedIndex])">
 				    <option>選擇好友</option>
 				    <c:forEach items="${friends}" var="friend">
-				    	<option onselect="chooseFriend(this)" value="${friend.account }">${friend.nickname }</option>
+				    	<option value="${friend.account }">${friend.nickname }</option>
 				    </c:forEach>
 				    </select>
 				</label>
@@ -95,7 +96,7 @@ label:before {
             
             <div class="write">
                 <a href="javascript:;" class="write-link attach"></a>
-                <input type="text" id="inputText"/>
+                <input type="text" id="inputText" onkeydown="if (event.keyCode == 13) { sendMessage()}"/>
                 <a href="javascript:;" class="write-link smiley"></a>
                 <a href="#" onclick="sendMessage()" class="write-link send"></a>
             </div>
@@ -222,9 +223,10 @@ label:before {
 	}
 	
 	function personClick(object){
-    	if ($(object).hasClass('.active')) {
+    	if ($(object).hasClass('person active')) {
             return false;
         } else {
+        	
             var findChat = $(object).attr('data-chat');
             var personName = $(object).find('.name').text();
             $('.right .top .name').html(personName);
@@ -260,8 +262,15 @@ label:before {
     
     
     function chooseFriend(friend){
-    	alert('1')
-//     	$('#receiver').attr("data-id", friend.value)
+    	if(friend.text!="選擇好友" || !$('#'+friend.value).hasClass('active')){
+			$('#receiver').attr("data-id", friend.value).text(friend.text);
+    	}
+    	if(!$('#'+friend.value)){
+    		alert('#'+friend.value);
+			$('.chat').removeClass('active-chat');
+		}else{
+			personClick($('#'+friend.value));
+		}
     	
     }
     
