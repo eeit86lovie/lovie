@@ -28,7 +28,7 @@
 }
 
 /* Links inside the dropdown */
-.dropdown-content a {
+.dropdown-content h2 {
     color: black;
     padding: 12px 16px;
     text-decoration: none;
@@ -36,7 +36,7 @@
 }
 
 /* Change color of dropdown links on hover */
-.dropdown-content a:hover {background-color: #f1f1f1}
+.dropdown-content h2:hover {background-color: #f1f1f1}
 
 /* Show the dropdown menu on hover */
 .dropdown:hover .dropdown-content {
@@ -55,26 +55,31 @@
 <div class="dropdown">
   <div class="dropdown-content" id="dropdown-content">
     
-    <a href="#">
-       <button id="modal_trigger" href="#modal" onclick="checkLogin()">發表文章</button>
-    </a>
+       <h2>
+       		<button id="modal_trigger" href="#modal" onclick="checkLogin()">發表文章</button>
+       </h2>    
     
-    <a href="#">
-    	<button id="searchMyArticleButton" onclick= "searchMyArticle()">我的文章</button>
-    </a>
+        <h2>    
+    		<button id="searchMyArticleButton" onclick= "searchMyArticle()">我的文章</button>
+        </h2>
     
-    <a href="#">
+    
+       <h2>   
     	<p>搜尋作者</p><br>
 	    <input type="text" id="searchMember">
+	    <p id="error_message_searchMember"></p>
 	    <button id="searchMemberButton" onclick= "searchmember()">搜尋</button>
-    </a>
+       </h2>
     
-    <a href="#">
+    <h2>
     	<p>搜尋標題</p><br>
 	    <input type="text" id="searchTitle">
+	    <p id="error_message_searchTitle"></p>
 	    <button id="searchTitleButton" onclick= "searchTitle()">搜尋</button>
     
-    </a> <a href="#">
+    </h2>
+    
+     <h2>
 	    <p>依類別搜尋</p><br>
 	    <select id="searchGenre">
 	　		<option value="好雷">好雷</option>
@@ -85,32 +90,26 @@
 	　		<option value="其他">其他</option>
 	　	</select><br>
 	    <button id="searchGenreButton" onclick= "searchGenre()">搜尋</button>
-    </a>    
+    </h2>    
     
-    <a href="#">
+    <h2>
     	<p>搜尋內容關鍵字</p><br>
 	    <input type="text" id="searchContent">
+	    <p id="error_message_searchContent"></p>
 	    <button id="searchContentButton" onclick= "searchContent()">搜尋</button>
-    </a>
+    </h2>
     
     
     
-    <a href="#">
+    <h2>
         <button id="searchMyLikeButton" onclick= "searchMyLike()">我所喜歡的文章</button>  
-    </a>
+    </h2>
     
     
-    <a href="#">
+    <h2>
         <button id="searchMyDisLikeButton" onclick= "searchMyDisLike()">我所不喜歡的文章</button> 
-    </a>
-    
-    
-    
-    
-    <a href="#">Link 10</a>
-    <a href="#">Link 11</a>
-    <a href="#">Link 12</a>
-    
+    </h2>
+     
   </div>
 </div>
 
@@ -236,13 +235,30 @@ function clickLightButton(){
 
 function searchmember(){
 	var searchedMember = $('#searchMember').val();
+	if(searchedMember==""){
+		$("#error_message_searchMember").empty();
+		$("#error_message_searchTitle").empty();
+		$("#error_message_searchMember").empty();
+		$("#error_message_searchMember").append("請輸入會員");
+	}else{
+		
 	window.location.assign("http://localhost:8080/Lovie/forumsOneMember/"+ searchedMember);
+	}
 }
 
 
 function searchTitle(){
 	var searchedTitle = $('#searchTitle').val();
+	if(searchedTitle==""){
+		$("#error_message_searchMember").empty();
+		$("#error_message_searchTitle").empty();
+		$("#error_message_searchContent").empty();
+		$("#error_message_searchTitle").append("請輸入標題")
+	}else{
+		
 	window.location.assign("http://localhost:8080/Lovie/forumsTitle/"+searchedTitle);
+	}
+	
 }
 
 
@@ -260,7 +276,16 @@ function searchGenre(){
 
 function searchContent(){
 	var searchContent = $("#searchContent").val();
+	$("#error_message_searchMember").empty();
+	$("#error_message_searchTitle").empty();
+	$("#error_message_searchContent").empty();
+	if(searchContent==""){
+		$("#error_message_searchContent").empty();
+		$("#error_message_searchContent").append("請輸入內容")
+	}else{
+		
 	window.location.assign("http://localhost:8080/Lovie/forumsArticleContent/"+ searchContent);
+	}
 }
 
 

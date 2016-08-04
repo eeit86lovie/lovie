@@ -37,7 +37,7 @@
 	
 		
 	<div class="row">
-   ${memberAccount}
+  
 		
 		<div class="col-md-2">
 			<c:import charEncoding="UTF-8" url="/forum/NewTestUl.jsp"></c:import>
@@ -157,6 +157,7 @@
 var selectMemberArticleJson;
 var memberJson;
 
+
 $.ajax({
 	url : "${pageContext.request.contextPath}/forumsMember",
 	type : "post",
@@ -179,9 +180,17 @@ $.ajax({
 							type : "post",
 							dataType : "json",
 							success : function(allLikejson) {
-								selectMemberArticleJson = selectMemberArticlejson;
-		 						createArticle(selectMemberArticlejson,selectReplyjson,allLikejson);
-							}					
+								
+								if(selectMemberArticlejson !=""){
+									selectMemberArticleJson = selectMemberArticlejson;
+			 						createArticle(selectMemberArticlejson,selectReplyjson,allLikejson);
+							
+								}else{
+									
+									var no_member = $("<p></p>").append("查無此會員")
+									$("#box").append(no_member);
+								}
+								}					
 						})
 					}					
 				})

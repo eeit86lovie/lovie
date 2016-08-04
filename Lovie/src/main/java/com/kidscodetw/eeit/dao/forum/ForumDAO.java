@@ -14,7 +14,7 @@ public interface ForumDAO {
 	
 	List<ForumBean> select_ALL();
 	
-	List<ForumBean> select_NEXT(int count);
+	List<ForumBean> select_NEXT(Integer count);
 	
 	List<ForumBean> select_genre(String genre);
 	

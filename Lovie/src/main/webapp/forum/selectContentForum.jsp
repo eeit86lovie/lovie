@@ -37,7 +37,6 @@
 	
 		
 	<div class="row">
-   ${memberAccount}
 		
 		<div class="col-md-2">
 			<c:import charEncoding="UTF-8" url="/forum/NewTestUl.jsp"></c:import>
@@ -179,8 +178,16 @@ $.ajax({
 							type : "post",
 							dataType : "json",
 							success : function(allLikejson) {
-								selectContentArticleJson = selectContentArticlejson;
-		 						createArticle(selectContentArticlejson,selectReplyjson,allLikejson);
+								
+								if(selectContentArticlejson !=""){
+									selectContentArticleJson = selectContentArticlejson;
+			 						createArticle(selectContentArticlejson,selectReplyjson,allLikejson);		
+								}else{
+									var no_member = $("<p></p>").append("查無此文章")
+									$("#box").append(no_member);
+								}
+								
+							
 							}					
 						})
 					}					

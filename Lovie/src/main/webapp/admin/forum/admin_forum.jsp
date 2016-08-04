@@ -25,7 +25,7 @@
 				</div>
 				<div class="col-md-2">
 					<button id="update_button" onclick="movieCrawler()">更新電影</button>
-					<img id ="update_loading_icon" src="image/loading.gif" style="width: 100px;display: none">
+					
 				</div>
 			</div>
 			<hr>
@@ -51,19 +51,10 @@
 										<th>檢舉次數</th>
 									</tr>
 								</thead>
-								<tbody id="forum_tbody">
-									<c:forEach var="reports" items="${forums }" varStatus="vs">
-										<tr>
-											<td ${forums.ForumBean.id}>${forums.ForumBean.id}</td>
-<%-- 											<td id="movie${forums.id }_mName" onclick="movie_edit(this)">${movie.name}</td> --%>
-<%-- 											<td id="movie${movie.id }_mRank" onclick="movie_edit(this)">${movie.rank}</td> --%>
-<%-- 											<td id="movie${movie.id }_mStartTime" onclick="movie_edit(this)" style="min-width: 100px;">${movie.startTime}</td> --%>
-<%-- 											<td id="movie${movie.id }_mFilmLength" onclick="movie_edit(this)">${movie.filmLength}</td> --%>
-<%-- 											<td id="movie${movie.id }_mIntro" onclick="movie_edit(this)">${movie.intro}</td> --%>
-<%-- 											<td id="movie${movie.id }_mPhoto" onclick="movie_edit(this)">${movie.photo}</td> --%>
-<%-- 											<td id="movie${movie.id }_mTrailer" onclick="movie_edit(this)">${movie.trailer}</td> --%>
-										</tr>
-									</c:forEach>
+								<tbody id="forum_tbody">				
+										<tr id="admim_forum">
+
+										</tr>								
 								</tbody>
 							</table>
 						</div>
@@ -78,6 +69,43 @@
 			
 			
 <script>
+
+$.ajax({
+	url : "${pageContext.request.contextPath}/forumsAdmin",
+	type : "get",
+	dataType : "json",
+	success : function(report) {
+			
+		for(var i =0;i<report.length;i++){
+			var td0 = $("<td id='"+'img'+report[i].id+"'></ul>").append("X");
+			var td1 = $("<td id='"+'id'+report[i].id+"'></ul>").append(report[i].id);
+			var td2 = $("<td id='"+'member'+report[i].id+"'></ul>").append(report[i].memberAccount);
+			var td3 = $("<td id='"+'title'+report[i].id+"'></ul>").append(report[i].title);
+			var td4 = $("<td id='"+'content'+report[i].id+"'></ul>").append(report[i].content);
+			var td5 = $("<td id='"+'genre'+report[i].id+"'></ul>").append(report[i].genre);
+			var td6 = $("<td id='"+'pubTime'+report[i].id+"'></ul>").append(report[i].pubTime);
+			var td7 = $("<td id='"+'editTime'+report[i].id+"'></ul>").append(report[i].editTime);
+			var td8 = $("<td id='"+'reportMember'+report[i].id+"'></ul>").append(report[i].reportMember);
+			var td9 = $("<td id='"+'reportReason'+report[i].id+"'></ul>").append(report[i].reportReason);
+			
+			var tr = $("#admim_forum").append(td0);
+			tr.append(td1);
+			tr.append(td2);			
+			tr.append(td3);
+			tr.append(td4);
+			tr.append(td5);
+			tr.append(td6);
+			tr.append(td7);
+			tr.append(td8);
+			tr.append(td9);
+			
+			$("#forum_tbody").append(tr);
+			
+		}
+		
+	
+	}					
+})
 
 
 </script>		

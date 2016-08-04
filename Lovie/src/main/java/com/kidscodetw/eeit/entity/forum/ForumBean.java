@@ -6,7 +6,7 @@ import java.util.Arrays;
 
 public class ForumBean {
 	
-	private int id;
+	private Integer id;
 	private String memberAccount;
 	private String title;
 	private byte[] photo;
@@ -17,10 +17,10 @@ public class ForumBean {
 	
     
     
-    public int getId() {
+    public Integer getId() {
 		return id;
 	}
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 	public String getMemberAccount() {

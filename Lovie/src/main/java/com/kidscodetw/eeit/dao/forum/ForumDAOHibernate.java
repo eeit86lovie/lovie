@@ -49,7 +49,7 @@ public class ForumDAOHibernate implements ForumDAO {
 
 	
 	@Override
-	public List<ForumBean> select_NEXT(int next_count) {
+	public List<ForumBean> select_NEXT(Integer next_count) {
 		
 			List<ForumBean> lfb = null;
 				 Query query = getSession().createQuery(SELECT_ALL);			 		

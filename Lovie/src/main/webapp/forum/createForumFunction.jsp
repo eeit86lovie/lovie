@@ -347,9 +347,9 @@ function add(){
 	  		var countReplyimg_div = $("<div class='countReplyimg_div'></div>").append(replyCountimg);
 	  		countReplyimg_div.className = "countReplyimg_div"
 	  		var countReply = Article_replyarea_div.children().length+"則留言";
-	  		alert(Article_replyarea_div.children().length);
+	  		var countReply_div = $("<div class='countReply_div' id='"+'countReply_div'+articleJson[i].id+"'></div>");
 	  		if(Article_replyarea_div.children().length>0){
-	  			var countReply_div = $("<div class='countReply_div' id='"+'countReply_div'+articleJson[i].id+"'></div>").append(countReply);
+	  			countReply_div.append(countReply);
 	  		}
 	  		
 	  		

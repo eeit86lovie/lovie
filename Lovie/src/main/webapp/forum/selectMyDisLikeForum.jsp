@@ -36,8 +36,7 @@
        
 	
 		
-	<div class="row">
-   ${memberAccount}
+	<div class="row">  
 		
 		<div class="col-md-2">
 			<c:import charEncoding="UTF-8" url="/forum/NewTestUl.jsp"></c:import>
@@ -179,8 +178,17 @@ $.ajax({
 							type : "post",
 							dataType : "json",
 							success : function(allLikejson) {
-								selectIDisLikeJson = selectIDisLikejson;
-		 						createArticle(selectIDisLikejson,selectReplyjson,allLikejson);
+								
+								if(selectIDisLikejson != ""){
+									selectIDisLikeJson = selectIDisLikejson;
+			 						createArticle(selectIDisLikejson,selectReplyjson,allLikejson);
+								}else{
+									
+									var no_member = $("<p></p>").append("目前無DisLike的文章喔!!")
+									$("#box").append(no_member);
+								}
+								
+							
 							}					
 						})
 					}					

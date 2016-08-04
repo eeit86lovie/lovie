@@ -29,7 +29,7 @@ public class ForumService {
 		return result;
 	}
 
-	public ForumBean select_id(int id){
+	public ForumBean select_id(Integer id){
 		ForumBean result = null;
 		if(id!=0){
 			result = forumDAO.select_id(id);
@@ -45,7 +45,7 @@ public class ForumService {
 		return result;
 	}
 
-	public int delete(int id){
+	public int delete(Integer id){
 		int result = 0;
 		if(id!=0){
 			result = forumDAO.delete(id);
