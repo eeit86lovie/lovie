@@ -58,7 +58,8 @@ td{
 								<tbody id="movie_tbody">
 									<c:forEach var="movie" items="${movies }" varStatus="vs">
 										<tr id="movietr${movie.id }">
-											<td id="movie_delete${movie.id }" onclick="movie_delete(this)"><i class="fa fa-trash-o" style="color:red;"></i></td>
+											<td id="movie_delete${movie.id }" onclick="movie_delete(this)"><span
+												class="glyphicon glyphicon-remove" style="color: red;"></span></td>
 											<td id="movie${movie.id }_mID" onclick="movie_edit(this)">${movie.id}</td>
 											<td id="movie${movie.id }_mName" onclick="movie_edit(this)">${movie.name}</td>
 											<td id="movie${movie.id }_mRank" onclick="movie_edit(this)">${movie.rank}</td>
