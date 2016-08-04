@@ -35,15 +35,15 @@ height:100px;
     <li><a href="#tabs-3">對我感興趣的人</a></li>
   </ul>
   <div id="tabs-1">
-    <ul id="friendTable"></ul>
+    <div id="friendTable"></div>
   </div>
   
   <div id="tabs-2">
-     <ul id="interestedTable"></ul>
+     <div id="interestedTable"></div>
   </div>
   
   <div id="tabs-3">
-     <ul id="interestingTable"></ul>
+     <div id="interestingTable"></div>
   </div>
 </div>
  
@@ -70,21 +70,19 @@ function findData(loginmemberId,relation,tableName){
 		processData: false,
 		contentType: false,
 		success:function(memberBean){
-// 			console.log("成功")
 			var flag = $(document.createDocumentFragment());
 			$.each(memberBean,function(idx,member){	
 				var img=$('<img />')
 				img.addClass("img1");
 				img.attr('src',"${pageContext.request.contextPath}/photo/member/"+member.id)
-				var cell1=$("<a herf></a>")
+				var cell1=$("<div><a herf></a></div>")
 				cell1.attr('href',"${pageContext.request.contextPath}/member/profile/"+member.id)
 				cell1.append(img)
-		//		var cell1  = $("<div></div>").append(img)
-				var cell2  = $("<span></span>").text(member.nickname)
-				var cell3  = $("<span></span>").text(member.city)
-				var cell4  = $("<span></span>").text(member.age+"歲")
+				var cell2  = $("<div></div>").text(member.nickname)
+				var cell3  = $("<div></div>").text(member.city)
+				var cell4  = $("<div></div>").text(member.age+"歲")
 		
-				var row = $("<li class='item'></li>").append([cell1,cell2,cell3,cell4])
+				var row = $("<div class='item'></div>").append([cell1,cell2,cell3,cell4])
 				flag.append(row);
 			})
 			tb.append(flag)
