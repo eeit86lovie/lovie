@@ -31,8 +31,9 @@ public class MemberBean implements Serializable{
 	private String registeredTime;
 	private String lastOnTime;
 	private String privilegeExp;
-	private int age;
-	
+	private Integer loginTimes;
+	private Integer age;
+
 
 
 	public int getAge() {
@@ -46,7 +47,7 @@ public class MemberBean implements Serializable{
 	}
 	
 	public String toString(){
-		return "model.MemberBean[id:"+id+", "+"account:"+account+ ", "+"password:"+password+ ", "+"gender:"+gender+ ", "+"email:"+email+ ", "+"nickname:"+nickname+ ", "+"city:"+city+ ", "+"district:"+district+ ", "+"phone:"+phone+ ", "+"privilege:"+privilege+ ", "+"photoUrl:"+photoUrl+ ", "+"birthday:"+birthday+ ", "+"friendNum:"+friendNum+ ", "+"commentPoint:"+commentPoint+ ", "+"intro:"+intro+ ", "+"constellation:"+constellation+ ", "+"registeredTime:"+registeredTime+ ", "+"lastOnTime:"+lastOnTime;
+		return "model.MemberBean[id:"+id+", "+"account:"+account+ ", "+"password:"+password+ ", "+"gender:"+gender+ ", "+"email:"+email+ ", "+"nickname:"+nickname+ ", "+"city:"+city+ ", "+"district:"+district+ ", "+"phone:"+phone+ ", "+"privilege:"+privilege+ ", "+"photoUrl:"+photoUrl+ ", "+"birthday:"+birthday+ ", "+"friendNum:"+friendNum+ ", "+"commentPoint:"+commentPoint+ ", "+"intro:"+intro+ ", "+"constellation:"+constellation+ ", "+"registeredTime:"+registeredTime+ ", "+"lastOnTime:"+lastOnTime+ ", "+"loginTimes:"+loginTimes;
 //		return "model.MemberBean[photo:"+photo;
 	}
 	
@@ -173,6 +174,14 @@ public class MemberBean implements Serializable{
 
 	public void setPrivilegeExp(String privilegeExp) {
 		this.privilegeExp = privilegeExp;
+	}
+
+	public Integer getLoginTimes() {
+		return loginTimes;
+	}
+
+	public void setLoginTimes(Integer loginTimes) {
+		this.loginTimes = loginTimes;
 	}
 	
 

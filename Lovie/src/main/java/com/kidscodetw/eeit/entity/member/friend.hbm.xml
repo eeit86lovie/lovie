@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="com.kidscodetw.eeit.entity.member.FriendBean" table="Friend" >
+        <composite-id>
+            <key-property name="memberId" column="memberId"/>
+            <key-property name="friendId" column="friendId"/>
+        </composite-id>
+        <property name="relation" column="relation" />
+    </class>
+</hibernate-mapping>

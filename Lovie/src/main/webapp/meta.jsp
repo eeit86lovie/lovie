@@ -4,7 +4,7 @@
 <!-- <link rel="stylesheet" href="css/bootstrap-theme.css"> -->
 <script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.1.1/sockjs.min.js"></script>
-<script src="//cdn.bootcss.com/stomp.js/2.3.3/stomp.js"></script>
+<script src="${pageContext.request.contextPath }/js/stomp.js"></script>
 
 
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/login.css">

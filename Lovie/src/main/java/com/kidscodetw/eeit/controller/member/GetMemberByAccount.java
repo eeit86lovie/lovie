@@ -18,8 +18,14 @@ public class GetMemberByAccount {
 	@RequestMapping(value="member/nickname/{account}", produces=MediaType.APPLICATION_JSON)
 	@ResponseBody
 	public MemberBean getNickname(@PathVariable("account")String account){
+		
 		MemberBean memberBean = memberDAO.select(account);
-		return memberBean;
+		if(memberBean!=null){
+			return memberBean;
+		}else{
+			return null;
+		}
+		
 	}
 
 }

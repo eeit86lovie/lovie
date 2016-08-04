@@ -42,6 +42,7 @@ public class SelectArticleServlet {
 		return "forum/NewTestForum.jsp";
 	}
 
+	
 	@RequestMapping(value = "forumsAddarticle.mvc", method = RequestMethod.GET)
 	public String forumJsp2() {
 		return "forum/NewTestForum.jsp";

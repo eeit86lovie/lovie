@@ -25,10 +25,11 @@ public class MemberPersonalPage {
 	public String getMemberById(@PathVariable("id")Integer memberId, Model model){
 		MemberBean memberBean=memberDAO.select(memberId);
 //		model.addAttribute("memberConstellation",DataTransfer.changeBirthdayToConstellations(memberBean));
-//		model.addAttribute("memberAge",DataTransfer.changeBirthdayToAge(memberBean));
+		model.addAttribute("memberPrivilege",DataTransfer.changeNumToPrivilege(memberBean));
 		model.addAttribute("gender",DataTransfer.genderTransfer(memberBean));
 		model.addAttribute("oneMember",memberBean);
 		model.addAttribute("article",forumDAO.select_memberAccount(memberBean.getAccount()).size());
 		return "member/memberPersonalPage.jsp";
 	}
+	
 }

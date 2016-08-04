@@ -1,52 +1,64 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+
+<!-- Bootstrap Core CSS -->
+<link
+	href="${pageContext.request.contextPath}/admin/bower_components/bootstrap/dist/css/bootstrap.min.css"
+	rel="stylesheet">
+
+<!-- Custom CSS -->
+<link href="${pageContext.request.contextPath}/dist/css/sb-admin-2.css"
+	rel="stylesheet">
+
+
+<!-- Custom Fonts -->
+<link
+	href="${pageContext.request.contextPath}/admin/bower_components/font-awesome/css/font-awesome.min.css"
+	rel="stylesheet" type="text/css">
+
+<!-- Bootstrap Core CSS -->
+<link href="${pageContext.request.contextPath}/css/bootstrap.min.css"
+	rel="stylesheet">
+
+<!-- Custom CSS -->
+<link href="${pageContext.request.contextPath}/css/shop-homepage.css"
+	rel="stylesheet">
+
+
+<!-- MetisMenu CSS -->
+<link
+	href="${pageContext.request.contextPath}/bower_components/metisMenu/dist/metisMenu.min.css"
+	rel="stylesheet">
+
+<!-- Timeline CSS -->
+<link href="${pageContext.request.contextPath}/css/timeline.css"
+	rel="stylesheet">
+
+
+
+
+
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <c:import charEncoding="UTF-8" url="/meta.jsp"></c:import>
 <title>商城購物</title>
 
 <style>
-.navbar-default{
- margin-top:-0.5cm;
-
+.navbar-default {
+	margin-top: -0.5cm;
 }
 
-.slide-image{
-display:block;
-margin: auto;
-width:1000px;
-height:1000px;
-max-width:1000px;
-max-height:3000px;
+.nav {
+	text-align: center;
 }
 
-.thumbnail img{
-width:180px;
-height:180px;
-
+.thumbnail {
+	text-align: center;
+	border: solid;
 }
-
-.nav{
-text-align:center;
-
-}
-
-.caption{
-
-
-text-align:center;
-
-
-}
-
-
-
-
-
-
 </style>
 
 
@@ -54,88 +66,198 @@ text-align:center;
 <c:import charEncoding="UTF-8" url="/header.jsp"></c:import>
 </head>
 <body>
- 
- 
-  <div class="row">
- 
- 
- <div id="wrapper">
-       <div class="navbar-default sidebar">
-                <div class="sidebar-nav navbar-collapse">
-                    <ul class="nav" id="side-menu">
-                        
-                       <li>
-                            <a href="/Lovie/product.do"><i class="my home"></i>回商城首頁 </a>
-                        </li>
-                        <li>
-                            <a href="/Lovie/memberproduct.do?category=1"><i class="buy member"></i>購買會員 </a>
-                        </li>
-                        <li>
-                            <a href="#"><i class=""></i> 電影週邊商品<span class="fa arrow"></span></a>
-                            <ul class="nav nav-second-level">
-                                <li>
-                                    <a href="/Lovie/moviepost.do?category=2">電影海報</a>
-                                </li>
-                                <li>
-                                    <a href="/Lovie/clothesproduct.do?category=4">服飾</a>
-                                </li>
-                            </ul>
-                            <!-- /.nav-second-level -->
-                        </li>
-                        <li>
-                            <a href="tables.html"><i class="selectbill"></i>訂單查詢</a>
-                        </li>
-                        <li>
-                            <a href="forms.html"><i class="mylove"></i>我的最愛</a>
-                        </li>
-                        <li>
-                            <a href="#"><i class="customerservice"></i>回報客服</a>
-                           
-                            <!-- /.nav-second-level -->
-                        </li>
-                       
-                       
-                    </ul>
-                </div>
-                <!-- /.sidebar-collapse -->
-            </div>
-       </div>
-</div>
 
-<div id="page-wrapper">
-<div class="col-md-9">
+	<div class="row">
 
-<c:forEach var="dollproducts" items="${Alldollproduct}">
-<div class="col-md-4">
-					<div class="thumbnail">
-						<img src="../cart/images000.jpg" alt="">
-						<div class="caption">
-						    <p id="dollproductname">${dollproducts.name}</p>
-						    <p id="dollmoney">NT:${dollproducts.cost}元</p>
-				            <p id="dollproductcontent">${dollproducts.content}</p>
-							<p>
-								<a href="#" class="btn btn-primary">加入購物車</a>
-							</p>
+		<div class="navbar-default sidebar">
+			<div class="sidebar-nav navbar-collapse">
+				<ul class="nav" id="side-menu">
+					<li><a href="/Lovie/products" class="show">首頁</a></li>
 
-						</div>
-					</div>
+					<li><a href="/Lovie/product/memberproduct.jsp">購買會員</a></li>
 
-				</div>
-</c:forEach>
+					<li><a href="/Lovie/product/moviepostproduct.jsp">電影海報</a></li>
+					<li><a href="/Lovie/product/dollproduct.jsp">人物公仔</a></li>
+					<li><a href="/Lovie/product/clothesproduct.jsp">服飾</a></li>
 
-				
+					<li><a href="/Lovie/product/cart.jsp"><i class="glyphicon glyphicon-shopping-cart"></i> 購物車</a></li>
+					<li><a href="/Lovie/product/tradedetail.jsp"><i class="selectbill"></i>訂單查詢</a></li>
+					<li><a href=""><i class="customerservice"></i>回報客服</a> <!-- /.nav-second-level -->
+					</li>
+
+
+				</ul>
 			</div>
-</div>
 
-
-  <script>
-
-
+		</div>
+	</div>
 
 
 
-  </script>
-  
+	<div id="page-wrapper">
+
+	
+	</div>
+
+	<script>
+
+	var dolls = document.createDocumentFragment();
+	//公仔
+	function buyDoll(){
+		$("#page-wrapper").empty();
+		$.ajax({
+			type : "get",
+			url : "dolls/3",
+			success : function(data) {
+				for (var i = 0; i<data.length; i++) {
+
+					var DollNameP = document.createElement("p");
+					var DollNameTextP = document.createTextNode(data[i].name);
+					DollNameP.appendChild(DollNameTextP);
+
+					var DollMoneyP = document.createElement("p");
+					var DollMoneyTextP = document.createTextNode(data[i].cost);
+					DollMoneyP.appendChild(DollMoneyTextP);
+
+					var DollContentP = document.createElement("p");
+					var DollContentTextP = document.createTextNode(data[i].content);
+					DollContentP.appendChild(DollContentTextP);
+
+					var DollBtnP = document.createElement("button");
+					DollBtnP.id = "DollBtnP"+JSON.stringify(data[i]['productid']);
+					DollBtnP.setAttribute('onclick', "addToCart(this)");
+					DollBtnP.className = "addtocart"
+					var DollBtnTextP = document.createTextNode("加入購物車");
+					DollBtnP.appendChild(DollBtnTextP);
+					
+					var DollSelect=document.createElement("select");
+					DollSelect.className="form-control input-sm";
+					DollSelect.id="DollSelectAmountdata"+JSON.stringify(data[i].productid);
+					
+					var DollOpt1=document.createElement("option");
+					DollOpt1.value=1;
+					var DollOPtText1=document.createTextNode(1);
+					DollOpt1.appendChild(DollOPtText1);
+					
+					var DollOpt2=document.createElement("option");
+					DollOpt2.value=2;
+					var DollOPtText2=document.createTextNode(2);
+					DollOpt2.appendChild(DollOPtText2);
+					
+					var DollOpt3=document.createElement("option");
+					DollOpt3.value=3;
+					var DollOPtText3=document.createTextNode(3);
+					DollOpt3.appendChild(DollOPtText3);
+					
+					var DollOpt4=document.createElement("option");
+					DollOpt4.value=4;
+					var DollOPtText4=document.createTextNode(4);
+					DollOpt4.appendChild(DollOPtText4);
+					
+					var DollOpt5=document.createElement("option");
+					DollOpt5.value=5;
+					var DollOPtText5=document.createTextNode(5);
+					DollOpt5.appendChild(DollOPtText5);
+	
+
+					var DollCaptionDiv = document.createElement("div");
+					DollCaptionDiv.className = "caption";
+					DollCaptionDiv.id = "dollProduct";
+
+					var DollImgDiv = document.createElement("img");
+					DollImgDiv.setAttribute("src", "null");
+
+					var DollThumbnailDiv = document.createElement("div");
+					DollThumbnailDiv.className = "thumbnail";
+					DollThumbnailDiv.id = "dolldiscount";
+
+					var DollColDiv = document.createElement("div")
+					DollColDiv.className = "col-sm-4 col-lg-4 col-md-4";
+					DollColDiv.id = "Dollproductshow";
+
+					DollCaptionDiv.appendChild(DollNameP);
+					DollCaptionDiv.appendChild(DollMoneyP);
+					DollCaptionDiv.appendChild(DollContentP);
+					DollSelect.appendChild(DollOpt1);
+					DollSelect.appendChild(DollOpt2);
+					DollSelect.appendChild(DollOpt3);
+					DollSelect.appendChild(DollOpt4);
+					DollSelect.appendChild(DollOpt5);
+					DollCaptionDiv.appendChild(DollSelect);
+					DollCaptionDiv.appendChild(DollBtnP);
+					DollThumbnailDiv.appendChild(DollImgDiv);
+					DollThumbnailDiv.appendChild(DollCaptionDiv);
+					DollColDiv.appendChild(DollThumbnailDiv);
+					dolls.appendChild(DollColDiv);
+
+					var DollwrapperDiv = document.getElementById("page-wrapper");
+					DollwrapperDiv.appendChild(dolls);
+
+				}
+			}
+		})
+	}
+
+	window.onload=buyDoll();
+	function addToCart(addToCartObject){
+		var ProductId = addToCartObject.id.substring(8);
+        var DollAmount=document.getElementById("DollSelectAmountdata"+addToCartObject.id.substring(8));
+		$.ajax({
+			type : "get",
+			url : "cart.do",
+			data : {
+				productId : ProductId,
+				amount:DollAmount.value
+			},
+			success : function(addproductbean) {
+			
+                   alert("確定加入購物車");
+			}
+		});
+	
+	}
+
+		</script>
+
+
+
+
+
+
+
+	<!-- jQuery -->
+	<script
+		src="${pageContext.request.contextPath}/admin/bower_components/jquery/dist/jquery.min.js"></script>
+
+	<!-- Bootstrap Core JavaScript -->
+	<script
+		src="${pageContext.request.contextPath}/admin/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+
+
+	<!-- Metis Menu Plugin JavaScript -->
+	<script
+		src="${pageContext.request.contextPath}/admin/bower_components/metisMenu/dist/metisMenu.min.js"></script>
+
+	<!-- Flot Charts JavaScript -->
+	<script
+		src="${pageContext.request.contextPath}/admin/bower_components/flot/excanvas.min.js"></script>
+	<script
+		src="${pageContext.request.contextPath}/admin/bower_components/flot/jquery.flot.js"></script>
+	<script
+		src="${pageContext.request.contextPath}/admin/bower_components/flot/jquery.flot.pie.js"></script>
+	<script
+		src="${pageContext.request.contextPath}/admin/bower_components/flot/jquery.flot.resize.js"></script>
+	<script
+		src="${pageContext.request.contextPath}/admin/bower_components/flot/jquery.flot.time.js"></script>
+	<script
+		src="${pageContext.request.contextPath}/admin/bower_components/flot.tooltip/js/jquery.flot.tooltip.min.js"></script>
+	
+
+	<!-- Custom Theme JavaScript -->
+	<script src="${pageContext.request.contextPath}/dist/js/sb-admin-2.js"></script>
+
+
+
 </body>
-   <c:import charEncoding="UTF-8" url="/footer.jsp"></c:import>              
+<c:import charEncoding="UTF-8" url="/footer.jsp"></c:import>
 </html>

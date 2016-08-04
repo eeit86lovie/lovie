@@ -216,5 +216,14 @@
 		<constructor-arg ref="reportDAO"></constructor-arg>
 	</bean>	
 	
+	<!-- FriendDAO -->
+	<bean id="friendDAOHibernate" class="com.kidscodetw.eeit.dao.member.FriendDAOHibernate">
+		<constructor-arg ref="sessionFactory"></constructor-arg>
+	</bean>
+
+<!-- 	<bean id="friendDAO" class="com.kidscodetw.eeit.service.member.FriendService"> -->
+<!-- 		<constructor-arg ref="memberRoleDAOHibernate"></constructor-arg> -->
+<!-- 	</bean> -->
+	
 	
 </beans>

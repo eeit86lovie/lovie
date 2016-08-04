@@ -1,6 +1,7 @@
 package com.kidscodetw.eeit.controller.message;
 
 import java.security.Principal;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 import java.util.SortedSet;
@@ -15,8 +16,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.google.gson.Gson;
+import com.kidscodetw.eeit.dao.member.FriendDAO;
+import com.kidscodetw.eeit.dao.member.MemberDAO;
 import com.kidscodetw.eeit.dao.message.MessageDAO;
+import com.kidscodetw.eeit.entity.member.FriendBean;
+import com.kidscodetw.eeit.entity.member.MemberBean;
 import com.kidscodetw.eeit.entity.message.MessageBean;
 import com.kidscodetw.eeit.util.MessageTimestampComparator;
 
@@ -26,9 +30,22 @@ public class MessageController {
 
 	@Autowired
 	private MessageDAO messageDAO;
+	
+	@Autowired
+	private FriendDAO friendDAO;
+	
+	@Autowired
+	private MemberDAO memberDAO;
 
 	@RequestMapping(method = RequestMethod.GET)
-	public String dispatch(Model model) {
+	public String dispatch(Principal principal, Model model){
+		Integer memberId = memberDAO.select(principal.getName()).getId();
+		List<FriendBean> friendBeans = friendDAO.selectPart(memberId, 3);
+		List<MemberBean> memberBeans = new ArrayList<MemberBean>();
+		for(FriendBean bean :friendBeans){
+			memberBeans.add(memberDAO.select(bean.getFriendId()));
+		}
+		model.addAttribute("friends", memberBeans);
 		return "/chat/chat.jsp";
 	}
 
@@ -55,5 +72,6 @@ public class MessageController {
 	public List<MessageBean> getReceivers(String receiver) {
 		return messageDAO.selectReceiver(receiver);
 	}
+	
 
 }

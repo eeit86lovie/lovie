@@ -3,41 +3,43 @@
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping>
-    <class name="com.kidscodetw.eeit.entity.member.MemberBean" table="Member" >
-        
-        <id name="id" column="id">
-            <generator class="identity"/>
-        </id>
-        
-        <property name="account">
-        	<column name="account" not-null="true" />
-        </property>
-        <property name="password" column="password" />
-        <property name="gender" column="gender" />
-        <property name="email" column="email" />
-        <property name="nickname" column="nickname" />
-        <property name="city" column="city" />
-        <property name="district" column="district" />
-        <property name="phone" column="phone" />
-        <property name="privilege">
-        	<column name="privilege" not-null="false" default="1" />
-        </property>
-        <property name="photoUrl" column="photoUrl" />
-<!--         <property name="photo"> -->
-<!--         	<column name="photo" not-null="false" default="1" /> -->
-<!--         </property> -->
-        <property name="birthday" column="birthday" />
-        <property name="friendNum" column="friendNum" />
-        <property name="commentPoint" column="commentPoint" />
-        <property name="intro" column="intro" />
-        <property name="constellation" column="constellation" />
-        <property name="registeredTime">
-        	<column name="registeredTime" not-null="false" default="null" />
-        </property>
-        <property name="lastOnTime" column="lastOnTime" />
-        <property name="privilegeExp" column="privilegeExp" />
-        
-       
-        
-    </class>
+	<class name="com.kidscodetw.eeit.entity.member.MemberBean" table="Member">
+
+		<id name="id" column="id">
+			<generator class="identity" />
+		</id>
+
+		<property name="account">
+			<column name="account" not-null="true" />
+		</property>
+		<property name="password" column="password" />
+		<property name="gender" column="gender" />
+		<property name="email" column="email" />
+		<property name="nickname" column="nickname" />
+		<property name="city" column="city" />
+		<property name="district" column="district" />
+		<property name="phone" column="phone" />
+		<property name="privilege">
+			<column name="privilege" not-null="false" default="1" />
+		</property>
+		<property name="photoUrl" column="photoUrl" />
+		<!-- <property name="photo"> -->
+		<!-- <column name="photo" not-null="false" default="1" /> -->
+		<!-- </property> -->
+		<property name="birthday" column="birthday" />
+		<property name="friendNum" column="friendNum" />
+		<property name="commentPoint" column="commentPoint" />
+		<property name="intro" column="intro" />
+		<property name="constellation" column="constellation" />
+		<property name="registeredTime">
+			<column name="registeredTime" not-null="false" default="null" />
+		</property>
+		<property name="lastOnTime" generated="never" insert="false" update="false">
+			<column name="lastOnTime" default="CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP" />
+		</property>
+		<property name="privilegeExp" column="privilegeExp" />
+		<property name="loginTimes" column="loginTimes" />
+
+
+	</class>
 </hibernate-mapping>

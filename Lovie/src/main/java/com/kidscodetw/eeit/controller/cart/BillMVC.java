@@ -1,12 +1,12 @@
 package com.kidscodetw.eeit.controller.cart;
 
-
 import java.util.List;
 
 import javax.ws.rs.core.MediaType;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -15,12 +15,14 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.kidscodetw.eeit.dao.cart.BillDAO;
 import com.kidscodetw.eeit.dao.cart.ProductDAO;
 import com.kidscodetw.eeit.dao.cart.TradeDetailDAO;
+import com.kidscodetw.eeit.dao.member.MemberDAO;
 import com.kidscodetw.eeit.entity.cart.ProductBean;
+import com.kidscodetw.eeit.entity.member.MemberBean;
+import com.kidscodetw.eeit.service.member.MemberGetListService;
 
 @Controller
-//@RequestMapping("memberproducts")
-public class MemberProductMVC {
-
+//@RequestMapping("bill")
+public class BillMVC {
 
 	@Autowired
 	private ProductDAO productDAO;
@@ -28,28 +30,16 @@ public class MemberProductMVC {
 	private TradeDetailDAO tradedetailDAO;
 	@Autowired
 	private BillDAO billDAO;
+	@Autowired
+	private MemberDAO memberDAO;
 
+	
 
-
-	// 顯示商品
-	@RequestMapping(value="/product/memberproducts/{categoryId}" ,method = RequestMethod.GET, produces=MediaType.APPLICATION_JSON)
-	@ResponseBody
-	public List<ProductBean> getList(@PathVariable("categoryId")Integer categoryId) {
-		System.out.println("AAA");
-		List<ProductBean> memberProduct = productDAO.select_category(categoryId);
-		return memberProduct;
-	}
 	
 	
-	//刪除商品
-	@RequestMapping(value="/product/memberproducts}" ,method = RequestMethod.GET, produces=MediaType.APPLICATION_JSON)
-	@ResponseBody
-	public int delet(@PathVariable("productId")Integer productId) {
-		int memberProduct=productDAO.delet(productId);
-		return memberProduct;
-		
-	}
 	
-	//新增商品
+	
+	
+	
 	
 }
