@@ -157,8 +157,9 @@
 	 					 	        </button>
 							    </div></td>
                                      </tr>
+                                     
                                     </c:forEach> 
- 
+                                             
                                     </tbody>
                                     
                                     
@@ -237,24 +238,20 @@ function cancel(object){
 	
 	  }
 	  
-	  
+ 
 
-var allcost=0;
-function titleCost(){
-	var tbody = $('tbody:eq(1)')
-   
-	for(var i=0;i<itemAmount;i++){
-		//alert( $('tbody:eq(1)>tr:eq('+i+')').attr('data-cost') )
-     var allproductcost=$('tbody:eq(1)>tr:eq('+i+')').attr('data-cost');
-		allcost=parseInt(allcost)+parseInt(allproductcost);
+	var allcost=0;
+	function titleCost(){
+		var tbody = $('tbody:eq(0)')
+	   
+		for(var i=0;i<itemAmount;i++){
+			//alert( $('tbody:eq(1)>tr:eq('+i+')').attr('data-cost') )
+	     var allproductcost=$('tbody:eq(0)>tr:eq('+i+')').attr('data-cost');
+			allcost=parseInt(allcost)+parseInt(allproductcost);	
+		} 		
+		window.location.assign("http://localhost:8080/Lovie/product/checkproduct.jsp?allcost="+allcost);
+		
 	}
-	
-	alert("http://localhost:8080/Lovie/product/checkproduct.jsp?allcost="+allcost);
-	window.location.assign("http://localhost:8080/Lovie/product/checkproduct.jsp?allcost="+allcost);
-	                        
-}
-
-
 
 </script>      
 

@@ -96,7 +96,7 @@ public class CartServlet extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("cartservlet post");
+		
 		request.setCharacterEncoding("UTF-8");
 		PrintWriter out = response.getWriter();
 		HttpSession session = request.getSession();
@@ -108,7 +108,7 @@ public class CartServlet extends HttpServlet {
 		while(check.hasNext()){
 			Map<String, Object> m3 = check.next();
 			ProductBean bean1 = (ProductBean) m3.get("bean");
-			if(bean1.getProductid() == productid){
+			if(bean1.getProductid().equals(productid)){
 				addcart.remove(m3);
 				out.print("success");
 				break;

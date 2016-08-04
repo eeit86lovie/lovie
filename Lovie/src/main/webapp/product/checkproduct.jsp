@@ -157,7 +157,8 @@
                                     </c:forEach> 
                                          <tr >
                                              <th>總金額</th>
-                                             <td id="title">${param.allcost}</td>
+                                            <th id="allMoney">${param.allcost}</th>
+                                           
                                          </tr>
                                         
                                     </tbody>
@@ -170,7 +171,7 @@
                             </div>
                             
                             <div>
-                            <a href="/Lovie/product/bill.jsp" type="button" class="btn btn-primary">確認結帳</a>
+                            <a href="#" type="button" class="btn btn-primary" onclick="checktitleCost()">確認結帳</a>
                        
                             <button type="button" class="btn btn-danger" onclick="history.back()">回上一頁</button>
                             </div>
@@ -203,20 +204,19 @@
 	
 	
 // }
-alert("${allcost}"+"AAA");
+
+
 
 var allcost=0;
-function titleCost(){
-	var tbody = $('tbody:eq(1)')
+function checktitleCost(){
+	var tbody = $('tbody:eq(0)')
    
 	for(var i=0;i<itemAmount;i++){
-	
-     var allproductcost=$('tbody:eq(1)>tr:eq('+i+')').attr('data-cost');
-		
-		allcost=parseInt(allcost)+parseInt(allproductcost);
-
+		//alert( $('tbody:eq(0)>tr:eq('+i+')').attr('data-cost') )
+     var allproductcost=$('tbody:eq(0)>tr:eq('+i+')').attr('data-cost');
+		allcost=parseInt(allcost)+parseInt(allproductcost);	
 	}
-
+	window.location.assign("http://localhost:8080/Lovie/product/bill.jsp?allcost="+allcost);
 }
 
 
