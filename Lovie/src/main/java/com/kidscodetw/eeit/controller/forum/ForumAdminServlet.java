@@ -101,39 +101,39 @@ public class ForumAdminServlet{
 }
 
 
-
-//@WebServlet("/admin/movie/movie.do")
-public class ForumAdminServlet  extends HttpServlet {
-
-	private ForumService forumService;
-	private ArticleRankService articleRankService;
-	
-	@Override
-//	public void init() throws ServletException {
-//		ServletContext application = this.getServletContext(); 
-//		ApplicationContext context = WebApplicationContextUtils.getWebApplicationContext(application);
-//		forumService =(ForumService) context.getBean("forumService");
-//		articleRankService =(ArticleRankService) context.getBean("articleRankService");
+//
+////@WebServlet("/admin/movie/movie.do")
+//public class ForumAdminServlet  extends HttpServlet {
+//
+//	private ForumService forumService;
+//	private ArticleRankService articleRankService;
+//	
+//	@Override
+////	public void init() throws ServletException {
+////		ServletContext application = this.getServletContext(); 
+////		ApplicationContext context = WebApplicationContextUtils.getWebApplicationContext(application);
+////		forumService =(ForumService) context.getBean("forumService");
+////		articleRankService =(ArticleRankService) context.getBean("articleRankService");
+////	}
+//	
+//	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+//		
+//		request.setCharacterEncoding("UTF-8");		
+//		List<ArticleRankBean> reportBean = articleRankService.select_report(1);
+//		List report = new ArrayList();
+//		Map<String,Object> all = new HashMap<String,Object>();
+//		for(int i = 0; i<reportBean.size();i++){
+//						
+//			ForumBean reportArticle = forumService.select_id(reportBean.get(i).getArticleID());
+//			String reportMember = reportBean.get(i).getMemberAccount();
+//			String reportReason = reportBean.get(i).getReportReason();
+//			report.add(reportMember);
+//			report.add(reportReason);
+//			all.put("ForumBean", reportArticle);
+//			all.put("reportBean", report);
+//		}
+//		request.setAttribute("reports", all);
+//		RequestDispatcher rd = request.getRequestDispatcher("admin_forum.jsp");
+//		rd.forward(request, response);
 //	}
-	
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		request.setCharacterEncoding("UTF-8");		
-		List<ArticleRankBean> reportBean = articleRankService.select_report(1);
-		List report = new ArrayList();
-		Map<String,Object> all = new HashMap<String,Object>();
-		for(int i = 0; i<reportBean.size();i++){
-						
-			ForumBean reportArticle = forumService.select_id(reportBean.get(i).getArticleID());
-			String reportMember = reportBean.get(i).getMemberAccount();
-			String reportReason = reportBean.get(i).getReportReason();
-			report.add(reportMember);
-			report.add(reportReason);
-			all.put("ForumBean", reportArticle);
-			all.put("reportBean", report);
-		}
-		request.setAttribute("reports", all);
-		RequestDispatcher rd = request.getRequestDispatcher("admin_forum.jsp");
-		rd.forward(request, response);
-	}
-}
+//}
