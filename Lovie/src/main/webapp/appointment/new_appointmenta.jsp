@@ -25,7 +25,7 @@
 }
 .clearselspan {
    line-height:30px;
-   color:green;
+   //color:green;
 }
 
 </style>
@@ -58,12 +58,12 @@
 		    <label class="control-label col-md-2" for="city" style="margin-right: 0px;">城　　市：</label>
 		    <div class="col-md-9"> 
 	    		<select name="city" id="city" class="form-control" multiple="multiple">
-					<option value=""  class="form-control"></option>
 					<c:forEach var="cityVO" items="${citynames}">
 						<option value="${cityVO}">${cityVO}</option>
    					</c:forEach>
 				</select>
 		    </div>	
+		    <span class="glyphicon glyphicon-remove-sign clearselspan" aria-hidden="true" onclick="clearinput(1);"></span>
 		</div>
 		<div class="form-group">
 		    <label class="control-label col-md-2" for="theaterName" style="margin-right: 0px;">戲院名稱：</label>
@@ -75,17 +75,18 @@
    					</c:forEach>
 				</select>
 		    </div>
+		    <span class="glyphicon glyphicon-remove-sign clearselspan" aria-hidden="true" onclick="clearinput(2);"></span>
 		</div>
 		<div class="form-group">
 		    <label class="control-label col-md-2" for="genreId" style="margin-right: 0px;">電影類型：</label>
 		    <div class="col-md-9"> 
 	    		<select name="genreId" id="genreId"  class="form-control" multiple="multiple">
-					<option value=""  class="form-control"></option>
 					<c:forEach var="genreVO" items="${genrenames}">
 						<option value="${genreVO.id}">${genreVO.name}</option>
    					</c:forEach>
 				</select>
 		    </div>		 
+		    <span class="glyphicon glyphicon-remove-sign clearselspan" aria-hidden="true" onclick="clearinput(3);"></span>
 		</div>
 		<div class="form-group">
 		    <label class="control-label col-md-2" for="movieName" style="margin-right: 0px;">電影名稱：</label>
@@ -96,14 +97,15 @@
 						<option value="${movieVO}">${movieVO}</option>
    					</c:forEach>
 				</select>
-		    </div>		 
+		    </div>	
+		    <span class="glyphicon glyphicon-remove-sign clearselspan" aria-hidden="true" onclick="clearinput(4);"></span>
 		</div>
 		<div class="form-group">
 		    <label class="control-label col-md-2" for="showtimeDate" style="margin-right: 0px;">放映日期：</label>
 		    <div class="col-md-9"> 
 		    	<input type="text" class="form-control" id="showtimeDate" name="showtimeDate" placeholder="請選擇放映日期" readonly>
 		    </div>
-		    <span class="glyphicon glyphicon-remove-sign clearselspan" aria-hidden="true" onclick="clearinput();"></span>
+		    <span class="glyphicon glyphicon-remove-sign clearselspan" aria-hidden="true" onclick="clearinput(5);"></span>
 	    </div>
 		<div class="form-group"> 
 		  <div class="col-md-offset-2 col-md-9">
@@ -150,8 +152,20 @@
 <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.js"></script>
 
 <script>
-function clearinput() {
- 	$("#showtimeDate").val(""); 
+function clearinput(sel) {
+	switch(sel)
+	{  case 1:
+			$("#city").val('').trigger('change'); break; 
+	   case 2:
+			$("#theaterName").val('').trigger('change'); break; 
+	   case 3:
+			$("#genreId").val('').trigger('change'); break; 
+	   case 4:
+			$("#movieName").val('').trigger('change'); break; 
+	   case 5:
+			$("#city").val('').trigger('change'); break; 
+	
+	}
 
 }
 
