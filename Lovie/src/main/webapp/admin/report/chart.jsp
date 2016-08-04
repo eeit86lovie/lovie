@@ -64,7 +64,7 @@
 <script type="text/javascript">
 $(function () {
 	$.ajax({
-		url : "chart1select",
+		url : "${pageContext.request.contextPath}/admin/report/chart1select",
 		type:"get",
 		success : function(data) {
 		if (data != null) {
@@ -162,7 +162,7 @@ $(function () {
  
 
 	$.ajax({
-		url : "chart2select",
+		url : "${pageContext.request.contextPath}/admin/report/chart2select",
 		type:"get",
 		success : function(data) {
 		if (data != null) {
@@ -224,7 +224,7 @@ $(function () {
 	});
 
 	$.ajax({
-		url : "chart3select",
+		url : "${pageContext.request.contextPath}/admin/report/chart3select",
 		type:"get",
 		success : function(data) {
 		if (data != null) {
