@@ -154,7 +154,7 @@
 <c:import charEncoding="UTF-8" url="/forum/createForumFunction.jsp"></c:import>
 
 <script>
-var selectTitleArticleJson;
+var selectIDisLikeJson;
 var memberJson;
 
 $.ajax({
@@ -169,18 +169,18 @@ $.ajax({
 			dataType : "json",
 			success : function(selectReplyjson) {
 				$.ajax({
-					url : "${pageContext.request.contextPath}/forumsSelectTitle",
+					url : "${pageContext.request.contextPath}/forumsSelectIDisLike",
 					type : "post",
-					data:{Title:"${title}"},
+					data:{MemberAccount:"${myDisLike}"},
 					dataType : "json",
-					success : function(selectTitleArticlejson) {			
+					success : function(selectIDisLikejson) {			
 						$.ajax({
 							url : "${pageContext.request.contextPath}/forumsAllLike",
 							type : "post",
 							dataType : "json",
 							success : function(allLikejson) {
-								selectTitleArticleJson = selectTitleArticlejson;
-		 						createArticle(selectTitleArticlejson,selectReplyjson,allLikejson);
+								selectIDisLikeJson = selectIDisLikejson;
+		 						createArticle(selectIDisLikejson,selectReplyjson,allLikejson);
 							}					
 						})
 					}					

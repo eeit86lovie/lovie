@@ -58,7 +58,7 @@
 	　		<option value="問片">問片</option>
 	　		<option value="其他">其他</option>
 	　	</select>
-        <input type="text" id="username" class="articleTitle">
+        <input type="text" id="articleTitle" class="articleTitle">
         <p id ="error_title" class="error_title"></p>
        
         <TextArea type="text" id="textArea" class="articleTextArea"></TextArea><br>
@@ -72,7 +72,7 @@
     </form>
            
      </div>   
-</div>
+
     </section>
 </div>
 
@@ -90,15 +90,17 @@ function checkLogin(){
 
 
 function clickLightButton(){
+	
+	
 	var pubMember = "${loginmember.account}";
-	var pubTitle = $("#username").val();
+	var pubTitle = $("#articleTitle").val();
 	var pubGenre = $("#ArticleGenre").val();
 	var pubContent = $("#textArea").val();
 	
 	var error_title = 0;
 	var error_content = 0;
-	
-		
+	$("#error_title").empty();
+	$("#error_content").empty();	
 		
 		
 		if(pubTitle==""){
@@ -130,11 +132,14 @@ function clickLightButton(){
 				},
 				dataType : "json",
 				success : function(PublicationArticleResult) {
+					
 					$("#lean_overlay").hide();
 					$("#modal").hide();
 					
 					var selectReplyjson;	 
 				    createArticle(PublicationArticleResult,selectReplyjson);
+				    $("#articleTitle").val("");
+				    $("#textArea").val("");
 				}					
 			})
 		

@@ -179,7 +179,7 @@
 	</bean>
 	
 	<!-- FriendDAO -->
-	<bean id="friendDAOHibernate" class="com.kidscodetw.eeit.dao.member.FriendDAOHibernate">
+	<bean id="friendDAO" class="com.kidscodetw.eeit.dao.member.FriendDAOHibernate">
 		<constructor-arg ref="sessionFactory"></constructor-arg>
 	</bean>
 

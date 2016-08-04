@@ -35,16 +35,23 @@ public class SelectAdvancedArticleServlet {
 	public String forumAdvanced4() {
 		return "/forum/selectTitleForum.jsp";
 	}
+
+	@RequestMapping(value = "forumsSelectGenre", method = RequestMethod.GET)
+	public String forumAdvanced5() {
+		return "/forum/selectGenreForum.jsp";
+	}
 	
 	@RequestMapping(value = "forumsSelectILike", method = RequestMethod.GET)
 	public String forumAdvanced2() {
-		return "forum/NewTestForum.jsp";
+		return "/forum/selectMyLikeForum.jsp";
 	}
 	
 	@RequestMapping(value = "forumsSelectIDisLike", method = RequestMethod.GET)
 	public String forumAdvanced3() {
-		return "forum/NewTestForum.jsp";
+		return "forum/selectMyDisLikeForum.jsp";
 	}
+	
+	
 	
 	
 	
@@ -68,7 +75,7 @@ public class SelectAdvancedArticleServlet {
 	
 
 	//在selectTitleForum.jsp做ajax
-	@RequestMapping(value = "forumsSelectTitle", params = { "Title" }, method = RequestMethod.POST)
+	@RequestMapping(value = "forumsSelectTitle", params = {"Title"}, method = RequestMethod.POST)
 	@ResponseBody
 	public List<ForumBean> selectTitle(
 			@RequestParam("Title") String Title) {	
@@ -85,44 +92,104 @@ public class SelectAdvancedArticleServlet {
 
 	
 	
+	    //在selectGenreForum.jsp做ajax
+		@RequestMapping(value = "forumsSelectGenre", params = {"Genre"}, method = RequestMethod.POST)
+		@ResponseBody
+		public List<ForumBean> selectGenre(
+				@RequestParam("Genre") String Genre) {	
+			List<ForumBean> selectGenreArticlejson = forumDAO.select_genre(Genre);
+			return selectGenreArticlejson;
+		}
+		
+		//導向selectGenreForum.jsp
+		@RequestMapping(value = "forumsArticleGenre/{Genre}", method = RequestMethod.GET)
+		public String selectGenre(@PathVariable("Genre") String Genre, Model model) {
+			model.addAttribute("genre", Genre);
+			return "/forum/selectGenreForum.jsp";
+		}
 	
+	
+	
+		
+		
+		//在selectContentForum.jsp做ajax
+		@RequestMapping(value = "forumsSelectContent", params = {"Content"}, method = RequestMethod.POST)
+		@ResponseBody
+		public List<ForumBean> selectContent(
+				@RequestParam("Content") String Content) {	
+			List<ForumBean> selectContentArticlejson = forumDAO.select_content(Content);
+			return selectContentArticlejson;
+		}
+				
+		//導向selectContentForum.jsp
+		@RequestMapping(value = "forumsArticleContent/{Content}", method = RequestMethod.GET)
+		public String selectContent(@PathVariable("Content") String Content, Model model) {
+			model.addAttribute("content", Content);
+			return "/forum/selectContentForum.jsp";
+		}
+		
 	
 
 
+	
 	
 	@RequestMapping(value = "forumsSelectILike", params = { "MemberAccount" }, method = RequestMethod.POST)
 	@ResponseBody
-	public List<ArticleRankBean> select_I_Like(
+	public List<ForumBean> selectMyLike(
 			@RequestParam("MemberAccount") String MemberAccount) {
 	
 		 List<ArticleRankBean> selectmemberjson = articleRankDAO.select_memberAccount(MemberAccount);
-		 List<ArticleRankBean> selectILikejson = new ArrayList();
+		 List<ForumBean> selectILikejson = new ArrayList();
 		 
 		 for(int i =0;i<selectmemberjson.size();i++){
 			 if(selectmemberjson.get(i).getGood()==1){
-				 selectILikejson.add(selectmemberjson.get(i));
+				
+				 ForumBean selectGood = forumDAO.select_id(selectmemberjson.get(i).getArticleID());
+				 selectILikejson.add(selectGood);				 
 			 }
 		 }
-		 
 		return selectILikejson;
 	}
 
 	
 	
+	//導向selectMyLikeForum.jsp
+	@RequestMapping(value = "forumsArticleMyLike/{MyLike}", method = RequestMethod.GET)
+	public String selectMyLike(@PathVariable("MyLike") String MyLike, Model model) {
+		model.addAttribute("myLike", MyLike);
+		return "/forum/selectMyLikeForum.jsp";
+	}
+	
+	
+	
+	
 	@RequestMapping(value = "forumsSelectIDisLike", params = { "MemberAccount" }, method = RequestMethod.POST)
 	@ResponseBody
-	public List<ArticleRankBean> select_I_Dis_Like(
+	public List<ForumBean> select_I_Dis_Like(
 			@RequestParam("MemberAccount") String MemberAccount) {
 	
+		
 		 List<ArticleRankBean> selectmemberjson = articleRankDAO.select_memberAccount(MemberAccount);
-		 List<ArticleRankBean> selectIDisLikejson = new ArrayList();
+		 List<ForumBean> selectIDisLikejson = new ArrayList();
 		 
 		 for(int i =0;i<selectmemberjson.size();i++){
 			 if(selectmemberjson.get(i).getBad()==1){
-				 selectIDisLikejson.add(selectmemberjson.get(i));
+				 
+				 ForumBean selectBad = forumDAO.select_id(selectmemberjson.get(i).getArticleID());
+				 selectIDisLikejson.add(selectBad);
 			 }
 		 }
 		 
 		return selectIDisLikejson;
 	}
+
+	
+	//導向selectMyDisLikeForum.jsp
+	@RequestMapping(value = "forumsArticleMyDisLike/{MyDisLike}", method = RequestMethod.GET)
+	public String selectMyDisLike(@PathVariable("MyDisLike") String MyDisLike, Model model) {
+		model.addAttribute("myDisLike", MyDisLike);
+		return "/forum/selectMyDisLikeForum.jsp";
+	}
+
+
 }

@@ -126,7 +126,7 @@ public class AppointmentsMVC {
 		    //    update appr status=2否  where appointmentID= ? and status in (0,1)
 		    //    update appr status=1是  where appointmentID= ? and requestMemberId= ? and status = 0
 			if (acancel != true && astatus == 1 )
-			{  System.out.println("aa");
+			{  
 			   Integer res1 = appointmentService2.updateacceptedByAid(appointmentID, acontent, radiomid);
 			   if (res1 <= 0)
 				   finres = false;

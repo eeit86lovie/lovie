@@ -33,7 +33,12 @@ public class MemberDAOHibernate implements MemberDAO {
 		Query query = getSession().createQuery(
 				"from MemberBean where account=:account");
 		query.setParameter("account", account);
-		return (MemberBean) query.list().get(0);
+		List<MemberBean> result =  (List<MemberBean>) query.list();
+		if(result.size()>0){
+			return result.get(0);
+		}else{
+			return null;
+		}
 	}
 
 	@Override
