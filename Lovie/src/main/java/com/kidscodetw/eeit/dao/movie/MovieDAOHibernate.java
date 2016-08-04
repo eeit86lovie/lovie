@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.hibernate.Query;
+import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
@@ -21,8 +22,9 @@ public class MovieDAOHibernate implements MovieDAO {
 	private static final String SELECT_PHOTO = "SELECT id,photo FROM MovieBean";
 	private static final String UPDATE_PHOTO = "update MovieBean set photo=? where id=:id";
 	private static final String SELECT_BY_NAME = "from MovieBean where name=:name";
+	
 
-
+	
 	private SessionFactory sessionFactory;
 
 	public MovieDAOHibernate(SessionFactory sessionFactory) {

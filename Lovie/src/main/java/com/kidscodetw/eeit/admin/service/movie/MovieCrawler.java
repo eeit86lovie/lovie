@@ -64,13 +64,16 @@ public class MovieCrawler {
 			}
 			
 			remove_MOVIE_MAP_duplicate();
-			out.write("<h2>準備新增:" + MOVIE_MAP.size() + "部電影" + "</h2><br />");
-			Iterator iter2 = MOVIE_MAP.entrySet().iterator();
-			while (iter2.hasNext()) {
-				Map.Entry<String, String> entry = (Map.Entry<String, String>) iter2.next();
-				out.write(entry.getKey() + "<br />");
+			if(MOVIE_MAP.size()==0){
+				out.write("no");
+			}else{
+				out.write("<h2>準備新增:" + MOVIE_MAP.size() + "部電影" + "</h2><br />");
+				Iterator iter2 = MOVIE_MAP.entrySet().iterator();
+				while (iter2.hasNext()) {
+					Map.Entry<String, String> entry = (Map.Entry<String, String>) iter2.next();
+					out.write(entry.getKey() + "<br />");
+				}
 			}
-
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

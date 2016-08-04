@@ -1,7 +1,5 @@
 package com.kidscodetw.eeit.jdbc;
 
-import java.io.FileInputStream;
-import java.io.IOException;
 import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.sql.Connection;
@@ -32,8 +30,49 @@ public class MovieDAOJdbc implements MovieDAO{
 	private static final String SELECT_BY_MOVIENAMES = "SELECT distinct Name FROM Movie";
 	private static final String UPDATE_PHOTO = "UPDATE Movie set photo = ? WHERE id = ?";
 	private static final String SELECT_PHOTO = "SELECT id, photo FROM Movie";
+	private static final String CHECK_PHOTO_NULL = "SELECT id FROM Movie WHERE photo IS NULL";
 	
 	
+	public List<Integer>checkPhotoNull(){
+		Connection conn = CommonUtil.connectMysql();
+		PreparedStatement pstat = null;
+		ResultSet rs = null;
+		List<Integer> moviesNullPhoto = null;
+		try {
+			pstat = conn.prepareStatement(CHECK_PHOTO_NULL);
+			rs = pstat.executeQuery();
+			moviesNullPhoto = new ArrayList<Integer>();
+			while(rs.next()){
+				moviesNullPhoto.add(Integer.valueOf(rs.getString(1)));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if (pstat != null) {
+				try {
+					pstat.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		return moviesNullPhoto;
+		
+	}
 	
 	public Map selectPhotos(){
 		Connection conn = CommonUtil.connectMysql();
