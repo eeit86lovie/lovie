@@ -102,7 +102,7 @@ a{
 
 								<ul id="menu" style="display:none;position:absolute;z-index:1;">
 									<li><div><a href='${pageContext.request.contextPath}/member/profile/${loginmember.id}'>個人首頁</a></div></li>
-									<li><div>我的朋友</div></li>
+									<li><div><a href='${pageContext.request.contextPath}/member/memberFriendList.jsp'>我的朋友</a></div></li>
 									<li><div>有興趣的對象</div></li>
 									<li><div>我的邀請</div></li>
 									<li><div>我的請求</div></li>
