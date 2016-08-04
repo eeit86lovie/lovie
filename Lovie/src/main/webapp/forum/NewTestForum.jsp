@@ -26,7 +26,6 @@
 
 <body>
 	<c:import charEncoding="UTF-8" url="/header.jsp"></c:import>
-	<c:import charEncoding="UTF-8" url="/forum/NewLightBox.jsp"></c:import>
 	<c:import charEncoding="UTF-8" url="/forum/createForumFunction.jsp"></c:import>
 		
 	

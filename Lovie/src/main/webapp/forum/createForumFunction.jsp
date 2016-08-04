@@ -160,10 +160,11 @@ function add(){
 			var article_genre_Text = document.createTextNode(articleJson[i].genre);
 	  		var article_title_Text = document.createTextNode(articleJson[i].title);
 	  		var article_content_Text = document.createTextNode(articleJson[i].content);
-	  		var article_pubTime_Text = document.createTextNode("發表時間:"+articleJson[i].pubTime);
-	  		var article_editTime_Text = document.createTextNode("最後編輯時間:"+articleJson[i].editTime);
-	 
-	  		
+	  		var time_pubTime = new Date(articleJson[i].pubTime);
+	  		var article_pubTime_Text = document.createTextNode("發表時間:"+time_pubTime.customFormat( "#YYYY#-#MM#-#DD# #hh#:#mm#:#ss#" ));
+	  		time_editTime = new Date(articleJson[i].editTime);
+	  		var article_editTime_Text = document.createTextNode("最後編輯時間:"+ time_editTime.customFormat( "#YYYY#-#MM#-#DD# #hh#:#mm#:#ss#" ));
+	
 	  		var replyText = document.createElement("input");
 				replyText.setAttribute("type", "text");
 				replyText.className = "replyText";
@@ -346,6 +347,7 @@ function add(){
 	  		var countReplyimg_div = $("<div class='countReplyimg_div'></div>").append(replyCountimg);
 	  		countReplyimg_div.className = "countReplyimg_div"
 	  		var countReply = Article_replyarea_div.children().length+"則留言";
+	  		alert(Article_replyarea_div.children().length);
 	  		if(Article_replyarea_div.children().length>0){
 	  			var countReply_div = $("<div class='countReply_div' id='"+'countReply_div'+articleJson[i].id+"'></div>").append(countReply);
 	  		}
@@ -516,7 +518,9 @@ function add(){
 	  	
 	  	
 	  	var Reply_content_div = $("<div class='replycontent'></div>").append(returnReplyjson.content);
-	  	var Reply_pubTime_div = $("<div class='replypubTime'></div>").append("留言時間:"+returnReplyjson.pubTime);	
+	  	
+	  	var time_replyTime = new Date(returnReplyjson.pubTime);
+	  	var Reply_pubTime_div = $("<div class='replypubTime'></div>").append("留言時間:"+time_replyTime.customFormat( "#YYYY#-#MM#-#DD# #hh#:#mm#:#ss#" ));	
 	    var replyAll_div = $("<div class='replyAll'></div>");//整塊留言DIV		
 		
 	    
@@ -990,6 +994,27 @@ function add(){
 
 	}
 
+   
+   Date.prototype.customFormat = function(formatString){
+	   var YYYY,YY,MMMM,MMM,MM,M,DDDD,DDD,DD,D,hhhh,hhh,hh,h,mm,m,ss,s,ampm,AMPM,dMod,th;
+	   YY = ((YYYY=this.getFullYear())+"").slice(-2);
+	   MM = (M=this.getMonth()+1)<10?('0'+M):M;
+	   MMM = (MMMM=["January","February","March","April","May","June","July","August","September","October","November","December"][M-1]).substring(0,3);
+	   DD = (D=this.getDate())<10?('0'+D):D;
+	   DDD = (DDDD=["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"][this.getDay()]).substring(0,3);
+	   th=(D>=10&&D<=20)?'th':((dMod=D%10)==1)?'st':(dMod==2)?'nd':(dMod==3)?'rd':'th';
+	   formatString = formatString.replace("#YYYY#",YYYY).replace("#YY#",YY).replace("#MMMM#",MMMM).replace("#MMM#",MMM).replace("#MM#",MM).replace("#M#",M).replace("#DDDD#",DDDD).replace("#DDD#",DDD).replace("#DD#",DD).replace("#D#",D).replace("#th#",th);
+	   h=(hhh=this.getHours());
+	   if (h==0) h=24;
+	   if (h>12) h-=12;
+	   hh = h<10?('0'+h):h;
+	   hhhh = hhh<10?('0'+hhh):hhh;
+	   AMPM=(ampm=hhh<12?'am':'pm').toUpperCase();
+	   mm=(m=this.getMinutes())<10?('0'+m):m;
+	   ss=(s=this.getSeconds())<10?('0'+s):s;
+	   return formatString.replace("#hhhh#",hhhh).replace("#hhh#",hhh).replace("#hh#",hh).replace("#h#",h).replace("#mm#",mm).replace("#m#",m).replace("#ss#",ss).replace("#s#",s).replace("#ampm#",ampm).replace("#AMPM#",AMPM);
+	 };
+   
 </script>
 
 
