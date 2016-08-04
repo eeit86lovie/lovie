@@ -26,7 +26,7 @@ public class FriendDAOHibernate implements FriendDAO {
 		return query.list();
 	}
 
-	// 條件查詢好友(1)、誰對自己感興趣(2)、對誰感興趣(3)
+	// 條件查詢好友(1)、對誰感興趣(2)、誰對自己感興趣(3)
 	@Override
 	public List<FriendBean> selectPart(Integer memberId, Integer relation) {
 		Query query = getSession()
