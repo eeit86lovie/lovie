@@ -70,6 +70,15 @@ public class AppointmentsMVC {
 	
 	@RequestMapping("new_appointmentb")	
 	public String new_appointmentb(Model model){
+		List<GenreBean> genre_names = appointmovieService.select_genre_list();
+		List<String> movie_names = appointmovieService.select_movienames_list();
+		List<String> theater_names = appointmovieService.select_theaternames_list();
+		String[] city_names={"基隆市","台北市","新北市","桃園市","新竹市","苗栗縣","台中市","南投縣","雲林縣","彰化縣","嘉義市","台南市","高雄市","屏東縣","宜蘭縣","花蓮縣","台東市","金門縣","澎湖縣"};
+
+		model.addAttribute("citynames", city_names);
+		model.addAttribute("theaternames", theater_names);
+		model.addAttribute("genrenames", genre_names);
+		model.addAttribute("movienames", movie_names);		
 		return "appointment/new_appointmentb.jsp";
 	}	
 		
