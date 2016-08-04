@@ -22,7 +22,7 @@ import com.kidscodetw.eeit.entity.forum.ArticleRankBean;
 import com.kidscodetw.eeit.entity.forum.ForumBean;
 
 
-@WebServlet("/admin/movie/movie.do")
+//@WebServlet("/admin/movie/movie.do")
 public class ForumAdminServlet  extends HttpServlet {
 
 	@Override

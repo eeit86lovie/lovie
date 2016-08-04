@@ -200,6 +200,14 @@
 		<constructor-arg ref="appointmentRequestDAO"></constructor-arg>
 	</bean>	
 	
+	<!-- 	AppointmovieDAO -->
+	<bean id="appointmovieDAO" class="com.kidscodetw.eeit.dao.appointment.AppointmovieDAOHibernate">
+		<constructor-arg ref="sessionFactory"></constructor-arg>
+	</bean>
+	<bean id="appointmovieService" class="com.kidscodetw.eeit.service.appointment.AppointmovieService">
+		<constructor-arg ref="appointmovieDAO"></constructor-arg>
+	</bean>	
+
 	<!-- 	ChartDAO -->
 	<bean id="chartDAO" class="com.kidscodetw.eeit.dao.report.ChartDAOHibernate">
 		<constructor-arg ref="sessionFactory"></constructor-arg>

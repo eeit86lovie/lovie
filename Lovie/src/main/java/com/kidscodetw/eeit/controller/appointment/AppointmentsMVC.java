@@ -3,10 +3,12 @@ package com.kidscodetw.eeit.controller.appointment;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Set;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.ws.rs.core.MediaType;
@@ -16,9 +18,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.kidscodetw.eeit.dao.movie.MovieDAO;
+import com.kidscodetw.eeit.dao.movie.TheaterDAO;
 import com.kidscodetw.eeit.entity.appointment.AppointmentBean2;
 import com.kidscodetw.eeit.entity.appointment.AppointmentaBean;
 import com.kidscodetw.eeit.entity.appointment.AppointmentaeditBean;
@@ -27,8 +32,14 @@ import com.kidscodetw.eeit.entity.appointment.AppointmentbBean;
 import com.kidscodetw.eeit.entity.appointment.AppointmentbeditBean;
 import com.kidscodetw.eeit.entity.appointment.AppointmentsBean;
 import com.kidscodetw.eeit.entity.member.MemberBean;
+import com.kidscodetw.eeit.entity.movie.GenreBean;
+import com.kidscodetw.eeit.entity.movie.TheaterBean;
 import com.kidscodetw.eeit.service.appointment.AppointmentRequestService;
 import com.kidscodetw.eeit.service.appointment.AppointmentService2;
+import com.kidscodetw.eeit.service.appointment.AppointmovieService;
+import com.kidscodetw.eeit.service.movie.GenreService;
+import com.kidscodetw.eeit.service.movie.MovieService;
+import com.kidscodetw.eeit.service.movie.TheaterService;
 import com.kidscodetw.eeit.util.DataTransfer;
 
 @Controller
@@ -40,7 +51,29 @@ public class AppointmentsMVC {
 	AppointmentService2 appointmentService2;
 	@Autowired
 	AppointmentRequestService appointmentRequestService;
+	@Autowired
+	AppointmovieService appointmovieService;
 	
+	@RequestMapping("new_appointmenta")
+	public String new_appointmenta(Model model){
+		List<GenreBean> genre_names = appointmovieService.select_genre_list();
+		List<String> movie_names = appointmovieService.select_movienames_list();
+		List<String> theater_names = appointmovieService.select_theaternames_list();
+		String[] city_names={"基隆市","台北市","新北市","桃園市","新竹市","苗栗縣","台中市","南投縣","雲林縣","彰化縣","嘉義市","台南市","高雄市","屏東縣","宜蘭縣","花蓮縣","台東市","金門縣","澎湖縣"};
+
+		model.addAttribute("citynames", city_names);
+		model.addAttribute("theaternames", theater_names);
+		model.addAttribute("genrenames", genre_names);
+		model.addAttribute("movienames", movie_names);
+		return "appointment/new_appointmenta.jsp";
+	}	
+	
+	@RequestMapping("new_appointmentb")	
+	public String new_appointmentb(Model model){
+		return "appointment/new_appointmentb.jsp";
+	}	
+		
+		
 	//查詢(1)
 	@RequestMapping("appointments")
 	public String getAppointments(){

@@ -7,7 +7,6 @@ import com.kidscodetw.eeit.dao.appointment.AppointmentDAO2;
 import com.kidscodetw.eeit.entity.appointment.AppointmentBean2;
 import com.kidscodetw.eeit.entity.appointment.AppointmentaBean;
 import com.kidscodetw.eeit.entity.appointment.AppointmentaeditBean;
-import com.kidscodetw.eeit.entity.appointment.AppointmentbBean;
 import com.kidscodetw.eeit.entity.appointment.AppointmentsBean;
 
 public class AppointmentService2 {
