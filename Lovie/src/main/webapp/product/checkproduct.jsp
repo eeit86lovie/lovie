@@ -130,14 +130,14 @@
                                             <th>產品價格</th>
                                              <th>數量</th>
                                              <th>小計</th>
-                                             <th>刪除</th>
+                                        
                                          
                                             
                                         </tr>
                                     </thead>
                                     <tbody>
                                     <c:forEach items="${addcartlist}" var="addtocart" varStatus="loop">
-					 
+                                    		
                                            <tr id="Cart${addtocart.bean.productid}" data-cost="${addtocart.bean.cost*addtocart.amount}" class="success">
                                              <td>${addtocart.bean.productid}</td>
                                              <td>${addtocart.bean.name}</td>
@@ -147,18 +147,19 @@
                                              <td>${addtocart.bean.cost}</td>
                                              <td>${addtocart.amount}</td>
                                              <td>${addtocart.bean.cost*addtocart.amount}</td>
-                                             <td><div class="delete">
-                                             <c:if test="${loop.last}">
+                                            <c:if test="${loop.last}">
                                     		<script>
                                     		var itemAmount = ${loop.count}
                                     		</script>
                                     		</c:if>
-							    	<button id="delete-btn${addtocart.bean.productid}" onclick="cancel(this)" type="button" class="glyphicon glyphicon-trash" title="自購物車移除">
-	 					 	        </button>
-							    </div></td>
+                                    		
                                      </tr>
                                     </c:forEach> 
- 
+                                         <tr >
+                                             <th>總金額</th>
+                                             <td id="title">${param.allcost}</td>
+                                         </tr>
+                                        
                                     </tbody>
                                     
                                     
@@ -169,8 +170,8 @@
                             </div>
                             
                             <div>
-                            <a href="#" type="button" class="btn btn-primary" onclick="titleCost()">前往結帳</a>
-                            <button type="button" class="btn btn-warning" onclick="deleteCart()">清空購物車</button>
+                            <a href="/Lovie/product/bill.jsp" type="button" class="btn btn-primary">確認結帳</a>
+                       
                             <button type="button" class="btn btn-danger" onclick="history.back()">回上一頁</button>
                             </div>
                             </div>
@@ -181,20 +182,7 @@
                     </div>
                     <!-- /.panel -->
 
-
 <script> 
-//移除全部
-function deleteCart(){
-
-	$.ajax({
-		url: "${pageContext.request.contextPath}/removeSessionAttribute",
-		type:'get',
-		success: function(result){
-			$("#ShoppingCart").empty();
-    	}
-	});
-
-}
 
 
 // //移除單筆
@@ -215,44 +203,22 @@ function deleteCart(){
 	
 	
 // }
-
-function cancel(object){
-
-	var deleteproductid=object.id.substring(10);
-	var deleteproductcontent=object.id.substring(10);
-	alert("aa");
-			  $.ajax({
-				  'type':'post',
-				  'url':'cart.do?productid='+deleteproductid,
-				  'success':function(data){
-					  if(data=="success"){
-						
-						  $('#Cart'+deleteproductcontent).empty();		  
-						  
-						alert("已刪除商品");
-
-					  }    						  
-				  }    					  
-			  });
-	
-	  }
-	  
-	  
+alert("${allcost}"+"AAA");
 
 var allcost=0;
 function titleCost(){
 	var tbody = $('tbody:eq(1)')
    
 	for(var i=0;i<itemAmount;i++){
-		//alert( $('tbody:eq(1)>tr:eq('+i+')').attr('data-cost') )
-     var allproductcost=$('tbody:eq(1)>tr:eq('+i+')').attr('data-cost');
-		allcost=parseInt(allcost)+parseInt(allproductcost);
-	}
 	
-	alert("http://localhost:8080/Lovie/product/checkproduct.jsp?allcost="+allcost);
-	window.location.assign("http://localhost:8080/Lovie/product/checkproduct.jsp?allcost="+allcost);
-	                        
+     var allproductcost=$('tbody:eq(1)>tr:eq('+i+')').attr('data-cost');
+		
+		allcost=parseInt(allcost)+parseInt(allproductcost);
+
+	}
+
 }
+
 
 
 

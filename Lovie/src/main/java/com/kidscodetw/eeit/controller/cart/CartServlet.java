@@ -61,7 +61,12 @@ public class CartServlet extends HttpServlet {
 					Map<String, Object> m2= check.next();
 					ProductBean bean1 = (ProductBean) m2.get("bean");
 					if(bean1.getProductid().equals(productid)){
-						m2.replace("amount", amount);
+						Integer oldamount = bean1.getAmount();
+						System.out.println("oldamount"+oldamount);
+						Integer newamount = oldamount + amount ;  
+						System.out.println("newamount"+newamount);
+						bean1.setAmount(newamount);
+						m2.replace("amount", newamount);
 						out.print("modified");
 						break;
 					}else{
@@ -91,6 +96,7 @@ public class CartServlet extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		System.out.println("cartservlet post");
 		request.setCharacterEncoding("UTF-8");
 		PrintWriter out = response.getWriter();
 		HttpSession session = request.getSession();
@@ -102,7 +108,7 @@ public class CartServlet extends HttpServlet {
 		while(check.hasNext()){
 			Map<String, Object> m3 = check.next();
 			ProductBean bean1 = (ProductBean) m3.get("bean");
-			if(bean1.getProductid()==productid){
+			if(bean1.getProductid() == productid){
 				addcart.remove(m3);
 				out.print("success");
 				break;

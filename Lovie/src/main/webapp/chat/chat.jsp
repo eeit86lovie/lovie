@@ -116,12 +116,14 @@ label:before {
         url: 'info',
         type: 'GET',
         success: function(response) {
+        	if(response[0]==null){
+        	}else{
            	for(var i=0; i<response.length;i++){
            		appendPeople(response[i]);
            		appendRight(response[i]);
-           		
            	}
            	firstLoad();
+        	}
         }
       });
     
@@ -262,16 +264,17 @@ label:before {
     
     
     function chooseFriend(friend){
-    	if(friend.text!="選擇好友" || !$('#'+friend.value).hasClass('active')){
-			$('#receiver').attr("data-id", friend.value).text(friend.text);
+    	if(friend.text!="選擇好友"){
+	    	if(!$('#'+friend.value).hasClass('active')){
+				$('#receiver').attr("data-id", friend.value).text(friend.text);
+	    	}
+	    	var checkPerson = document.getElementById(friend.value);
+	    	if(checkPerson==null){
+				$('.chat').removeClass('active-chat');
+			}else{
+				personClick($('#'+friend.value));
+			}
     	}
-    	if(!$('#'+friend.value)){
-    		alert('#'+friend.value);
-			$('.chat').removeClass('active-chat');
-		}else{
-			personClick($('#'+friend.value));
-		}
-    	
     }
     
     </script>
