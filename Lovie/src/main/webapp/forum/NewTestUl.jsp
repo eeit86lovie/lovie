@@ -12,103 +12,136 @@
 
 <style type="text/css">
 
+body{
+	background-color:#FFFFFF;
+}
+
+
 /* The container <div> - needed to position the dropdown content */
 .dropdown {
-    position: relative;
-    display: inline-block;
+	width:220px;
+	background-color: #FFFFFF;
+	position:fixed; /*固定不動*/
+	top:200px;
+	left:50px;
 }
 
 /* Dropdown Content (Hidden by Default) */
+
+.row.dropdown-content { 
+	margin:5px;
+}
+
+.min_but{
+    width: 210px;
+    height: 35px;
+    float:left;
+    margin:10px 0;
+	border: #ff5959 1px solid;
+	border-radius:5px;
+	-moz-border-radius:5px;
+	color: #ff5959;
+	background-color: #FFFFFF;
+}
+
+.min_but:hover{
+	color: #FFFFFF;
+	background-color: #ff5959;
+}
+
+.search_but{
+	width: 50px;
+    height: 25px;
+    float:right;
+	border: #ff5959 1px solid;
+	border-radius:3px;
+	-moz-border-radius:3px;
+	color: #FFFFFF;
+	background-color:#ff5959;
+	text-align: center;
+	margin:5px 0;
+}
+
 .dropdown-content {
- 
-    position: absolute;
-    background-color: #f9f9f9;
-    min-width: 160px;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+	width:200px;
+	font-size:16px;
+	clor:#ff5959;
+	float:left;
+	margin:5px 0;
+	
 }
 
-/* Links inside the dropdown */
-.dropdown-content h2 {
-    color: black;
-    padding: 12px 16px;
-    text-decoration: none;
-    display: block;
+.search_text{
+	width:140px;
+	height: 25px;
+	float:left;
+	border-radius:3px;
+	-moz-border-radius:3px;
+	margin:5px 0;
+
 }
 
-/* Change color of dropdown links on hover */
-.dropdown-content h2:hover {background-color: #f1f1f1}
-
-/* Show the dropdown menu on hover */
-.dropdown:hover .dropdown-content {
-    display: block;
+.menu_search_genre{
+	width: 140px;
+    height: 25px;
+    margin-top:5px;
+    margin-bottom:15px;
+}
+.minsearch_text{
+	width:200px;
+	margin-top:2px;
+	border-bottom: #ffa3a3 2px solid;
 }
 
-/* Change the background color of the dropdown button when the dropdown content is shown */
-.dropdown:hover .dropbtn {
-    background-color: #3e8e41;
-}
 
+.remind_text{
+	font-size:12px;
+	width:200px;
+	color:red;
+	float:left;
+	padding-tottom:5px;
+}
 </style>
+
 
 </head>
 <body>
 <div class="dropdown">
   <div class="dropdown-content" id="dropdown-content">
-    
-       <h2>
-       		<button id="modal_trigger" href="#modal" onclick="checkLogin()">發表文章</button>
-       </h2>    
-    
-        <h2>    
-    		<button id="searchMyArticleButton" onclick= "searchMyArticle()">我的文章</button>
-        </h2>
-    
-    
-       <h2>   
-    	<p>搜尋作者</p><br>
-	    <input type="text" id="searchMember">
-	    <p id="error_message_searchMember"></p>
-	    <button id="searchMemberButton" onclick= "searchmember()">搜尋</button>
-       </h2>
-    
-    <h2>
-    	<p>搜尋標題</p><br>
-	    <input type="text" id="searchTitle">
-	    <p id="error_message_searchTitle"></p>
-	    <button id="searchTitleButton" onclick= "searchTitle()">搜尋</button>
-    
-    </h2>
-    
-     <h2>
-	    <p>依類別搜尋</p><br>
-	    <select id="searchGenre">
+
+       		<button id="modal_trigger" href="#modal" onclick="checkLogin()" class="min_but">發表文章</button>
+  
+    		<button id="searchMyArticleButton" onclick= "searchMyArticle()"class="min_but">我的文章</button>
+    		
+    		<button id="searchMyLikeButton" onclick= "searchMyLike()"class="min_but">我所喜歡的文章</button>  
+
+        <button id="searchMyDisLikeButton" onclick= "searchMyDisLike()"class="min_but">我所不喜歡的文章</button> 
+  
+    	<p class="minsearch_text">搜尋作者</p>
+	    <input type="text" id="searchMember" class="search_text">
+	    <button id="searchMemberButton" onclick= "searchmember()"class="search_but">搜尋</button>
+	    <p id="error_message_searchMember" class="remind_text"></p>
+
+    	<p class="minsearch_text">搜尋標題</p>
+	    <input type="text" id="searchTitle" class="search_text">
+	    <button id="searchTitleButton" onclick= "searchTitle()"class="search_but" >搜尋</button>
+    	<p id="error_message_searchTitle" class="remind_text"></p>
+
+	    <p class="minsearch_text">依類別搜尋</p>
+	    <select id="searchGenre" class="menu_search_genre">
 	　		<option value="好雷">好雷</option>
 	　		<option value="負雷">負雷</option>
 	　		<option value="新聞">新聞</option>
 	　		<option value="討論">討論</option>
 	　		<option value="問片">問片</option>
 	　		<option value="其他">其他</option>
-	　	</select><br>
-	    <button id="searchGenreButton" onclick= "searchGenre()">搜尋</button>
-    </h2>    
-    
-    <h2>
-    	<p>搜尋內容關鍵字</p><br>
-	    <input type="text" id="searchContent">
-	    <p id="error_message_searchContent"></p>
-	    <button id="searchContentButton" onclick= "searchContent()">搜尋</button>
-    </h2>
-    
-    
-    
-    <h2>
-        <button id="searchMyLikeButton" onclick= "searchMyLike()">我所喜歡的文章</button>  
-    </h2>
-    
-    
-    <h2>
-        <button id="searchMyDisLikeButton" onclick= "searchMyDisLike()">我所不喜歡的文章</button> 
-    </h2>
+	　	</select>
+	    <button id="searchGenreButton" onclick= "searchGenre()"class="search_but">搜尋</button>
+
+    	<p class="minsearch_text">搜尋內容關鍵字</p>
+	    <input type="text" id="searchContent" class="search_text">
+	    <button id="searchContentButton" onclick= "searchContent()"class="search_but">搜尋</button>
+ 		<p id="error_message_searchContent" class="remind_text"></p>
      
   </div>
 </div>

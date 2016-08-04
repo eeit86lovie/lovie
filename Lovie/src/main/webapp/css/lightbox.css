@@ -23,7 +23,7 @@ body {font-family: 'Source Sans Pro', sans-serif; font-size: 14px; color: #666;}
 	-webkit-border-radius:5px;
 }
 
-#modal_trigger {margin:100px auto; width:100px; display:block;}
+#modal_trigger {margin:5px auto; width:210px; display:block;}
 
 .action_btns{
 }
