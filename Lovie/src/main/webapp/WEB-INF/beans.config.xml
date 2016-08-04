@@ -127,7 +127,7 @@
 		<constructor-arg ref="sessionFactory"></constructor-arg>
 	</bean>
 	
-	<bean id="productDAO" class="com.kidscodetw.eeit.service.cart.ProductService">
+	<bean id="productService" class="com.kidscodetw.eeit.service.cart.ProductService">
 		<constructor-arg ref="productDAOHibernate"></constructor-arg>
 	</bean>
 	

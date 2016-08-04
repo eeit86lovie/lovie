@@ -10,10 +10,19 @@ public class ProductBean implements Serializable{
 	private Integer productid;
 	private Integer cost;
 	private double discount;
-	private Integer inventory;//庫�?��??
+	private Integer inventory;
 	private Blob productphoto;
-	private Integer category;//類別  1:??�員 2:?��影海?�� 3:人物?���? 4:??�飾
-	private String content;//?���?
+	private Integer category;
+	private String content;
+	
+	private transient int amount =0;
+	
+	public int getAmount() {
+		return amount;
+	}
+	public void setAmount(int amount) {
+		this.amount = amount;
+	}
 	public String getName() {
 		return name;
 	}

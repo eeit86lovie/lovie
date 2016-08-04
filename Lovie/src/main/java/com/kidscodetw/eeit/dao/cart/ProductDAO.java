@@ -8,7 +8,7 @@ public interface ProductDAO {
 
 	public abstract List<ProductBean> select_ALL();
 
-	public abstract ProductBean select_id(int productid);
+	public abstract ProductBean select_id(Integer productid);
 
 	public abstract ProductBean select_name(String name);
 
