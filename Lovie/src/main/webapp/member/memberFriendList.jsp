@@ -10,6 +10,7 @@
 width:100px;
 height:100px;
 }
+
 </style>
 <c:import charEncoding="UTF-8" url="/meta.jsp"></c:import>
 <title>會員朋友列表</title>
@@ -34,7 +35,7 @@ height:100px;
     <li><a href="#tabs-2">我感興趣的對象</a></li>
     <li><a href="#tabs-3">對我感興趣的人</a></li>
   </ul>
-  <div id="tabs-1">
+  <div id="tabs-1" >
     <div id="friendTable"></div>
   </div>
   
@@ -75,15 +76,14 @@ function findData(loginmemberId,relation,tableName){
 				var img=$('<img />')
 				img.addClass("img1");
 				img.attr('src',"${pageContext.request.contextPath}/photo/member/"+member.id)
-				var cell1=$("<div><a herf></a></div>")
+				var cell1=$("<a href></a>")
 				cell1.attr('href',"${pageContext.request.contextPath}/member/profile/"+member.id)
 				cell1.append(img)
+				var cell0  = $("<div></div>").append(cell1)
 				var cell2  = $("<div></div>").text(member.nickname)
-				var cell3  = $("<div></div>").text(member.city)
-				var cell4  = $("<div></div>").text(member.age+"歲")
-		
-				var row = $("<div class='item'></div>").append([cell1,cell2,cell3,cell4])
-				flag.append(row);
+				
+				var row = $("<div class='item'></div>").append([cell0,cell2])
+				flag.append(row)
 			})
 			tb.append(flag)
 
