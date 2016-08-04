@@ -10,6 +10,13 @@
 width:100px;
 height:100px;
 }
+.row{
+margin-bottom: 10px;
+margin-top: 10px
+}
+.col-sm-10{
+margin: 0px;
+}
 
 </style>
 <c:import charEncoding="UTF-8" url="/meta.jsp"></c:import>
@@ -36,8 +43,8 @@ height:100px;
     <li><a href="#tabs-3">對我感興趣的人</a></li>
   </ul>
   <div id="tabs-1" >
-    <div id="friendTable"></div>
-  </div>
+<!-- <div id="friendTable"></div> -->
+			</div>
   
   <div id="tabs-2">
      <div id="interestedTable"></div>
@@ -52,7 +59,7 @@ height:100px;
  <script type="text/javascript">
  var loginmemberId= "${loginmember.id}";
  window.onload=function() {
-    	findData(loginmemberId,1,"friendTable");
+    	findData(loginmemberId,1,"tabs-1");
     	findData(loginmemberId,2,"interestedTable");
     	findData(loginmemberId,3,"interestingTable");
 
@@ -79,10 +86,13 @@ function findData(loginmemberId,relation,tableName){
 				var cell1=$("<a href></a>")
 				cell1.attr('href',"${pageContext.request.contextPath}/member/profile/"+member.id)
 				cell1.append(img)
-				var cell0  = $("<div></div>").append(cell1)
-				var cell2  = $("<div></div>").text(member.nickname)
+				var cell0  = $("<div class='col-sm-2'></div>").append(cell1)
+				var cell2  = $("<div class='col-sm-2'></div>").text(member.nickname)
+				var cell3  = $("<div class='col-sm-2'></div>").text(member.city)
+				var cell4  = $("<div class='col-sm-2'></div>").text(member.age+"歲")
+				var cell5  = $("<div class='col-sm-7'></div>").text(member.intro)
 				
-				var row = $("<div class='item'></div>").append([cell0,cell2])
+				var row = $("<div class='row'></div>").append([cell0,cell2,cell3,cell4,cell5])
 				flag.append(row)
 			})
 			tb.append(flag)
