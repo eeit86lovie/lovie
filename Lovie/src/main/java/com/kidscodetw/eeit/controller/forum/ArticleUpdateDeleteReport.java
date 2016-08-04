@@ -93,15 +93,14 @@ public class ArticleUpdateDeleteReport {
 			System.out.println(UpdateContent);
 		
 			ForumBean fb = new ForumBean();
-			
-			fb.setId(UpdateArticleId);
-			fb.setMemberAccount(UpdateMember);
+			ForumBean selectUpdate = forumDAO.select_id(UpdateArticleId);
+			fb.setId(selectUpdate.getId());
+			fb.setMemberAccount(selectUpdate.getMemberAccount());
 			fb.setTitle(UpdateTitle);
 			fb.setGenre(UpdateGenre);
-			fb.setContent(UpdateContent);
-			
-			//fb.setPubTime(new java.sql.Timestamp(new java.util.Date().getTime()));
-			//fb.setEditTime(new java.sql.Timestamp(new java.util.Date().getTime()));
+			fb.setContent(UpdateContent);			
+			fb.setPubTime(selectUpdate.getPubTime());
+			fb.setEditTime(new java.sql.Timestamp(new java.util.Date().getTime()));
 			ForumBean UpdateArticle = forumDAO.update(fb);
 			return UpdateArticle;
 		}

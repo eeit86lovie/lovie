@@ -54,7 +54,7 @@
 								<tbody id="forum_tbody">
 									<c:forEach var="reports" items="${forums }" varStatus="vs">
 										<tr>
-											<td id="movie${forums.ForumBean.id}_mID" onclick="movie_edit(this)">${forums.ForumBean.id}</td>
+											<td ${forums.ForumBean.id}>${forums.ForumBean.id}</td>
 <%-- 											<td id="movie${forums.id }_mName" onclick="movie_edit(this)">${movie.name}</td> --%>
 <%-- 											<td id="movie${movie.id }_mRank" onclick="movie_edit(this)">${movie.rank}</td> --%>
 <%-- 											<td id="movie${movie.id }_mStartTime" onclick="movie_edit(this)" style="min-width: 100px;">${movie.startTime}</td> --%>
