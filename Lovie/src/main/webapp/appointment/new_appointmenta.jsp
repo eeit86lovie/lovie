@@ -101,9 +101,13 @@
 		    <span class="glyphicon glyphicon-remove-sign clearselspan" aria-hidden="true" onclick="clearinput(4);"></span>
 		</div>
 		<div class="form-group">
-		    <label class="control-label col-md-2" for="showtimeDate" style="margin-right: 0px;">放映日期：</label>
-		    <div class="col-md-9"> 
-		    	<input type="text" class="form-control" id="showtimeDate" name="showtimeDate" placeholder="請選擇放映日期" readonly>
+		    <label class="control-label col-md-2" for="showtimeDatebeg" style="margin-right: 0px;">放映日期：</label>
+		    <div class="col-md-4"> 
+		    	<input type="text" class="form-control" id="showtimeDatebeg" name="showtimeDatebeg" placeholder="請選擇放映起日" readonly>
+		    </div>
+		    <div class="col-md-1" style="text-align:center;line-height:29px;"><span >～</span></div>
+		    <div class="col-md-4"> 
+		    	<input type="text" class="form-control" id="showtimeDateend" name="showtimeDateend" placeholder="請選擇放映迄日" readonly>
 		    </div>
 		    <span class="glyphicon glyphicon-remove-sign clearselspan" aria-hidden="true" onclick="clearinput(5);"></span>
 	    </div>
@@ -163,7 +167,9 @@ function clearinput(sel) {
 	   case 4:
 			$("#movieName").val('').trigger('change'); break; 
 	   case 5:
-			$("#city").val('').trigger('change'); break; 
+			$("#showtimeDatebeg").val(""); 
+			$("#showtimeDateend").val(""); 
+			break; 
 	
 	}
 
@@ -174,7 +180,8 @@ function formreset() {
 	$("#theaterName").val('').trigger('change');
 	$("#genreId").val('').trigger('change');
 	$("#movieName").val('').trigger('change');
-	$("#showtimeDate").val(""); 
+	$("#showtimeDatebeg").val(""); 
+	$("#showtimeDateend").val(""); 
 }
 
 function formsubmit() {
@@ -182,12 +189,20 @@ function formsubmit() {
 	var theatersels = $("#theaterName").val();
 	var genresels = $("#genreId").val();
 	var moviesels = $("#movieName").val();
-	var showtimesels = $("#showtimeDate").val();
-console.log(citysels);
+	var showtimeDatebeg = $("#showtimeDatebeg").val();
+	var showtimeDateend = $("#showtimeDateend").val();
+
+	if ((showtimeDatebeg != ''  && showtimeDateend != '')
+		&& (showtimeDatebeg > showtimeDateend)) 
+	{
+		alert("放映起日不可大於放映迄日,請重新選擇.");
+		return;
+	}	
+console.log(citysels);  //array
 console.log(theatersels);
-console.log(genresels);
+console.log(genresels);   //array
 console.log(moviesels);
-console.log(showtimesels);
+console.log(showtimeDatebeg+"~"+showtimeDateend);
   alert("查詢.....");
   
   
@@ -211,7 +226,8 @@ console.log(showtimesels);
 			 placeholder: '請選擇電影名稱',
 			 allowClear: true
 		 });
-         $('#showtimeDate').datepicker({ dateFormat: "yy-mm-dd" });
+         $('#showtimeDatebeg').datepicker({ dateFormat: "yy-mm-dd" });
+         $('#showtimeDateend').datepicker({ dateFormat: "yy-mm-dd" });
      });
 </script>
 <!-- end script -->
