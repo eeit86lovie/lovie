@@ -8,7 +8,6 @@ import com.kidscodetw.eeit.entity.member.InterestedMoviesBean;
 
 public interface InterestedMoviesDAO {
 
-	public abstract Session getSession();
 
 	public abstract List<InterestedMoviesBean> select();
 
