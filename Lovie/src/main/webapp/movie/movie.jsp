@@ -44,7 +44,7 @@
 				<p>上映時間:${movie.startTime}</p>
 				<p>
 					類型:
-					<c:forEach var="genre" items="${genre_list }">${genre}&nbsp;</c:forEach>
+					<c:forEach var="genre" items="${genre_list}">${genre}&nbsp;</c:forEach>
 				</p>
 				<p align="justify">簡介:<br>${movie.intro}</p>
 				

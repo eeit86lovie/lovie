@@ -72,7 +72,7 @@ label:before {
     
   </head>
 
-  <body>
+  <body onload="connect()">
 
     <div class="wrapper">
     <div class="container">
@@ -96,7 +96,7 @@ label:before {
             
             <div class="write">
                 <a href="javascript:;" class="write-link attach"></a>
-                <input type="text" id="inputText" onfocus="inputOnfocus()" onkeydown="if (event.keyCode == 13) { sendMessage()}"/>
+                <input type="text" id="inputText" onkeydown="if (event.keyCode == 13) { sendMessage()}"/>
                 <a href="javascript:;" class="write-link smiley"></a>
                 <a href="#" onclick="sendMessage()" class="write-link send"></a>
             </div>
@@ -110,87 +110,8 @@ label:before {
     	<script src="//cdn.bootcss.com/stomp.js/2.3.3/stomp.js"></script>
     	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.14.1/moment.min.js"></script>
 		<script src="${pageContext.request.contextPath }/chat/js/chat.js"></script>
-		
- <script>
- var stompClient = null;
- 
- function inputOnfocus(){
-	 if($('#receiver').text()==""){
-		 alert($('.active-chat').attr('data-chat'))
-	 	$('#receiver').attr('data-chat', ($('.active-chat').attr('data-chat')));
-	 	$.ajax({
-		    url: '${pageContext.request.contextPath}/member/nickname/'+$('.active-chat').attr('data-chat'),
-		    type: 'GET',
-		    async: false,
-		    success: function(response) {
-		        nickname = response['nickname'];
-		        $('#receiver').text(nickname);
-		    }
-		  });
-	 }
- }
- 
- function chooseFriend(friend){
- 	if(friend.text!="選擇好友"){
-	    	if(!$('#'+friend.value).hasClass('active')){
-				$('#receiver').attr("data-id", friend.value).text(friend.text);
-	    	}
-	    	var checkPerson = document.getElementById(friend.value);
-	    	if(checkPerson==null){
-				$('.chat').removeClass('active-chat');
-			}else{
-				personClick($('#'+friend.value));
-			}
- 	}
- }
- 
- function sendMessage(){
-		if($('#inputText').val()==""){
-			alert('請輸入傳送的內容');
-		}else if($('#receiver').attr('data-id')==""){
-			alert('請選擇發送的對象');
-		}else{
-			var message = $('#inputText').val();
-			$('#inputText').val("");
-			var sender = ${loginmember.account};
-			var receiver = $('#receiver').attr('data-id');
-			stompClient.send("/app/chat", {}, JSON.stringify({ 'receiver': receiver , 'message':message}));
-		}
-	}
- 
- function personClick(object){
- 	if ($(object).hasClass('person active')) {
-         return false;
-     } else {
-     	
-         var findChat = $(object).attr('data-chat');
-         var personName = $(object).find('.name').text();
-         $('.right .top .name').html(personName);
-         $('.chat').removeClass('active-chat');
-         $('.left .person').removeClass('active');
-         $(object).addClass('active');
-         $('.chat[data-chat = '+findChat+']').addClass('active-chat');
-         $('#receiver').attr('data-id',findChat);
-     }
- };
-       
-window.onload = function() {
-	
-
-	function chooseFriend(friend){
-    	if(friend.text!="選擇好友"){
-	    	if(!$('#'+friend.value).hasClass('active')){
-				$('#receiver').attr("data-id", friend.value).text(friend.text);
-	    	}
-	    	var checkPerson = document.getElementById(friend.value);
-	    	if(checkPerson==null){
-				$('.chat').removeClass('active-chat');
-			}else{
-				personClick($('#'+friend.value));
-			}
-    	}
-    }
-	
+    
+    <script>
     $.ajax({
         url: 'info',
         type: 'GET',
@@ -201,19 +122,26 @@ window.onload = function() {
            		appendPeople(response[i]);
            		appendRight(response[i]);
            	}
-           	var firstSender = [${firstSender}];
-           	if(firstSender.length==0){
-           		firstLoad();	
-           	}else{
-           		personClick($('#'+firstSender));
-           	}
-           	
-        }
+           	firstLoad();
+        	}
         }
       });
     
 		
-
+// 		<div class="chat" data-chat="person1">
+//         <div class="conversation-start">
+//             <span>Today, 6:48 AM</span>
+//         </div>
+//         <div class="bubble you">
+//             Hello,
+//         </div>
+//         <div class="bubble you">
+//             it's me.
+//         </div>
+//         <div class="bubble you">
+//             I was wondering...
+//         </div>
+//     </div>
 	function appendRight(person){
 		var fixedPerson;
 		if(person['sender'] == ${loginmember.account}){
@@ -226,16 +154,13 @@ window.onload = function() {
 			var date = new Date(person['timestamp'])
 			var dateString = date.getMonth()+1 +'/'+date.getDate()+' '+ date.getHours()+':'+date.getMinutes() 
 			time_div = $('<div></div>').attr('class', 'conversation-start').html("<span>"+dateString+"</span>");
-			if(person['receiver']==${loginmember.account}){
+			if(person['sender']==${loginmember.account}){
 				message_div = $('<div></div>').attr('class', 'bubble you').text(person['message'])
-				$('#'+fixedPerson+'_chat').append(message_div);
-			}else if(person['sender']==${loginmember.account}){
+			}else{
 				message_div = $('<div></div>').attr('class', 'bubble me').text(person['message'])
-				$('#'+fixedPerson+'_chat').append(message_div);
 			}
 			person_div.append(time_div).append(message_div);
 			person_div.insertBefore($('.write'));
-			$('#'+fixedPerson+'_chat').addClass('active-chat');
 		}else{
 			if(fixedPerson==person['sender']){
 				appendMessage = $('<div></div').attr('class', 'bubble you').text(person['message']);
@@ -247,10 +172,14 @@ window.onload = function() {
 			
 		}
 		
-		
 	}
 	
-
+//  <li class="person" data-chat="person1">
+//  <img src="http://s13.postimg.org/ih41k9tqr/img1.jpg" alt="" />
+//  <span class="name">Thomas Bangalter</span>
+//  <span class="time">2:09 PM</span>
+//  <span class="preview">I was wondering...</span>
+//
 	function appendPeople(person){
 		var fixedPerson;
 		var nickname;
@@ -270,7 +199,7 @@ window.onload = function() {
 				    }
 				  });
 			sender_li = $('<li></li>').attr('class', 'person').attr('id',fixedPerson).attr('data-chat',fixedPerson).attr('onclick', 'personClick(this)');
-			sender_img = $('<img></img>').attr('src','${pageContext.request.contextPath}/photo/member/account/'+fixedPerson);
+			sender_img = $('<img></img>').attr('src','http://localhost:8080/Lovie/photo/member/account/'+fixedPerson);
 			sender_span_name = $('<span></span>').attr('class', 'name').text(nickname);
 			var date = new Date(person['timestamp']);
 			var dateString = date.getHours()+':'+date.getMinutes();
@@ -284,14 +213,36 @@ window.onload = function() {
 			var dateString = date.getHours()+':'+date.getMinutes();
 			$('#'+fixedPerson+' .time').html(dateString);
 		}
-		
+	}
+	
+	function sendMessage(){
+		var message = $('#inputText').val();
+		$('#inputText').val("");
+		var sender = ${loginmember.account};
+		var receiver = $('#receiver').attr('data-id');
+		stompClient.send("/app/chat", {}, JSON.stringify({ 'receiver': receiver , 'message':message}));
 		
 	}
-
 	
+	function personClick(object){
+    	if ($(object).hasClass('person active')) {
+            return false;
+        } else {
+        	
+            var findChat = $(object).attr('data-chat');
+            var personName = $(object).find('.name').text();
+            $('.right .top .name').html(personName);
+            $('.chat').removeClass('active-chat');
+            $('.left .person').removeClass('active');
+            $(object).addClass('active');
+            $('.chat[data-chat = '+findChat+']').addClass('active-chat');
+            $('#receiver').attr('data-id',findChat);
+        }
+    	};
 	
 
-    
+    </script>
+    <script>
     function firstLoad(){
     	var firstPerson = $('.right div:nth-child(2)').attr('data-chat')
     	var nickname;
@@ -311,29 +262,21 @@ window.onload = function() {
     }
     
     
- 
-    function connect() {
-        var socket = new SockJS('/Lovie/stomp');
-        stompClient = Stomp.over(socket);
-        stompClient.connect({}, function(frame) {
-            console.log('Connected: ' + frame);
-            stompClient.subscribe('/user/queue/chat', function(message){
-            	appendRight(JSON.parse(message.body));
-            	appendPeople(JSON.parse(message.body));
-            	
-            });
-        });
+    
+    function chooseFriend(friend){
+    	if(friend.text!="選擇好友"){
+	    	if(!$('#'+friend.value).hasClass('active')){
+				$('#receiver').attr("data-id", friend.value).text(friend.text);
+	    	}
+	    	var checkPerson = document.getElementById(friend.value);
+	    	if(checkPerson==null){
+				$('.chat').removeClass('active-chat');
+			}else{
+				personClick($('#'+friend.value));
+			}
+    	}
     }
-    connect();
-   
-
-    function disconnect() {
-        if (stompClient != null) {
-            stompClient.disconnect();
-        }
-        console.log("Disconnected");
-    }
-}
- </script>
+    
+    </script>
   </body>
 </html>

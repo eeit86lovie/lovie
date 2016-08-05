@@ -14,12 +14,13 @@ public class InterestedMoviesDAOHibernate implements InterestedMoviesDAO {
 	private static final String SELECT_ALL= "FROM InterestedMoviesBean";
 	private static final String SELECT_BY_MEMBER= "FROM InterestedMoviesBean where memberId =:memberId";
 	private static final String SELECT_BY_GENRE= "FROM InterestedMoviesBean where genreId =:genreId";
-	private static final String SELECT_BY_BOTH= "FROM InterestedMoviesBean where genreId =:genreId and movieId =:movieId";
+	private static final String SELECT_BY_BOTH= "FROM InterestedMoviesBean where genreId =:genreId and memberId =:memberId";
 
 
 	public InterestedMoviesDAOHibernate(SessionFactory sessionFactory) {
 		this.sessionFactory = sessionFactory;
 	}
+
 
 	public Session getSession() {
 		return sessionFactory.getCurrentSession();
@@ -52,7 +53,7 @@ public class InterestedMoviesDAOHibernate implements InterestedMoviesDAO {
 	@Override
 	public InterestedMoviesBean insert(InterestedMoviesBean bean) {
 		Query query = this.getSession().createQuery(SELECT_BY_BOTH);
-		query.setParameter("movieId", bean.getMemberId());
+		query.setParameter("memberId", bean.getMemberId());
 		query.setParameter("genreId", bean.getGenreId());
 		List<InterestedMoviesBean> list = query.list();
 		if(list.size()==0){
@@ -67,7 +68,7 @@ public class InterestedMoviesDAOHibernate implements InterestedMoviesDAO {
 	public boolean delete(InterestedMoviesBean bean) {
 		this.getSession().delete(bean);
 		Query query = this.getSession().createQuery(SELECT_BY_BOTH);
-		query.setParameter("movieId", bean.getMemberId());
+		query.setParameter("memberId", bean.getMemberId());
 		query.setParameter("genreId", bean.getGenreId());
 		List<InterestedMoviesBean> list = query.list();
 		if(list.size()==0){
