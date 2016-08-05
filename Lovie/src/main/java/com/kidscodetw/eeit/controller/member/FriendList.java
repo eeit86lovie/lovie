@@ -16,8 +16,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kidscodetw.eeit.dao.member.FriendDAO;
+import com.kidscodetw.eeit.dao.member.InterestedMoviesDAO;
 import com.kidscodetw.eeit.dao.member.MemberDAO;
+import com.kidscodetw.eeit.dao.movie.GenreDAO;
 import com.kidscodetw.eeit.entity.member.FriendBean;
+import com.kidscodetw.eeit.entity.member.InterestedMoviesBean;
 import com.kidscodetw.eeit.entity.member.MemberBean;
 
 @Controller
@@ -32,6 +35,13 @@ public class FriendList {
 	@Autowired
 	private ServletContext servletContext;
 	
+	@Autowired
+	private InterestedMoviesDAO interestedMoviesDAO;
+	
+	@Autowired
+	private GenreDAO genreDAO;
+	
+	
 	@RequestMapping(method = RequestMethod.POST, value="/getFriendData", produces=MediaType.APPLICATION_JSON)
 	public @ResponseBody List<MemberBean> getFriendData(
 			HttpSession session,
@@ -41,13 +51,20 @@ public class FriendList {
 		MemberBean bean=((MemberBean)session.getAttribute("loginmember"));
 		//把好友id調出來
 		List<FriendBean> friendBeanList = friendDAO.selectPart(bean.getId(), relation);
-		List<MemberBean> friendMemberList = new ArrayList<MemberBean>();
-		for(FriendBean beans:friendBeanList){
-			friendMemberList.add(memberDAO.select(beans.getFriendId()));
+		List<MemberBean> friendMemberList = new ArrayList<MemberBean>();//會員所有朋友
+		for(FriendBean beans:friendBeanList){//調出所有朋友的會員資料
+			MemberBean mb=memberDAO.select(beans.getFriendId());
+			//------------調出所有朋友喜歡的電影的中文名
+			List<InterestedMoviesBean> imoviesList=interestedMoviesDAO.selectByMemberId(mb.getId());
+			List<String> movieList= new ArrayList<String>();;
+			for(InterestedMoviesBean item:imoviesList){
+				String movieType=genreDAO.select(item.getGenreId()).getName();
+				movieList.add(movieType);
+			}
+			mb.setInterestedMovieList(movieList);
+			friendMemberList.add(mb);
 		}
 		return friendMemberList;
-		
 	}
-	
 
 }

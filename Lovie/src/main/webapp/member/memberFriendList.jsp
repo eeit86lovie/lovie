@@ -43,7 +43,7 @@ margin: 0px;
     <li><a href="#tabs-3">對我感興趣的人</a></li>
   </ul>
   <div id="tabs-1" >
-<!-- <div id="friendTable"></div> -->
+<div id="friendTable"></div>
 			</div>
   
   <div id="tabs-2">
@@ -59,7 +59,7 @@ margin: 0px;
  <script type="text/javascript">
  var loginmemberId= "${loginmember.id}";
  window.onload=function() {
-    	findData(loginmemberId,1,"tabs-1");
+    	findData(loginmemberId,1,"friendTable");
     	findData(loginmemberId,2,"interestedTable");
     	findData(loginmemberId,3,"interestingTable");
 
@@ -87,13 +87,14 @@ function findData(loginmemberId,relation,tableName){
 				cell1.attr('href',"${pageContext.request.contextPath}/member/profile/"+member.id)
 				cell1.append(img)
 				var cell0  = $("<div class='col-sm-2'></div>").append(cell1)
-				var cell2  = $("<div class='col-sm-2'></div>").text(member.nickname)
+				var cell2  = $("<div class='col-sm-2' style='color:#EE7700'></div>").text(member.nickname)
 				var cell3  = $("<div class='col-sm-2'></div>").text(member.city)
 				var cell4  = $("<div class='col-sm-2'></div>").text(member.age+"歲")
 				var intro = $("<span></span>").append(member.intro)
 				var cell5  = $("<div class='col-sm-7'></div>").append(intro)
-				
-				var row = $("<div class='row'></div>").append([cell0,cell2,cell3,cell4,cell5])
+				var cell6 =$("<div class='col-sm-12' style='color:#880000'></div>").text("喜歡的電影類型："+member.interestedMovieList)
+				var cell7 =$("<div class='col-sm-12'></div>").append("<hr>")
+				var row = $("<div class='row'></div>").append([cell0,cell2,cell3,cell4,cell5,cell6,cell7])
 				flag.append(row)
 			})
 			tb.append(flag)

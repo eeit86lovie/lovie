@@ -2,6 +2,7 @@ package com.kidscodetw.eeit.entity.member;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 
@@ -33,8 +34,17 @@ public class MemberBean implements Serializable{
 	private String privilegeExp;
 	private Integer loginTimes;
 	private Integer age;
+	private List<String> interestedMovieList;
 
 
+
+	public List<String> getInterestedMovieList() {
+		return interestedMovieList;
+	}
+
+	public void setInterestedMovieList(List<String> interestedMovieList) {
+		this.interestedMovieList = interestedMovieList;
+	}
 
 	public int getAge() {
 		Date myDate = new Date();
