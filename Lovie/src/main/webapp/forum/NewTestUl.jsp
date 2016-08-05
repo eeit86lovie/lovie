@@ -23,7 +23,7 @@ body{
 	background-color: #FFFFFF;
 	position:fixed; /*固定不動*/
 	top:200px;
-	left:50px;
+	left:-100px;
 }
 
 /* Dropdown Content (Hidden by Default) */
@@ -160,7 +160,6 @@ body{
     
       <div class="user_login">
     <form>
-    
     	<select id="ArticleGenre" class="articleGenre">
 	　		<option value="好雷">好雷</option>
 	　		<option value="負雷">負雷</option>
