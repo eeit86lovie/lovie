@@ -61,5 +61,14 @@ public class FriendDAOHibernate implements FriendDAO {
 		}
 		return bean;
 	}
+	@Override
+	public boolean delete(FriendBean bean) {
+		if (bean != null && bean.getMemberId() != 0) {
+			this.getSession().delete(bean);
+			return true;
+		}
+		return false;
+		
+	}
 
 }

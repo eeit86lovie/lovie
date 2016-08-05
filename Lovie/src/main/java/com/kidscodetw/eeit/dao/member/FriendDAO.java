@@ -21,5 +21,6 @@ public interface FriendDAO {
 	public abstract FriendBean insert(FriendBean bean);
 
 	public abstract FriendBean update(FriendBean bean);
+	public abstract boolean delete(FriendBean bean);
 
 }

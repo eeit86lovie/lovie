@@ -40,6 +40,12 @@ public class FriendService implements FriendDAO{
 		return friendDAO.update(bean);
 	}
 
+
+	@Override
+	public boolean delete(FriendBean bean) {
+		return friendDAO.delete(bean);
+	}
+
 	
 
 	

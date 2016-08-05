@@ -117,7 +117,22 @@ function findData(loginmemberId,relation,tableName){
 }
 
 function addFriend(friendId){
-	
+	var formData1 = new FormData();
+	formData1.append('friendId',friendId );
+		$.ajax({
+			url: "${pageContext.request.contextPath}/member/AddOrRemoveFriendService/addFriend",
+			type: 'post',
+			data: formData1,
+			processData: false,
+			contentType: false,
+			success: function(data){
+				alert("更新成功")
+// 				dialog.dialog( "close" );
+// 				window.location.reload();
+			},error: function(){
+				alert("失敗Q_Q")
+			}
+		})	
 }
 
  
