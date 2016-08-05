@@ -107,9 +107,9 @@ $.ajax({
 			var td6 = $("<td id='"+'pubTime'+report[i].id+"'></ul>").append(report[i].pubTime);
 			var td7 = $("<td id='"+'reportMember'+report[i].id+"'></ul>").append(report[i].reportMember);
 			var td8 = $("<td id='"+'reportReason'+report[i].id+"'></ul>").append(report[i].reportReason);
-			var td9 = $("<td id='"+'reportReason'+report[i].id+"'></ul>").append(reportcount);
+			var td9 = $("<td id='"+'reportReason'+report[i].id+"'></ul>").append(reportcount);			
+			var tr = $("<tr id='"+'tr'+report[i].id+"'></tr>").append(td0);
 			
-			var tr = $("<tr></tr>").append(td0);
 			tr.append(td1);
 			tr.append(td2);			
 			tr.append(td3);
@@ -135,8 +135,8 @@ $.ajax({
 
 
 function clickDelete(ButtonObject){
-	
 	var article_ID = ButtonObject.id.substring(9);
+	$("#"+"tr"+article_ID).addClass("tr");
 	$.ajax({
 		url : "${pageContext.request.contextPath}/forumsDelete",
 		type : "POST",
@@ -145,11 +145,8 @@ function clickDelete(ButtonObject){
 			Article_ID:article_ID,
 		},
 		success : function(deleteCount) {
-			if(deleteCount==1){
-				$("#"+"BOX01"+ article_ID).remove();
-				alert("刪除成功");
-			}else{
-				alert("刪除失敗");
+			if(deleteCount==1){				
+			  $(".tr").remove();
 			}
 		}		
 	})			

@@ -11,19 +11,40 @@
  input[type=checkbox] {
      display: none; 
  } 
+
+input[name="hideUDR_checkBox"] + label span{
+    display:inline-block;
+    width:50px;
+    height:50px;
+    margin:-1px 4px 0 0;
+    vertical-align:middle;   
+    background:url('${pageContext.request.contextPath}/image/hideReply.gif');
+    background-size: 50% 50%;
+    background-repeat:no-repeat;
+    cursor:pointer;   
+}
+input[name="hideUDR_checkBox"]:checked + label span{
+    background:url('${pageContext.request.contextPath}/image/unhideReply.gif');
+    background-size: 50% 50%;
+    background-repeat:no-repeat;
+}
+
+
+
+
 input[name="hideReply_checkBox"] + label span{
     display:inline-block;
     width:50px;
     height:50px;
     margin:-1px 4px 0 0;
     vertical-align:middle;   
-    background:url('${pageContext.request.contextPath}/image/unhideReply.gif');
+    background:url('${pageContext.request.contextPath}/image/countReply.gif');
     background-size: 50% 50%;
     background-repeat:no-repeat;
     cursor:pointer;   
 }
 input[name="hideReply_checkBox"]:checked + label span{
-    background:url('${pageContext.request.contextPath}/image/hideReply.gif');
+    background:url('${pageContext.request.contextPath}/image/noReply.gif');
     background-size: 50% 50%;
     background-repeat:no-repeat;
 }
@@ -191,13 +212,13 @@ function add(){
 				hideReply.className ="hideReply_checkBox";
 				hideReply.name ="hideReply_checkBox";
 				hideReply.setAttribute("onchange", "heidReplyDiv(this)");
-				var hideReply_div = $("<div class='hideReply_div'></div>").append(hideReply);
+				//var hideReply_div = $("<div class='hideReply_div'></div>").append(hideReply);
 				var hidelabel = document.createElement('label');
 				hidelabel.setAttribute("for", hideReply.id);				
 				var hidespan = document.createElement('span');
 				hidespan.className ="hidespan";
 				hidelabel.appendChild(hidespan);
-				hideReply_div.append(hidelabel);
+				//hideReply_div.append(hidelabel);
 					
 				
 				
@@ -221,8 +242,8 @@ function add(){
 				articleUDR.type = "checkbox";
 				articleUDR.id = "articleUDR"+articleJson[i].id;
 				
-				articleUDR.className ="hideReply_checkBox";
-				articleUDR.name ="hideReply_checkBox";
+				articleUDR.className ="hideUDR_checkBox";
+				articleUDR.name ="hideUDR_checkBox";
 				var articleUDRlabel = document.createElement('label');
 				articleUDRlabel.setAttribute("for", articleUDR.id );				
 				var articleUDRspan = document.createElement('span');
@@ -341,15 +362,16 @@ function add(){
 	  		
 	  
 	 		
-	  		var replyCountimg = document.createElement("img");
-	  		replyCountimg.className = "replyCountimg";
-	  		replyCountimg.src = "${pageContext.request.contextPath}/image/countReply.gif";
-	  		var countReplyimg_div = $("<div class='countReplyimg_div'></div>").append(replyCountimg);
+	  		//var replyCountimg = document.createElement("img");
+	  		//replyCountimg.className = "replyCountimg";
+	  		//replyCountimg.src = "${pageContext.request.contextPath}/image/countReply.gif";
+	  		var countReplyimg_div = $("<div class='countReplyimg_div'></div>").append(hideReply);
+	  		countReplyimg_div.append(hidelabel);
 	  		countReplyimg_div.className = "countReplyimg_div"
 	  		var countReply = Article_replyarea_div.children().length+"則留言";
 	  		var countReply_div = $("<div class='countReply_div' id='"+'countReply_div'+articleJson[i].id+"'></div>");
-	  		if(Article_replyarea_div.children().length>0){
-	  			countReply_div.append(countReply);
+	  		if(Article_replyarea_div.children().length>0){		
+	  				countReply_div.append(countReply);		  		
 	  		}
 	  		
 	  		
@@ -424,7 +446,7 @@ function add(){
 	  		ALLbutton_div.append(countDisLike_div);
 	  		ALLbutton_div.append(countReplyimg_div);
 	  		ALLbutton_div.append(countReply_div);
-	  		ALLbutton_div.append(hideReply_div);
+	  		//ALLbutton_div.append(hideReply_div);
 	  	
 	  			  		
 	  		Article_addReply_div.append(replyText);
@@ -487,8 +509,13 @@ function add(){
 					})			
 						    var countReply_div_Id = $("#"+"countReply_div"+replyButtonObject.id.substring(11));
 						    var newCountReply = parseInt(countReply_div_Id.text().slice(0,-3)) + 1;		
+						    //alert(newCountReply);
 						    countReply_div_Id.text("");
-						    countReply_div_Id.append(newCountReply+"則留言");	
+						    if(isNaN(newCountReply)){
+						    	countReply_div_Id.append("1則留言");	
+						    }else{	
+						    	countReply_div_Id.append(newCountReply+"則留言");	
+						    }
 		
 		}else{
 				var error_message = $("<div class='errormessage' id='errormessage'></div>").append("請輸入留言");
@@ -521,7 +548,7 @@ function add(){
 	  	
 	  	var time_replyTime = new Date(returnReplyjson.pubTime);
 	  	var Reply_pubTime_div = $("<div class='replypubTime'></div>").append("留言時間:"+time_replyTime.customFormat( "#YYYY#-#MM#-#DD# #hh#:#mm#:#ss#" ));	
-	    var replyAll_div = $("<div class='replyAll'></div>");//整塊留言DIV		
+	    var replyAll_div = $("<div class='replyAll'></div>");//整塊DIV		
 		
 	    
 	    replyAll_div.append(Reply_photo_div);
