@@ -232,12 +232,5 @@
 		<constructor-arg ref="friendDAOHibernate"></constructor-arg>
 	</bean>	
 	
-		<!-- 	interestedMoviesDAO -->
-	<bean id="interestedMoviesDAOHibernate" class="com.kidscodetw.eeit.dao.member.InterestedMoviesDAOHibernate">
-		<constructor-arg ref="sessionFactory"></constructor-arg>
-	</bean>
-	<bean id="interestedMoviesDAO" class="com.kidscodetw.eeit.service.member.InterestedMoviesSerivce">
-		<constructor-arg ref="interestedMoviesDAOHibernate"></constructor-arg>
-	</bean>	
 	
 </beans>

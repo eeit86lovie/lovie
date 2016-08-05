@@ -91,7 +91,9 @@
 	            	showBroadcast(JSON.parse(message.body).message);
 	            });
 	            stompClient.subscribe('/user/queue/chat', function(message){
-	            	showMessageTip(JSON.parse(message.body).message);
+	            	if(JSON.parse(message.body).sender!=${loginmember.account}){
+	            		showMessageTip(JSON.parse(message.body));	
+	            	}
 	            });
 	        });
 		</sec:authorize>
@@ -105,7 +107,10 @@
 	            	showBroadcast(JSON.parse(message.body).message);
 	            });
 	            stompClient.subscribe('/user/queue/chat', function(message){
-	            	showMessageTip(JSON.parse(message.body).message);
+	            	if(JSON.parse(message.body).sender!=${loginmember.account}){
+	            		showMessageTip(JSON.parse(message.body));	
+	            	}
+	            	
 	            });
 	        });
 		</sec:authorize>
@@ -118,7 +123,9 @@
 	            	showBroadcast(JSON.parse(message.body).message);
 	            });
 	            stompClient.subscribe('/user/queue/chat', function(message){
-	            	showMessageTip(JSON.parse(message.body));
+	            	if(JSON.parse(message.body).sender!=${loginmember.account}){
+	            		showMessageTip(JSON.parse(message.body));	
+	            	}
 	            });
 	        });
 		</sec:authorize>
@@ -143,7 +150,7 @@
 			    success: function(response) {
 			        nickname = response['nickname'];
 			        $("#notifications-bottom-right").html();
-					$("#notifications-bottom-right").html('<div id="notifications-bottom-right-tab"><div id="notifications-bottom-right-tab-close" class="close"><span class="iconb" data-icon="&#xe20e;"></span></div><div id="notifications-bottom-right-tab-avatar"><img src="${pageContext.request.contextPath}/photo/member/account/'+message.sender+'" width="70" height="70" /></div><div id="notifications-bottom-right-tab-right"><div id="notifications-bottom-right-tab-right-title"><span>'+nickname+'</span> 發給你一個訊息</div><div id="notifications-bottom-right-tab-right-text">'+message.message+'</div></div></div>');
+					$("#notifications-bottom-right").html('<a href="${pageContext.request.contextPath}/chat/sender='+message.sender+'"><div id="notifications-bottom-right-tab"><div id="notifications-bottom-right-tab-close" class="close"><span class="iconb" data-icon="&#xe20e;"></span></div><div id="notifications-bottom-right-tab-avatar"><img src="${pageContext.request.contextPath}/photo/member/account/'+message.sender+'" width="70" height="70" /></div><div id="notifications-bottom-right-tab-right"><div id="notifications-bottom-right-tab-right-title"><span>'+nickname+'</span> 發給你一個訊息</div><div id="notifications-bottom-right-tab-right-text">'+message.message+'</div></div></div></a>');
 					$("#notifications-bottom-right-tab").addClass('animated ' + $('#effects').val());
 					refresh_close();
 			    }

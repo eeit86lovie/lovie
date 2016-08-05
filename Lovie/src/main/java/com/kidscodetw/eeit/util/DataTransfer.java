@@ -6,9 +6,12 @@ import java.util.Date;
 import com.kidscodetw.eeit.entity.member.MemberBean;
 
 public class DataTransfer {
-
-//	public static String movieTypeTransfer(){return "";}
-	
+//	public static int changeBirthdayToAge(MemberBean memberBean) {
+//			int intValue = Integer.parseInt(memberBean.getBirthday().substring(
+//					0, 4));
+//			Date today = Calendar.getInstance().getTime();
+//			return today.getYear() + 1900 - intValue;
+//	}
 	public static String genderTransfer(MemberBean memberBean){
 		String gender=null;
 		if(memberBean.getGender()==0)
@@ -16,19 +19,6 @@ public class DataTransfer {
 		else if(memberBean.getGender()==1)
 			gender="男";
 		return gender;
-	}
-
-	public static String changeNumToPrivilege(MemberBean memberBean){
-		Integer Num=memberBean.getPrivilege();
-		String privilege=null;
-		if(Num==1){
-			privilege="普通會員";
-		}else if(Num==2){
-			privilege="黃金會員";
-		}else{
-			privilege="管理員";
-		}
-		return privilege;
 	}
 
 	public static String changeBirthdayToConstellations(MemberBean memberBean) {
@@ -111,5 +101,17 @@ public class DataTransfer {
 		}
 
 		return result;
+	}
+	public static String changeNumToPrivilege(MemberBean memberBean){
+		Integer Num=memberBean.getPrivilege();
+		String privilege=null;
+		if(Num==1){
+			privilege="普通會員";
+		}else if(Num==2){
+			privilege="黃金會員";
+		}else{
+			privilege="管理員";
+		}
+		return privilege;
 	}
 }

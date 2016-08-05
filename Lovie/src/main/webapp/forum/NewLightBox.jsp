@@ -58,10 +58,10 @@
 	　		<option value="問片">問片</option>
 	　		<option value="其他">其他</option>
 	　	</select>
-        <input type="text" id="articleTitle" class="articleTitle" placeholder="文章標題">
+        <input type="text" id="articleTitle" class="articleTitle">
         <p id ="error_title" class="error_title"></p>
        
-        <TextArea type="text" id="textArea" class="articleTextArea" placeholder="文章標題"></TextArea><br>
+        <TextArea type="text" id="textArea" class="articleTextArea"></TextArea><br>
         <p id="error_content" class="error_content"></p>
         
         <div class="action_btns">
