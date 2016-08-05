@@ -42,7 +42,7 @@
 		
 		<div class="col-md-8">			
 			<div id="box">
-				<input type="button" id="addarticle" value="ADD" onclick="add()">
+<!-- 				<input type="button" id="addarticle" value="ADD" onclick="add()"> -->
 			</div>
 		</div>
 	

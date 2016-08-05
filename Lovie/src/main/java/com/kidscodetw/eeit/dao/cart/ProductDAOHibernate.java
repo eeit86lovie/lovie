@@ -53,7 +53,7 @@ public class ProductDAOHibernate implements ProductDAO {
 				 return lpb;	
 	}
 	@Override
-	public ProductBean select_id(int productid) {
+	public ProductBean select_id(Integer productid) {
 		ProductBean pb = null;
 		pb = (ProductBean) getSession().get(ProductBean.class, productid);
 		

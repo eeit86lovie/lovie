@@ -24,5 +24,6 @@ public interface MovieDAO {
 	MovieBean insert(MovieBean bean);
 
 	MovieBean update(MovieBean bean);
+	
 
 }

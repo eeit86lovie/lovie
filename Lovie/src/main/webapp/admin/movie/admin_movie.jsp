@@ -44,6 +44,7 @@ td{
 								id="movietable">
 								<thead>
 									<tr>
+										<th></th>
 										<th>ID</th>
 										<th>名稱</th>
 										<th>分級</th>
@@ -56,7 +57,9 @@ td{
 								</thead>
 								<tbody id="movie_tbody">
 									<c:forEach var="movie" items="${movies }" varStatus="vs">
-										<tr>
+										<tr id="movietr${movie.id }">
+											<td id="movie_delete${movie.id }" onclick="movie_delete(this)"><span
+												class="glyphicon glyphicon-remove" style="color: red;"></span></td>
 											<td id="movie${movie.id }_mID" onclick="movie_edit(this)">${movie.id}</td>
 											<td id="movie${movie.id }_mName" onclick="movie_edit(this)">${movie.name}</td>
 											<td id="movie${movie.id }_mRank" onclick="movie_edit(this)">${movie.rank}</td>
@@ -168,67 +171,34 @@ td{
 						while(crawloutput.firstChild){
 							crawloutput.removeChild(crawloutput.firstChild);
 						}
-						crawloutput.innerHTML = "<h2>新增完成</h2>";
-						updated_movies = JSON.parse(xhr.responseText);
-						movie_tbody = document.getElementById("movie_tbody");
-						for(i=0 ; i<updated_movies.length ; i++){
-							movie_tr = document.createElement("tr");
-							movie_tbody.appendChild(movie_tr);
-							movie_id_td = document.createElement("td");
-							movie_id_td.setAttribute("id", "movie"+updated_movies[i].id+"_mID");
-							movie_id_td.setAttribute("onclick", "movie_edit(this)")
-							movie_id_col = document.createTextNode(updated_movies[i].id);
-							movie_id_td.appendChild(movie_id_col);
-							movie_tr.appendChild(movie_id_td);
-							movie_name_td = document.createElement("td");
-							movie_name_td.setAttribute("id", "movie"+updated_movies[i].name+"_mName");
-							movie_name_td.setAttribute("onclick", "movie_edit(this)")
-							movie_name_col = document.createTextNode(updated_movies[i].name);
-							movie_name_td.appendChild(movie_name_col);
-							movie_tr.appendChild(movie_name_td);
-							movie_rank_td = document.createElement("td");
-							movie_rank_td.setAttribute("id", "movie"+updated_movies[i].rank+"_mRank");
-							movie_rank_td.setAttribute("onclick", "movie_edit(this)")
-							movie_rank_col = document.createTextNode(updated_movies[i].rank);
-							movie_rank_td.appendChild(movie_rank_col);
-							movie_tr.appendChild(movie_rank_td);
-							movie_starttime_td = document.createElement("td");
-							movie_starttime_td.setAttribute("id", "movie"+updated_movies[i].starttime+"_mStartTime");
-							movie_starttime_td.setAttribute("onclick", "movie_edit(this)")
-							movie_starttime_col = document.createTextNode(updated_movies[i].startTime);
-							movie_starttime_td.appendChild(movie_starttime_col);
-							movie_tr.appendChild(movie_starttime_td);
-							movie_filmLength_td = document.createElement("td");
-							movie_filmLength_td.setAttribute("id", "movie"+updated_movies[i].filmLength+"_mFilmLength");
-							movie_filmLength_td.setAttribute("onclick", "movie_edit(this)")
-							movie_filmLength_col = document.createTextNode(updated_movies[i].filmLength);
-							movie_filmLength_td.appendChild(movie_filmLength_col);
-							movie_tr.appendChild(movie_filmLength_td);
-							movie_intro_td = document.createElement("td");
-							movie_intro_td.setAttribute("id", "movie"+updated_movies[i].intro+"_mIntro");
-							movie_intro_td.setAttribute("onclick", "movie_edit(this)")
-							movie_intro_col = document.createTextNode(updated_movies[i].intro);
-							movie_intro_td.appendChild(movie_intro_col);
-							movie_tr.appendChild(movie_intro_td);
-							movie_photo_td = document.createElement("td");
-							movie_photo_td.setAttribute("id", "movie"+updated_movies[i].photo+"_mPhoto");
-							movie_photo_td.setAttribute("onclick", "movie_edit(this)")
-							movie_photo_col = document.createTextNode(updated_movies[i].photo);
-							movie_photo_td.appendChild(movie_photo_col);
-							movie_tr.appendChild(movie_photo_td);
-							movie_trailer_td = document.createElement("td");
-							movie_trailer_td.setAttribute("id", "movie"+updated_movies[i].trailer+"_mTrailer");
-							movie_trailer_td.setAttribute("onclick", "movie_edit(this)")
-							movie_trailer_col = document.createTextNode(updated_movies[i].trailer);
-							movie_trailer_td.appendChild(movie_trailer_col);
-							movie_tr.appendChild(movie_trailer_td);
+						$(crawloutput).html("<h2>新增完成</h2>").delay(1000);
+						location.assign("${pageContext.request.contextPath}/admin/movie/movie.do")
 							
-						}
-						
-						
 					}
+						
 				}
 			}
+			
+			function movie_delete(movie){
+				var check = confirm("確定刪除電影ID "+movie.id.substring(12)+" ?");
+				if(check==true){
+					$.ajax({
+						url: '${pageContext.request.contextPath}/admin/movie/delete/'+movie.id.substring(12),
+						type: 'get',
+						success: function(response) {
+					        if(response=='yes'){
+					        	alert('刪除成功!');
+					        	$('#movietr'+movie.id.substring(12)).empty().remove();
+					        }else{
+					        	alert('刪除失敗,請洽管理員!')
+					        }
+					 
+					    }
+						
+					})
+				}
+			}
+				
 			
 			</script>
 </body>

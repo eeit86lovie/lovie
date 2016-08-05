@@ -8,6 +8,15 @@
 <c:import charEncoding="UTF-8" url="../meta.jsp"></c:import>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+
+<style type="text/css">
+
+.deleteimg{
+    width:30px;
+    height:25px;
+}
+
+</style>
 </head>
 <body>
 <div id="wrapper">
@@ -24,7 +33,6 @@
 					<div id="crawloutput"></div>
 				</div>
 				<div class="col-md-2">
-					<button id="update_button" onclick="movieCrawler()">更新電影</button>
 					
 				</div>
 			</div>
@@ -52,9 +60,7 @@
 									</tr>
 								</thead>
 								<tbody id="forum_tbody">				
-										<tr id="admim_forum">
-
-										</tr>								
+																	
 								</tbody>
 							</table>
 						</div>
@@ -75,20 +81,35 @@ $.ajax({
 	type : "get",
 	dataType : "json",
 	success : function(report) {
-			
+		
 		for(var i =0;i<report.length;i++){
-			var td0 = $("<td id='"+'img'+report[i].id+"'></ul>").append("X");
+			
+			
+			var reportcount = 0;
+		for(var j =0;j<report.length;j++){
+			if(report[i].id == report[j].id){
+				reportcount++;
+			}
+		}
+			
+			var deleteimg = document.createElement("img");
+			deleteimg.className = "deleteimg";
+			deleteimg.id = "deleteimg"+report[i].id;
+			deleteimg.setAttribute("onclick", "clickDelete(this)");
+			deleteimg.src = "${pageContext.request.contextPath}/image/deleteArticle.gif";
+				
+			var td0 = $("<td id='"+'img'+report[i].id+"'></ul>").append(deleteimg);
 			var td1 = $("<td id='"+'id'+report[i].id+"'></ul>").append(report[i].id);
 			var td2 = $("<td id='"+'member'+report[i].id+"'></ul>").append(report[i].memberAccount);
-			var td3 = $("<td id='"+'title'+report[i].id+"'></ul>").append(report[i].title);
-			var td4 = $("<td id='"+'content'+report[i].id+"'></ul>").append(report[i].content);
-			var td5 = $("<td id='"+'genre'+report[i].id+"'></ul>").append(report[i].genre);
+			var td3 = $("<td id='"+'genre'+report[i].id+"'></ul>").append(report[i].genre);
+			var td4 = $("<td id='"+'title'+report[i].id+"'></ul>").append(report[i].title);
+			var td5 = $("<td id='"+'content'+report[i].id+"'></ul>").append(report[i].content);
 			var td6 = $("<td id='"+'pubTime'+report[i].id+"'></ul>").append(report[i].pubTime);
-			var td7 = $("<td id='"+'editTime'+report[i].id+"'></ul>").append(report[i].editTime);
-			var td8 = $("<td id='"+'reportMember'+report[i].id+"'></ul>").append(report[i].reportMember);
-			var td9 = $("<td id='"+'reportReason'+report[i].id+"'></ul>").append(report[i].reportReason);
+			var td7 = $("<td id='"+'reportMember'+report[i].id+"'></ul>").append(report[i].reportMember);
+			var td8 = $("<td id='"+'reportReason'+report[i].id+"'></ul>").append(report[i].reportReason);
+			var td9 = $("<td id='"+'reportReason'+report[i].id+"'></ul>").append(reportcount);
 			
-			var tr = $("#admim_forum").append(td0);
+			var tr = $("<tr></tr>").append(td0);
 			tr.append(td1);
 			tr.append(td2);			
 			tr.append(td3);
@@ -101,11 +122,39 @@ $.ajax({
 			
 			$("#forum_tbody").append(tr);
 			
+			
 		}
 		
 	
 	}					
 })
+
+
+
+
+
+
+function clickDelete(ButtonObject){
+	
+	var article_ID = ButtonObject.id.substring(9);
+	$.ajax({
+		url : "${pageContext.request.contextPath}/forumsDelete",
+		type : "POST",
+		
+		data : {
+			Article_ID:article_ID,
+		},
+		success : function(deleteCount) {
+			if(deleteCount==1){
+				$("#"+"BOX01"+ article_ID).remove();
+				alert("刪除成功");
+			}else{
+				alert("刪除失敗");
+			}
+		}		
+	})			
+	
+}
 
 
 </script>		

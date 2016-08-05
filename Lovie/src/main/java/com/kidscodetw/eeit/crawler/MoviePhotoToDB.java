@@ -1,6 +1,7 @@
 package com.kidscodetw.eeit.crawler;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -17,21 +18,9 @@ public class MoviePhotoToDB {
 //	}
 
 	public static void getLink() {
-		MovieDAO movieDAO = new MovieDAOJdbc();
+		MovieDAOJdbc movieDAO = new MovieDAOJdbc();
 		MovieBean tempBean = null;
-		Map<Integer, byte[]> photos = movieDAO.selectPhotos();
-		List<Integer> tempList = new ArrayList<Integer>();
-//		Set<Integer> photosKeys = photos.keySet();
-//		for(Integer key: photosKeys){
-//			if(photos.get(key)!=null){
-//				tempList.add(key);
-//			}
-//		}
-//		for(Integer key2: tempList){
-//			photos.remove(key2);
-//		}
-		
-		Set<Integer> photo_null = photos.keySet();
+		List<Integer> photo_null = movieDAO.checkPhotoNull();
 		for(Integer i: photo_null){
 			tempBean = movieDAO.select(i);
 			movieDAO.updatePhotos(tempBean.getPhotoUrl(), tempBean.getId());

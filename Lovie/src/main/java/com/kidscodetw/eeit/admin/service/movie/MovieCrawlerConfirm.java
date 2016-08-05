@@ -3,6 +3,7 @@ package com.kidscodetw.eeit.admin.service.movie;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -23,8 +24,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.google.gson.Gson;
-import com.kidscodetw.eeit.crawler.GetMovieGenre;
-import com.kidscodetw.eeit.crawler.MovieMapGetMovieGenre;
 import com.kidscodetw.eeit.crawler.MoviePhotoToDB;
 import com.kidscodetw.eeit.dao.movie.MovieDAO;
 import com.kidscodetw.eeit.entity.movie.MovieBean;
@@ -37,14 +36,13 @@ public class MovieCrawlerConfirm {
 	private MovieDAO movieDAO;
 
 	@RequestMapping(method = RequestMethod.GET)
-	protected String doGet(HttpServletRequest request,
+	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) {
 		response.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html");
-		PrintWriter out;
+		PrintWriter out=null;
 		try {
 			out = response.getWriter();
-
 			Map<String, String> movie_map = MovieCrawler.getMOVIE_MAP();
 			List<MovieBean> list_mb = movieDAO.select();
 			for (MovieBean mb : list_mb) {
@@ -52,12 +50,6 @@ public class MovieCrawlerConfirm {
 					movie_map.remove(mb.getName());
 				}
 			}
-
-			// for (Map.Entry<String, String> entry : movie_map.entrySet())
-			// {
-			// System.out.println(entry.getKey() + "/" + entry.getValue());
-			// }
-
 			List<MovieBean> list_mb_update_complete = new ArrayList<MovieBean>();
 			Iterator iter = movie_map.entrySet().iterator();
 			while (iter.hasNext()) {
@@ -77,7 +69,6 @@ public class MovieCrawlerConfirm {
 			e.printStackTrace();
 		}
 		MoviePhotoToDB.getLink();
-		return "/admin/movie/MovieMapGetMovieGenre";
 	}
 
 	// Map<MovieName, MovieLink>
