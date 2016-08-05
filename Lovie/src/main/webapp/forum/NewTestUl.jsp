@@ -106,6 +106,7 @@ body{
 
 </head>
 <body>
+<c:import charEncoding="UTF-8" url="/forum/createForumFunction.jsp"></c:import>
 <div class="dropdown">
   <div class="dropdown-content" id="dropdown-content">
 
@@ -267,6 +268,7 @@ function clickLightButton(){
 
 function searchmember(){
 	var searchedMember = $('#searchMember').val();
+	var account = getmemberPhoto(searchedMember).nickname
 	if(searchedMember==""){
 		$("#error_message_searchMember").empty();
 		$("#error_message_searchTitle").empty();
@@ -274,7 +276,7 @@ function searchmember(){
 		$("#error_message_searchMember").append("請輸入會員");
 	}else{
 		
-	window.location.assign("http://localhost:8080/Lovie/forumsOneMember/"+ searchedMember);
+	window.location.assign("http://localhost:8080/Lovie/forumsOneMember/"+ account);
 	}
 }
 
