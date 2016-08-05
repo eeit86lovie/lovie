@@ -90,7 +90,8 @@ function findData(loginmemberId,relation,tableName){
 				var cell2  = $("<div class='col-sm-2'></div>").text(member.nickname)
 				var cell3  = $("<div class='col-sm-2'></div>").text(member.city)
 				var cell4  = $("<div class='col-sm-2'></div>").text(member.age+"歲")
-				var cell5  = $("<div class='col-sm-7'></div>").text(member.intro)
+				var intro = $("<span></span>").append(member.intro)
+				var cell5  = $("<div class='col-sm-7'></div>").append(intro)
 				
 				var row = $("<div class='row'></div>").append([cell0,cell2,cell3,cell4,cell5])
 				flag.append(row)
