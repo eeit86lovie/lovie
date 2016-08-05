@@ -21,7 +21,6 @@ public class InterestedMoviesDAOHibernate implements InterestedMoviesDAO {
 		this.sessionFactory = sessionFactory;
 	}
 
-	@Override
 	public Session getSession() {
 		return sessionFactory.getCurrentSession();
 	}
