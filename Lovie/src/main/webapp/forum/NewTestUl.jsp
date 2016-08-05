@@ -23,7 +23,7 @@ body{
 	background-color: #FFFFFF;
 	position:fixed; /*固定不動*/
 	top:200px;
-	left:-100px;
+	left:50px;
 }
 
 /* Dropdown Content (Hidden by Default) */
@@ -118,12 +118,12 @@ body{
         <button id="searchMyDisLikeButton" onclick= "searchMyDisLike()"class="min_but">我所不喜歡的文章</button> 
   
     	<p class="minsearch_text">搜尋作者</p>
-	    <input type="text" id="searchMember" class="search_text" style="color:black">
+	    <input type="text" id="searchMember" class="search_text">
 	    <button id="searchMemberButton" onclick= "searchmember()"class="search_but">搜尋</button>
 	    <p id="error_message_searchMember" class="remind_text"></p>
 
     	<p class="minsearch_text">搜尋標題</p>
-	    <input type="text" id="searchTitle" class="search_text" style="color:black">
+	    <input type="text" id="searchTitle" class="search_text">
 	    <button id="searchTitleButton" onclick= "searchTitle()"class="search_but" >搜尋</button>
     	<p id="error_message_searchTitle" class="remind_text"></p>
 
@@ -288,7 +288,7 @@ function searchTitle(){
 		$("#error_message_searchTitle").append("請輸入標題")
 	}else{
 		
-	window.location.assign("http://localhost:8080/Lovie/forumsTitle/"+searchedTitle);
+	window.location.assign("${pageContext.request.contextPath}/forumsTitle/"+searchedTitle);
 	}
 	
 }
@@ -296,13 +296,13 @@ function searchTitle(){
 
 function searchMyArticle(){
 	var searchMyArticle = "${loginmember.account}";
-	window.location.assign("http://localhost:8080/Lovie/forumsOneMember/"+ searchMyArticle);
+	window.location.assign("${pageContext.request.contextPath}/forumsOneMember/"+ searchMyArticle);
 }
 
 
 function searchGenre(){
 	var searchGenre = $("#searchGenre").val();
-	window.location.assign("http://localhost:8080/Lovie/forumsArticleGenre/"+ searchGenre);
+	window.location.assign("${pageContext.request.contextPath}/forumsArticleGenre/"+ searchGenre);
 }
 
 
@@ -316,19 +316,19 @@ function searchContent(){
 		$("#error_message_searchContent").append("請輸入內容")
 	}else{
 		
-	window.location.assign("http://localhost:8080/Lovie/forumsArticleContent/"+ searchContent);
+	window.location.assign("${pageContext.request.contextPath}/forumsArticleContent/"+ searchContent);
 	}
 }
 
 
 function searchMyLike(){
 	var searchMyLike = "${loginmember.account}";
-	window.location.assign("http://localhost:8080/Lovie/forumsArticleMyLike/"+ searchMyLike);
+	window.location.assign("${pageContext.request.contextPath}/forumsArticleMyLike/"+ searchMyLike);
 }
 
 function searchMyDisLike(){
 	var searchMyDisLike = "${loginmember.account}";
-	window.location.assign("http://localhost:8080/Lovie/forumsArticleMyDisLike/"+ searchMyDisLike);
+	window.location.assign("${pageContext.request.contextPath}/forumsArticleMyDisLike/"+ searchMyDisLike);
 }
 
 
