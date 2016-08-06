@@ -28,10 +28,8 @@ public class AddOrRemoveFriendService {
 	@RequestMapping(method = RequestMethod.POST, value="/addFriend", produces=MediaType.APPLICATION_JSON)
 	@ResponseBody
 	public void addFriend(HttpSession session,
-//			@RequestParam Integer memberId,
 			@RequestParam Integer friendId,
 			Model model){
-		System.out.println("進來啦!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
 		Integer memberId=(((MemberBean)session.getAttribute("loginmember"))).getId();
 		FriendBean myFBean=null;
 		FriendBean otherFBean=null;
@@ -51,6 +49,27 @@ public class AddOrRemoveFriendService {
 			otherFBean.setRelation(1);
 			friendDAO.update(myFBean);
 			friendDAO.update(otherFBean);
+		}
+		
+	}
+	
+	@RequestMapping(method = RequestMethod.POST, value="/removeFriend", produces=MediaType.APPLICATION_JSON)
+	@ResponseBody
+	public void removeFriend(HttpSession session,
+			@RequestParam Integer friendId,
+			Model model){
+		Integer memberId=(((MemberBean)session.getAttribute("loginmember"))).getId();
+		FriendBean myFBean=friendDAO.selectOne(memberId, friendId);
+		FriendBean otherFBean=friendDAO.selectOne(friendId, memberId);
+		if(myFBean.getRelation()==1){
+			myFBean.setRelation(3);
+			otherFBean.setRelation(2);
+			friendDAO.update(myFBean);
+			friendDAO.update(otherFBean);
+		}else if(myFBean.getRelation()==2){
+			friendDAO.delete(myFBean);
+			friendDAO.delete(otherFBean);
+			
 		}
 		
 	}
