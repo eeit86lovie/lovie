@@ -2,8 +2,6 @@ package com.kidscodetw.eeit.service.member;
 
 import java.util.List;
 
-import org.hibernate.Session;
-
 import com.kidscodetw.eeit.dao.member.InterestedMoviesDAO;
 import com.kidscodetw.eeit.entity.member.InterestedMoviesBean;
 
@@ -32,6 +30,5 @@ public class InterestedMoviesSerivce implements InterestedMoviesDAO{
 	public boolean delete(InterestedMoviesBean bean) {
 		return interestedMoviesDAOHibernate.delete(bean);
 	}
-	
 
 }

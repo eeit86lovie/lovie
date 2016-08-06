@@ -181,7 +181,7 @@
 			eleBtn.addEventListener("click", function() {
 				//keyword.value = this.firstChild.nodeValue;
 				//show.style.display = "none";
-				window.location="http://localhost:8080/Lovie/moviename/"+this.firstChild.nodeValue;
+				window.location="${pageContext.request.contextPath}/moviename/"+this.firstChild.nodeValue;
 				
 				
 				

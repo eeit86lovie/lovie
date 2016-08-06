@@ -41,16 +41,7 @@ public class ForumAdminServlet{
 		
             Map<String, String> reportMapObject = new HashMap<String,String>();
 			ForumBean reportArticle = forumDAO.select_id(reportBeans.get(i).getArticleID());
-			//reportMapObject.put("id", reportArticle.getId().toString());
-			
-			if(reportArticle.getId()!=null){
-				pubTime = reportArticle.getId().toString();
-			}
-			reportMapObject.put("id", id);
-			
-			
-			
-			
+			reportMapObject.put("id", reportArticle.getId().toString());			
 			reportMapObject.put("memberAccount", reportArticle.getMemberAccount().toString());
 			reportMapObject.put("title", reportArticle.getTitle().toString());
 			reportMapObject.put("content", reportArticle.getContent().toString());

@@ -73,7 +73,11 @@ color:black;
   <div class="col-md-9" ><span id="intro" onclick="member_edit(this)">${oneMember.intro}</span></div>
   <div class="col-md-2" ></div>
    <div class="col-md-12" ><br></div>
-  <div class="col-md-10" ><b class="memberColumn">喜歡的電影類型：</b>喜劇|奇幻|驚悚</div>
+  <div class="col-md-10" ><b class="memberColumn">喜歡的電影類型：</b>
+  	<c:forEach var="genre" items="${genre_list}">
+  	${genre}&nbsp;
+  	</c:forEach>
+  </div>
   <div class="col-md-2" ><button  type="button" id=advancedEdit style="display:none">進階編輯</button></div>
   <div class="col-md-12" ><br></div>
  <div class="col-md-5" style="font-size:20%;color:black">註冊日期：${oneMember.registeredTime}</div>

@@ -11,12 +11,7 @@
 <link rel="stylesheet" href="css/style.css">
 <link rel="stylesheet" href="css/footer.css">
 <link rel="stylesheet" href="css/scrolling-nav.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/css/animate.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/css/animated-notifications.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/css/Icomoon/style.css" />
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/css/sweetalert/dist/sweetalert.css">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.1.1/sockjs.min.js"></script>
-<script src="//cdn.bootcss.com/stomp.js/2.3.3/stomp.js"></script>
+
 <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="description" content="">
