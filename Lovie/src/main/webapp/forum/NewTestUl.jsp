@@ -48,7 +48,7 @@ body{
 	color: #FFFFFF;
 	background-color: #ff5959;
 }
-
+/*
 .search_but{
 	width: 50px;
     height: 25px;
@@ -59,7 +59,19 @@ body{
 	color: #FFFFFF;
 	background-color:#ff5959;
 	text-align: center;
-	margin:5px 0;
+	cursor: pointer;
+}
+*/
+
+button{
+width:50px;
+height:25px;
+	margin-top:5px;
+	color: #FFFFFF;
+	background-color:#ff5959;
+	border:none;
+		border-radius:3px;
+	-moz-border-radius:3px;
 }
 
 .dropdown-content {
@@ -78,19 +90,22 @@ body{
 	border-radius:3px;
 	-moz-border-radius:3px;
 	margin:5px 0;
+	color:#666666;
 
 }
 
 .menu_search_genre{
 	width: 140px;
     height: 25px;
-    margin-top:5px;
+    margin-top:8px;
     margin-bottom:15px;
+    color:#666666;
 }
 .minsearch_text{
 	width:200px;
 	margin-top:2px;
-	border-bottom: #ffa3a3 2px solid;
+	color: #ff5959;
+	font-weight: bold;
 }
 
 
@@ -120,12 +135,12 @@ body{
   
     	<p class="minsearch_text">搜尋作者</p>
 	    <input type="text" id="searchMember" class="search_text">
-	    <button id="searchMemberButton" onclick= "searchmember()"class="search_but">搜尋</button>
+	    <button id="searchMemberButton" onclick= "searchmember()">搜尋</button>
 	    <p id="error_message_searchMember" class="remind_text"></p>
 
     	<p class="minsearch_text">搜尋標題</p>
 	    <input type="text" id="searchTitle" class="search_text">
-	    <button id="searchTitleButton" onclick= "searchTitle()"class="search_but" >搜尋</button>
+	    <button id="searchTitleButton" onclick= "searchTitle()" >搜尋</button>
     	<p id="error_message_searchTitle" class="remind_text"></p>
 
 	    <p class="minsearch_text">依類別搜尋</p>
@@ -137,11 +152,11 @@ body{
 	　		<option value="問片">問片</option>
 	　		<option value="其他">其他</option>
 	　	</select>
-	    <button id="searchGenreButton" onclick= "searchGenre()"class="search_but">搜尋</button>
+	    <button id="searchGenreButton" onclick= "searchGenre()" class="but">搜尋</button>
 
     	<p class="minsearch_text">搜尋內容關鍵字</p>
 	    <input type="text" id="searchContent" class="search_text">
-	    <button id="searchContentButton" onclick= "searchContent()"class="search_but">搜尋</button>
+	    <button id="searchContentButton" onclick= "searchContent()">搜尋</button>
  		<p id="error_message_searchContent" class="remind_text"></p>
      
   </div>
@@ -268,7 +283,7 @@ function clickLightButton(){
 
 function searchmember(){
 	var searchedMember = $('#searchMember').val();
-	var account = getmemberPhoto(searchedMember).nickname
+	var account = getmemberNickName(searchedMember);
 	if(searchedMember==""){
 		$("#error_message_searchMember").empty();
 		$("#error_message_searchTitle").empty();
@@ -276,7 +291,7 @@ function searchmember(){
 		$("#error_message_searchMember").append("請輸入會員");
 	}else{
 		
-	window.location.assign("http://localhost:8080/Lovie/forumsOneMember/"+ account);
+	window.location.assign("${pageContext.request.contextPath}/forumsOneMember/"+ account);
 	}
 }
 
@@ -290,7 +305,7 @@ function searchTitle(){
 		$("#error_message_searchTitle").append("請輸入標題")
 	}else{
 		
-	window.location.assign("http://localhost:8080/Lovie/forumsTitle/"+searchedTitle);
+	window.location.assign("${pageContext.request.contextPath}/forumsTitle/"+searchedTitle);
 	}
 	
 }
@@ -298,13 +313,13 @@ function searchTitle(){
 
 function searchMyArticle(){
 	var searchMyArticle = "${loginmember.account}";
-	window.location.assign("http://localhost:8080/Lovie/forumsOneMember/"+ searchMyArticle);
+	window.location.assign("${pageContext.request.contextPath}/forumsOneMember/"+ searchMyArticle);
 }
 
 
 function searchGenre(){
 	var searchGenre = $("#searchGenre").val();
-	window.location.assign("http://localhost:8080/Lovie/forumsArticleGenre/"+ searchGenre);
+	window.location.assign("${pageContext.request.contextPath}/forumsArticleGenre/"+ searchGenre);
 }
 
 
@@ -318,19 +333,19 @@ function searchContent(){
 		$("#error_message_searchContent").append("請輸入內容")
 	}else{
 		
-	window.location.assign("http://localhost:8080/Lovie/forumsArticleContent/"+ searchContent);
+	window.location.assign("${pageContext.request.contextPath}/forumsArticleContent/"+ searchContent);
 	}
 }
 
 
 function searchMyLike(){
 	var searchMyLike = "${loginmember.account}";
-	window.location.assign("http://localhost:8080/Lovie/forumsArticleMyLike/"+ searchMyLike);
+	window.location.assign("${pageContext.request.contextPath}/forumsArticleMyLike/"+ searchMyLike);
 }
 
 function searchMyDisLike(){
 	var searchMyDisLike = "${loginmember.account}";
-	window.location.assign("http://localhost:8080/Lovie/forumsArticleMyDisLike/"+ searchMyDisLike);
+	window.location.assign("${pageContext.request.contextPath}/forumsArticleMyDisLike/"+ searchMyDisLike);
 }
 
 

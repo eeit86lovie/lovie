@@ -95,7 +95,7 @@ a.btn_red {color: #FFF;}
 	margin-left:5px;
 	}
 	
-.articleTextArea{ 
+.articleTextArea{ 	
 	width:490px;
 	height:100px;
 	float:right;
@@ -107,7 +107,7 @@ a.btn_red {color: #FFF;}
 	border:0.5px solid   #d0d0d0; 
 	border-radius:5px; 
 	-moz-border-radius:5px; 
-	-webkit-border-radius:5px; 
+	-webkit-border-radius:5px;
 	}
 .error_title{
 	color:#c91924;
