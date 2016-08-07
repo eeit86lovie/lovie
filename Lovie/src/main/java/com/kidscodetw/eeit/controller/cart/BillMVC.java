@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kidscodetw.eeit.dao.cart.BillDAO;
 import com.kidscodetw.eeit.dao.cart.ProductDAO;
-import com.kidscodetw.eeit.dao.cart.TradeDetailDAO;
+
 import com.kidscodetw.eeit.dao.member.MemberDAO;
 import com.kidscodetw.eeit.entity.cart.ProductBean;
 import com.kidscodetw.eeit.entity.member.MemberBean;
@@ -26,8 +26,7 @@ public class BillMVC {
 
 	@Autowired
 	private ProductDAO productDAO;
-	@Autowired
-	private TradeDetailDAO tradedetailDAO;
+
 	@Autowired
 	private BillDAO billDAO;
 	@Autowired

@@ -204,12 +204,14 @@
 		function addToCart(addToCartObject){
 			var ProductId = addToCartObject.id.substring(10);
 	        var Amount=document.getElementById("MemberSelectAmountdata"+addToCartObject.id.substring(10));
+	    
 			$.ajax({
 				type : "get",
 				url : "cart.do",
 				data : {
 					productId : ProductId,
-					amount:Amount.value
+					amount:Amount.value,
+				
 				},
 				success : function(addproductbean) {
 					

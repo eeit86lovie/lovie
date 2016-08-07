@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kidscodetw.eeit.dao.cart.BillDAO;
 import com.kidscodetw.eeit.dao.cart.ProductDAO;
-import com.kidscodetw.eeit.dao.cart.TradeDetailDAO;
+
 import com.kidscodetw.eeit.entity.cart.ProductBean;
 
 @Controller
@@ -22,13 +22,12 @@ public class ClothesMVC {
 
 	@Autowired
 	private ProductDAO productDAO;
-	@Autowired
-	private TradeDetailDAO tradedetailDAO;
+
 	@Autowired
 	private BillDAO billDAO;
 
 
-	// 顯示1~10筆商品
+	// 憿舐內1~10蝑���
 	@RequestMapping(value="/product/clothes/{categoryId}" ,method = RequestMethod.GET, produces=MediaType.APPLICATION_JSON)
 	@ResponseBody
 	public List<ProductBean> getList(@PathVariable("categoryId")Integer categoryId) {

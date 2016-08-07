@@ -12,6 +12,12 @@ public class BillBean implements Serializable{
 	private Integer id;
 	private Integer memberid;
 	private String account;
+	private String membername;
+	private Integer productid;
+	private String productname;
+	private Integer amount;
+    private String address;
+    private Integer title;
 	private java.util.Date tradeTime;
 	private Integer creditnum;
 	private Integer status;
@@ -32,6 +38,42 @@ public class BillBean implements Serializable{
 	}
 	public void setAccount(String account) {
 		this.account = account;
+	}
+	public String getMembername() {
+		return membername;
+	}
+	public void setMembername(String membername) {
+		this.membername = membername;
+	}
+	public Integer getProductid() {
+		return productid;
+	}
+	public void setProductid(Integer productid) {
+		this.productid = productid;
+	}
+	public String getProductname() {
+		return productname;
+	}
+	public void setProductname(String productname) {
+		this.productname = productname;
+	}
+	public Integer getAmount() {
+		return amount;
+	}
+	public void setAmount(Integer amount) {
+		this.amount = amount;
+	}
+	public String getAddress() {
+		return address;
+	}
+	public void setAddress(String address) {
+		this.address = address;
+	}
+	public Integer getTitle() {
+		return title;
+	}
+	public void setTitle(Integer title) {
+		this.title = title;
 	}
 	public java.util.Date getTradeTime() {
 		return tradeTime;
@@ -57,10 +99,14 @@ public class BillBean implements Serializable{
 	@Override
 	public String toString() {
 		return "BillBean [id=" + id + ", memberid=" + memberid + ", account="
-				+ account + ", tradeTime=" + tradeTime + ", creditnum="
-				+ creditnum + ", status=" + status + "]";
+				+ account + ", membername=" + membername + ", productid="
+				+ productid + ", productname=" + productname + ", amount="
+				+ amount + ", address=" + address + ", title=" + title
+				+ ", tradeTime=" + tradeTime + ", creditnum=" + creditnum
+				+ ", status=" + status + "]";
 	}
 
+	
 	
 	
 }

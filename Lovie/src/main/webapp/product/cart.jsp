@@ -10,7 +10,6 @@
 	href="${pageContext.request.contextPath}/admin/bower_components/bootstrap/dist/css/bootstrap.min.css"
 	rel="stylesheet">
 
-<!-- Custom CSS -->
 <link href="${pageContext.request.contextPath}/dist/css/sb-admin-2.css"
 	rel="stylesheet">
 
@@ -28,21 +27,6 @@
 <link href="${pageContext.request.contextPath}/css/shop-homepage.css"
 	rel="stylesheet">
 
-
-<!-- MetisMenu CSS -->
-<link
-	href="${pageContext.request.contextPath}/bower_components/metisMenu/dist/metisMenu.min.css"
-	rel="stylesheet">
-
-<!-- Timeline CSS -->
-<link href="${pageContext.request.contextPath}/css/timeline.css"
-	rel="stylesheet">
-
-
-<!-- Morris Charts CSS -->
-<link
-	href="${pageContext.request.contextPath}/bower_components/morrisjs/morris.css"
-	rel="stylesheet">
 
 
 
@@ -159,7 +143,11 @@
                                      </tr>
                                      
                                     </c:forEach> 
-                                             
+                                          <tr >
+                                             <th>總金額</th>
+                                            <th id="allMoney"></th>
+                                         </tr>
+                                           
                                     </tbody>
                                     
                                     
@@ -170,9 +158,9 @@
                             </div>
                             
                             <div>
-                            <a href="#" type="button" class="btn btn-primary" onclick="titleCost()">前往結帳</a>
+                            <button type="button" class="btn btn-primary" onclick="checkoutProduct()">前往結帳</button>
                             <button type="button" class="btn btn-warning" onclick="deleteCart()">清空購物車</button>
-                            <button type="button" class="btn btn-danger" onclick="history.back()">回上一頁</button>
+                            <button type="button" class="btn btn-danger" onclick="history.back()">繼續購物</button>
                             </div>
                             </div>
                             </div>
@@ -198,61 +186,47 @@ function deleteCart(){
 }
 
 
-// //移除單筆
-// function deleteCartItem(object){
-// 	var cartlist = [];
-// 	for(var i=1;i<itemAmount+1;i++){
-// 		var item = {"productid": $('#Cart'+i+' td:eq(0)').text(), "amount": $('#Cart'+i+' td:eq(6)').text()}
-// 		cartlist.push(item);
-// 		alert(item);
-// 		$("#").empty();
-// 	}
-//onclick="deleteCartItem(this)	
-	
-// 	//alert(object.id.substring(10));
-// 	var cartid = object.id.substring(10);
-// 	alert(cartid);
-// 	alert($('#Cart'+cartid+' td:eq(6)').text());
-	
-	
-// }
+//移除單筆
 
 function cancel(object){
-
 	var deleteproductid=object.id.substring(10);
 	var deleteproductcontent=object.id.substring(10);
-	alert("aa");
+
 			  $.ajax({
 				  'type':'post',
 				  'url':'cart.do?productid='+deleteproductid,
+				
 				  'success':function(data){
 					  if(data=="success"){
-						
-						  $('#Cart'+deleteproductcontent).empty();		  
-						  
+						  $('#Cart'+deleteproductcontent).empty().attr('data-cost',0);		  
 						alert("已刪除商品");
-
+						
+						titleCost()
 					  }    						  
 				  }    					  
 			  });
-	
+			  
 	  }
-	  
- 
 
-	var allcost=0;
 	function titleCost(){
-		var tbody = $('tbody:eq(0)')
-	   
+		var allcost=0;
 		for(var i=0;i<itemAmount;i++){
-			//alert( $('tbody:eq(1)>tr:eq('+i+')').attr('data-cost') )
+			//alert( $('tbody:eq(0)>tr:eq('+i+')').attr('data-cost') )
 	     var allproductcost=$('tbody:eq(0)>tr:eq('+i+')').attr('data-cost');
 			allcost=parseInt(allcost)+parseInt(allproductcost);	
-		} 		
-		window.location.assign("http://localhost:8080/Lovie/product/checkproduct.jsp?allcost="+allcost);
-		
+		} 
+		$('#allMoney').text(allcost);
 	}
-
+	
+	function checkoutProduct(){
+ 		window.location.assign("${pageContext.request.contextPath}/product/checkproduct.jsp?allcost="+allcost);
+	}
+	
+	window.onload=function(){
+		
+		titleCost();	
+	}
+	
 </script>      
 
 
@@ -270,9 +244,7 @@ function cancel(object){
 		src="${pageContext.request.contextPath}/admin/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 
 
-	<!-- Metis Menu Plugin JavaScript -->
-	<script
-		src="${pageContext.request.contextPath}/admin/bower_components/metisMenu/dist/metisMenu.min.js"></script>
+	
 
 	<!-- Flot Charts JavaScript -->
 	<script

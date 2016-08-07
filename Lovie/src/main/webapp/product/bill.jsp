@@ -46,6 +46,34 @@
 .navbar-default {
 	margin-top: -0.5cm;
 }
+
+.nav {
+	text-align: center;
+}
+
+.thumbnail {
+	text-align: center;
+	border: solid;
+}
+
+
+.btn btn-primary btn-lg{
+text-align: center;
+
+}
+.panel-heading{
+
+text-align: center;
+}
+alert alert-warning{
+
+text-align: right;
+}
+
+.btn btn-primary btn-lg btn-block{
+text-align:center;;
+
+}
 </style>
 
 <c:import charEncoding="UTF-8" url="/header.jsp"></c:import>
@@ -78,17 +106,77 @@
 
 		</div>
 	</div>
-	${loginmember.account}
-
-
 	<div id="page-wrapper">
+<div class="col-lg-9">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                                                                    購買商品
+                        </div>
+                        <!-- /.panel-heading -->
+                        <div class="panel-body">
+                            <div class="table-responsive">
+                                <table id="ShoppingCart"class="table">
+                                    <thead>
+                                        <tr>
+                                          
+                                            <th>產品編號</th>
+                                            <th>產品名稱</th>
+                                            <th>產品樣式</th>
+                                            <th>產品內容</th>
+                                            <th>產品折扣</th>
+                                            <th>產品價格</th>
+                                             <th>數量</th>
+                                             <th>小計</th>
+                                 
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    <c:forEach items="${addcartlist}" var="addtocart" varStatus="loop">
+                                    		
+                                           <tr id="Cart${addtocart.bean.productid}" data-cost="${addtocart.bean.cost*addtocart.amount}" class="success">
+                                             <td>${addtocart.bean.productid}</td>
+                                             <td>${addtocart.bean.name}</td>
+                                             <td>${addtocart.bean.productphoto}</td>
+                                             <td>${addtocart.bean.content}</td>
+                                             <td>${addtocart.bean.discount}</td>
+                                             <td>${addtocart.bean.cost}</td>
+                                             <td>${addtocart.amount}</td>
+                                             <td>${addtocart.bean.cost*addtocart.amount}</td>
+                                            <c:if test="${loop.last}">
+                                    		<script>
+                                    		var itemAmount = ${loop.count}
+                                    		</script>
+                                    		</c:if>
+                                    		
+                                     </tr>
+                                    </c:forEach>
+                                   
+                                         
+                                    </tbody>
+                                    
+                                    
+                                </table>
+                                <div>
+                          
+                                </div>
+                            </div>
+                                  <div class="alert alert-warning">
+                                          <tr >
+                                             <th>總金額</th>
+                                            <th id="allMoney">${param.allcost}</th>
+                                         </tr> 
+                                  </div>
+                            </div>
+                            </div>
 
-		<div class="col-lg-9">
+                        </div>
+                      
+           <div class="col-lg-9">
 			<div class="panel panel-default">
-				<div class="panel-heading">訂單</div>
+				<div class="panel-heading">　</div>
 				<div class="panel-body">
 					<div class="row">
-						<div class="col-lg-4">
+						<div class="col-lg-6">
 							<form role="form">
 								<div class="form-group">
 									<label>會員帳號:</label>
@@ -102,139 +190,113 @@
 								<div class="form-group">
 
 									<div class="st1">
-										<label>姓名</label> <input class="" type="text" id="idName"
-											required placeholder="請輸入姓名" /><span id="idsp1"> </span>
+										<label  for="idName">姓名</label>: 
+										<input class="" type="text" id="idName" required placeholder="請輸入姓名" onblur="chkName()"/><span id="idsp1"></span>
 									</div>
 									<span>必填(不可空白，至少兩個字且必須為中文字)</span>
 								</div>
 								<div class="form-group">
 									<div class="st1">
-										<label>地址</label> <input class="" type="text" id="idAddress"
-											required placeholder="請輸入地址" /><span id="idsp2"> </span> <br>
+										<label for="idAddress">地址</label> 
+										<input class="" type="text" id="idAddress" required placeholder="請輸入地址" onblur="chkAddress()"/><span id="idsp2"> </span> <br>
 										<span>必填(不可空白，至少兩個字且必須為中文字)</span></br>
 									</div>
 								</div>
 								<div class="form-group">
-									<label>E-MAIL</label> <input class="" type="text"
-										id="idAddress" required placeholder="請輸入E-MAIL" /><span
+									<label for="idMail">E-MAIL</label> <input class="" type="text"
+										id="idMail" required placeholder="請輸入E-MAIL" onblur="chkMail()"/><span
 										id="idsp3"> </span> <br>
 									<span>(不可空白，不包含中文，至少6個字且必須包含英文字母、數字、特殊字元[!@#$%^&*]</span></br>
 
 								</div>
 								<div class="form-group">
-									<label>連絡電話</label> <input class="" type="text" id="idAddress"
-										required placeholder="請輸入電話" /><span id="idsp4"> </span> <br>
-									<span>(不可空白，不包含中文，至少6個字且必須包含英文字母、數字、特殊字元[!@#$%^&*]<span>
+									<label for="idPhone">連絡電話</label> <input class="" type="text" id="idPhone" required placeholder="請輸入電話" onblur="chkPhone()"/><span id="idsp3"> </span> <br>
+									<span>(不可空白)<span>
 											</br>
 								</div>
 						</div>
-						<div class="col-lg-4">
+						<div class="col-lg-6">
 							<div class="form-group">
-								<label>購買產品:</label>
-								<c:forEach items="${addcartlist}" var="addtocart" varStatus="loop">
-									<tr id="Cart${addtocart.bean.productid}" data-cost="${addtocart.bean.cost*addtocart.amount}" class="success">
-										<br><td>產品編號:${addtocart.bean.productid}</td>
-										<br><td>產品名稱:${addtocart.bean.name}</td>
-										<br><td>產品內容:${addtocart.bean.content}</td>
-										<br><td>產品折扣:${addtocart.bean.discount}</td>
-										<br><td>單筆金額:NT$${addtocart.bean.cost}元</td>
-										<br><td>產品數量${addtocart.amount}</td>
-										<br><td>產品金額:${addtocart.bean.cost*addtocart.amount}</td>
-										<c:if test="${loop.last}">
-											<script>
-                                    		var itemAmount = ${loop.count}
-                                    		</script>
-										</c:if>
-									</tr>
-								</c:forEach>
-
-								<tr>
-									<br><th>總金額</th>
-									<th id="allMoney">NT$${param.allcost}元</th>
-
-								</tr>
-
-							</div>
-						</div>
-						<div class="col-lg-4">
-						
-						
-						
-						
-							<div class="form-group">
-									<label>信用卡號</label>
-									<input class="" type="text" id="idAddress" required placeholder="請輸入卡號" /><spanid="idsp3"> </span> <br>
-									<span>(不可空白，不包含中文，至少6個字且必須包含英文字母、數字、特殊字元[!@#$%^&*]</span></br>
+									<label for="idCard">信用卡號</label>
+									<img src="${pageContext.request.contextPath}/src/main/webapp/image/product/visa.jpg"></img>
+									<input class="" type="text" id="idCard" required placeholder="請輸入卡號"   onblur="chkCard()"/><spani d="idsp4"> </span> <br>
+									<span>(不可空白)</span></br>
 
 								</div>
-	
+
 						</div>
-						</form>
-						<form role="form"></form>
+						 
+					</form>
+					
 					</div>
-					<!-- /.col-lg-6 (nested) -->
+					<div>
+                           <button type="button" class="btn btn-primary btn-lg btn-block"  onclick="setBill()">送出</button>
+                      </div>
 				</div>
-				<!-- /.row (nested) -->
 			</div>
-			<!-- /.panel-body -->
+	
+			</div>
+
 		</div>
-		<!-- /.panel -->
-	</div>
-
-
-
+		
+	
 
 	<script>
-		function bill() {
-			$.ajax({
-				type : "get",
-				url : "cart.do",
-				data : {
-					productId : ProductId,
-					amount:Amount.value
-				},
-				success : function(addproductbean) {
+ 
+
+				function chkName(){
+				var theName=document.getElementById("idName").value;
+				re = /^[\u4E00-\u9FA5]{2,}$/;
+				if(re.test(theName))
+				alert("OK");
+				else
+				alert("錯誤");
 				}
-			});
+				function chkAddress(){
+				var theAddress=document.getElementById("idAddress").value;
+				re=/^[\u4E00-\u9FA5]{2,}$/;
+				if(re.test(theAddress))	
+				alert("OK");
+				else
+			    alert("錯誤");	
+				}
+				function chkMail(){
+				var theMail=document.getElementById("idMail").value;
+				re=/^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z]+$/;
+				if(re.test(theMail))	
+				alert("OK");	
+				else
+		        alert("錯誤");
+				}
+				function chkPhone(){
+					var thePhone=document.getElementById("idPhone").value;
+					re=/^09\d{2}-?\d{3}-?\d{3}$/;
+					if(re.test(thePhone))
+					alert("OK");
+					else
+				    alert("錯誤");	
+					}	
+				function chkCard(){
+					var theCard=document.getElementById("idCard").value;
+					re=/^(4[0-9]{12}(?:[0-9]{3})?)*$/;
+					if(re.test(theCard))
+						alert("OK");
+						else
+					    alert("錯誤");	
+						}	
+				
+		
+				
+function setBill(){
+	
+	
+	
+	
+	
+	
+}
+
 							
-
-			
-			window.onload = function() {
-								document.getElementById("idName").onblur = chkName;
-								document.getElementById("idPwd").onblur = chkPwd;
-								document.getElementById("idDate").onblur = chkDate;
-							}
-							function chkName() {
-								var theName = document.getElementById("idName").value;
-								re = /^[\u4E00-\u9FA5]{2,}$/;
-								if (re.test(theName))
-									document.getElementById("idsp1").innerHTML = "<img src='../EEITLabSrc(Express)/Lab06/Images/check.png' />";
-								else
-									document.getElementById("idsp1").innerHTML = "<img src='../EEITLabSrc(Express)/Lab06/Images/error.png' />";
-							}
-							function chkPwd() {
-								var theName = document.getElementById("idPwd").value;
-								re = /^(?=.*[a-z])(?=.*\d)(?=.*[\*\@\-\_\+\$\%\#\&\^\!])\S{6,}$/;
-								if (re.test(theName))
-									document.getElementById("idsp2").innerHTML = "<img src='../EEITLabSrc(Express)/Lab06/Images/check.png' />";
-								else
-									document.getElementById("idsp2").innerHTML = "<img src='../EEITLabSrc(Express)/Lab06/Images/error.png' />";
-							}
-							function chkDate() {
-								var theDate = document.getElementById("idDate").value;
-								re = /^((0?[1-9]|1[012])[- /.](0?[1-9]|[12][0-9]|3[01])[- /.](19|20)?[0-9]{2})*$/;
-								if (theDate == "") {
-									document.getElementById("idsp3").innerHTML = "<img src='../EEITLabSrc(Express)/Lab06/Images/error.png' />";
-								} else if (re.test(theDate)) {
-									document.getElementById("idsp3").innerHTML = "<img src='../EEITLabSrc(Express)/Lab06/Images/check.png' />";
-								} else {
-									document.getElementById("idsp3").innerHTML = "<img src='../EEITLabSrc(Express)/Lab06/Images/error.png' />";
-								}
-							}
-
-						}
-					})
-		}
 	</script>
 
 

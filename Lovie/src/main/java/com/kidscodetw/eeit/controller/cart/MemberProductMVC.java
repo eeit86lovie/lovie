@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kidscodetw.eeit.dao.cart.BillDAO;
 import com.kidscodetw.eeit.dao.cart.ProductDAO;
-import com.kidscodetw.eeit.dao.cart.TradeDetailDAO;
+
 import com.kidscodetw.eeit.entity.cart.ProductBean;
 
 @Controller
@@ -24,14 +24,13 @@ public class MemberProductMVC {
 
 	@Autowired
 	private ProductDAO productDAO;
-	@Autowired
-	private TradeDetailDAO tradedetailDAO;
+
 	@Autowired
 	private BillDAO billDAO;
 
 
 
-	// 顯示商品
+	// 憿舐內����
 	@RequestMapping(value="/product/memberproducts/{categoryId}" ,method = RequestMethod.GET, produces=MediaType.APPLICATION_JSON)
 	@ResponseBody
 	public List<ProductBean> getList(@PathVariable("categoryId")Integer categoryId) {
@@ -41,7 +40,7 @@ public class MemberProductMVC {
 	}
 	
 	
-	//刪除商品
+	//������
 	@RequestMapping(value="/product/memberproducts}" ,method = RequestMethod.GET, produces=MediaType.APPLICATION_JSON)
 	@ResponseBody
 	public int delet(@PathVariable("productId")Integer productId) {
@@ -50,6 +49,6 @@ public class MemberProductMVC {
 		
 	}
 	
-	//新增商品
+	//�憓���
 	
 }
