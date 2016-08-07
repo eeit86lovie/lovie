@@ -39,19 +39,6 @@ public class UserMessageController {
 		}
 	}
 
-	@SubscribeMapping("topic/guest")
-	public void putGuest(ServletContext context, Principal principal) {
-		guestlisteningUser.add(principal.getName());
-	}
-	
-	@SubscribeMapping("topic/user")
-	public void putUser(ServletContext context, Principal principal) {
-		userlisteningUser.add(principal.getName());
-	}
-	
-	@SubscribeMapping("topic/gold")
-	public void putGold(ServletContext context, Principal principal) {
-		goldlisteningUser.add(principal.getName());
-	}
+	 
 
 }

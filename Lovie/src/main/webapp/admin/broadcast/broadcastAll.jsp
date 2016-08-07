@@ -50,17 +50,47 @@
         }
         
     </script>
+    
+   <style>
+.abgne-menu-20140101-2 input[type="checkbox"] {
+    display: none;
+}
+.abgne-menu-20140101-2 input[type="checkbox"] + label {
+    display: inline-block;
+    background-color: #ccc;
+    cursor: pointer;
+    padding: 5px 10px;
+}
+.abgne-menu-20140101-2 input[type="checkbox"]:checked + label {
+    background-color: #f3d42e;
+}
+   
+   </style>
 </head>
 <body onload="connect()">
 <div id="wrapper">
 <c:import charEncoding="UTF-8" url="../nav.jsp"></c:import>
 	<div id="page-wrapper">
-	<form>
-	<input type="checkbox" id="guestCheckbox" name="guest" value="guest" checked> 未登入用戶 <br>
-  	<input type="checkbox" id="userCheckbox" name="user" value="user" checked> 一般會員 <br>
-  	<input type="checkbox" id="goldCheckbox" name="gold" value="gold" checked> 黃金會員 <br>
-
-	</form>
+	
+	<div class="row">
+		<h1>群組廣播:</h1>
+	</div>
+	
+	<div class="row">
+	
+	<div class="abgne-menu-20140101-2">
+	    <input type="checkbox" id="guestCheckbox" name="guest" value="guest">
+	    <label for="guestCheckbox">未登入用戶</label>
+ 
+	    <input type="checkbox" id="userCheckbox" name="user" value="user">
+	    <label for="userCheckbox"> 一般會員 </label>
+ 
+	    <input type="checkbox" id="goldCheckbox" name="gold" value="gold">
+	    <label for="goldCheckbox"> 黃金會員 </label>
+ 
+	</div>
+	
+	</div>
 	
 	<div id="conversationDiv">
         <label>請輸入廣播內容</label><input type="text" id="messageInput" />
