@@ -365,8 +365,10 @@ function checkEmail(){
 var relationship="${relationship}"
 if("${loginmember.id}"!="${oneMember.id}"&&(relationship==""||relationship==3)){
 	document.getElementById("friend").style.display = "inline";//不是好友也沒有說感興趣的話就有加好友的顯示鈕
-}else{
+}else if("${loginmember.id}"=="${oneMember.id}"){
 	document.getElementById("friend").style.display = "none";
+}else{
+	$("#friend").replaceWith("<button class='edit' type='button' id='friend' onclick='removeFriend()'>取消關注</button>")
 }
 
 //加好友程式
@@ -381,13 +383,31 @@ function addFriend(){
 			contentType: false,
 			success: function(data){
 				alert("更新成功")
-// 				dialog.dialog( "close" );
 				window.location.reload();
 			},error: function(){
 				alert("失敗Q_Q")
 			}
 		})	
 }
+//取消追蹤
+function removeFriend(){
+	var formData1 = new FormData();
+	formData1.append('friendId',"${oneMember.id}"  );
+		$.ajax({
+			url: "${pageContext.request.contextPath}/member/AddOrRemoveFriendService/removeFriend",
+			type: 'post',
+			data: formData1,
+			processData: false,
+			contentType: false,
+			success: function(data){
+				alert("更新成功")
+				window.location.reload();
+			},error: function(){
+				alert("失敗Q_Q")
+			}
+		})	
+}
+
 
 </script>
 
