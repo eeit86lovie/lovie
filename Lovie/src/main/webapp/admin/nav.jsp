@@ -219,7 +219,7 @@
 				<li><a href="#"><i class="fa fa-user fa-fw"></i> 會員<span
 						class="fa arrow"></span></a>
 					<ul class="nav nav-second-level">
-						<li><a href="#">會員管理1</a></li>
+						<li><a href="${pageContext.request.contextPath}/admin/member/admin_members.jsp">會員管理</a></li>
 						<li><a href="#">會員管理2</a></li>
 						<li><a href="#">會員管理3</a></li>
 					</ul></li>
