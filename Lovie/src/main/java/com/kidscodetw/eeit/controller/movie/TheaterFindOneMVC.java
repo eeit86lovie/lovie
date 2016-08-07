@@ -22,36 +22,39 @@ import com.kidscodetw.eeit.entity.movie.TheaterBean;
 @Controller
 @RequestMapping("theater")
 public class TheaterFindOneMVC {
-	
+
 	@Autowired
 	private TheaterDAO theaterDAO;
-	
+
 	@Autowired
 	private ShowtimeDAO showtimeDAO;
-	
+
 	@Autowired
 	private MovieDAO movieDAO;
-	
-	@RequestMapping(method=RequestMethod.GET, path="{tID}")
-	public String getMovies(@PathVariable("tID")Integer tID, Model model){
+
+	@RequestMapping(method = RequestMethod.GET, path = "{tID}")
+	public String getMovies(@PathVariable("tID") Integer tID, Model model) {
 		TheaterBean theaterBean = theaterDAO.select(tID);
-		model.addAttribute("theater", theaterBean); 
-		List<ShowtimeBean> showtimeBeans = showtimeDAO.selectTheater(theaterBean.getName());
+		model.addAttribute("theater", theaterBean);
+		List<ShowtimeBean> showtimeBeans = showtimeDAO
+				.selectTheater(theaterBean.getName());
 		model.addAttribute("showtimes", showtimeBeans);
 		Set<String> movieSet = new HashSet<String>();
 		List<MovieBean> listAllMovieBean = new ArrayList<MovieBean>();
 		listAllMovieBean = movieDAO.select();
 		List<MovieBean> movieBeans = new ArrayList<MovieBean>();
-		for(ShowtimeBean sb : showtimeBeans){
+		for (ShowtimeBean sb : showtimeBeans) {
 			movieSet.add(sb.getMovieName());
 		}
-		for(MovieBean movieBean : listAllMovieBean){
-			if(movieSet.contains(movieBean.getName())){
+		for (MovieBean movieBean : listAllMovieBean) {
+			if (movieSet.contains(movieBean.getName())) {
 				movieBeans.add(movieBean);
 			}
 		}
 		model.addAttribute("movies", movieBeans);
 		return "theater/theater.jsp";
 	}
+
+	
 
 }
