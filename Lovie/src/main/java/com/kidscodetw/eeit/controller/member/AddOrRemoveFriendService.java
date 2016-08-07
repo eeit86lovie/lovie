@@ -33,19 +33,23 @@ public class AddOrRemoveFriendService {
 		Integer memberId=(((MemberBean)session.getAttribute("loginmember"))).getId();
 		FriendBean myFBean=null;
 		FriendBean otherFBean=null;
-		myFBean=friendDAO.selectOne(memberId, friendId);
+			myFBean=friendDAO.selectOne(memberId, friendId);
 		if(myFBean==null){//代表兩人原本無關係
+			System.out.println("null");
+			myFBean=new FriendBean();
+			otherFBean=new FriendBean();
 			myFBean.setMemberId(memberId);
 			myFBean.setFriendId(friendId);
-			myFBean.setRelation(3);
+			myFBean.setRelation(2);
 			friendDAO.insert(myFBean);
 			otherFBean.setMemberId(friendId);
 			otherFBean.setFriendId(memberId);
-			otherFBean.setRelation(2);
+			otherFBean.setRelation(3);
 			friendDAO.insert(otherFBean);
 		}else if(myFBean.getRelation()==3){
 			myFBean.setRelation(1);
 			otherFBean=friendDAO.selectOne(friendId, memberId);
+			System.out.println(otherFBean);
 			otherFBean.setRelation(1);
 			friendDAO.update(myFBean);
 			friendDAO.update(otherFBean);

@@ -127,8 +127,7 @@ function addFriend(friendId){
 			contentType: false,
 			success: function(data){
 				alert("更新成功")
-// 				dialog.dialog( "close" );
-// 				window.location.reload();
+				window.location.reload();
 			},error: function(){
 				alert("失敗Q_Q")
 			}
@@ -146,7 +145,7 @@ function removeFriend(friendId){
 			success: function(data){
 				alert("更新成功")
 // 				dialog.dialog( "close" );
-// 				window.location.reload();
+				window.location.reload();
 			},error: function(){
 				alert("失敗Q_Q")
 			}
