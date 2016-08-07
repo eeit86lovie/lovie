@@ -1,7 +1,6 @@
 package com.kidscodetw.eeit.admin.controller.broadcast;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
@@ -13,8 +12,7 @@ public class BroadcastMapping {
 	}
 	
 	@RequestMapping("admin/broadcast/broadcastOne")
-	public String broadcastOneDispatch(Model model){
-		model.addAttribute("onlineUsers",OnlineUserRepo.getOnlineUser());
+	public String broadcastOneDispatch(){
 		return "/admin/broadcast/broadcastOne.jsp";
 	}
 }

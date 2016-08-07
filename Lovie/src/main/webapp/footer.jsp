@@ -80,6 +80,7 @@
 		
 		
 		
+		
 		<sec:authorize access="!hasRole('USER') and !hasRole('GOLD') and !hasRole('ADMIN')">
 			var socket = new SockJS('/Lovie/stomp');
 	        stompClient = Stomp.over(socket);
@@ -107,9 +108,6 @@
 	            	}
 	            	
 	            });
-				stompClient.subscribe('/app/attend', function(message){
-	            	
-	            });
 	        });
 		</sec:authorize>
 	
@@ -124,9 +122,6 @@
 	            	if(JSON.parse(message.body).sender!=${loginmember.account}){
 	            		showMessageTip(JSON.parse(message.body));	
 	            	}
-	            });
-				stompClient.subscribe('/app/attend', function(message){
-	            	
 	            });
 	        });
 		</sec:authorize>

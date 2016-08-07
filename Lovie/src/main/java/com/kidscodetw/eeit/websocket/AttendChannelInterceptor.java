@@ -20,25 +20,17 @@ public class AttendChannelInterceptor extends ChannelInterceptorAdapter {
 	@Override
 	public void postSend(Message<?> message, MessageChannel channel,
 			boolean sent) {
-
+		
 		StompHeaderAccessor sha = StompHeaderAccessor.wrap(message);
-
-		if (sha.getCommand() == null
-				|| sha.getCommand().equals(StompCommand.CONNECT)) {
+		if (sha==null || sha.getCommand() == null|| sha.getCommand().equals(StompCommand.CONNECT) || sha.getUser() == null) {
 			return;
 		}
-		if (sha.getUser() == null) {
-			return;
-		}
-
-		if (sha.getDestination().equals("/app/attend")) {
+		if (sha.getDestination() !=null && sha.getDestination().equals("/app/attend")) {
 			OnlineUserRepo.getOnlineUser().put(sha.getUser().getName(),
 					memberDAO.select(sha.getUser().getName()));
 		}
-
 		if (sha.getCommand().equals(StompCommand.DISCONNECT) || sha.getCommand().equals(StompCommand.ERROR)) {
 			OnlineUserRepo.getOnlineUser().remove(sha.getUser().getName());
 		}
-
 	}
 }

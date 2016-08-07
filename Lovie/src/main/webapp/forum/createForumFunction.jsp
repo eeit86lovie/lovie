@@ -484,6 +484,16 @@ function add(){
 
 
 	
+	function getmemberNickName(nickName){
+		for(var j = 0; j<Object.keys(memberJson).length;j++){
+			if(memberJson[j].nickName == nickName){
+				return memberJson[j];
+			}	
+		}	
+	}//end of getMemberPhoto
+
+	
+	
 	
 	function clickReplyButton(replyButtonObject){
 		$("#errormessage").remove();
