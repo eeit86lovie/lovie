@@ -29,6 +29,12 @@ public class ForumAdminServlet{
 	private ArticleRankDAO articleRankDAO;
 
 
+//	@RequestMapping(value = "forumsSelectReportReson11", method = RequestMethod.GET)
+//	public String forumreportArticle() {
+//		return "admin/forum/admin_reportArticle.jsp";
+//	}
+	
+	
 	
 	@RequestMapping(value = "forumsAdmin", method = RequestMethod.GET)
 	@ResponseBody
@@ -76,12 +82,30 @@ public class ForumAdminServlet{
 	
 	@RequestMapping(value = "forumsSelectReportID", params = {"ReportAreicleID"}, method = RequestMethod.POST)
 	@ResponseBody
-	public ForumBean reportArticleID(
+	public List<ForumBean> reportArticleID(
 			@RequestParam("ReportAreicleID") Integer ReportAreicleID) {	
+		List reportArticlejson = new ArrayList();
 		ForumBean reportArticle = forumDAO.select_id(ReportAreicleID);
-		return reportArticle;
+		reportArticlejson.add(reportArticle);
+		return reportArticlejson;
 	}
 	
+	
+	@RequestMapping(value = "forumsSelectReportReson", params = {"ReportID"}, method = RequestMethod.POST)
+	@ResponseBody
+	public List<ArticleRankBean> reportReson(
+			@RequestParam("ReportID") Integer ReportID) {	
+	
+		List reportAdmin = new ArrayList();
+		List<ArticleRankBean> oneArticleReport = articleRankDAO.select_articleID(ReportID);
+		for(int i = 0; i<oneArticleReport.size();i++){
+			if(oneArticleReport.get(i).getReport()==1){
+				reportAdmin.add(oneArticleReport.get(i));	
+			}
+			
+		}
+		return reportAdmin;
+	}
 	
 	
 }

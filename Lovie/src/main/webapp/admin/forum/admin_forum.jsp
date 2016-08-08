@@ -16,9 +16,22 @@
     height:25px;
 }
 
+td{
+	min-width: 30px;
+	max-width: 400px;
+	overflow: hidden;
+	 white-space:nowrap;
+	 overflow:hidden;
+	 text-overflow: ellipsis;
+}
+th{
+min-width: 50px;
+}
+
 </style>
 </head>
 <body>
+
 <div id="wrapper">
 		<c:import charEncoding="UTF-8" url="../nav.jsp"></c:import>
 		<div id="page-wrapper">
@@ -44,7 +57,7 @@
 					<div class="panel-body">
 						<div class="dataTable_wrapper">
 							<table class="table table-striped table-bordered table-hover"
-								id="movietable">
+								id="forumtable" "style='table-layout: fixed'">
 								<thead>
 									<tr>
 										<th>操作</th>
@@ -52,8 +65,8 @@
 										<th>ID</th>
 										<th>會員</th>
 										<th>分類</th>
-										<th>文章標題</th>
-										<th>文章內容</th>
+										<th style="min-width:75px">文章標題</th>
+										<th style="min-width:75px">文章內容</th>
 										<th>發佈時間</th>
 										<th>檢舉次數</th>
 									</tr>
@@ -116,9 +129,7 @@ $.ajax({
 			var td8 = $("<td id='"+'reportReason'+report[i].id+"'></td>").append(reportcount);
 						
 			
-			var tr = jQuery("<tr id='"+'tr'+report[i].id+"'></tr>", {
-				onclick: seeReportArticle
-			});
+			var tr = $("<tr id='"+'tr'+report[i].id+"'></tr>");
 			
 			
 			
@@ -145,9 +156,7 @@ $.ajax({
 })
 
 
-function seeReportArticle(){
-	alert("sssssdddddd");
-}
+
 
 
 

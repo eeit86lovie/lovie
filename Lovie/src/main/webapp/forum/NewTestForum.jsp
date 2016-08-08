@@ -16,6 +16,21 @@
 
 <style type="text/css">
 
+.addMoreAreicle{
+	width: 780px;
+	height: 35px;
+	border-radius: 8px;
+	-moz-border-radius: 8px;
+	-webkit-border-radius: 8px;
+	background-Color:#ffb1b1;
+	color:#FFF;
+	margin:0 auto;
+	text-align:center;
+	font-weight: bold;
+	line-height:35px;
+	font-size:20px;
+	cursor: pointer;
+}
 </style>
 
 
@@ -45,7 +60,7 @@
 
 			</div>
 			
-			<div onclick="add()">載入更多文章</div>
+			<div class="addMoreAreicle" onclick="add()">載入更多文章</div>
 		</div>
 	
         <div class="col-md-2"></div>

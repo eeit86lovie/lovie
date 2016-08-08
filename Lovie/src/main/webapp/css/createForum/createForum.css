@@ -120,8 +120,8 @@ body {
 	background-Color: #FF9797;
 	position:relative;
 	float: right;
-	right:20px;
-	top:20px;
+	right:5px;
+	top:15px;
 }
 .replyText {
 	width: 700px;
@@ -253,6 +253,7 @@ body {
 	line-height:25px;
 	float: left;
 	margin-left:5px;
+	cursor: pointer;
 }
 .countDisLike_div{
 	width:120px;
@@ -270,6 +271,18 @@ body {
 }
 .articleUDR_ul_div{
   display: none;
+}
+.articleUDR_ul_div button{
+    position:relative;
+	top:0;
+	right:0;
+	float: right;
+  width:150px;
+  height:70px;
+  border: #ADADAD 1px solid;
+	border-radius: 5px;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;	
 }
 .articleUDR_div{
 	width: 20px;
