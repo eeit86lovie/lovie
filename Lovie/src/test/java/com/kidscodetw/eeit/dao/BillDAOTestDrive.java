@@ -46,15 +46,6 @@ public class BillDAOTestDrive {
 	@Test
 	@Transactional
 	@Rollback(true)
-	public void select_name() {
-		BillBean bb = billDAO.select_name("CCCC");
-		Assert.isTrue(bb.getAccount().equals("CCCC"),
-				"select_Name fail");
-	}
-
-	@Test
-	@Transactional
-	@Rollback(true)
 	public void select_memberid(){
 		List<BillBean> lpb = billDAO.select_memberid(1);
 		Assert.notEmpty(lpb, "FindAllTest fail");
@@ -70,7 +61,6 @@ public class BillDAOTestDrive {
 		bb.setTradeTime(new java.sql.Timestamp(new java.util.Date().getTime()));
 	    bb.setStatus(0);
 	    bb.setCreditnum(111111111);
-	    bb.setAccount("AAAAA");
 		BillBean result = billDAO.insert(bb);
 		Assert.isTrue(result.getMemberid().equals(2), "insert fail");
 	}

@@ -38,16 +38,6 @@
 <link href="${pageContext.request.contextPath}/css/timeline.css"
 	rel="stylesheet">
 
-
-<!-- Morris Charts CSS -->
-<link
-	href="${pageContext.request.contextPath}/bower_components/morrisjs/morris.css"
-	rel="stylesheet">
-
-
-
-
-
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <c:import charEncoding="UTF-8" url="/meta.jsp"></c:import>
 <title>商城購物</title>
@@ -67,21 +57,30 @@
 }
 
 
+.btn btn-primary btn-lg{
+text-align: center;
 
-.col-lg-6{
+}
+.panel-heading{
 
-	text-align: center;
+text-align: center;
+}
+alert alert-warning{
+
+text-align: right;
+}
+
+.btn btn-primary btn-lg btn-block{
+text-align:center;;
 
 }
 </style>
-
-
 
 <c:import charEncoding="UTF-8" url="/header.jsp"></c:import>
 </head>
 <body>
 
-		<div class="row">
+	<div class="row">
 
 		<div class="navbar-default sidebar">
 			<div class="sidebar-nav navbar-collapse">
@@ -94,8 +93,10 @@
 					<li><a href="/Lovie/product/dollproduct.jsp">人物公仔</a></li>
 					<li><a href="/Lovie/product/clothesproduct.jsp">服飾</a></li>
 
-					<li><a href="/Lovie/product/cart.jsp"><i class="glyphicon glyphicon-shopping-cart"></i> 購物車</a></li>
-					<li><a href="/Lovie/product/tradedetail.jsp"><i class="selectbill"></i>訂單查詢</a></li>
+					<li><a href="/Lovie/product/cart.jsp"><i
+							class="glyphicon glyphicon-shopping-cart"></i> 購物車</a></li>
+					<li><a href="/Lovie/product/tradedetail.jsp"><i
+							class="selectbill"></i>訂單查詢</a></li>
 					<li><a href=""><i class="customerservice"></i>回報客服</a> <!-- /.nav-second-level -->
 					</li>
 
@@ -105,15 +106,12 @@
 
 		</div>
 	</div>
-
-
-
 	<div id="page-wrapper">
-
-		<div class="col-lg-6">
-                    <div class="panel panel-default">
+<div class="col-lg-9">
+<form role="form" action="${pageContext.request.contextPath }/billCheckout" method="post">
+     <div class="panel panel-default">
                         <div class="panel-heading">
-                                                                                        購物車
+                                                  交易明細
                         </div>
                         <!-- /.panel-heading -->
                         <div class="panel-body">
@@ -122,43 +120,35 @@
                                     <thead>
                                         <tr>
                                           
-                                            <th>產品編號</th>
+                                            <th>會員編號</th>
+                                            <th>會員帳號</th>
+                                            <th>地址</th>
+                                            <th>聯絡電話</th>
+                                            <th>交易日期</th>
                                             <th>產品名稱</th>
-                                            <th>產品樣式</th>
-                                            <th>產品內容</th>
-                                            <th>產品折扣</th>
-                                            <th>產品價格</th>
                                              <th>數量</th>
-                                             <th>小計</th>
+                                             <th>總價</th>
                                  
                                         </tr>
                                     </thead>
                                     <tbody>
-                                    <c:forEach items="${addcartlist}" var="addtocart" varStatus="loop">
-                                    		
-                                           <tr id="Cart${addtocart.bean.productid}" data-cost="${addtocart.bean.cost*addtocart.amount}" class="success">
-                                             <td>${addtocart.bean.productid}</td>
-                                             <td>${addtocart.bean.name}</td>
-                                             <td>${addtocart.bean.productphoto}</td>
-                                             <td>${addtocart.bean.content}</td>
-                                             <td>${addtocart.bean.discount}</td>
-                                             <td>${addtocart.bean.cost}</td>
-                                             <td>${addtocart.amount}</td>
-                                             <td>${addtocart.bean.cost*addtocart.amount}</td>
-                                            <c:if test="${loop.last}">
-                                    		<script>
-                                    		var itemAmount = ${loop.count}
-                                    		</script>
-                                    		</c:if>
+                                    <c:forEach items="${last}" var="orderDetail" >
+                                    		alert("AAA");
+                                           <tr id="bill${orderDetail.id}" class="success">
+                                             <td>${orderDetail.}</td>
+                                             <td></td>
+                                             <td></td>
+                                             <td></td>
+                                             <td></td>
+                                             <td></td>
+                                             <td></td>
+                                             <td></td>
+                                          
                                     		
                                      </tr>
-                                    </c:forEach> 
-                                         <tr >
-                                             <th>總金額</th>
-
-                                            <th id="allMoney">${param.allcost}</th>
-
-                                        
+                                    </c:forEach>
+                                   
+                                         
                                     </tbody>
                                     
                                     
@@ -167,63 +157,36 @@
                           
                                 </div>
                             </div>
-                            
-                            <div>
-                            <a href="#" type="button" class="btn btn-primary" onclick="checktitleCost()">確認結帳</a>
-                       
-                            <button type="button" class="btn btn-danger" onclick="history.back()">回上一頁</button>
+                                  <div class="alert alert-warning">
+                                          <tr >
+                                             <th>總金額</th>
+                                            <th id="allMoney">${param.allcost}</th>
+                                         </tr> 
+                                  </div>
                             </div>
-                            </div>
-                            </div>
-                            <!-- /.table-responsive -->
-                        </div>
-                        <!-- /.panel-body -->
-                    </div>
-                    <!-- /.panel -->
+                  
+  </div>
 
-<script> 
+  </div>
+                      
 
-
-// //移除單筆
-// function deleteCartItem(object){
-// 	var cartlist = [];
-// 	for(var i=1;i<itemAmount+1;i++){
-// 		var item = {"productid": $('#Cart'+i+' td:eq(0)').text(), "amount": $('#Cart'+i+' td:eq(6)').text()}
-// 		cartlist.push(item);
-// 		alert(item);
-// 		$("#").empty();
-// 	}
-//onclick="deleteCartItem(this)	
-	
-// 	//alert(object.id.substring(10));
-// 	var cartid = object.id.substring(10);
-// 	alert(cartid);
-// 	alert($('#Cart'+cartid+' td:eq(6)').text());
 	
 	
-// }
+	
 
 
-var allcost=0;
-function checktitleCost(){
-	var tbody = $('tbody:eq(0)')
-   
-	for(var i=0;i<itemAmount;i++){
-		//alert( $('tbody:eq(0)>tr:eq('+i+')').attr('data-cost') )
-     var allproductcost=$('tbody:eq(0)>tr:eq('+i+')').attr('data-cost');
-	 allcost=parseInt(allcost)+parseInt(allproductcost);	
-	}
-
-
-	$('#allMoney').text(allcost);
-	window.location.assign("${pageContext.request.contextPath}/product/bill.jsp?allcost="+allcost);
-
-}
-
-
-
-
-</script>      
+		<script>
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	</script>
 
 
 
@@ -257,7 +220,7 @@ function checktitleCost(){
 		src="${pageContext.request.contextPath}/admin/bower_components/flot/jquery.flot.time.js"></script>
 	<script
 		src="${pageContext.request.contextPath}/admin/bower_components/flot.tooltip/js/jquery.flot.tooltip.min.js"></script>
-	
+
 
 	<!-- Custom Theme JavaScript -->
 	<script src="${pageContext.request.contextPath}/dist/js/sb-admin-2.js"></script>

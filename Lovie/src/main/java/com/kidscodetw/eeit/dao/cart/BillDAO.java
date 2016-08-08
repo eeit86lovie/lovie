@@ -8,16 +8,14 @@ public interface BillDAO {
 
 	public abstract List<BillBean> select_ALL();
 
-	public abstract BillBean select_id(int id);
+	public abstract BillBean select_id(Integer id);
 
-	public abstract List<BillBean> select_memberid(int memberid);
-
-	public abstract BillBean select_name(String account);
+	public abstract List<BillBean> select_memberid(Integer memberid);
 
 	public abstract BillBean insert(BillBean bb);
 
 	public abstract BillBean update(BillBean bb);
 
-	public abstract int delete(int id);
+	public abstract int delete(Integer id);
 
 }

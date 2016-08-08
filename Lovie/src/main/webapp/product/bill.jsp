@@ -177,7 +177,7 @@ text-align:center;;
 				<div class="panel-body">
 					<div class="row">
 						<div class="col-lg-6">
-							<form role="form">
+							<form role="form" action="${pageContext.request.contextPath }/billCheckout" method="post">
 								<div class="form-group">
 									<label>會員帳號:</label>
 									<p id="memberAccount" class="help-block">${loginmember.account}</p>
@@ -191,26 +191,26 @@ text-align:center;;
 
 									<div class="st1">
 										<label  for="idName">姓名</label>: 
-										<input class="" type="text" id="idName" required placeholder="請輸入姓名" onblur="chkName()"/><span id="idsp1"></span>
+										<input  type="text" id="idName" required placeholder="請輸入姓名" name="username"/><span id="idsp1"></span>
 									</div>
 									<span>必填(不可空白，至少兩個字且必須為中文字)</span>
 								</div>
 								<div class="form-group">
 									<div class="st1">
 										<label for="idAddress">地址</label> 
-										<input class="" type="text" id="idAddress" required placeholder="請輸入地址" onblur="chkAddress()"/><span id="idsp2"> </span> <br>
+										<input class="" type="text" id="idAddress" required placeholder="請輸入地址" name="address"/><span id="idsp2"> </span> <br>
 										<span>必填(不可空白，至少兩個字且必須為中文字)</span></br>
 									</div>
 								</div>
 								<div class="form-group">
 									<label for="idMail">E-MAIL</label> <input class="" type="text"
-										id="idMail" required placeholder="請輸入E-MAIL" onblur="chkMail()"/><span
+										id="idMail" required placeholder="請輸入E-MAIL" name="mail"/><span
 										id="idsp3"> </span> <br>
 									<span>(不可空白，不包含中文，至少6個字且必須包含英文字母、數字、特殊字元[!@#$%^&*]</span></br>
 
 								</div>
 								<div class="form-group">
-									<label for="idPhone">連絡電話</label> <input class="" type="text" id="idPhone" required placeholder="請輸入電話" onblur="chkPhone()"/><span id="idsp3"> </span> <br>
+									<label for="idPhone">連絡電話</label> <input class="" type="text" id="idPhone" required placeholder="請輸入電話" name="phone"/><span id="idsp3"> </span> <br>
 									<span>(不可空白)<span>
 											</br>
 								</div>
@@ -219,18 +219,20 @@ text-align:center;;
 							<div class="form-group">
 									<label for="idCard">信用卡號</label>
 									<img src="${pageContext.request.contextPath}/src/main/webapp/image/product/visa.jpg"></img>
-									<input class="" type="text" id="idCard" required placeholder="請輸入卡號"   onblur="chkCard()"/><spani d="idsp4"> </span> <br>
+									<input class="" type="text" id="idCard" required placeholder="請輸入卡號"  name="card"/><span id="idsp4"> </span> <br>
 									<span>(不可空白)</span></br>
 
 								</div>
 
 						</div>
 						 
+						 <Input type="submit" class="btn btn-primary btn-lg btn-block" ></Input>
+						 
 					</form>
 					
 					</div>
 					<div>
-                           <button type="button" class="btn btn-primary btn-lg btn-block"  onclick="setBill()">送出</button>
+                           
                       </div>
 				</div>
 			</div>
@@ -278,23 +280,11 @@ text-align:center;;
 					}	
 				function chkCard(){
 					var theCard=document.getElementById("idCard").value;
-					re=/^(4[0-9]{12}(?:[0-9]{3})?)*$/;
-					if(re.test(theCard))
-						alert("OK");
-						else
-					    alert("錯誤");	
-						}	
+					
 				
 		
 				
-function setBill(){
-	
-	
-	
-	
-	
-	
-}
+
 
 							
 	</script>

@@ -11,13 +11,8 @@ public class BillBean implements Serializable{
 	private static final long serialVersionUID = 1L;
 	private Integer id;
 	private Integer memberid;
-	private String account;
-	private String membername;
-	private Integer productid;
-	private String productname;
-	private Integer amount;
     private String address;
-    private Integer title;
+    private Integer phone;
 	private java.util.Date tradeTime;
 	private Integer creditnum;
 	private Integer status;
@@ -33,47 +28,17 @@ public class BillBean implements Serializable{
 	public void setMemberid(Integer memberid) {
 		this.memberid = memberid;
 	}
-	public String getAccount() {
-		return account;
-	}
-	public void setAccount(String account) {
-		this.account = account;
-	}
-	public String getMembername() {
-		return membername;
-	}
-	public void setMembername(String membername) {
-		this.membername = membername;
-	}
-	public Integer getProductid() {
-		return productid;
-	}
-	public void setProductid(Integer productid) {
-		this.productid = productid;
-	}
-	public String getProductname() {
-		return productname;
-	}
-	public void setProductname(String productname) {
-		this.productname = productname;
-	}
-	public Integer getAmount() {
-		return amount;
-	}
-	public void setAmount(Integer amount) {
-		this.amount = amount;
-	}
 	public String getAddress() {
 		return address;
 	}
 	public void setAddress(String address) {
 		this.address = address;
 	}
-	public Integer getTitle() {
-		return title;
+	public Integer getPhone() {
+		return phone;
 	}
-	public void setTitle(Integer title) {
-		this.title = title;
+	public void setPhone(Integer phone) {
+		this.phone = phone;
 	}
 	public java.util.Date getTradeTime() {
 		return tradeTime;
@@ -98,14 +63,10 @@ public class BillBean implements Serializable{
 	}
 	@Override
 	public String toString() {
-		return "BillBean [id=" + id + ", memberid=" + memberid + ", account="
-				+ account + ", membername=" + membername + ", productid="
-				+ productid + ", productname=" + productname + ", amount="
-				+ amount + ", address=" + address + ", title=" + title
-				+ ", tradeTime=" + tradeTime + ", creditnum=" + creditnum
-				+ ", status=" + status + "]";
+		return "BillBean [id=" + id + ", memberid=" + memberid + ", address="
+				+ address + ", phone=" + phone + ", tradeTime=" + tradeTime
+				+ ", creditnum=" + creditnum + ", status=" + status + "]";
 	}
-
 	
 	
 	
