@@ -10,6 +10,9 @@ td{
 	min-width: 30px;
 	max-width: 400px;
 	overflow: hidden;
+	 white-space:nowrap;
+	 overflow:hidden;
+	 text-overflow: ellipsis;
 }
 th{
 min-width: 50px;
@@ -42,7 +45,7 @@ min-width: 50px;
 					<div class="panel-body">
 						<div class="dataTable_wrapper">
 							<table class="table table-striped table-bordered table-hover"
-								id="membertable">
+								id="membertable" "style='table-layout: fixed'";>
 								<thead>
 									<tr>
 										<th >權限</th>
@@ -103,7 +106,7 @@ $.ajax({
 			var cell8  = $("<td></td>").text(member.district)
 			var cell9  = $("<td></td>").text(member.phone)
 			var cell10  = $("<td></td>").text(member.birthday)
-			var cell11  = $("<td></td>").text(member.intro)
+			var cell11  = $("<td  title=value></td>").text(member.intro)
 			var cell12 = $("<td></td>").text(member.registeredTime)
 			var cell13 = $("<td></td>").text(member.lastOnTime)
 			var cell14 = $("<td></td>").text(member.privilegeExp)
