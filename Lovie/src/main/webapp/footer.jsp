@@ -106,8 +106,10 @@
 	            	if(JSON.parse(message.body).sender!=${loginmember.account}){
 	            		showMessageTip(JSON.parse(message.body));	
 	            	}
-	            	
 	            });
+	        	stompClient.subscribe('/app/attend', function(message){
+	              	
+	        	});
 	        });
 		</sec:authorize>
 	
@@ -123,6 +125,9 @@
 	            		showMessageTip(JSON.parse(message.body));	
 	            	}
 	            });
+	        	stompClient.subscribe('/app/attend', function(message){
+          	
+	        	});
 	        });
 		</sec:authorize>
 		

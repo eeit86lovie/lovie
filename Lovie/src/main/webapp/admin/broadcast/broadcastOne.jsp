@@ -52,7 +52,9 @@
     </script>
     
    <style>
-
+	td{
+		Vertical-Align:middle !important;
+	}
    
    </style>
 </head>
@@ -66,11 +68,30 @@
 	</div>
 	
 	<div class="row">
-	
+	<table class="table">
+	<thead>
+		<th></th>
+		<th>照片</th>
+		<th>ID</th>
+		<th>帳號</th>
+		<th>暱稱</th>
+		<th>性別</th>
+		<th>居住地</th>
+	</thead>
+	<tbody>
 	<c:forEach items="${onlineUsers }" var="onlineUser">
-		${onlineUser }<br><br>
+	<tr>
+		<td><input type="checkbox" name="account" value="${onlineUser.account }" /></td>
+		<td><img height="100" src="${pageContext.request.contextPath }/photo/member/${onlineUser.id}" /></td>
+		<td>${onlineUser.id}</td>
+		<td>${onlineUser.account}</td>
+		<td>${onlineUser.nickname}</td>
+		<td>${onlineUser.gender}</td>
+		<td>${onlineUser.city}</td>
+	</tr>
 	</c:forEach>
-	
+	</tbody>
+	</table>
 	
 	</div>
 	
