@@ -486,7 +486,7 @@ function add(){
 	
 	function getmemberNickName(nickName){
 		for(var j = 0; j<Object.keys(memberJson).length;j++){
-			if(memberJson[j].nickName == nickName){
+			if(memberJson[j].nickname == nickName){
 				return memberJson[j];
 			}	
 		}	

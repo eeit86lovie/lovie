@@ -74,7 +74,13 @@ height:25px;
 	-moz-border-radius:3px;
 }
 
+#dropdown{
+    position: relative;
+    height: 400px;
+}
 .dropdown-content {
+	position: absolute;
+        height: 360px;
 	width:200px;
 	font-size:16px;
 	clor:#ff5959;
@@ -116,13 +122,17 @@ height:25px;
 	float:left;
 	padding-tottom:5px;
 }
+
+button {
+    position:relative; /* Or absolute, inline-block, inline */
+}
 </style>
 
 
 </head>
 <body>
 <c:import charEncoding="UTF-8" url="/forum/createForumFunction.jsp"></c:import>
-<div class="dropdown">
+<div id="dropdown">
   <div class="dropdown-content" id="dropdown-content">
 
        		<button id="modal_trigger" href="#modal" onclick="checkLogin()" class="min_but">發表文章</button>
@@ -135,12 +145,12 @@ height:25px;
   
     	<p class="minsearch_text">搜尋作者</p>
 	    <input type="text" id="searchMember" class="search_text">
-	    <button id="searchMemberButton" onclick= "searchmember()">搜尋</button>
+	    <button type="button" id="searchMemberButton" onclick= "searchmember()">搜尋</button>
 	    <p id="error_message_searchMember" class="remind_text"></p>
 
     	<p class="minsearch_text">搜尋標題</p>
 	    <input type="text" id="searchTitle" class="search_text">
-	    <button id="searchTitleButton" onclick= "searchTitle()" >搜尋</button>
+	     <button type="button" id="searchTitleButton" onclick= "searchTitle()" >搜尋</button>
     	<p id="error_message_searchTitle" class="remind_text"></p>
 
 	    <p class="minsearch_text">依類別搜尋</p>
@@ -152,11 +162,11 @@ height:25px;
 	　		<option value="問片">問片</option>
 	　		<option value="其他">其他</option>
 	　	</select>
-	    <button id="searchGenreButton" onclick= "searchGenre()" class="but">搜尋</button>
+	     <button type="button"  id="searchGenreButton" onclick= "searchGenre()">搜尋</button>
 
     	<p class="minsearch_text">搜尋內容關鍵字</p>
 	    <input type="text" id="searchContent" class="search_text">
-	    <button id="searchContentButton" onclick= "searchContent()">搜尋</button>
+	     <button type="button"  id="searchContentButton" onclick= "searchContent()">搜尋</button>
  		<p id="error_message_searchContent" class="remind_text"></p>
      
   </div>
@@ -283,7 +293,7 @@ function clickLightButton(){
 
 function searchmember(){
 	var searchedMember = $('#searchMember').val();
-	var account = getmemberNickName(searchedMember);
+	var account = getmemberNickName(searchedMember).account;
 	if(searchedMember==""){
 		$("#error_message_searchMember").empty();
 		$("#error_message_searchTitle").empty();
