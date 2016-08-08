@@ -86,21 +86,44 @@ input[name="dislike_checkBox"]:checked + label span{
 
 <script>
 
-function scroll(){
-    var sHeight = document.body.scrollTop;//滚动高度
-    var wHeight = document.documentElement.clientHeight;//window 
-    var dHeight = document.documentElement.offsetHeight;//整个文档高度
-    if(dHeight-(sHeight+wHeight)<100)
-    {
-    	add();
-    	//setTimeout(function() { add(); }, 5000);
+// $(window).scroll(function(){
+//     //最後一頁scrollTop=body-window，50是預留空間
+//     last=$("body").height()-$(window).height()-50
+//     if($(window).scrollTop()>=last){
+//     	add();
+//     }
+// })
+
+
+// function dd(){
+// 	 last=$("body").height()-$(window).height()-50
+// 	    if($(window).scrollTop()>=last){
+// 	    	add();
+// 	    }
+// }
+
+//window.onload=scroll;
+
+// function scroll(){
+//     var sHeight = document.body.scrollTop;//滚动高度
+//     var wHeight = document.documentElement.clientHeight;//window 
+//     var dHeight = document.documentElement.offsetHeight;//整个文档高度
+//     if(dHeight-(sHeight+wHeight)<100)
+//     {
+//     	alert("ssssssssss");
+//     	add();
+//     	//setTimeout(function() { add(); }, 5000);
     	
-    }
+//     }
     
-};
+// };
 
 
-
+// $(window).scroll(function() {
+//    if($(window).scrollTop() + $(window).height() > $(document).height() - 100) {
+// 	   add();
+//    }
+// });
 
 		
 		
@@ -149,6 +172,7 @@ function add(){
 								dataType : "json",
 								success : function(allLikejson) {
 			 						createArticle(addarticlejson,selectReplyjson,allLikejson);
+			 			
 								}					
 							})
 						}					
@@ -485,11 +509,14 @@ function add(){
 
 	
 	function getmemberNickName(nickName){
+		var Member = "";
 		for(var j = 0; j<Object.keys(memberJson).length;j++){
 			if(memberJson[j].nickname == nickName){
-				return memberJson[j];
-			}	
-		}	
+				Member = memberJson[j];
+				return Member;
+			}
+		}
+		return Member;
 	}//end of getMemberPhoto
 
 	

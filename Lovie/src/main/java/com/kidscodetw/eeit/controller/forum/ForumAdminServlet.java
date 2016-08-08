@@ -7,8 +7,11 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kidscodetw.eeit.dao.forum.ArticleRankDAO;
@@ -61,6 +64,22 @@ public class ForumAdminServlet{
 		
 				
 		return report;
+	}
+	
+	
+	@RequestMapping(value = "forumsAdminReportArticle/{ReportAreicleID}", method = RequestMethod.GET)
+	public String reportArticleID(@PathVariable("ReportAreicleID") Integer ReportAreicleID, Model model) {
+		model.addAttribute("reportAreicleID", ReportAreicleID);
+		return "admin/forum/admin_reportArticle.jsp";
+	}
+	
+	
+	@RequestMapping(value = "forumsSelectReportID", params = {"ReportAreicleID"}, method = RequestMethod.POST)
+	@ResponseBody
+	public ForumBean reportArticleID(
+			@RequestParam("ReportAreicleID") Integer ReportAreicleID) {	
+		ForumBean reportArticle = forumDAO.select_id(ReportAreicleID);
+		return reportArticle;
 	}
 	
 	

@@ -48,6 +48,7 @@
 								<thead>
 									<tr>
 										<th>操作</th>
+									    <th>觀看</th>
 										<th>ID</th>
 										<th>會員</th>
 										<th>分類</th>
@@ -98,19 +99,22 @@ $.ajax({
 			deleteimg.setAttribute("onclick", "clickDelete(this)");
 			deleteimg.src = "${pageContext.request.contextPath}/image/deleteArticle.gif";
 			
+			var detailimg = document.createElement("img");
+			detailimg.className = "deleteimg";
+			detailimg.id = "deleteimg"+report[i].id;
+			detailimg.setAttribute("onclick", "clickdetail(this)");
+			deleteimg.src = "${pageContext.request.contextPath}/image/deleteArticle.gif";
+			
 			var td0 = $("<td id='"+'img'+report[i].id+"'></td>").append(deleteimg);
-			var td1 = $("<td id='"+'id'+report[i].id+"'></td>").append(report[i].id);
-			var td2 = $("<td id='"+'member'+report[i].id+"'></td>").append(report[i].memberAccount);
-			var td3 = $("<td id='"+'genre'+report[i].id+"'></td>").append(report[i].genre);
-			var td4 = $("<td id='"+'title'+report[i].id+"'></td>").append(report[i].title);
-			var td5 = $("<td id='"+'content'+report[i].id+"'></td>").append(report[i].content);
-			var td6 = $("<td id='"+'pubTime'+report[i].id+"'></td>").append(report[i].pubTime);
-			var td7 = $("<td id='"+'reportReason'+report[i].id+"'></td>").append(reportcount);
-			
-			
-			//$("#"+"tr"+ report[i].id).attr('onclick', '').click(seeReportArticle);
-			//var tr = $("<tr id='"+'tr'+report[i].id+"'></tr>");
-			//$( "#"+"tr"+ report[i].id).click(seeReportArticle);
+			var td1 = $("<td id='"+'img'+report[i].id+"'></td>").append(detailimg);
+			var td2 = $("<td id='"+'id'+report[i].id+"'></td>").append(report[i].id);
+			var td3 = $("<td id='"+'member'+report[i].id+"'></td>").append(report[i].memberAccount);
+			var td4 = $("<td id='"+'genre'+report[i].id+"'></td>").append(report[i].genre);
+			var td5 = $("<td id='"+'title'+report[i].id+"'></td>").append(report[i].title);
+			var td6 = $("<td id='"+'content'+report[i].id+"'></td>").append(report[i].content);
+			var td7 = $("<td id='"+'pubTime'+report[i].id+"'></td>").append(report[i].pubTime);
+			var td8 = $("<td id='"+'reportReason'+report[i].id+"'></td>").append(reportcount);
+						
 			
 			var tr = jQuery("<tr id='"+'tr'+report[i].id+"'></tr>", {
 				onclick: seeReportArticle
@@ -127,6 +131,7 @@ $.ajax({
 			tr.append(td5);
 			tr.append(td6);
 			tr.append(td7);
+			tr.append(td8);
 			
 			
 			$("#forum_tbody").append(tr);
@@ -169,6 +174,11 @@ function clickDelete(ButtonObject){
 	
 }
 
+function clickdetail(detailObject){
+	
+	var article_ID = detailObject.id.substring(9)
+	window.location.assign("${pageContext.request.contextPath}/forumsAdminReportArticle/"+ article_ID);
+}
 
 
 

@@ -4,12 +4,12 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<link rel="stylesheet" href="${pageContext.request.contextPath}/css/lightbox.css">
 <c:import charEncoding="UTF-8" url="/meta.jsp"></c:import>
 <script src="${pageContext.request.contextPath}/js/jquery-ui/jquery-ui.js"></script>
 <script src="${pageContext.request.contextPath}/js/jquery.leanModal.min.js"></script>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/createForum/createForum.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/selectLike/selectLike.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/lightbox.css">
 <script src="${pageContext.request.contextPath}/js/jquery.hoverCarousel.js"></script>
 
 
@@ -19,8 +19,8 @@
 
 <style type="text/css">
 
-.error_title{
-	width:700px;
+.notfound{
+	width:800px;
 	height:500px;
 	margin:0 auto;
 	font-size:28px;
@@ -49,7 +49,7 @@
 			<c:import charEncoding="UTF-8" url="/forum/NewTestUl.jsp"></c:import>
 		</div>
 		
-		<div id="ALL_PAGE" class="col-md-8">			
+		<div class="col-md-8">			
 			<div id="box"></div>
 		</div>
 	
@@ -189,10 +189,8 @@ $.ajax({
 			 						createArticle(selectTitleArticlejson,selectReplyjson,allLikejson);
 										
 								}else{
-									var no_member_div =$("<div class='error_title'></div>")
-									var no_member = $("<p></p>").append("查無此標題")
-									no_member_div.append(no_member)
-									$("#ALL_PAGE").append(no_member_div);
+									var no_member = $("<p class='notfound'></p>").append("查無此標題")
+									$("#box").append(no_member);
 								}
 								
 							}					

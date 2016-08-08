@@ -18,12 +18,11 @@ body{
 
 
 /* The container <div> - needed to position the dropdown content */
-.dropdown {
-	width:220px;
-	background-color: #FFFFFF;
-	position:fixed; /*固定不動*/
-	top:200px;
-	left:-100px;
+#dropdown{
+    position: relative;
+    height: 400px;
+	MARGIN-LEFT:100PX;
+	MARGIN-TOP:100PX;
 }
 
 /* Dropdown Content (Hidden by Default) */
@@ -294,6 +293,7 @@ function clickLightButton(){
 function searchmember(){
 	var searchedMember = $('#searchMember').val();
 	var account = getmemberNickName(searchedMember).account;
+	
 	if(searchedMember==""){
 		$("#error_message_searchMember").empty();
 		$("#error_message_searchTitle").empty();
