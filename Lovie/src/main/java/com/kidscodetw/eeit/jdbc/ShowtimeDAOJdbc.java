@@ -15,6 +15,7 @@ import com.kidscodetw.eeit.util.CommonUtil;
 
 public class ShowtimeDAOJdbc implements ShowtimeDAO{
 	
+	private static final String SELECT_ALL = "SELECT * FROM Showtime";
 	private static final String SELECT_BY_ID = "SELECT * FROM Showtime WHERE id = ?";
 	private static final String SELECT_BY_MOVIE = "SELECT * FROM Showtime WHERE movieName = ?";
 	private static final String SELECT_BY_THEATER = "SELECT * FROM Showtime WHERE theaterName = ?";
@@ -82,6 +83,55 @@ public class ShowtimeDAOJdbc implements ShowtimeDAO{
 			pstat = conn.prepareStatement(SELECT_BY_BOTH);
 			pstat.setString(1, movieName);
 			pstat.setString(2, theaterName);
+			rs = pstat.executeQuery();
+			listbean = new ArrayList<ShowtimeBean>();
+			while (rs.next()) {
+				ShowtimeBean bean = new ShowtimeBean();
+				bean.setId(rs.getInt("id"));
+				bean.setMovieName(rs.getString("movieName"));
+				bean.setTheaterName(rs.getString("theaterName"));
+				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+				bean.setShowtimeDate(sdf.format(new java.util.Date(rs.getDate(4).getTime())));
+				bean.setShowtimeTime(rs.getString("showtimeTime"));
+				bean.setOnline(rs.getInt("online"));
+				listbean.add(bean);
+			}
+			return listbean;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if (pstat != null) {
+				try {
+					pstat.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		return listbean;
+	}
+	
+	public List<ShowtimeBean> select(){
+		List<ShowtimeBean> listbean = null;
+		Connection conn = CommonUtil.connectMysql();
+		PreparedStatement pstat = null;
+		ResultSet rs = null;
+		try {
+			pstat = conn.prepareStatement(SELECT_ALL);
 			rs = pstat.executeQuery();
 			listbean = new ArrayList<ShowtimeBean>();
 			while (rs.next()) {

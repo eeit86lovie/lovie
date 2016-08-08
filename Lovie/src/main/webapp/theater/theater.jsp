@@ -73,7 +73,7 @@ background-color: #555;
 		<div class="row">
 			<div class="col-md-4">
 				<h1 class="page-header" style="font-size: 24px;">
-					<a href="theater/${theater.id }">${theater.name}</a>
+					<a href="${pageContext.request.contextPath }/theater/${theater.id }">${theater.name}</a>
 				</h1>
 				${theater.address }<br> ${theater.phone } &nbsp <a
 					href="${theater.websiteUrl }">網站</a><br>
