@@ -992,16 +992,16 @@ function add(){
 					if(allLikejson[m].articleID==article_ID){
 						if(allLikejson[m].good == 1){
 							var li_Rank = $("<li></li>");											
-							var rankPeople_div = $("<div ></div>");
-							var rankPeopleName_div = $("<div></div>").append(getmemberPhoto(allLikejson[m].memberAccount).nickname);
+							//var rankPeople_div = $("<div ></div>");
+							//var rankPeopleName_div = $("<div></div>").append(getmemberPhoto(allLikejson[m].memberAccount).nickname);
 							var rankPeople_img = document.createElement("img");
 							rankPeople_img.className ="rankPeople_img";
 							rankPeople_img.src = getmemberPhoto(allLikejson[m].memberAccount).photoUrl;
 				
-							rankPeople_div.append(rankPeople_img);
-							rankPeople_div.append(rankPeopleName_div);	
+							//rankPeople_div.append(rankPeople_img);
+							//rankPeople_div.append(rankPeopleName_div);	
 							
-							li_Rank.append(rankPeople_div);
+							li_Rank.append(rankPeople_img);
 							
 														
 							$("#selectLike_ul").append(li_Rank);
