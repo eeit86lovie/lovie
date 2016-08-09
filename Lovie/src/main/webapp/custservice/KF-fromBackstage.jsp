@@ -16,7 +16,7 @@
 
 <div class="container">
     <div class="row">
-    
+
 
         <div class="col-md-10 col-md-offset-1">
 
@@ -30,20 +30,17 @@
                         <th class="hidden-xs">編號</th>
                         <th>Name</th>
                         <th>Email</th>
-                        <th>Photo</th>
                         <th>問題內容</th>
                         <th>控制</th>
                     </tr> 
                   </thead>
                   <tbody>
                           <tr>
-
-                            <td>問題</td>
-                            <td class="hidden-xs">1</td>
-                            <td>John Doe</td>
-                            <td>johndoe@example.com</td>
-                            <td>相片</td>
-                            <td>內容</td>
+                            <td>帳號</td>
+                            <td class="hidden-xs">3122094</td>
+                            <td>溫雅</td>
+                            <td>AA@BB.CC</td>
+                            <td>我的帳號登入不了是怎麼了?</td>
                             <td align="center">
                               <a class="btn btn-default"><em class="fa fa-pencil"></em></a>
                               <a class="btn btn-danger"><em class="fa fa-trash"></em></a>                                                           
@@ -52,25 +49,6 @@
                         </tbody>
                 </table>
             
-              </div>
-              <div class="panel-footer">
-                <div class="row">
-                  <div class="col col-xs-4">Page 1 of 5
-                  </div>
-                  <div class="col col-xs-8">
-                    <ul class="pagination hidden-xs pull-right">
-                      <li><a href="#">1</a></li>
-                      <li><a href="#">2</a></li>
-                      <li><a href="#">3</a></li>
-                      <li><a href="#">4</a></li>
-                      <li><a href="#">5</a></li>
-                    </ul>
-                    <ul class="pagination visible-xs pull-right">
-                        <li><a href="#">«</a></li>
-                        <li><a href="#">»</a></li>
-                    </ul>
-                  </div>
-                </div>
               </div>
             </div>
 
