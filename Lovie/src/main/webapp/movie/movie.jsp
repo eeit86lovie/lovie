@@ -59,7 +59,9 @@
 				<div style="border: #BBB 2px dotted; height: 260px; overflow: auto; padding: 10px;">
 				
 				<c:forEach var="showtime" items="${showtime_list }">
+				<a href="${pageContext.request.contextPath }/appointmentaadd/${showtime.id }">
 				${showtime.theaterName } ${showtime.showtimeDate } ${showtime.showtimeTime }<br>
+				</a>
 				</c:forEach>
 				   
 					
@@ -87,39 +89,39 @@
 		</div>
 		<!-- /.row -->
 
-		<!-- Related Projects Row -->
-		<div class="row">
+<!-- 		<!-- Related Projects Row --> -->
+<!-- 		<div class="row"> -->
 
-			<div class="col-lg-12">
-				<h3 class="page-header" style="font-size: 28px;">近期約會</h3>
-			</div>
+<!-- 			<div class="col-lg-12"> -->
+<!-- 				<h3 class="page-header" style="font-size: 28px;">近期約會</h3> -->
+<!-- 			</div> -->
 
-			<div class="col-sm-3 col-xs-6">
-				<a href="#"> <img class="img-responsive portfolio-item"
-					src="http://placehold.it/500x300" alt="">
-				</a>
-			</div>
+<!-- 			<div class="col-sm-3 col-xs-6"> -->
+<!-- 				<a href="#"> <img class="img-responsive portfolio-item" -->
+<!-- 					src="http://placehold.it/500x300" alt=""> -->
+<!-- 				</a> -->
+<!-- 			</div> -->
 
-			<div class="col-sm-3 col-xs-6">
-				<a href="#"> <img class="img-responsive portfolio-item"
-					src="http://placehold.it/500x300" alt="">
-				</a>
-			</div>
+<!-- 			<div class="col-sm-3 col-xs-6"> -->
+<!-- 				<a href="#"> <img class="img-responsive portfolio-item" -->
+<!-- 					src="http://placehold.it/500x300" alt=""> -->
+<!-- 				</a> -->
+<!-- 			</div> -->
 
-			<div class="col-sm-3 col-xs-6">
-				<a href="#"> <img class="img-responsive portfolio-item"
-					src="http://placehold.it/500x300" alt="">
-				</a>
-			</div>
+<!-- 			<div class="col-sm-3 col-xs-6"> -->
+<!-- 				<a href="#"> <img class="img-responsive portfolio-item" -->
+<!-- 					src="http://placehold.it/500x300" alt=""> -->
+<!-- 				</a> -->
+<!-- 			</div> -->
 
-			<div class="col-sm-3 col-xs-6">
-				<a href="#"> <img class="img-responsive portfolio-item"
-					src="http://placehold.it/500x300" alt="">
-				</a>
-			</div>
+<!-- 			<div class="col-sm-3 col-xs-6"> -->
+<!-- 				<a href="#"> <img class="img-responsive portfolio-item" -->
+<!-- 					src="http://placehold.it/500x300" alt=""> -->
+<!-- 				</a> -->
+<!-- 			</div> -->
 
-		</div>
-		<!-- /.row -->
+<!-- 		</div> -->
+ 		<!-- /.row --> 
 
 
 	</div>

@@ -90,5 +90,4 @@ public class MessageController {
 		return messageDAO.selectReceiver(receiver);
 	}
 	
-
 }

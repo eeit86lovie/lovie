@@ -35,7 +35,7 @@
             var checkedUser = document.getElementById("userCheckbox");
             var checkedGold = document.getElementById("goldCheckbox");
            	if(!checkedGuest.checked && !checkedUser.checked && !checkedGold.checked){
-            	alert("請至少勾選一項使用者群組");
+            	alert("請至少勾選一名會員");
            	}else{
            		stompClient.send("/app/broadcast", {}, JSON.stringify({ 'message': message ,'group':[getCheckedValue(checkedGuest) ,getCheckedValue(checkedUser),getCheckedValue(checkedGold)]}));
            	}

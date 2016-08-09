@@ -10,7 +10,7 @@ public class TradeDetailDAOHibernate implements TradeDetailDAO {
 
 	private static final String SELECT_ALL = "FROM TradeDetailBean";
 	private static final String SELECT_ID = "FROM TradeDetailBean WHERE id=?";
-	private static final String SELECT_MEMEBRID = "FROM TradeDetailBean WHERE memberid=:memberid";
+	private static final String SELECT_BILLID = "FROM TradeDetailBean WHERE billid=:billid";
 	private static final String INSERT = "INSERT INTO TradeDetailBean(memberid,productid,totalcost,amount)VALUES(?,?,?,?)";
 	private static final String UPDATE = "UPDATE TradeDetailBean SET memberid=COALESCE(?,memberid),productid=COALESCE(?,productid),totalcost =COALESCE(?, totalcost),amount =COALESCE(?, amount)WHERE id=?";
 	private static final String DELETE = "DELETE FROM TradeDetailBean WHERE id=?";
@@ -39,9 +39,9 @@ public class TradeDetailDAOHibernate implements TradeDetailDAO {
 		return tdb;
 	}
 	@Override
-	public List<TradeDetailBean> select_memberid(Integer memberid){
-		Query query  =getSession().createQuery(SELECT_MEMEBRID);
-		query.setParameter("memberid", memberid);
+	public List<TradeDetailBean> select_billid(Integer billid){
+		Query query  =getSession().createQuery(SELECT_BILLID);
+		query.setParameter("billid", billid);
 		return query.list();
 		}
 	

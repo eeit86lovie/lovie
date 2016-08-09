@@ -156,7 +156,9 @@ background-color: #555;
 					<div class="showtime" id="style-1">
 						<c:forEach var="showtime" items="${showtimes }">
 							<c:if test="${showtime.movieName == movie.name}">
+							<a href="${pageContext.request.contextPath }/appointmentaadd/${showtime.id } ">
 							 ${showtime.showtimeDate } - ${showtime.showtimeTime }<br>
+							 </a>
 							</c:if>
 						</c:forEach>
 
