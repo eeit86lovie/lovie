@@ -108,7 +108,7 @@ text-align:center;;
 	</div>
 	<div id="page-wrapper">
 <div class="col-lg-9">
-<form role="form" action="${pageContext.request.contextPath }/billCheckout" method="post">
+<form role="form" action="${pageContext.request.contextPath }/billCheckout" >
      <div class="panel panel-default">
                         <div class="panel-heading">
                                                   交易明細
@@ -132,41 +132,39 @@ text-align:center;;
                                         </tr>
                                     </thead>
                                     <tbody>
-                                    <c:forEach items="${last}" var="orderDetail" >
-                                    		alert("AAA");
-                                           <tr id="bill${orderDetail.id}" class="success">
-                                             <td>${orderDetail.}</td>
-                                             <td></td>
-                                             <td></td>
-                                             <td></td>
-                                             <td></td>
-                                             <td></td>
-                                             <td></td>
-                                             <td></td>
+                                    <c:forEach items="${checkoutItems}" var="checkoutItem" >
+                                    <tr>
+                                           
+                                             <td>${checkoutItem.memberid }</td>
+                                             <td>${checkoutItem.memberaccount }</td>
+                                             <td>${checkoutItem.memberaddress }</td>
+                                             <td>${checkoutItem.memberphone }</td>
+                                             <td>${checkoutItem.checktradeTime }</td>
+                                             <td>${checkoutItem.productname }</td>
+                                             <td>${checkoutItem.amount }</td>
+                                             <td>${checkoutItem.totalcost }</td>
                                           
                                     		
                                      </tr>
                                     </c:forEach>
                                    
-                                         
+                                     
+                                     	
+                                     
                                     </tbody>
                                     
                                     
                                 </table>
-                                <div>
-                          
+                                <div style="float:right; font-size: 18px;margin-right:8px;">
+                          			總金額:${amount }
                                 </div>
                             </div>
-                                  <div class="alert alert-warning">
-                                          <tr >
-                                             <th>總金額</th>
-                                            <th id="allMoney">${param.allcost}</th>
-                                         </tr> 
-                                  </div>
+                                  
                             </div>
                   
   </div>
 
+  </div>
   </div>
                       
 

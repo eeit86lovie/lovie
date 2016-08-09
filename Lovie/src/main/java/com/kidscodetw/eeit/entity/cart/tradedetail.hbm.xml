@@ -8,7 +8,7 @@
         <id name="id" column="id">
             <generator class="identity"/>
         </id>
-         <property name="memberid" column="memberid" />
+         <property name="billid" column="billid" />
         <property name="productid" column="productid" />
         <property name="amount" column="amount" />
         <property name="totalcost" column="totalcost" />
