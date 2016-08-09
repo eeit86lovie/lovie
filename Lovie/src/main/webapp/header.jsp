@@ -63,7 +63,7 @@ a{
 								<div class="msg">${msg}</div>
 							</c:if>
 							<form name='loginForm'
-		 					 action="<c:url value='${pageContext.request.contextPath }/j_spring_security_check' />" method="post">
+		 					 action="${pageContext.request.contextPath }/j_spring_security_check" method="post">
 					
 							   <table>
 								<tr>
