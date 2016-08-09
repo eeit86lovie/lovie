@@ -11,7 +11,7 @@
 		</h3>
 		<p class="footer-links">
 			<a href="#">首頁</a> · <a href="#">約會</a> · <a href="#">電影</a> · <a
-				href="#">會員</a> · <a href="#">討論</a> · <a href="#">感興趣</a>
+				href="#">戲院</a> · · <a href="#">會員</a> · <a href="#">討論</a> · <a href="#">商城</a> · <a href="#">客服</a>
 		</p>
 		<p class="footer-company-name">Lovie &copy; 2015</p>
 	</div>
