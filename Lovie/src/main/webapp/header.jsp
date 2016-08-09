@@ -45,6 +45,7 @@ a{
 					<li><a href=<c:url value="/members"/>>會員</a></li>
 					<li><a href=<c:url value="/forums"/>>討論</a></li>
 					<li><a href=<c:url value="/products"/>>商城</a></li>
+					<li><a href=<c:url value="/custservice"/>>客服</a></li>
 				</ul>
 				
 				<sec:authorize access="!hasRole('ROLE_ADMIN') and !hasRole('ROLE_GOLD') and !hasRole('ROLE_USER')">

@@ -46,6 +46,8 @@
         <mapping resource="com/kidscodetw/eeit/entity/forum/articlereply.hbm.xml" />
         <mapping resource="com/kidscodetw/eeit/entity/forum/forum.hbm.xml" />
         <mapping resource="com/kidscodetw/eeit/entity/message/message.hbm.xml" />
+        <mapping resource="com/kidscodetw/eeit/entity/custservice/cust_service.hbm.xml" />
+        <mapping resource="com/kidscodetw/eeit/entity/custservice/cust_service_catagory.hbm.xml" />
         <mapping class="com.kidscodetw.eeit.entity.appointment.AppointmentBean2" />
         <mapping class="com.kidscodetw.eeit.entity.appointment.AppointmentsBean" />
         <mapping class="com.kidscodetw.eeit.entity.appointment.AppointmentbBean" />
@@ -59,6 +61,7 @@
         <mapping class="com.kidscodetw.eeit.entity.report.Chart2Bean" />
         <mapping class="com.kidscodetw.eeit.entity.report.Chart3Bean" />
         <mapping class="com.kidscodetw.eeit.entity.report.ReportBean" />
+        
 	</session-factory>
 	
 </hibernate-configuration>

@@ -111,6 +111,15 @@
 		<constructor-arg ref="memberRoleDAOHibernate"></constructor-arg>
 	</bean>
 	
+	<!-- custServiceCatagoryDAO -->
+	<bean id="custServiceCatagoryDAOHibernate" class="com.kidscodetw.eeit.dao.custservice.CustServiceCatagoryDAOHibernate">
+		<constructor-arg ref="sessionFactory"></constructor-arg>
+	</bean>
+
+	<bean id="custServiceCatagoryDAO" class="com.kidscodetw.eeit.service.custservice.CustServiceCatagoryService">
+		<constructor-arg ref="custServiceCatagoryDAOHibernate"></constructor-arg>
+	</bean>
+	
 	<!-- MessageDAO -->
 	<bean id="MessageDAOHibernate" class="com.kidscodetw.eeit.dao.message.MessageDAOHibernate">
 		<constructor-arg ref="sessionFactory"></constructor-arg>

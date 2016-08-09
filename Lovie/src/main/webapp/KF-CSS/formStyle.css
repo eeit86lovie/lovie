@@ -1,4 +1,4 @@
-﻿@charset "utf-8";
+@charset "utf-8";
 /* CSS Document */
 
 html, body {
@@ -199,15 +199,9 @@ body {
 
 
 /** �̥k�� **/
-.{
-	width:780px;
-	margin-left:105px;
-}
-
-/* ���U�j�M�϶��@*/
 .right_frame{
 	width:780px;
-	margin-left:105px;
+	margin-left:210px;
 }
 
 /* ���U�j�M�϶��@*/
@@ -217,6 +211,7 @@ body {
 	height:40px;
 	margin:10px auto;
 }
+
 /* ���϶� */
 .select_cata{
 	width:280px;
@@ -406,7 +401,7 @@ body {
 	opacity:0.8;
 }
 
-/* �̤W��U�C�������G���ɺ�}�l��� */
+/* �̤W��U�C�������G���ɺ��}�l��� */
 .sub_share_social, .game_detail_sub_share_social{
 	position:absolute;
 	z-index:101;
@@ -466,7 +461,7 @@ body {
 	opacity:1.0;
 }
 
-/* �̤W��G���ɺ�}�l���b�Y�I�� */
+/* �̤W��G���ɺ��}�l���b�Y�I�� */
 .sub_share_social_shape{
 	margin-left:127px;
 	width:10px;
@@ -497,7 +492,7 @@ body {
 	background:url(../images/bg_game_ro.jpg) 50% center no-repeat;
 }
 
-/* �����U�C�������G�Ϥ������϶���s���� */
+/* �����U�C�������G�Ϥ������϶����s���� */
 .btn_banner_prev, .btn_banner_next{
 	top:245px;
 	position:absolute;
@@ -660,7 +655,7 @@ body {
 	text-decoration:none;
 }
 
-/** �D����u **/
+/** �D�����u **/
 .horizon{
 	width:1000px;
 	height:25px;
@@ -1030,7 +1025,7 @@ body {
 	background:#2064a9 url(../images/btn_icon_fb.png) 100px 10px no-repeat;
 }
 
-/* �����G�n�J���U�U�T�����i�B�`�����DFAQ  ��r���˦�*/
+/* �����G�n�J���U�U�T�����i�B�`�����DFAQ  ��r����˦�*/
 .login_member, .login_pw, .login_code, .search_txt{
 	background:#fff;
 	border:1px solid #ccc;
@@ -1697,7 +1692,7 @@ body {
 	text-decoration:underline;
 }
 
-/** �T�����i����G���ɺ�} **/
+/** �T�����i����G���ɺ��} **/
 .news_share{
 	line-height:50px;
 	padding:0 10px;
@@ -1812,7 +1807,7 @@ body {
 	top:5px;
 }
 
-/* �u�W���G��r�϶�B���s�϶� */
+/* �u�W���G��r�϶��B���s�϶� */
 .form_area, .form_btn{
 	width:700px;
 	position:relative;
@@ -1821,7 +1816,7 @@ body {
 	min-height:40px;
 }
 
-/* �u�W���G����B�h���r�B�����ɮװ϶�˦��B�C���b�� */
+/* �u�W���G����B�h���r�B�����ɮװ϶��˦��B�C���b�� */
 .form_txt, .form_txtarea, .form_data, .form_txt_game_id{
 	background:#fff;
 	border:1px solid #ccc;
@@ -2008,13 +2003,13 @@ body {
 	margin:-15px auto auto auto;
 }
 .btn_top a{
-	width:100px;
-	height:100px;
+	width:30px;
+	height:30px;
 	display:block;
-	background:url(../KF-image/top.jpg) no-repeat;
+	background:url(../images/btn_top.png) no-repeat;
 }
 .btn_top a:hover{
-	background:url(../KF-image/top.jpg) no-repeat;
+	background:url(../images/btn_top_s.png) no-repeat;
 }
 
 /* ���vLOGO�϶� */
