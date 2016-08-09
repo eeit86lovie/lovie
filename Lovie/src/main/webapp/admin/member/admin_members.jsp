@@ -223,7 +223,44 @@ function searchAccount(){
 				flag.append(row);
 			tb.append(flag)
 		},error: function(){
-			alert("失敗")
+			$.ajax({
+				url : "${pageContext.request.contextPath}/admin/member/getMembers",
+				type : "post",
+				processData: false,
+				contentType: false,
+				success : function(memberBeanList) {
+					var flag = $(document.createDocumentFragment())
+
+					$.each(memberBeanList,function(idx,member){	
+						if(member.gender==0){
+							member.gender="女"
+						}else{
+							member.gender="男"
+						}
+						var cell1  = $("<td style='width:10px'></td>").text(member.privilege)
+						var cell2  = $("<td></td>").text(member.id)
+						var cell3  = $("<td></td>").text(member.account)
+						var cell4  = $("<td></td>").text(member.nickname)
+						var cell5  = $("<td></td>").text(member.gender)
+						var cell6  = $("<td></td>").text(member.email)
+						var cell7  = $("<td></td>").text(member.city)
+						var cell8  = $("<td></td>").text(member.district)
+						var cell9  = $("<td></td>").text(member.phone)
+						var cell10  = $("<td></td>").text(member.birthday)
+						var cell11  = $("<td onclick='allIntro(this)'></td>").text(member.intro)
+						var cell12 = $("<td></td>").text(member.registeredTime)
+						var cell13 = $("<td></td>").text(member.lastOnTime)
+						var cell14 = $("<td></td>").text(member.privilegeExp)
+						var cell15  = $("<td></td>").text(member.loginTimes)
+
+						var row = $("<tr></tr>").append([cell1,cell2,cell3,cell4,cell5,cell6,cell7,cell8,cell9,cell10,cell11,cell12,cell13,cell14,cell15])
+						flag.append(row);
+					})
+					tb.append(flag)
+				},error: function(){
+					alert("失敗")
+				}					
+			})
 		}					
 	})
 }
