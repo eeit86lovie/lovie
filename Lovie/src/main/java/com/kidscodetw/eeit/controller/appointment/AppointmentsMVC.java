@@ -22,6 +22,7 @@ import com.kidscodetw.eeit.entity.appoint.AppointmentBean;
 import com.kidscodetw.eeit.entity.appointment.AppointmentBean2;
 import com.kidscodetw.eeit.entity.appointment.AppointmentaBean;
 import com.kidscodetw.eeit.entity.appointment.AppointmentaeditBean;
+import com.kidscodetw.eeit.entity.appointment.AppointmentamBean;
 import com.kidscodetw.eeit.entity.appointment.AppointmentbBean;
 import com.kidscodetw.eeit.entity.appointment.AppointmentbeditBean;
 import com.kidscodetw.eeit.entity.appointment.AppointmentsBean;
@@ -189,7 +190,14 @@ public class AppointmentsMVC {
 		return "appointment/new_appointmentb.jsp";
 	}	
 		
-		
+	@RequestMapping("new_appointment_json")
+	public @ResponseBody List<AppointmentamBean> new_appointment_json(
+			   @RequestParam(value="showtimechk",required=false) Integer[] showtimechk){
+		List<AppointmentamBean> appointment_list = appointmentService2.selectBySids(showtimechk);
+		return appointment_list;
+	}
+
+	
 	//查詢(1)
 	@RequestMapping("appointments")
 	public String getAppointments(){

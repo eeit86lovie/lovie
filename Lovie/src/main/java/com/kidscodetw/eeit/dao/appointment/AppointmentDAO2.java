@@ -7,6 +7,7 @@ import com.kidscodetw.eeit.entity.appoint.AppointmentBean;
 import com.kidscodetw.eeit.entity.appointment.AppointmentBean2;
 import com.kidscodetw.eeit.entity.appointment.AppointmentaBean;
 import com.kidscodetw.eeit.entity.appointment.AppointmentaeditBean;
+import com.kidscodetw.eeit.entity.appointment.AppointmentamBean;
 import com.kidscodetw.eeit.entity.appointment.AppointmentsBean;
 
 public interface AppointmentDAO2 {
@@ -25,6 +26,6 @@ public interface AppointmentDAO2 {
 	public abstract List<AppointmentaBean> selectByMid(Integer memberId);
 	public abstract AppointmentaeditBean selectByAidMid(Integer appointmentID,Integer memberId);
 	public abstract Integer selectByMemberShowtimeId(Integer memberId, Integer showtimeId);
-	public abstract AppointmentaeditBean selectByAidMidwith9(Integer appointmentID, Integer memberId); 
-
+	public abstract AppointmentaeditBean selectByAidMidwith9(Integer appointmentID, Integer memberId);
+	public abstract List<AppointmentamBean> selectBySids(Integer[] showtimeIds); 
 }

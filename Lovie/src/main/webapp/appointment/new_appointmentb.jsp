@@ -266,14 +266,20 @@ function formsubmit() {
 				//var result = JSON.parse(data);
 				var result =data;
 				var movieshowtime = $("#movieshowtime");
-				console.log(movieshowtime);
+				var appointmentr = $("#appointmentr");
+				//console.log(movieshowtime);
 				if (result.length > 0) {
 					//movieshowtime.empty();
+				  $("<form class='form-horizontal' role='form' name='form2' id='form2' action='#'>" +
+  				  "<fieldset id='fieldset2'>" + 
+			      "<button type='button' class='btn btn-danger '" +
+				  "    	onClick='form2submit();' style='margin-bottom: 6px;' >查询約會(依電影時刻表)</button>").appendTo(movieshowtime);
 				for (var i = 0; i < result.length; i++) {
 					var item = result[i];
 				//**one movie template beg
 				    var drow = document.createElement('div');
-				    $(drow).addClass("row").appendTo(movieshowtime); //row div
+				    //$(drow).addClass("row").appendTo(movieshowtime); //row div
+				    $(drow).addClass("row").appendTo($("#fieldset2")); //row div
 				    var drow_c1 = document.createElement('div');
 				    $(drow_c1).addClass("col-md-2").appendTo(drow); //row div_col-2
 				    $("<img src=${pageContext.request.contextPath }/photo/movie/"+item.id+" style='height:200px;'>").appendTo(drow_c1);				
@@ -294,16 +300,17 @@ function formsubmit() {
 				    var item_s =  item.showtimeBeans;
 					for (var j = 0; j < item_s.length; j++) {
 						var item_s_i = item_s[j];
-						$("<p><input type='checkbox' name='showtimechk' id='showtimechk"+item_s_i.id+"' value='"+item_s_i.id+"' />"+
-						  "<a href='${pageContext.request.contextPath }/appointmentaadd/"+item_s_i.id+"'>　"+
+						$("<p><input type='checkbox' name='showtimechk' id='showtimechk"+item_s_i.id+"' value='"+item_s_i.id+"' />　"+
+						  "<a href='${pageContext.request.contextPath }/appointmentaadd/"+item_s_i.id+"'>"+
 							item_s_i.theaterName+"　"+item_s_i.showtimeDate+"　"+item_s_i.showtimeTime+"</a></p>").appendTo(drow_c3_1);
 					}
 				//**one movie template end	
 				}
+			    	$("<button type='button' class='btn btn-danger' onClick='form2submit();'>查询約會(依電影時刻表)</button>" ).appendTo($("#fieldset2")); //row div
 					$("#ajax-loader").removeClass("displaycomp").addClass("nondisplaycomp");
 					$("#collapseOne").removeClass('in');
 				 	//alert("查詢完成.....");
-//?? 呼叫查詢appr的函數()若沒有checked,就全部 ,加formchk				 
+				 	form2submit();
 				} else {
 					$("#ajax-loader").removeClass("displaycomp").addClass("nondisplaycomp");
 					movieshowtime.text("目前沒有符合條件的電影,請重新查詢。");
@@ -321,7 +328,98 @@ function formsubmit() {
 }
 
 function form2submit() {
-	alert("form2");
+	var showtimechk = [];
+	$('input[name="showtimechk"]:checked').each(function() {
+		showtimechk.push(this.value);
+	});
+	if (showtimechk=="")
+	{
+		$('input[name="showtimechk"]').each(function() {
+			showtimechk.push(this.value);
+		});
+	}	
+	if (showtimechk=="")
+	{
+		alert("請先查詢電影時刻表後,再執行查詢約會功能");
+	}else {
+		$.ajax({
+			url : "new_appointment_json",
+			data:{showtimechk:showtimechk.toString()},
+			type:"post",
+			beforeSend : function(){
+				var appointmentr = $("#appointmentr");
+				appointmentr.empty();
+				$("#ajax-loader2").removeClass("nondisplaycomp").addClass("displaycomp");
+				$("#collapseThree").addClass('in');
+			},
+			complete: function(){
+				$("#ajax-loader2").removeClass("displaycomp").addClass("nondisplaycomp");
+			},
+			success : function(data) {
+			if (data != null) {
+					//var result = JSON.parse(data);
+					var result =data;
+					var appointmentr = $("#appointmentr");
+					//console.log(result);
+					/*
+					if (result.length > 0) {
+						//movieshowtime.empty();
+					  $("<form class='form-horizontal' role='form' name='form2' id='form2' action='#'>" +
+	  				  "<fieldset id='fieldset2'>" + 
+				      "<button type='button' class='btn btn-danger '" +
+					  "    	onClick='form2submit();' style='margin-bottom: 6px;' >查询約會(依電影時刻表)</button>").appendTo(movieshowtime);
+					for (var i = 0; i < result.length; i++) {
+						var item = result[i];
+					//**one movie template beg
+					    var drow = document.createElement('div');
+					    //$(drow).addClass("row").appendTo(movieshowtime); //row div
+					    $(drow).addClass("row").appendTo($("#fieldset2")); //row div
+					    var drow_c1 = document.createElement('div');
+					    $(drow_c1).addClass("col-md-2").appendTo(drow); //row div_col-2
+					    $("<img src=${pageContext.request.contextPath }/photo/movie/"+item.id+" style='height:200px;'>").appendTo(drow_c1);				
+					    var drow_c2 = document.createElement('div');
+					    $(drow_c2).addClass("col-md-5").appendTo(drow); //row div_col-5
+					    $(drow_c2).addClass("movie_intro");
+					    $("<p><img src='${pageContext.request.contextPath }/image/movie/"+item.rank+".png' width='40'	></p>").appendTo(drow_c2);				
+					    $("<b style='font-size: 13px;'>片名："+item.name+"</b>").appendTo(drow_c2);				
+					    $("<p>上映時間:"+item.startTime+"</p>").appendTo(drow_c2);				
+					    $("<p>類型:"+item.genrelist+"</p>").appendTo(drow_c2);				
+					    $("<p align='justify'>簡介:<br>"+item.intro+"</p>").appendTo(drow_c2);				
+					    var drow_c3 = document.createElement('div');
+					    $(drow_c3).addClass("col-md-5").appendTo(drow); //row div_col-5
+					    $(drow_c3).addClass("movie_showtime");
+					    $("<h3 style='margin:1px;'>電影時刻表</h3>").appendTo(drow_c3);
+					    var drow_c3_1 = document.createElement('div');
+					    $(drow_c3_1).addClass("movie_showtime_inside").appendTo(drow_c3); 
+					    var item_s =  item.showtimeBeans;
+						for (var j = 0; j < item_s.length; j++) {
+							var item_s_i = item_s[j];
+							$("<p><input type='checkbox' name='showtimechk' id='showtimechk"+item_s_i.id+"' value='"+item_s_i.id+"' />　"+
+							  "<a href='${pageContext.request.contextPath }/appointmentaadd/"+item_s_i.id+"'>"+
+								item_s_i.theaterName+"　"+item_s_i.showtimeDate+"　"+item_s_i.showtimeTime+"</a></p>").appendTo(drow_c3_1);
+						}
+					//**one movie template end	
+					}
+				    	$("<button type='button' class='btn btn-danger' onClick='form2submit();'>查询約會(依電影時刻表)</button>" ).appendTo($("#fieldset2")); //row div
+						$("#ajax-loader").removeClass("displaycomp").addClass("nondisplaycomp");
+						$("#collapseOne").removeClass('in');
+					 	//alert("查詢完成.....");
+					 	form2submit();
+					} else {
+						$("#ajax-loader").removeClass("displaycomp").addClass("nondisplaycomp");
+						movieshowtime.text("目前沒有符合條件的電影,請重新查詢。");
+						appointmentr.text("目前沒有符合條件的約會,請重新查詢。");
+					 	alert("沒有相符的電影,請重新查詢。");
+					}*/
+					//$("#collapseTwo").addClass('in');
+			}else{
+				appointmentr.text("請重新查詢。");
+				alert("請重新查詢。");
+			}
+			}
+		});
+
+	}
 }
 </script>
 

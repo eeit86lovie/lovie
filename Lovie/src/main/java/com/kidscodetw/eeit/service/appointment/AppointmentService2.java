@@ -8,6 +8,7 @@ import com.kidscodetw.eeit.entity.appoint.AppointmentBean;
 import com.kidscodetw.eeit.entity.appointment.AppointmentBean2;
 import com.kidscodetw.eeit.entity.appointment.AppointmentaBean;
 import com.kidscodetw.eeit.entity.appointment.AppointmentaeditBean;
+import com.kidscodetw.eeit.entity.appointment.AppointmentamBean;
 import com.kidscodetw.eeit.entity.appointment.AppointmentsBean;
 
 public class AppointmentService2 {
@@ -109,6 +110,10 @@ public class AppointmentService2 {
 
 	public AppointmentaeditBean selectByAidMidwith9(Integer appointmentID,Integer memberId) {
 		return appointmentDAO.selectByAidMidwith9(appointmentID, memberId);
+	}
+
+	public List<AppointmentamBean> selectBySids(Integer[] showtimeIds) {
+		return appointmentDAO.selectBySids(showtimeIds);
 	}
 
 }

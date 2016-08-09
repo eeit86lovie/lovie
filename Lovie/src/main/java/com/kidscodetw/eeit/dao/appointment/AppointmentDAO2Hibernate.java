@@ -12,6 +12,7 @@ import com.kidscodetw.eeit.entity.appoint.AppointmentBean;
 import com.kidscodetw.eeit.entity.appointment.AppointmentBean2;
 import com.kidscodetw.eeit.entity.appointment.AppointmentaBean;
 import com.kidscodetw.eeit.entity.appointment.AppointmentaeditBean;
+import com.kidscodetw.eeit.entity.appointment.AppointmentamBean;
 import com.kidscodetw.eeit.entity.appointment.AppointmentareditBean;
 import com.kidscodetw.eeit.entity.appointment.AppointmentsBean;
 
@@ -278,6 +279,58 @@ public class AppointmentDAO2Hibernate implements AppointmentDAO2 {
 			//System.out.println(SELECT_ByMid);
 			SQLQuery query = getSession().createSQLQuery(SELECT_ByMid);
 			query.addEntity(AppointmentaBean.class);
+			result = query.list();
+		} catch (RuntimeException e) {
+			e.printStackTrace();
+		}
+		return result;
+	}	
+
+	@Override
+	public List<AppointmentamBean> selectBySids(Integer[] showtimeIds) {
+		List<AppointmentamBean> result = null;
+		try {
+			StringBuffer whereshowtime = new StringBuffer();
+			if (showtimeIds != null && showtimeIds.length > 0 ) 
+			{
+				whereshowtime = new StringBuffer("and showtimeId in ("+showtimeIds[0]);
+				for(int i=1;i<showtimeIds.length;i++)
+				{
+					whereshowtime.append(","+showtimeIds[i]);
+				}
+				whereshowtime.append(")");
+			}
+			String SELECT_BySids = 
+			   		"select C.id,pubTime,showtimeId,astatus,acontent,requestcnt, " + 
+					   "       memberId,nickname,gender, " + 
+					   "	   if(birthday= null,null,Year(current_date())-Year(birthday)) age, " + 
+					   "       if(gender= 0,'女',if(gender=1,'男',gender)) gendertxt,	    " + 
+					   "       showtimeDate,concat(movieName,'<br/>',theaterName,'<br/>',showtimeDate,' ',showtimeTime) showtimeData " + 
+					   "from ( select id,memberId,pubTime,showtimeId, " + 
+					   "              astatus,acontent,count(appointmentID) requestcnt " + 
+					   "       from " + 
+					   "       (select id,memberId,pubTime,showtimeId, " + 
+					   "	           status astatus,content acontent " + 
+					   "	    from eeit86.Appointment " + 
+					   "        where status = 1 "+ whereshowtime.toString() +" ) A " + 
+					   "	   left outer join " + 
+					   "	   (select appointmentID,requestMemberId " + 
+					   "        from eeit86.AppointmentRequest " + 
+					   "        where status <> 9 ) B " + 
+					   "	   on A.id = B.appointmentID " + 
+					   "       group by id,memberId,pubTime,showtimeId,astatus,acontent " + 
+					   "     ) C " + 
+					   "	 join " + 
+					   "	(select id,showtimeDate,showtimeTime,movieName,theaterName " + 
+					   "	 from eeit86.Showtime) D " + 
+					   "	 on C.showtimeId = D.id " + 
+					   "	 join " + 
+					   "    (select id,nickname,gender,birthday from eeit86.Member) E " + 
+					   "	 on memberId = E.id " + 
+					   "order by requestcnt desc,showtimeDate desc,pubTime,age " ;
+			System.out.println(SELECT_BySids);
+			SQLQuery query = getSession().createSQLQuery(SELECT_BySids);
+			query.addEntity(AppointmentamBean.class);
 			result = query.list();
 		} catch (RuntimeException e) {
 			e.printStackTrace();

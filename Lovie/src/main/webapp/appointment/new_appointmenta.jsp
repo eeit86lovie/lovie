@@ -245,7 +245,7 @@ function formsubmit() {
 				//var result = JSON.parse(data);
 				var result =data;
 				var movieshowtime = $("#movieshowtime");
-				console.log(movieshowtime);
+				//console.log(movieshowtime);
 				if (result.length > 0) {
 					movieshowtime.empty();
 				for (var i = 0; i < result.length; i++) {
