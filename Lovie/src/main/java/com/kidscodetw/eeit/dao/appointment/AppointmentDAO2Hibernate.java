@@ -2,19 +2,17 @@ package com.kidscodetw.eeit.dao.appointment;
 
 import java.sql.Date;
 import java.util.List;
-import java.util.Set;
 
 import org.hibernate.Query;
 import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
+import com.kidscodetw.eeit.entity.appoint.AppointmentBean;
 import com.kidscodetw.eeit.entity.appointment.AppointmentBean2;
 import com.kidscodetw.eeit.entity.appointment.AppointmentaBean;
 import com.kidscodetw.eeit.entity.appointment.AppointmentaeditBean;
 import com.kidscodetw.eeit.entity.appointment.AppointmentareditBean;
-import com.kidscodetw.eeit.entity.appointment.AppointmentbBean;
-import com.kidscodetw.eeit.entity.appointment.AppointmentbeditBean;
 import com.kidscodetw.eeit.entity.appointment.AppointmentsBean;
 
 public class AppointmentDAO2Hibernate implements AppointmentDAO2 {
@@ -22,6 +20,7 @@ public class AppointmentDAO2Hibernate implements AppointmentDAO2 {
 	private static final String SELECT_ALL = "from AppointmentBean2";
 	private static final String SELECT_BY_MEMBER = "from AppointmentBean2 where memberId=:memberId";
 	private static final String SELECT_BY_SHOWTIME = "from AppointmentBean2 where showtimeId=:showtimeId";
+	private static final String SELECT_BY_MEMBER_SHOWTIME = "from AppointmentBean2 where memberId=:memberId and showtimeId=:showtimeId  ";
 	private static final String UPDATESTATUS_BY_ID = "update AppointmentBean2 set status=:status where id=:appointmentID";
 	private static final String UPDATECONTENT_BY_ID_AID = "update AppointmentBean2 set content=:content where id=:appointmentID ";
 	private static final String UPDATESTATUSRTO8_BY_ID = "update AppointmentRequestBean set status=8 where appointmentID=:appointmentID and status in (0,1,2) ";
@@ -71,6 +70,18 @@ public class AppointmentDAO2Hibernate implements AppointmentDAO2 {
 	}
 
 	@Override
+	public Integer selectByMemberShowtimeId(Integer memberId,Integer showtimeId) {
+		Query query = getSession().createQuery(SELECT_BY_MEMBER_SHOWTIME);
+		query.setParameter("memberId", memberId);
+		query.setParameter("showtimeId", showtimeId);
+		List<AppointmentBean2> list = query.list();
+		if (list == null || list.size() <= 0)
+		   return null;
+		else
+		   return list.get(0).getId();
+	}
+	
+	@Override
 	public boolean delete(Integer id) {
 		AppointmentBean2 bean = (AppointmentBean2) this.getSession().get(AppointmentBean2.class, id);
 		if (bean != null) {
@@ -81,7 +92,7 @@ public class AppointmentDAO2Hibernate implements AppointmentDAO2 {
 	}
 
 	@Override
-	public AppointmentBean2 insert(AppointmentBean2 bean) {
+	public AppointmentBean insert(AppointmentBean bean) {
 		this.getSession().save(bean);
 		return bean;
 	}
@@ -302,7 +313,7 @@ public class AppointmentDAO2Hibernate implements AppointmentDAO2 {
 			SQLQuery query = getSession().createSQLQuery(SELECT_EDIT_ByAidMid);
 			query.addEntity(AppointmentaeditBean.class);
 			List<AppointmentaeditBean> list = query.list();
-			if (list != null)
+			if (list != null && list.size() > 0)
 			{  result = list.get(0);
 				String SELECTR_EDIT_ByAid =
 						"select appointmentID,requestMemberId,requestAppointmentTime,bstatus,bcontent, " +
@@ -331,4 +342,62 @@ public class AppointmentDAO2Hibernate implements AppointmentDAO2 {
 		}
 		return result;
 	}	
+	
+	@Override
+	public AppointmentaeditBean selectByAidMidwith9(Integer appointmentID,Integer memberId) {
+		AppointmentaeditBean result = null;
+		try { 
+			String SELECT_EDIT_ByAidMid =
+			        "select A.id,memberId mId,pubTime,showtimeId,astatus,acontent, " + 
+					"       gender,nickname,birthday,constellation,city,district, " + 
+				    "       if(birthday= null,null,Year(current_date())-Year(birthday)) age, " +
+				    "       if(gender= 0,'女',if(gender=1,'男',gender)) gendertxt, " +
+					"       concat(movieName,'<br/>',theaterName,'<br/>',showtimeDate,' ',showtimeTime) showtimeData  " + 
+					"from (select id,memberId,pubTime,showtimeId, " + 
+					"	         status astatus,content acontent " + 
+					"	  from eeit86.Appointment " + 
+					"      where  memberId="+memberId+" and id ="+appointmentID+"  ) A " + 
+					"	 join " + 
+					"	(select id,showtimeDate,showtimeTime,movieName,theaterName " + 
+					"	 from eeit86.Showtime) C " + 
+					"	 on A.showtimeId = C.id " + 
+					"	 join " + 
+					"    (select id,gender,nickname,birthday, " + 
+					"	        constellation,city,district  " + 
+					"	 from eeit86.Member " + 
+					"	 where id="+memberId + 
+					"	 ) D " + 
+					"	 on memberId = D.id " ;
+			SQLQuery query = getSession().createSQLQuery(SELECT_EDIT_ByAidMid);
+			query.addEntity(AppointmentaeditBean.class);
+			List<AppointmentaeditBean> list = query.list();
+			if (list != null && list.size() > 0)
+			{  result = list.get(0);
+				String SELECTR_EDIT_ByAid =
+						"select appointmentID,requestMemberId,requestAppointmentTime,bstatus,bcontent, " +
+						"       gender,nickname,birthday,constellation,city,district, " +
+						"       if(birthday= null,null,Year(current_date())-Year(birthday)) age, " +
+						"       if(gender= 0,'女',if(gender=1,'男',gender)) gendertxt " +
+						"from (select appointmentID,requestMemberId,requestAppointmentTime, " +
+						"	         status bstatus,content bcontent " +
+						"	  from eeit86.AppointmentRequest " +
+						"      where appointmentID ="+appointmentID+"  ) B " +
+						"	 join " +
+						"     (select id,gender,nickname,birthday, " +
+						"	        constellation,city,district  " +
+						"	  from eeit86.Member " +
+						"	 ) D " +
+						"	 on requestMemberId = D.id " ;		
+				SQLQuery query2 = getSession().createSQLQuery(SELECTR_EDIT_ByAid);
+				query2.addEntity(AppointmentareditBean.class);
+				List<AppointmentareditBean> listr = query2.list();
+				if (listr != null)
+				{  result.setAppointmentareditBeans(listr);		}
+			    //System.out.println(result);
+			}
+		} catch (RuntimeException e) {
+			e.printStackTrace();
+		}
+		return result;
+	}		
 }

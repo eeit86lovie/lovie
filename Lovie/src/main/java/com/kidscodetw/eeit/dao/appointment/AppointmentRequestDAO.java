@@ -11,4 +11,5 @@ public interface AppointmentRequestDAO {
 	public abstract Integer updatestatusByAidMid(Integer appointmentID,Integer requestMemberId, Integer status);
 	public abstract Integer updatecontentByAidMid(Integer appointmentID,Integer requestMemberId, String content);
 	public abstract AppointmentbeditBean selectByAidMid(Integer appointmentID,Integer requestMemberId);
+	public abstract Integer selectBySidMid(Integer showtimeID, Integer requestMemberId);
 }

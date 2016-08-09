@@ -53,6 +53,7 @@
         <mapping class="com.kidscodetw.eeit.entity.appointment.AppointmentareditBean" />
         <mapping class="com.kidscodetw.eeit.entity.appointment.AppointmentaBean" />
         <mapping class="com.kidscodetw.eeit.entity.appointment.AppointmentRequestBean" />
+        <mapping class="com.kidscodetw.eeit.entity.appointment.AppointmovieBean" />
         <mapping class="com.kidscodetw.eeit.entity.report.Chart1Bean" />
         <mapping class="com.kidscodetw.eeit.entity.report.Chart2Bean" />
         <mapping class="com.kidscodetw.eeit.entity.report.Chart3Bean" />

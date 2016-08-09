@@ -4,6 +4,7 @@ import java.sql.Date;
 import java.util.List;
 
 import com.kidscodetw.eeit.dao.appointment.AppointmentDAO2;
+import com.kidscodetw.eeit.entity.appoint.AppointmentBean;
 import com.kidscodetw.eeit.entity.appointment.AppointmentBean2;
 import com.kidscodetw.eeit.entity.appointment.AppointmentaBean;
 import com.kidscodetw.eeit.entity.appointment.AppointmentaeditBean;
@@ -30,6 +31,14 @@ public class AppointmentService2 {
 		return result;
 	}
 
+	public Integer selectByMemberShowtimeId(Integer memberId,Integer showtimeId){
+		Integer result = null;
+		if(memberId != 0 && showtimeId != 0 ){
+			result = appointmentDAO.selectByMemberShowtimeId(memberId, showtimeId);
+		}
+		return result;
+	}
+	
 	public List<AppointmentBean2> selectByMemberId(Integer memberId){
 		List<AppointmentBean2> result = null;
 		if(memberId!=0){
@@ -46,8 +55,8 @@ public class AppointmentService2 {
 		return result;
 	}
 
-	public AppointmentBean2 insert(AppointmentBean2 bean){
-		AppointmentBean2 result = null;
+	public AppointmentBean insert(AppointmentBean bean){
+		AppointmentBean result = null;
 		if(bean!=null){
 			result = appointmentDAO.insert(bean);
 		}
@@ -96,6 +105,10 @@ public class AppointmentService2 {
 
 	public AppointmentaeditBean selectByAidMid(Integer appointmentID,Integer memberId) {
 		return appointmentDAO.selectByAidMid(appointmentID, memberId);
+	}
+
+	public AppointmentaeditBean selectByAidMidwith9(Integer appointmentID,Integer memberId) {
+		return appointmentDAO.selectByAidMidwith9(appointmentID, memberId);
 	}
 
 }

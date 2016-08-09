@@ -122,7 +122,7 @@ public class AppointmentRequestDAOHibernate implements AppointmentRequestDAO {
 			SQLQuery query = getSession().createSQLQuery(SELECT_ByAidMid);
 			query.addEntity(AppointmentbeditBean.class);
 			List<AppointmentbeditBean> list = query.list();
-			if (list != null)
+			if (list != null && list.size() > 0)
 			   result = list.get(0);
 		} catch (RuntimeException e) {
 			e.printStackTrace();
@@ -130,4 +130,26 @@ public class AppointmentRequestDAOHibernate implements AppointmentRequestDAO {
 		return result;
 	}
 
+	@Override
+	public Integer selectBySidMid(Integer showtimeID,Integer requestMemberId) {
+		Integer result = null;
+		try { 
+			String SELECT_BySidMid =
+					"SELECT A.id " +
+					"FROM eeit86.Appointment A " +
+					"join " +
+					"eeit86.AppointmentRequest AR " +
+					"on A.id = AR.appointmentID " +
+					"where A.showtimeId="+showtimeID+" and AR.requestMemberId="+requestMemberId+
+					"  and AR.status in (0,1)";					
+			SQLQuery query = getSession().createSQLQuery(SELECT_BySidMid);
+			query.addEntity(AppointmentbeditBean.class);
+			List<Integer> list = query.list();
+			if (list != null && list.size() > 0 )
+			   result = list.get(0);
+		} catch (RuntimeException e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
 }

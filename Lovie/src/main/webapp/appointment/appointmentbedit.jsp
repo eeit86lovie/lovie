@@ -62,6 +62,50 @@
 .form-group {
     margin-bottom:8px;
 }
+.myButton {
+	-moz-box-shadow: 3px 5px 19px -3px #8a2a21;
+	-webkit-box-shadow: 3px 5px 19px -3px #8a2a21;
+	box-shadow: 3px 5px 19px -3px #8a2a21;
+	background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #c62d1f), color-stop(1, #f24437));
+	background:-moz-linear-gradient(top, #c62d1f 5%, #f24437 100%);
+	background:-webkit-linear-gradient(top, #c62d1f 5%, #f24437 100%);
+	background:-o-linear-gradient(top, #c62d1f 5%, #f24437 100%);
+	background:-ms-linear-gradient(top, #c62d1f 5%, #f24437 100%);
+	background:linear-gradient(to bottom, #c62d1f 5%, #f24437 100%);
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#c62d1f', endColorstr='#f24437',GradientType=0);
+	background-color:#c62d1f;
+	-moz-border-radius:6px;
+	-webkit-border-radius:6px;
+	border-radius:6px;
+	border:2px solid #d02718;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:12px;
+	font-weight:bold;
+	padding:5px 4px;
+	text-decoration:none;
+	text-shadow:1px 2px 1px #810e05;
+}
+.myButton:visited {
+	color:#ffffff;
+}
+.myButton:hover {
+	background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #f24437), color-stop(1, #c62d1f));
+	background:-moz-linear-gradient(top, #f24437 5%, #c62d1f 100%);
+	background:-webkit-linear-gradient(top, #f24437 5%, #c62d1f 100%);
+	background:-o-linear-gradient(top, #f24437 5%, #c62d1f 100%);
+	background:-ms-linear-gradient(top, #f24437 5%, #c62d1f 100%);
+	background:linear-gradient(to bottom, #f24437 5%, #c62d1f 100%);
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#f24437', endColorstr='#c62d1f',GradientType=0);
+	background-color:#f24437;
+	color:#f0f0e0;
+}
+.myButton:active {
+	position:relative;
+	top:1px;
+}
 </style>
 <title>查詢約會</title>
 </head>
@@ -75,8 +119,12 @@
 <!--  <div class="row"> -->
 <div class="col-md-12">
   <ul class="nav nav-tabs nav-justified">
-  <li><img src="${pageContext.request.contextPath}/image/icon/logo.png" style="width:90px;float:right;padding-right:20px;"></img>
-  <div style="color:red">會員:${loginmember.account}${loginmember.nickname}</div>
+    <li> 
+  <!--<img src="${pageContext.request.contextPath}/image/icon/logo.png" style="width:90px;float:right;padding-right:20px;"></img>
+      <div style="color:red">會員:${loginmember.account}${loginmember.nickname}</div>  -->
+       <span class="myButton" onclick="newappointmentb();"><span class="glyphicon glyphicon-heart" style="padding-right:2px;"></span>+申請新約會</span>
+       <span class="myButton" onclick="newappointmenta();"><span class="glyphicon glyphicon-heart-empty" style="padding-right:2px;"></span>+邀請新約會</span>
+    </li>
     <li><a href="${pageContext.request.contextPath}/appointments">一週約會通知</a></li>
     <li class="active"><a href="${pageContext.request.contextPath}/appointmentb">申請的約會(修改)</a></li>
     <li><a href="${pageContext.request.contextPath}/appointmenta">邀請的約會</a></li>
@@ -145,7 +193,7 @@
 	 <div class="btn-group" role="group" >
 	      <button type="button" id="savebtn" class="btn btn-primary btn-sm" 
 	      	  onClick="editsave();">存檔</button>
-	      <button type="button" class="btn btn-default btn-sm" onClick="editcancel();">返回</button>
+	      <button type="button" class="btn btn-default btn-sm" onClick="editcancel();">返回申請的約會</button>
 	 </div>
 	 </div>
 	 <div class="form-groupa col-md-12">
@@ -160,8 +208,64 @@
    
 </div>
 </div>
-  </div>
-  </div>
+<!-- weather beg -->
+<div class='row' style="display:none;">
+<h3 class='fc-title chfont textshadow'>一週天氣預報</h3>
+<div class='fc table-responsive' id='weekTable'>
+※ URL：http://opendata.cwb.gov.tw/opendataapi?dataid={dataid}&authorizationkey={apikey}
+{dataid}為各資料集代碼 (參照：資料清單) ex. F-A0012-001
+{apikey}為會員帳號對應之驗證碼 ex. CWB-1234ABCD-78EF-GH90-12XY-IJKL12345678
+範例：http://opendata.cwb.gov.tw/opendataapi?dataid=F-A0012-001&authorizationkey=CWB-1234ABCD-78EF-GH90-12XY-IJKL12345678 
+一般天氣預報-一週縣市天氣預報	F-C0032-005
+一般天氣預報-天氣小幫手	
+- 台北市天氣小幫手
+F-C0032-009
+- 新北市天氣小幫手
+F-C0032-010
+- 基隆市天氣小幫手
+F-C0032-011
+- 花蓮縣天氣小幫手
+F-C0032-012
+- 宜蘭縣天氣小幫手
+F-C0032-013
+- 金門縣天氣小幫手
+F-C0032-014
+- 澎湖縣天氣小幫手
+F-C0032-015
+- 台南市天氣小幫手
+F-C0032-016
+- 高雄市天氣小幫手
+F-C0032-017
+- 嘉義縣天氣小幫手
+F-C0032-018
+- 嘉義市天氣小幫手
+F-C0032-019
+- 苗栗縣天氣小幫手
+F-C0032-020
+- 台中市天氣小幫手
+F-C0032-021
+- 桃園市天氣小幫手
+F-C0032-022
+- 新竹縣天氣小幫手
+F-C0032-023
+- 新竹市天氣小幫手
+F-C0032-024
+- 屏東縣天氣小幫手
+F-C0032-025
+- 南投縣天氣小幫手
+F-C0032-026
+- 台東縣天氣小幫手
+F-C0032-027
+- 彰化縣天氣小幫手
+F-C0032-028
+- 雲林縣天氣小幫手
+F-C0032-029
+- 連江縣天氣小幫手
+F-C0032-030
+</div>
+</div>
+<!-- weather end -->
+</div></div>
 </div></div>
 <!--  </div>  -->
 </sec:authorize>
@@ -235,5 +339,14 @@ function editsave(){
 	}
 }
 </script>
+<script>
+function newappointmenta() {
+	window.location.href = "${pageContext.request.contextPath}/new_appointmenta";
+}
+function newappointmentb() {
+	window.location.href = "${pageContext.request.contextPath}/new_appointmentb";
+}
+</script>
+
 </body>
 </html>

@@ -10,7 +10,9 @@ import com.kidscodetw.eeit.entity.appointment.AppointmentaBean;
 import com.kidscodetw.eeit.entity.appointment.AppointmentaeditBean;
 import com.kidscodetw.eeit.entity.appointment.AppointmentbBean;
 import com.kidscodetw.eeit.entity.appointment.AppointmentsBean;
+import com.kidscodetw.eeit.entity.appointment.AppointmovieBean;
 import com.kidscodetw.eeit.entity.movie.GenreBean;
+import com.kidscodetw.eeit.entity.movie.ShowtimeBean;
 
 public class AppointmovieService {
 	
@@ -35,6 +37,23 @@ public class AppointmovieService {
 		List<String> result = null;
 		result = appointmovieDAO.select_theaternames_list();
 		return result;
+	}
+
+	public ShowtimeBean select_showtime(Integer id) {
+		return appointmovieDAO.select_showtime(id);
+	}
+	
+	public List<AppointmovieBean> select_movieshowtime_list(
+			String[] citysels,
+			String theatersels,
+			String[] genresels,
+			String moviesels,
+			String showtimeDatebeg,
+			String showtimeDateend
+			) {
+		List<AppointmovieBean> result = null;
+		result = appointmovieDAO.select_movieshowtime_list(genresels, showtimeDateend, genresels, showtimeDateend, showtimeDateend, showtimeDateend);
+		return result;		
 	}
 
 }
