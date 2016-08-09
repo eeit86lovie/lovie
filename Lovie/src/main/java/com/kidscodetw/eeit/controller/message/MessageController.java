@@ -49,19 +49,6 @@ public class MessageController {
 		model.addAttribute("friends", memberBeans);
 		return "/chat/chat.jsp";
 	}
-	
-	@RequestMapping(value="{senderAccount}", method = RequestMethod.GET)
-	public String dispatchWithSender(@PathVariable String senderAccount,Principal principal, Model model){
-		Integer memberId = memberDAO.select(principal.getName()).getId();
-		List<FriendBean> friendBeans = friendDAO.selectPart(memberId, 3);
-		List<MemberBean> memberBeans = new ArrayList<MemberBean>();
-		for(FriendBean bean :friendBeans){
-			memberBeans.add(memberDAO.select(bean.getFriendId()));
-		}
-		model.addAttribute("friends", memberBeans);
-		model.addAttribute("firstSender", senderAccount);
-		return "/chat/chat.jsp";
-	}
 
 	@RequestMapping(value = "info", produces = MediaType.APPLICATION_JSON)
 	@ResponseBody

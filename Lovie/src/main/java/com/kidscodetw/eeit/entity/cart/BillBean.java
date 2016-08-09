@@ -11,7 +11,8 @@ public class BillBean implements Serializable{
 	private static final long serialVersionUID = 1L;
 	private Integer id;
 	private Integer memberid;
-	private String account;
+    private String address;
+    private Integer phone;
 	private java.util.Date tradeTime;
 	private Integer creditnum;
 	private Integer status;
@@ -27,11 +28,17 @@ public class BillBean implements Serializable{
 	public void setMemberid(Integer memberid) {
 		this.memberid = memberid;
 	}
-	public String getAccount() {
-		return account;
+	public String getAddress() {
+		return address;
 	}
-	public void setAccount(String account) {
-		this.account = account;
+	public void setAddress(String address) {
+		this.address = address;
+	}
+	public Integer getPhone() {
+		return phone;
+	}
+	public void setPhone(Integer phone) {
+		this.phone = phone;
 	}
 	public java.util.Date getTradeTime() {
 		return tradeTime;
@@ -56,11 +63,11 @@ public class BillBean implements Serializable{
 	}
 	@Override
 	public String toString() {
-		return "BillBean [id=" + id + ", memberid=" + memberid + ", account="
-				+ account + ", tradeTime=" + tradeTime + ", creditnum="
-				+ creditnum + ", status=" + status + "]";
+		return "BillBean [id=" + id + ", memberid=" + memberid + ", address="
+				+ address + ", phone=" + phone + ", tradeTime=" + tradeTime
+				+ ", creditnum=" + creditnum + ", status=" + status + "]";
 	}
-
+	
 	
 	
 }

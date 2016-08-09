@@ -126,13 +126,9 @@
 		    <span class="glyphicon glyphicon-remove-sign clearselspan" aria-hidden="true" onclick="clearinput(4);"></span>
 		</div>
 		<div class="form-group">
-		    <label class="control-label col-md-2" for="showtimeDatebeg" style="margin-right: 0px;">放映日期：</label>
-		    <div class="col-md-4"> 
-		    	<input type="text" class="form-control" id="showtimeDatebeg" name="showtimeDatebeg" placeholder="請選擇放映起日" readonly>
-		    </div>
-		    <div class="col-md-1" style="text-align:center;line-height:29px;"><span >～</span></div>
-		    <div class="col-md-4"> 
-		    	<input type="text" class="form-control" id="showtimeDateend" name="showtimeDateend" placeholder="請選擇放映迄日" readonly>
+		    <label class="control-label col-md-2" for="showtimeDate" style="margin-right: 0px;">放映日期：</label>
+		    <div class="col-md-9"> 
+		    	<input type="text" class="form-control" id="showtimeDate" name="showtimeDate" placeholder="請選擇放映日期" readonly>
 		    </div>
 		    <span class="glyphicon glyphicon-remove-sign clearselspan" aria-hidden="true" onclick="clearinput(5);"></span>
 	    </div>
@@ -204,8 +200,7 @@ function formreset() {
 	$("#theaterName").val('').trigger('change');
 	$("#genreId").val('').trigger('change');
 	$("#movieName").val('').trigger('change');
-	$("#showtimeDatebeg").val(""); 
-	$("#showtimeDateend").val(""); 
+	$("#showtimeDate").val(""); 
 }
 
 function formsubmit() {
@@ -213,6 +208,7 @@ function formsubmit() {
 	var theatersels = $("#theaterName").val();
 	var genresels = $("#genreId").val();
 	var moviesels = $("#movieName").val();
+<<<<<<< HEAD
 	var showtimeDatebeg = $("#showtimeDatebeg").val();
 	var showtimeDateend = $("#showtimeDateend").val();
 
@@ -283,6 +279,18 @@ function formsubmit() {
 					
 		}}
 	});
+=======
+	var showtimesels = $("#showtimeDate").val();
+console.log(citysels);
+console.log(theatersels);
+console.log(genresels);
+console.log(moviesels);
+console.log(showtimesels);
+  alert("查詢.....");
+  
+  
+  
+>>>>>>> branch 'master' of https://github.com/eeit86lovie/lovie.git
 }
 </script>
 
@@ -302,8 +310,7 @@ function formsubmit() {
 			 placeholder: '請選擇電影名稱',
 			 allowClear: true
 		 });
-         $('#showtimeDatebeg').datepicker({ dateFormat: "yy-mm-dd" });
-         $('#showtimeDateend').datepicker({ dateFormat: "yy-mm-dd" });
+         $('#showtimeDate').datepicker({ dateFormat: "yy-mm-dd" });
      });
 </script>
 <!-- end script -->

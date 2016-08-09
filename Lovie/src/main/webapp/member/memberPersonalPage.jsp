@@ -57,7 +57,8 @@ color:black;
   <div class="col-md-12" ><br></div>
   <div class="col-md-3"><img id="blah" style="border:5px solid #acd6ff;border-radius:15px;width:100%" src="${pageContext.request.contextPath}/photo/member/${oneMember.id}"></div>
   <div class="col-md-9" ></div>
-  <div class="col-md-9" ><b class="memberColumn">暱稱：</b><span id="nickname" onclick="member_edit(this)">${oneMember.nickname}</span></div>
+  <div class="col-md-7" ><b class="memberColumn">暱稱：</b><span id="nickname" onclick="member_edit(this)">${oneMember.nickname}</span></div>
+  <div class="col-md-2" ><button class="edit" type="button" id="friend" onclick="addFriend()">感興趣</button></div>
   <div class="col-md-9" ><b class="memberColumn">年齡：</b>${oneMember.age}歲</div>
   <div class="col-md-9" ><b class="memberColumn">性別：</b>${gender}</div>
   <div class="col-md-9" ><b class="memberColumn">星座：</b>${oneMember.constellation}</div>
@@ -73,7 +74,11 @@ color:black;
   <div class="col-md-9" ><span id="intro" onclick="member_edit(this)">${oneMember.intro}</span></div>
   <div class="col-md-2" ></div>
    <div class="col-md-12" ><br></div>
-  <div class="col-md-10" ><b class="memberColumn">喜歡的電影類型：</b>喜劇|奇幻|驚悚</div>
+  <div class="col-md-10" ><b class="memberColumn">喜歡的電影類型：</b>
+  	<c:forEach var="genre" items="${genre_list}">
+  	${genre}&nbsp;
+  	</c:forEach>
+  </div>
   <div class="col-md-2" ><button  type="button" id=advancedEdit style="display:none">進階編輯</button></div>
   <div class="col-md-12" ><br></div>
  <div class="col-md-5" style="font-size:20%;color:black">註冊日期：${oneMember.registeredTime}</div>
@@ -107,6 +112,7 @@ if("${loginmember.id}"=="${oneMember.id}"&&"${oneMember.id}"!=""){
 	document.getElementById("pic").style.display = "block";
 	document.getElementById("uesrPic").style.display = "block";
 	document.getElementById("advancedEdit").style.display = "block";
+	document.getElementById("friend").style.display = "none";
 	
 	function readURL(input) {
 		  if (input.files && input.files[0]) {
@@ -352,6 +358,54 @@ function checkEmail(){
 		document.getElementById("checkButton").disabled=true;
 		alert("請輸入正確信箱")
 	}
+}
+
+//****************************************************************************************************************
+//加、取消好友鍵
+var relationship="${relationship}"
+if("${loginmember.id}"!="${oneMember.id}"&&(relationship==""||relationship==3)){
+	document.getElementById("friend").style.display = "inline";//不是好友也沒有說感興趣的話就有加好友的顯示鈕
+}else if("${loginmember.id}"=="${oneMember.id}"){
+	document.getElementById("friend").style.display = "none";
+}else{
+	$("#friend").replaceWith("<button class='edit' type='button' id='friend' onclick='removeFriend()'>取消關注</button>")
+}
+
+//加好友程式
+function addFriend(){
+	var formData1 = new FormData();
+	formData1.append('friendId',"${oneMember.id}" );
+		$.ajax({
+			url: "${pageContext.request.contextPath}/member/AddOrRemoveFriendService/addFriend",
+			type: 'post',
+			data: formData1,
+			processData: false,
+			contentType: false,
+			success: function(data){
+				alert("更新成功")
+				window.location.reload();
+			},error: function(){
+				alert("失敗Q_Q")
+			}
+		})	
+}
+//取消追蹤
+function removeFriend(){
+	var formData1 = new FormData();
+	formData1.append('friendId',"${oneMember.id}"  );
+		$.ajax({
+			url: "${pageContext.request.contextPath}/member/AddOrRemoveFriendService/removeFriend",
+			type: 'post',
+			data: formData1,
+			processData: false,
+			contentType: false,
+			success: function(data){
+				alert("更新成功")
+				window.location.reload();
+			},error: function(){
+				alert("失敗Q_Q")
+			}
+		})	
 }
 
 

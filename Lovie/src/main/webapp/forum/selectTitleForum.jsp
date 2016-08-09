@@ -4,12 +4,12 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<link rel="stylesheet" href="css/lightbox.css">
 <c:import charEncoding="UTF-8" url="/meta.jsp"></c:import>
 <script src="${pageContext.request.contextPath}/js/jquery-ui/jquery-ui.js"></script>
 <script src="${pageContext.request.contextPath}/js/jquery.leanModal.min.js"></script>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/createForum/createForum.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/selectLike/selectLike.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/lightbox.css">
 <script src="${pageContext.request.contextPath}/js/jquery.hoverCarousel.js"></script>
 
 
@@ -19,6 +19,12 @@
 
 <style type="text/css">
 
+.notfound{
+	width:800px;
+	height:500px;
+	margin:0 auto;
+	font-size:28px;
+}
 </style>
 
 
@@ -44,9 +50,7 @@
 		</div>
 		
 		<div class="col-md-8">			
-			<div id="box">
-				<input type="button" id="addarticle" value="ADD" onclick="add()">
-			</div>
+			<div id="box"></div>
 		</div>
 	
         <div class="col-md-2"></div>
@@ -185,7 +189,7 @@ $.ajax({
 			 						createArticle(selectTitleArticlejson,selectReplyjson,allLikejson);
 										
 								}else{
-									var no_member = $("<p></p>").append("查無此標題")
+									var no_member = $("<p class='notfound'></p>").append("查無此標題")
 									$("#box").append(no_member);
 								}
 								

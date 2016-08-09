@@ -9,7 +9,8 @@
             <generator class="identity"/>
         </id>
         <property name="memberid" column="memberid" />
-        <property name="account" column="account" />
+        <property name="address" column="address"/>
+         <property name="phone" column="phone"/>
         <property name="tradeTime" column="tradeTime" />
         <property name="creditnum" column="creditnum" />
         <property name="status" column="status" />

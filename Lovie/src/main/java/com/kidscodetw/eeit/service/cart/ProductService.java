@@ -25,14 +25,14 @@ public class ProductService {
 	    return result;
 	}
 		
-	public ProductBean select_id(int productid){
+	public ProductBean select_id(Integer productid){
 		ProductBean result = null;
 		if(productid!=0){
 			result = productDAO.select_id(productid);
 		}
 		return result;
 	}
-	public List<ProductBean> select_category(int category){
+	public List<ProductBean> select_category(Integer category){
 		List<ProductBean> result=null;
 		if(category!=0){
 			result=productDAO.select_category(category);
@@ -48,7 +48,7 @@ public class ProductService {
 		return result;
 	}
 
-	public int delete(int productid){
+	public int delete(Integer productid){
 		int result = 0;
 		if(productid!=0){
 			result = productDAO.delet(productid);

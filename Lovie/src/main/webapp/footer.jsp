@@ -90,16 +90,12 @@
 	            stompClient.subscribe('/topic/guest', function(message){
 	            	showBroadcast(JSON.parse(message.body).message);
 	            });
-	            stompClient.subscribe('/user/queue/chat', function(message){
-	            	if(JSON.parse(message.body).sender!=${loginmember.account}){
-	            		showMessageTip(JSON.parse(message.body));	
-	            	}
-	            });
+	            
 	        });
 		</sec:authorize>
 		
 		
-		<sec:authorize access="hasRole('GOLD') and !hasRole('ADMIN')">
+		<sec:authorize access="hasRole('USER') and !hasRole('GOLD') and !hasRole('ADMIN')">
 			var socket = new SockJS('/Lovie/stomp');
 	        stompClient = Stomp.over(socket);
 	        stompClient.connect({}, function(frame) {
@@ -115,7 +111,7 @@
 	        });
 		</sec:authorize>
 	
-		<sec:authorize access="hasRole('USER') and !hasRole('GOLD') and !hasRole('ADMIN')">
+		<sec:authorize access="hasRole('GOLD') and !hasRole('ADMIN')">
 			var socket = new SockJS('/Lovie/stomp');
 	        stompClient = Stomp.over(socket);
 	        stompClient.connect({}, function(frame) {
@@ -192,5 +188,6 @@
 		    }
 		});
 	</script>
+
 
 

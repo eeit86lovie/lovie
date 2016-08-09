@@ -4,7 +4,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<link rel="stylesheet" href="css/lightbox.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/lightbox.css">
 <c:import charEncoding="UTF-8" url="/meta.jsp"></c:import>
 <script src="${pageContext.request.contextPath}/js/jquery-ui/jquery-ui.js"></script>
 <script src="${pageContext.request.contextPath}/js/jquery.leanModal.min.js"></script>
@@ -16,6 +16,21 @@
 
 <style type="text/css">
 
+.addMoreAreicle{
+	width: 780px;
+	height: 35px;
+	border-radius: 8px;
+	-moz-border-radius: 8px;
+	-webkit-border-radius: 8px;
+	background-Color:#ffb1b1;
+	color:#FFF;
+	margin:0 auto;
+	text-align:center;
+	font-weight: bold;
+	line-height:35px;
+	font-size:20px;
+	cursor: pointer;
+}
 </style>
 
 
@@ -42,8 +57,10 @@
 		
 		<div class="col-md-8">			
 			<div id="box">
-<!-- 				<input type="button" id="addarticle" value="ADD" onclick="add()"> -->
+
 			</div>
+			
+			<div class="addMoreAreicle" onclick="add()">載入更多文章</div>
 		</div>
 	
         <div class="col-md-2"></div>

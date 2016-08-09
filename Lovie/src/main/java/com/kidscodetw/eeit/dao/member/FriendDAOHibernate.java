@@ -5,6 +5,7 @@ import java.util.List;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+
 import com.kidscodetw.eeit.entity.member.FriendBean;
 
 public class FriendDAOHibernate implements FriendDAO {
@@ -44,7 +45,11 @@ public class FriendDAOHibernate implements FriendDAO {
 						"from FriendBean where memberId=:memberId and friendId=:friendId");
 		query.setParameter("memberId", memberId);
 		query.setParameter("friendId", friendId);
-		return (FriendBean) query.list().get(0);
+		try {
+			return (FriendBean) query.list().get(0);
+		} catch (Exception e) {
+			return null;
+		}
 	}
 
 	@Override
@@ -60,6 +65,15 @@ public class FriendDAOHibernate implements FriendDAO {
 			this.getSession().saveOrUpdate(bean);
 		}
 		return bean;
+	}
+	@Override
+	public boolean delete(FriendBean bean) {
+		if (bean != null && bean.getMemberId() != 0) {
+			this.getSession().delete(bean);
+			return true;
+		}
+		return false;
+		
 	}
 
 }

@@ -12,12 +12,12 @@ public interface ProductDAO {
 
 	public abstract ProductBean select_name(String name);
 
-	public abstract List<ProductBean> select_category(int category);
+	public abstract List<ProductBean> select_category(Integer category);
 
 	public abstract ProductBean insert(ProductBean pb);
 
 	public abstract ProductBean update(ProductBean pb);
 
-	public abstract int delet(int productid);
+	public abstract int delet(Integer productid);
 
 }

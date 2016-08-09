@@ -16,9 +16,22 @@
     height:25px;
 }
 
+td{
+	min-width: 30px;
+	max-width: 400px;
+	overflow: hidden;
+	 white-space:nowrap;
+	 overflow:hidden;
+	 text-overflow: ellipsis;
+}
+th{
+min-width: 50px;
+}
+
 </style>
 </head>
 <body>
+
 <div id="wrapper">
 		<c:import charEncoding="UTF-8" url="../nav.jsp"></c:import>
 		<div id="page-wrapper">
@@ -44,18 +57,17 @@
 					<div class="panel-body">
 						<div class="dataTable_wrapper">
 							<table class="table table-striped table-bordered table-hover"
-								id="movietable">
+								id="forumtable" "style='table-layout: fixed'">
 								<thead>
 									<tr>
 										<th>操作</th>
+									    <th>觀看</th>
 										<th>ID</th>
 										<th>會員</th>
 										<th>分類</th>
-										<th>文章標題</th>
-										<th>文章內容</th>
+										<th style="min-width:75px">文章標題</th>
+										<th style="min-width:75px">文章內容</th>
 										<th>發佈時間</th>
-										<th>檢舉會員</th>
-										<th>被檢舉原因</th>
 										<th>檢舉次數</th>
 									</tr>
 								</thead>
@@ -92,24 +104,37 @@ $.ajax({
 			}
 		}
 			
+		
+		
 			var deleteimg = document.createElement("img");
 			deleteimg.className = "deleteimg";
 			deleteimg.id = "deleteimg"+report[i].id;
 			deleteimg.setAttribute("onclick", "clickDelete(this)");
 			deleteimg.src = "${pageContext.request.contextPath}/image/deleteArticle.gif";
-				
-			var td0 = $("<td id='"+'img'+report[i].id+"'></ul>").append(deleteimg);
-			var td1 = $("<td id='"+'id'+report[i].id+"'></ul>").append(report[i].id);
-			var td2 = $("<td id='"+'member'+report[i].id+"'></ul>").append(report[i].memberAccount);
-			var td3 = $("<td id='"+'genre'+report[i].id+"'></ul>").append(report[i].genre);
-			var td4 = $("<td id='"+'title'+report[i].id+"'></ul>").append(report[i].title);
-			var td5 = $("<td id='"+'content'+report[i].id+"'></ul>").append(report[i].content);
-			var td6 = $("<td id='"+'pubTime'+report[i].id+"'></ul>").append(report[i].pubTime);
-			var td7 = $("<td id='"+'reportMember'+report[i].id+"'></ul>").append(report[i].reportMember);
-			var td8 = $("<td id='"+'reportReason'+report[i].id+"'></ul>").append(report[i].reportReason);
-			var td9 = $("<td id='"+'reportReason'+report[i].id+"'></ul>").append(reportcount);
 			
-			var tr = $("<tr></tr>").append(td0);
+			var detailimg = document.createElement("img");
+			detailimg.className = "deleteimg";
+			detailimg.id = "deleteimg"+report[i].id;
+			detailimg.setAttribute("onclick", "clickdetail(this)");
+			deleteimg.src = "${pageContext.request.contextPath}/image/deleteArticle.gif";
+			
+			var td0 = $("<td id='"+'img'+report[i].id+"'></td>").append(deleteimg);
+			var td1 = $("<td id='"+'img'+report[i].id+"'></td>").append(detailimg);
+			var td2 = $("<td id='"+'id'+report[i].id+"'></td>").append(report[i].id);
+			var td3 = $("<td id='"+'member'+report[i].id+"'></td>").append(report[i].memberAccount);
+			var td4 = $("<td id='"+'genre'+report[i].id+"'></td>").append(report[i].genre);
+			var td5 = $("<td id='"+'title'+report[i].id+"'></td>").append(report[i].title);
+			var td6 = $("<td id='"+'content'+report[i].id+"'></td>").append(report[i].content);
+			var td7 = $("<td id='"+'pubTime'+report[i].id+"'></td>").append(report[i].pubTime);
+			var td8 = $("<td id='"+'reportReason'+report[i].id+"'></td>").append(reportcount);
+						
+			
+			var tr = $("<tr id='"+'tr'+report[i].id+"'></tr>");
+			
+			
+			
+			
+			tr.append(td0);
 			tr.append(td1);
 			tr.append(td2);			
 			tr.append(td3);
@@ -118,9 +143,10 @@ $.ajax({
 			tr.append(td6);
 			tr.append(td7);
 			tr.append(td8);
-			tr.append(td9);
+			
 			
 			$("#forum_tbody").append(tr);
+			
 			
 			
 		}
@@ -128,6 +154,7 @@ $.ajax({
 	
 	}					
 })
+
 
 
 
@@ -155,6 +182,13 @@ function clickDelete(ButtonObject){
 	})			
 	
 }
+
+function clickdetail(detailObject){
+	
+	var article_ID = detailObject.id.substring(9)
+	window.location.assign("${pageContext.request.contextPath}/forumsAdminReportArticle/"+ article_ID);
+}
+
 
 
 </script>		

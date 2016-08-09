@@ -9,7 +9,7 @@ import com.kidscodetw.eeit.entity.cart.TradeDetailBean;
 
 
 
-public class TradeDetailService {
+public class TradeDetailService implements TradeDetailDAO{
 
 	//private TradeDetailDAO  tradeDetailDAO = new TradeDetailDAOjdbc();
 	//private TradeDetailDAOHibernate tradeDetailDAO = new TradeDetailDAOHibernate();
@@ -25,7 +25,7 @@ public class TradeDetailService {
 		result = tradeDetailDAO.select_ALL();
 		return result;
 	}
-	public TradeDetailBean select_id(int id){
+	public TradeDetailBean select_id(Integer id){
 		TradeDetailBean result = null;
 		if(id!=0){
 			result = tradeDetailDAO.select_id(id);
@@ -33,6 +33,16 @@ public class TradeDetailService {
 		return result;
 	}
 
+	@Override
+	public List<TradeDetailBean> select_memberid(Integer memberid) {
+		List<TradeDetailBean> result = null;
+		if(memberid!=0 && memberid!=null){
+		result = tradeDetailDAO.select_memberid(memberid);
+	}
+		return result;
+	}
+	
+	
 	public TradeDetailBean insert(TradeDetailBean td){
 		TradeDetailBean result = null;
 		if(td!=null){
@@ -41,7 +51,7 @@ public class TradeDetailService {
 		return result;
 	}
 
-	public int delete(int id){
+	public int delete(Integer id){
 		int result = 0;
 		if(id!=0){
 			result = tradeDetailDAO.delete(id);
@@ -57,5 +67,7 @@ public class TradeDetailService {
 		}
 		return result;
 	}
+
+
 
 }

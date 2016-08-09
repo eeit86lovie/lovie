@@ -141,7 +141,6 @@
 		<constructor-arg ref="billDAOHibernate"></constructor-arg>
 	</bean>
 	
-	
 	<!-- 	TradeDetailDAO -->
 	<bean id="tradeDetailDAOHibernate" class="com.kidscodetw.eeit.dao.cart.TradeDetailDAOHibernate">
 		<constructor-arg ref="sessionFactory"></constructor-arg>
@@ -150,7 +149,6 @@
 	<bean id="tradeDetailDAO" class="com.kidscodetw.eeit.service.cart.TradeDetailService">
 		<constructor-arg ref="tradeDetailDAOHibernate"></constructor-arg>
 	</bean>
-	
 	<!-- 	UserDetail -->
 	<bean id="myUserDetailsService" class="com.kidscodetw.eeit.security.MyUserDetailsService">
 		<property name="memberDAO" ref="memberDAO"></property>

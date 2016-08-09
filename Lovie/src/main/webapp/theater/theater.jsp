@@ -60,17 +60,20 @@ border-radius:10px;
 background-color: #555;
 }
 
+#map{
+	height:300px;
+}
 </style>
 </head>
 <body>
 	<c:import url="/header.jsp"></c:import>
-
+	
 	<div class="container">
 
 		<div class="row">
 			<div class="col-md-4">
 				<h1 class="page-header" style="font-size: 24px;">
-					<a href="theater/${theater.id }">${theater.name}</a>
+					<a href="${pageContext.request.contextPath }/theater/${theater.id }">${theater.name}</a>
 				</h1>
 				${theater.address }<br> ${theater.phone } &nbsp <a
 					href="${theater.websiteUrl }">網站</a><br>
@@ -79,8 +82,64 @@ background-color: #555;
 			</div>
 			<div class="col-md-8"></div>
 		</div>
-
-
+		<div class="row">
+			<div id="map"></div>
+			<script>
+			var lat1;
+			var lng1;
+			var mapProp;
+			
+			$.ajax({
+				url:'https://maps.googleapis.com/maps/api/geocode/json?address='+'${theater.address}',
+				type:'get',
+				success: function(response) {
+					lat1 = parseFloat(JSON.stringify(response['results'][0]['geometry']['location']['lat']));
+			        lng1 = parseFloat(JSON.stringify(response['results'][0]['geometry']['location']['lng']));
+			        mapProp = {
+			        	    center:{lat: -25.363, lng: 131.044},
+			        	    zoom:5,
+			        	    scrollwheel: false,
+			        	    zoom: 16,
+			        	  };
+			        mapProp['center']['lat'] = lat1;
+			        mapProp['center']['lng'] = lng1;
+			        init();
+			    }
+			})
+			
+			function init(){
+				function loadGoogleMaps(){
+			        var script_tag = document.createElement('script');
+			        script_tag.setAttribute("type","text/javascript");
+			        script_tag.setAttribute("src","https://maps.googleapis.com/maps/api/js?key=AIzaSyD7tczdQwbQuR3m9WNivfIO3wYIMzRWNsc&callback=initMap");
+			        (document.getElementsByTagName("head")[0] || document.documentElement).appendChild(script_tag);
+			    }
+				
+				loadGoogleMaps();
+			}
+			var marker;
+			function initMap() {
+		        var map = new google.maps.Map(document.getElementById('map'), mapProp);
+		        var latlng = new google.maps.LatLng(lat1,lng1);
+		        marker = new google.maps.Marker({
+		            map: map,
+		            position: latlng,
+		            title: '${theater.name}',
+		          });
+		        marker.setMap(map);
+		    }
+			
+			
+		    </script>
+		</div>
+		<div class="row">
+		<div class="col-md-4">
+				<h1 class="page-header" style="font-size: 24px;">
+					上映中電影
+				</h1>
+			</div>
+		</div>
+		
 		<c:forEach var="movie" items="${movies }" varStatus="vs">
 			<c:if test="${vs.count %2 == 0}">
 				<div class="row">

@@ -130,9 +130,7 @@
                                             <th>產品價格</th>
                                              <th>數量</th>
                                              <th>小計</th>
-                                        
-                                         
-                                            
+                                 
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -157,9 +155,9 @@
                                     </c:forEach> 
                                          <tr >
                                              <th>總金額</th>
+
                                             <th id="allMoney">${param.allcost}</th>
-                                           
-                                         </tr>
+
                                         
                                     </tbody>
                                     
@@ -206,7 +204,6 @@
 // }
 
 
-
 var allcost=0;
 function checktitleCost(){
 	var tbody = $('tbody:eq(0)')
@@ -214,9 +211,13 @@ function checktitleCost(){
 	for(var i=0;i<itemAmount;i++){
 		//alert( $('tbody:eq(0)>tr:eq('+i+')').attr('data-cost') )
      var allproductcost=$('tbody:eq(0)>tr:eq('+i+')').attr('data-cost');
-		allcost=parseInt(allcost)+parseInt(allproductcost);	
+	 allcost=parseInt(allcost)+parseInt(allproductcost);	
 	}
-	window.location.assign("http://localhost:8080/Lovie/product/bill.jsp?allcost="+allcost);
+
+
+	$('#allMoney').text(allcost);
+	window.location.assign("${pageContext.request.contextPath}/product/bill.jsp?allcost="+allcost);
+
 }
 
 

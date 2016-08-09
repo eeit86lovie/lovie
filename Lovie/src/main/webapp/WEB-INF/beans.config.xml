@@ -119,9 +119,7 @@
 	<bean id="messageDAO" class="com.kidscodetw.eeit.service.message.MessageService">
 		<constructor-arg ref="MessageDAOHibernate"></constructor-arg>
 	</bean>
-	
-	
-	
+
 	<!-- 	ProductDAO -->
 	<bean id="productDAOHibernate" class="com.kidscodetw.eeit.dao.cart.ProductDAOHibernate">
 		<constructor-arg ref="sessionFactory"></constructor-arg>
@@ -140,9 +138,8 @@
 	<bean id="billDAO" class="com.kidscodetw.eeit.service.cart.BillService">
 		<constructor-arg ref="billDAOHibernate"></constructor-arg>
 	</bean>
-	
-	
-	<!-- 	TradeDetailDAO -->
+
+    <!-- 	TradeDetailDAO -->
 	<bean id="tradeDetailDAOHibernate" class="com.kidscodetw.eeit.dao.cart.TradeDetailDAOHibernate">
 		<constructor-arg ref="sessionFactory"></constructor-arg>
 	</bean>
@@ -150,7 +147,6 @@
 	<bean id="tradeDetailDAO" class="com.kidscodetw.eeit.service.cart.TradeDetailService">
 		<constructor-arg ref="tradeDetailDAOHibernate"></constructor-arg>
 	</bean>
-	
 	<!-- 	UserDetail -->
 	<bean id="myUserDetailsService" class="com.kidscodetw.eeit.security.MyUserDetailsService">
 		<property name="memberDAO" ref="memberDAO"></property>
@@ -232,5 +228,12 @@
 		<constructor-arg ref="friendDAOHibernate"></constructor-arg>
 	</bean>	
 	
+		<!-- 	interestedMoviesDAO -->
+	<bean id="interestedMoviesDAOHibernate" class="com.kidscodetw.eeit.dao.member.InterestedMoviesDAOHibernate">
+		<constructor-arg ref="sessionFactory"></constructor-arg>
+	</bean>
+	<bean id="interestedMoviesDAO" class="com.kidscodetw.eeit.service.member.InterestedMoviesSerivce">
+		<constructor-arg ref="interestedMoviesDAOHibernate"></constructor-arg>
+	</bean>	
 	
 </beans>

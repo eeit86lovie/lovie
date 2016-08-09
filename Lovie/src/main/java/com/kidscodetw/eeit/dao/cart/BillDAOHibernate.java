@@ -7,14 +7,15 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
 import com.kidscodetw.eeit.entity.cart.BillBean;
+import com.kidscodetw.eeit.entity.member.MemberBean;
+import com.kidscodetw.eeit.entity.movie.MovieBean;
 
 public class BillDAOHibernate implements BillDAO {
 
 	private static final String SELECT_ALL = "FROM BillBean";
 	private static final String SELECT_ID = "FROM BillBean WHERE id=?";
-	private static final String SELECT_NAME = "FROM BillBean WHERE `account` = ?";
-	private static final String SELECT_MEMBERID = "FROM BillBean WHERE memberid=?";
-	private static final String INSERT = "INSERT INTO BillBean(memberid, tradeTime, status, creditnum, account) VALUES(?,?,?,?,?)";
+	private static final String SELECT_MEMBERID = "FROM BillBean WHERE memberid=:memberid";
+	private static final String INSERT = "INSERT INTO BillBean(memberid, tradeTime, ,address, phone, status, creditnum) VALUES(?,?,?,?,?,?)";
 	private static final String UPDATE = "UPDATE BillBean SET account =COALESCE(?, account),creditnum =COALESCE(?, creditnum)WHERE id=?";
 	private static final String DELETE = "DELETE FROM BillBean WHERE id=?";
 	private SessionFactory sessionFactory;
@@ -29,40 +30,25 @@ public class BillDAOHibernate implements BillDAO {
 
 	@Override
 	public List<BillBean> select_ALL() {
-		List<BillBean> lbb = null;
 		Query query = getSession().createQuery(SELECT_ALL);
-		lbb = query.list();
-		return lbb;
+		return query.list();
 	}
 
 	@Override
-	public BillBean select_id(int id) {
+	public BillBean select_id(Integer id) {
 		BillBean bb = null;
 		bb = (BillBean) getSession().get(BillBean.class, id);
 		return bb;
 	}
 
 	@Override
-	public List<BillBean> select_memberid(int memberid) {
-		List<BillBean> lbb = null;
-		Query query = getSession().createQuery(SELECT_MEMBERID);
-		query.setParameter(0, memberid);
-		lbb = query.list();
-		return lbb;
+	public List<BillBean> select_memberid(Integer memberid) {
+		Query query  =getSession().createQuery(SELECT_MEMBERID);
+		query.setParameter("memberid", memberid);
+		return query.list();
 	}
+	
 
-	@Override
-	public BillBean select_name(String account) {
-		BillBean bb = null;
-		Query query = getSession().createQuery(SELECT_NAME);
-		query.setParameter(0, account);
-		List<BillBean> lbbs = query.list();
-		for (BillBean billbean : lbbs) {
-			bb = billbean;
-		}
-
-		return bb;
-	}
 
 	@Override
 	public BillBean insert(BillBean bean) {
@@ -77,7 +63,7 @@ public class BillDAOHibernate implements BillDAO {
 	}
 
 	@Override
-	public int delete(int id) {
+	public int delete(Integer id) {
 		int count = 0;
 		Query query = getSession().createQuery(DELETE);
 		query.setParameter(0, id);

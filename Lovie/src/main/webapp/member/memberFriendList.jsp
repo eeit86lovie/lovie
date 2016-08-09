@@ -14,8 +14,11 @@ height:100px;
 margin-bottom: 10px;
 margin-top: 10px
 }
-.col-sm-10{
-margin: 0px;
+.buttons{
+	border-radius: 8px;
+	background-color:#F88;
+	color:white;
+	border:0px;
 }
 
 </style>
@@ -43,7 +46,7 @@ margin: 0px;
     <li><a href="#tabs-3">對我感興趣的人</a></li>
   </ul>
   <div id="tabs-1" >
-<!-- <div id="friendTable"></div> -->
+<div id="friendTable"></div>
 			</div>
   
   <div id="tabs-2">
@@ -59,13 +62,20 @@ margin: 0px;
  <script type="text/javascript">
  var loginmemberId= "${loginmember.id}";
  window.onload=function() {
-    	findData(loginmemberId,1,"tabs-1");
+    	findData(loginmemberId,1,"friendTable");
     	findData(loginmemberId,2,"interestedTable");
     	findData(loginmemberId,3,"interestingTable");
 
 
 	}
 function findData(loginmemberId,relation,tableName){
+	var addfriendDisplay="inline";
+	var removefriendDisplay="inline";
+	if(tableName=="friendTable"||tableName=="interestedTable"){
+		addfriendDisplay="none";
+	}else if(tableName=="interestingTable"){
+		removefriendDisplay="none";
+	}
 	var tb = $("#"+tableName)
 	tb.empty()
 	var formData = new FormData();
@@ -83,24 +93,64 @@ function findData(loginmemberId,relation,tableName){
 				var img=$('<img />')
 				img.addClass("img1");
 				img.attr('src',"${pageContext.request.contextPath}/photo/member/"+member.id)
-				var cell1=$("<a href></a>")
-				cell1.attr('href',"${pageContext.request.contextPath}/member/profile/"+member.id)
-				cell1.append(img)
-				var cell0  = $("<div class='col-sm-2'></div>").append(cell1)
-				var cell2  = $("<div class='col-sm-2'></div>").text(member.nickname)
-				var cell3  = $("<div class='col-sm-2'></div>").text(member.city)
-				var cell4  = $("<div class='col-sm-2'></div>").text(member.age+"歲")
-				var cell5  = $("<div class='col-sm-7'></div>").text(member.intro)
-				
-				var row = $("<div class='row'></div>").append([cell0,cell2,cell3,cell4,cell5])
+				var img1=$("<a href></a>")
+				img1.attr('href',"${pageContext.request.contextPath}/member/profile/"+member.id)
+				img1.append(img)
+				var img2  = $("<div class='col-sm-2'></div>").append(img1)
+				var nickname  = $("<div class='col-sm-2' style='color:#EE7700'></div>").text(member.nickname)
+				var city  = $("<div class='col-sm-2'></div>").text(member.city)
+				var age  = $("<div class='col-sm-1'></div>").text(member.age+"歲")
+				var intro = $("<span></span>").append(member.intro)
+				var intro1  = $("<div class='col-sm-7'></div>").append(intro)
+				var movieList =$("<div class='col-sm-8' style='color:#880000'></div>").text("喜歡的電影類型："+member.interestedMovieList)
+				var hr =$("<div class='col-sm-12'></div>").append("<hr>")
+				var addFriend=$("<div class='col-sm-1'><button class='buttons' style='display:"+addfriendDisplay+"' onclick='addFriend("+member.id+")' '>加為好友</button></div>")
+				var removeFriend=$("<div class='col-sm-1'><button class='buttons' style='display:"+removefriendDisplay+"'onclick='removeFriend("+member.id+")'>取消關注</button></div>")
+				var line=$("<div class='col-sm-12'></div><div class='col-sm-8'></div>")
+				var row = $("<div class='row'></div>").append([img2,nickname,city,age,intro1,movieList,line,addFriend,removeFriend,hr])
 				flag.append(row)
 			})
 			tb.append(flag)
 
 		}
 		})
-} 
+}
 
+function addFriend(friendId){
+	var formData1 = new FormData();
+	formData1.append('friendId',friendId );
+		$.ajax({
+			url: "${pageContext.request.contextPath}/member/AddOrRemoveFriendService/addFriend",
+			type: 'post',
+			data: formData1,
+			processData: false,
+			contentType: false,
+			success: function(data){
+				alert("更新成功")
+				window.location.reload();
+			},error: function(){
+				alert("失敗Q_Q")
+			}
+		})	
+}
+function removeFriend(friendId){
+	var formData1 = new FormData();
+	formData1.append('friendId',friendId );
+		$.ajax({
+			url: "${pageContext.request.contextPath}/member/AddOrRemoveFriendService/removeFriend",
+			type: 'post',
+			data: formData1,
+			processData: false,
+			contentType: false,
+			success: function(data){
+				alert("更新成功")
+// 				dialog.dialog( "close" );
+				window.location.reload();
+			},error: function(){
+				alert("失敗Q_Q")
+			}
+		})	
+}
  
  </script>
 

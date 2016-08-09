@@ -5,16 +5,15 @@ import java.util.List;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-
 import com.kidscodetw.eeit.entity.cart.TradeDetailBean;
-
 public class TradeDetailDAOHibernate implements TradeDetailDAO {
 
-	private static final String SELECT_ALL = "SELECT * FROM TradeDetail";
-	private static final String SELECT_ID = "SELECT * FROM TradeDetail WHERE id=?";
-	private static final String INSERT = "INSERT INTO TradeDetail(productid,title,amount)VALUES(?,?,?)";
-	private static final String UPDATE = "UPDATE TradeDetail SET productid=COALESCE(?,productid),title =COALESCE(?, title),amount =COALESCE(?, amount)WHERE id=?";
-	private static final String DELETE = "DELETE FROM TradeDetail WHERE id=?";
+	private static final String SELECT_ALL = "FROM TradeDetailBean";
+	private static final String SELECT_ID = "FROM TradeDetailBean WHERE id=?";
+	private static final String SELECT_MEMEBRID = "FROM TradeDetailBean WHERE memberid=:memberid";
+	private static final String INSERT = "INSERT INTO TradeDetailBean(memberid,productid,totalcost,amount)VALUES(?,?,?,?)";
+	private static final String UPDATE = "UPDATE TradeDetailBean SET memberid=COALESCE(?,memberid),productid=COALESCE(?,productid),totalcost =COALESCE(?, totalcost),amount =COALESCE(?, amount)WHERE id=?";
+	private static final String DELETE = "DELETE FROM TradeDetailBean WHERE id=?";
 	private SessionFactory sessionFactory;
 
 	public TradeDetailDAOHibernate(SessionFactory sessionFactory) {
@@ -34,12 +33,18 @@ public class TradeDetailDAOHibernate implements TradeDetailDAO {
 	}
 
 	@Override
-	public TradeDetailBean select_id(int id) {
+	public TradeDetailBean select_id(Integer id) {
 		TradeDetailBean tdb = null;
 		tdb = (TradeDetailBean) getSession().get(TradeDetailBean.class, id);
 		return tdb;
 	}
-
+	@Override
+	public List<TradeDetailBean> select_memberid(Integer memberid){
+		Query query  =getSession().createQuery(SELECT_MEMEBRID);
+		query.setParameter("memberid", memberid);
+		return query.list();
+		}
+	
 	@Override
 	public TradeDetailBean insert(TradeDetailBean bean) {
 		getSession().save(bean);
@@ -53,11 +58,13 @@ public class TradeDetailDAOHibernate implements TradeDetailDAO {
 	}
 
 	@Override
-	public int delete(int id) {
+	public int delete(Integer id) {
 		int count = 0;
 		Query query = getSession().createQuery(DELETE);
 		query.setParameter(0, id);
 		count = query.executeUpdate();
 		return count;
 	}
+
+
 }
