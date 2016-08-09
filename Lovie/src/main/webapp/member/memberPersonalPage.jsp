@@ -403,7 +403,7 @@ function removeFriend(){
 				alert("更新成功")
 				window.location.reload();
 			},error: function(){
-				alert("失敗Q_Q")
+// 				alert("失敗Q_Q")
 			}
 		})	
 }

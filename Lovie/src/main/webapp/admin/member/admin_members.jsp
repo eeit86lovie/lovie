@@ -17,6 +17,12 @@ td{
 th{
 min-width: 50px;
 }
+#search-box {
+  font-size: 13px;
+  width: 120px;
+  background: #E6E6E6 url('http://www.davidpai.tw/wp-content/uploads/2012/04/search.gif') no-repeat 3px 3px;
+  padding: 3px 3px 3px 22px;
+}
 </style>
 </head>
 <body>
@@ -41,6 +47,8 @@ min-width: 50px;
 			<div class="row">
 				<div class="col-md-12">
 					<div class="panel-heading">會員資料列表</div>
+					<div class="panel-heading">ID查詢：<input id="search-box" type="text" name="search-box" /></div>
+					
 					<!-- /.panel-heading -->
 					<div class="panel-body">
 						<div class="dataTable_wrapper">
@@ -106,7 +114,7 @@ $.ajax({
 			var cell8  = $("<td></td>").text(member.district)
 			var cell9  = $("<td></td>").text(member.phone)
 			var cell10  = $("<td></td>").text(member.birthday)
-			var cell11  = $("<td  title=value></td>").text(member.intro)
+			var cell11  = $("<td onclick='allIntro(this)'></td>").text(member.intro)
 			var cell12 = $("<td></td>").text(member.registeredTime)
 			var cell13 = $("<td></td>").text(member.lastOnTime)
 			var cell14 = $("<td></td>").text(member.privilegeExp)
@@ -121,7 +129,9 @@ $.ajax({
 	}					
 })
 
-
+function allIntro(object){
+	alert(object.innerHTML.replace(/<br>/gi,"\n"))
+}
 
 
 </script>		
