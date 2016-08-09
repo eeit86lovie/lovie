@@ -7,7 +7,7 @@ public class CustServiceBean implements Serializable{
 	private Integer memberId;
 	private Integer catagory;
 	private String message;
-	private byte[] photo;
+	private String replyMessage;
 	private Integer status;
 	private Integer id;
 	
@@ -36,12 +36,7 @@ public class CustServiceBean implements Serializable{
 	public void setMessage(String message) {
 		this.message = message;
 	}
-	public byte[] getPhoto() {
-		return photo;
-	}
-	public void setPhoto(byte[] photo) {
-		this.photo = photo;
-	}
+
 	public Integer getStatus() {
 		return status;
 	}
@@ -55,6 +50,12 @@ public class CustServiceBean implements Serializable{
 	public TheaterBean update(CustServiceBean custServiceBean) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+	public String getReplyMessage() {
+		return replyMessage;
+	}
+	public void setReplyMessage(String replyMessage) {
+		this.replyMessage = replyMessage;
 	}
 	
 }

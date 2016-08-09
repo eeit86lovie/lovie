@@ -11,6 +11,7 @@
         <property name="memberId" column="memberId" />
         <property name="catagory" column="catagory" />
         <property name="message" column="message" />
+        <property name="replyMessage" column="replyMessage" />
         <property name="status" column="status" />
         
     
