@@ -6,7 +6,7 @@ import com.kidscodetw.eeit.dao.cart.BillDAO;
 import com.kidscodetw.eeit.entity.cart.BillBean;
 
 
-public class BillService {
+public class BillService implements BillDAO{
 
 	//private BillDAO billDao = new BillDAOjdbc();
 	//private BillDAOHibernate orderDao = new BillDAOHibernate();
@@ -21,17 +21,8 @@ public class BillService {
 		result = billDAO.select_ALL();
 		return result;
 	}
-	public List<BillBean> select_MEMBERID(int memberid){
-		List<BillBean> result = null;
-		if(memberid!=0){
-			result = billDAO.select_memberid(memberid);
-		}
-		return result;
-	}
 	
-	
-	
-	public BillBean select_id(int id){
+	public BillBean select_id(Integer id){
 		BillBean result = null;
 		if(id!=0){
 			result = billDAO.select_id(id);
@@ -39,6 +30,15 @@ public class BillService {
 		return result;
 	}
 
+	public List<BillBean> select_memberid(Integer memberid){
+		List<BillBean> result=null;
+		if(memberid!=0 && memberid!=null){
+			result=billDAO.select_memberid(memberid);
+		}
+		return result;
+		
+	}
+	
 	public BillBean insert(BillBean bb){
 		BillBean result = null;
 		if(bb!=null){
@@ -47,7 +47,7 @@ public class BillService {
 		return result;
 	}
 
-	public int delete(int id){
+	public int delete(Integer id){
 		int result = 0;
 		if(id!=0){
 			result = billDAO.delete(id);
@@ -64,4 +64,8 @@ public class BillService {
 		return result;
 	}
 
-}
+
+
+	}
+
+

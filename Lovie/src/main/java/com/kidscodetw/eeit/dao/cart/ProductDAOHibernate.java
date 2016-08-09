@@ -74,7 +74,7 @@ public class ProductDAOHibernate implements ProductDAO {
 	}
 
 	@Override
-	public List<ProductBean> select_category(int category) {
+	public List<ProductBean> select_category(Integer category) {
 		List<ProductBean> lpb = null;
 		Query query = getSession().createQuery(SELECT_CATEGORY);
 		query.setParameter(0,category);
@@ -94,7 +94,7 @@ public class ProductDAOHibernate implements ProductDAO {
 		return bean;
 	}
 	@Override
-	public int delet(int productid) {
+	public int delet(Integer productid) {
 		int count = 0;
 		Query query = getSession().createQuery(DELETE);
 		query.setParameter(0, productid);

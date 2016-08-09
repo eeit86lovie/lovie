@@ -16,28 +16,15 @@
     height:25px;
 }
 
-td{
-	min-width: 30px;
-	max-width: 400px;
-	overflow: hidden;
-	 white-space:nowrap;
-	 overflow:hidden;
-	 text-overflow: ellipsis;
-}
-th{
-min-width: 50px;
-}
-
 </style>
 </head>
 <body>
-
 <div id="wrapper">
 		<c:import charEncoding="UTF-8" url="../nav.jsp"></c:import>
 		<div id="page-wrapper">
 			<div class="row">
 				<div class="col-md-4">
-					<h2 class="">討論區管理</h2>
+					<h2 class="">商品管理</h2>
 				</div>
 			</div>
 			<hr>
@@ -52,12 +39,12 @@ min-width: 50px;
 			<hr>
 			<div class="row">
 				<div class="col-md-12">
-					<div class="panel-heading">被檢舉文章</div>
+					<div class="panel-heading">商品列表</div>
 					<!-- /.panel-heading -->
 					<div class="panel-body">
 						<div class="dataTable_wrapper">
 							<table class="table table-striped table-bordered table-hover"
-								id="forumtable" "style='table-layout: fixed'">
+								id="movietable">
 								<thead>
 									<tr>
 										<th>操作</th>
@@ -65,8 +52,8 @@ min-width: 50px;
 										<th>ID</th>
 										<th>會員</th>
 										<th>分類</th>
-										<th style="min-width:75px">文章標題</th>
-										<th style="min-width:75px">文章內容</th>
+										<th>文章標題</th>
+										<th>文章內容</th>
 										<th>發佈時間</th>
 										<th>檢舉次數</th>
 									</tr>
@@ -89,10 +76,10 @@ min-width: 50px;
 <script>
 
 $.ajax({
-	url : "${pageContext.request.contextPath}/forumsAdmin",
+	url : "${pageContext.request.contextPath}/",
 	type : "get",
 	dataType : "json",
-	success : function(report) {
+	success : function() {
 		
 		for(var i =0;i<report.length;i++){
 			
@@ -129,7 +116,9 @@ $.ajax({
 			var td8 = $("<td id='"+'reportReason'+report[i].id+"'></td>").append(reportcount);
 						
 			
-			var tr = $("<tr id='"+'tr'+report[i].id+"'></tr>");
+			var tr = jQuery("<tr id='"+'tr'+report[i].id+"'></tr>", {
+				onclick: seeReportArticle
+			});
 			
 			
 			
@@ -158,36 +147,6 @@ $.ajax({
 
 
 
-
-
-
-function clickDelete(ButtonObject){
-	
-	var article_ID = ButtonObject.id.substring(9);
-	$.ajax({
-		url : "${pageContext.request.contextPath}/forumsDelete",
-		type : "POST",
-		
-		data : {
-			Article_ID:article_ID,
-		},
-		success : function(deleteCount) {
-			if(deleteCount==1){
-				$("#"+"BOX01"+ article_ID).remove();
-				alert("刪除成功");
-			}else{
-				alert("刪除失敗");
-			}
-		}		
-	})			
-	
-}
-
-function clickdetail(detailObject){
-	
-	var article_ID = detailObject.id.substring(9)
-	window.location.assign("${pageContext.request.contextPath}/forumsAdminReportArticle/"+ article_ID);
-}
 
 
 

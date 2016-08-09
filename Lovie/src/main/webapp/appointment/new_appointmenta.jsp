@@ -27,7 +27,32 @@
    line-height:30px;
    //color:green;
 }
-
+.movie_intro
+{
+   border: #E0E0E0 1px dashed; 
+   height:200px;
+   overflow: auto; 
+   //margin-left: 5px;
+   //margin-right: 5px;   
+}
+.movie_showtime
+{
+   //height:180px;
+   //margin-left: 5px;
+   //margin-right: 5px;   
+}
+.movie_showtime_inside
+{
+   border: #BBB 2px dotted; 
+   height: 180px; 
+   overflow: auto; 
+   padding-left: 1px;
+   font-size:15px;
+}
+.movie_showtime_inside a:hover 
+{ 
+   text-decoration:none;
+} 
 </style>
 <title>邀請新約會</title>
 </head>
@@ -133,8 +158,9 @@
     <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
       <div class="panel-body">
       <!-- 2 showtime beg -->
-
-        oooo片  OO戲院: 2016-8-2 10:00 
+	  <div id="movieshowtime">
+        	目前沒有符合條件的電影,請重新查詢。
+      </div> 
       <!-- 2 showtime end -->
       </div>
     </div>
@@ -163,10 +189,10 @@ function clearinput(sel) {
 	   case 4:
 			$("#movieName").val('').trigger('change'); break; 
 	   case 5:
-			$("#city").val('').trigger('change'); break; 
-	
+			$("#showtimeDatebeg").val(""); 
+			$("#showtimeDateend").val(""); 
+			break; 
 	}
-
 }
 
 function formreset() {
@@ -182,6 +208,78 @@ function formsubmit() {
 	var theatersels = $("#theaterName").val();
 	var genresels = $("#genreId").val();
 	var moviesels = $("#movieName").val();
+<<<<<<< HEAD
+	var showtimeDatebeg = $("#showtimeDatebeg").val();
+	var showtimeDateend = $("#showtimeDateend").val();
+
+	if ((showtimeDatebeg != ''  && showtimeDateend != '')
+		&& (showtimeDatebeg > showtimeDateend)) 
+	{
+		alert("放映起日不可大於放映迄日,請重新選擇.");
+		return;
+	}	
+	
+	console.log(citysels);  //array
+	console.log(theatersels);
+	console.log(genresels);   //array
+	console.log(moviesels);
+	console.log(showtimeDatebeg+"~"+showtimeDateend);
+
+	$.ajax({
+		url : "new_appointmoviea_json",
+		data:{citysels:citysels,theatersels:theatersels,
+			genresels:genresels,moviesels:moviesels,
+			showtimeDatebeg:showtimeDatebeg,showtimeDateend:showtimeDateend},
+		type:"get",
+		success : function(data) {
+		if (data != null) {
+				//var result = JSON.parse(data);
+				var result =data;
+				var movieshowtime = $("#movieshowtime");
+				console.log(movieshowtime);
+				if (result.length > 0) {
+					movieshowtime.empty();
+				for (var i = 0; i < result.length; i++) {
+					var item = result[i];
+				//**one movie template beg
+				    var drow = document.createElement('div');
+				    $(drow).addClass("row").appendTo(movieshowtime); //row div
+				    var drow_c1 = document.createElement('div');
+				    $(drow_c1).addClass("col-md-2").appendTo(drow); //row div_col-2
+				    $("<img src=${pageContext.request.contextPath }/photo/movie/"+item.id+" style='height:200px;'>").appendTo(drow_c1);				
+				    var drow_c2 = document.createElement('div');
+				    $(drow_c2).addClass("col-md-5").appendTo(drow); //row div_col-5
+				    $(drow_c2).addClass("movie_intro");
+				    $("<p><img src='${pageContext.request.contextPath }/image/movie/"+item.rank+".png' width='40'	></p>").appendTo(drow_c2);				
+				    $("<b style='font-size: 13px;'>片名："+item.name+"</b>").appendTo(drow_c2);				
+				    $("<p>上映時間:"+item.startTime+"</p>").appendTo(drow_c2);				
+				    $("<p>類型:"+item.genrelist+"</p>").appendTo(drow_c2);				
+				    $("<p align='justify'>簡介:<br>"+item.intro+"</p>").appendTo(drow_c2);				
+				    var drow_c3 = document.createElement('div');
+				    $(drow_c3).addClass("col-md-5").appendTo(drow); //row div_col-5
+				    $(drow_c3).addClass("movie_showtime");
+				    $("<h3 style='margin:1px;'>電影時刻表</h3>").appendTo(drow_c3);
+				    var drow_c3_1 = document.createElement('div');
+				    $(drow_c3_1).addClass("movie_showtime_inside").appendTo(drow_c3); 
+				    var item_s =  item.showtimeBeans;
+					for (var j = 0; j < item_s.length; j++) {
+						var item_s_i = item_s[j];
+						$("<a href='${pageContext.request.contextPath }/appointmentaadd/"+item_s_i.id+"'><p>　"+
+								item_s_i.theaterName+"　"+item_s_i.showtimeDate+"　"+item_s_i.showtimeTime+"</p></a>").appendTo(drow_c3_1);
+					}
+				//**one movie template end	
+				}
+					$("#collapseOne").removeClass('in');
+				 	//alert("查詢完成.....");
+				} else {
+					movieshowtime.text("目前沒有符合條件的電影,請重新查詢。");
+				 	//alert("沒有相符的電影,請重新查詢。");
+				}
+				$("#collapseTwo").addClass('in');
+					
+		}}
+	});
+=======
 	var showtimesels = $("#showtimeDate").val();
 console.log(citysels);
 console.log(theatersels);
@@ -192,6 +290,7 @@ console.log(showtimesels);
   
   
   
+>>>>>>> branch 'master' of https://github.com/eeit86lovie/lovie.git
 }
 </script>
 

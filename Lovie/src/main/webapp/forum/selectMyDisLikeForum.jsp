@@ -4,7 +4,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<link rel="stylesheet" href="css/lightbox.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/lightbox.css">
 <c:import charEncoding="UTF-8" url="/meta.jsp"></c:import>
 <script src="${pageContext.request.contextPath}/js/jquery-ui/jquery-ui.js"></script>
 <script src="${pageContext.request.contextPath}/js/jquery.leanModal.min.js"></script>
@@ -18,7 +18,12 @@
 <title>Insert title here</title>
 
 <style type="text/css">
-
+.notfound{
+	width:800px;
+	height:500px;
+	margin:0 auto;
+	font-size:28px;
+}
 </style>
 
 
@@ -44,7 +49,7 @@
 		
 		<div class="col-md-8">			
 			<div id="box">
-				<input type="button" id="addarticle" value="ADD" onclick="add()">
+				
 			</div>
 		</div>
 	
@@ -184,7 +189,7 @@ $.ajax({
 			 						createArticle(selectIDisLikejson,selectReplyjson,allLikejson);
 								}else{
 									
-									var no_member = $("<p></p>").append("目前無DisLike的文章喔!!")
+									var no_member = $("<p class='notfound'></p>").append("目前無DisLike的文章喔!!")
 									$("#box").append(no_member);
 								}
 								

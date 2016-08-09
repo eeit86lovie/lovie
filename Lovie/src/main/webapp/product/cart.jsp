@@ -208,8 +208,9 @@ function cancel(object){
 			  
 	  }
 
+	var allcost=0;
 	function titleCost(){
-		var allcost=0;
+		allcost=0;
 		for(var i=0;i<itemAmount;i++){
 			//alert( $('tbody:eq(0)>tr:eq('+i+')').attr('data-cost') )
 	     var allproductcost=$('tbody:eq(0)>tr:eq('+i+')').attr('data-cost');
@@ -219,7 +220,7 @@ function cancel(object){
 	}
 	
 	function checkoutProduct(){
- 		window.location.assign("${pageContext.request.contextPath}/product/checkproduct.jsp?allcost="+allcost);
+  		window.location.assign("${pageContext.request.contextPath}/product/checkproduct.jsp?allcost="+allcost);
 	}
 	
 	window.onload=function(){

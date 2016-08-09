@@ -3,12 +3,9 @@ package com.kidscodetw.eeit.controller.appointment;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Date;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
-import java.util.Set;
 
-import javax.annotation.Resource;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.ws.rs.core.MediaType;
@@ -18,29 +15,23 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.kidscodetw.eeit.dao.movie.MovieDAO;
-import com.kidscodetw.eeit.dao.movie.TheaterDAO;
+import com.kidscodetw.eeit.entity.appoint.AppointmentBean;
 import com.kidscodetw.eeit.entity.appointment.AppointmentBean2;
 import com.kidscodetw.eeit.entity.appointment.AppointmentaBean;
 import com.kidscodetw.eeit.entity.appointment.AppointmentaeditBean;
-import com.kidscodetw.eeit.entity.appointment.AppointmentareditBean;
 import com.kidscodetw.eeit.entity.appointment.AppointmentbBean;
 import com.kidscodetw.eeit.entity.appointment.AppointmentbeditBean;
 import com.kidscodetw.eeit.entity.appointment.AppointmentsBean;
+import com.kidscodetw.eeit.entity.appointment.AppointmovieBean;
 import com.kidscodetw.eeit.entity.member.MemberBean;
 import com.kidscodetw.eeit.entity.movie.GenreBean;
-import com.kidscodetw.eeit.entity.movie.TheaterBean;
+import com.kidscodetw.eeit.entity.movie.ShowtimeBean;
 import com.kidscodetw.eeit.service.appointment.AppointmentRequestService;
 import com.kidscodetw.eeit.service.appointment.AppointmentService2;
 import com.kidscodetw.eeit.service.appointment.AppointmovieService;
-import com.kidscodetw.eeit.service.movie.GenreService;
-import com.kidscodetw.eeit.service.movie.MovieService;
-import com.kidscodetw.eeit.service.movie.TheaterService;
-import com.kidscodetw.eeit.util.DataTransfer;
 
 @Controller
 public class AppointmentsMVC {
@@ -54,6 +45,7 @@ public class AppointmentsMVC {
 	@Autowired
 	AppointmovieService appointmovieService;
 	
+	//邀請約會
 	@RequestMapping("new_appointmenta")
 	public String new_appointmenta(Model model){
 		List<GenreBean> genre_names = appointmovieService.select_genre_list();
@@ -67,7 +59,122 @@ public class AppointmentsMVC {
 		model.addAttribute("movienames", movie_names);
 		return "appointment/new_appointmenta.jsp";
 	}	
+
+	@RequestMapping("new_appointmoviea_json")
+	public @ResponseBody List<AppointmovieBean> new_appointmoviea_json(
+		   @RequestParam(value="citysels",required=false) String[] citysels,
+		   @RequestParam(value="theatersels",required=false) String theatersels,
+		   @RequestParam(value="genresels",required=false) String[] genresels,
+		   @RequestParam(value="moviesels",required=false) String moviesels,
+		   @RequestParam(value="showtimeDatebeg",required=false) String showtimeDatebeg,
+		   @RequestParam(value="showtimeDateend",required=false) String showtimeDateend,
+		   Model model){
+		List<AppointmovieBean> appointmovie_list = appointmovieService.select_movieshowtime_list(citysels, theatersels, genresels, moviesels, showtimeDatebeg, showtimeDateend);
+		return appointmovie_list;
+	}
 	
+	@RequestMapping(value="/appointmentaadd/{showtimeID}", produces=MediaType.APPLICATION_JSON)
+	public String appointmentaadd(@PathVariable("showtimeID")Integer showtimeID, 
+			                          Model model,HttpSession session){
+		MemberBean bean =  	(MemberBean) session.getAttribute("loginmember");
+    	if (bean != null)
+    	{
+    		Integer memberId = bean.getId();
+	    	if (memberId != null && showtimeID != null)
+	    	{
+	    		Integer appointmentID =  appointmentService2.selectByMemberShowtimeId(memberId, showtimeID);
+  		System.out.println("2 showtimeID"+showtimeID+","+memberId+","+appointmentID);
+		    	if (appointmentID != null)
+		    	{
+			    	AppointmentaeditBean editbean = appointmentService2.selectByAidMidwith9(appointmentID, memberId);
+			    	if (editbean != null)
+			    	{
+						model.addAttribute("oneAppointmentedit",editbean);
+				    	return "appointment/appointmentaedit.jsp";
+			    	}
+		    	}else{
+		    		System.out.println("4 showtimeID");
+		    		appointmentID =  appointmentRequestService.selectBySidMid(showtimeID, memberId);
+			    	if (appointmentID != null)
+			    	{
+				    	AppointmentbeditBean editbean = appointmentRequestService.selectByAidMid(appointmentID, memberId);
+				    	if (editbean != null)
+				    	{
+					    	//DataTransfer.changeBirthdayToAge
+							int intValue = Integer.parseInt(editbean.getBirthday().substring(0, 4));
+							java.util.Date today = Calendar.getInstance().getTime();
+							Integer memberAge = today.getYear() + 1900 - intValue;
+					    	//DataTransfer.genderTransfer
+							String gender=null;
+							if(editbean.getGender()==0)
+								gender="女";
+							else if(editbean.getGender()==1)
+								gender="男";
+							//DataTransfer  end 
+							model.addAttribute("memberAge",memberAge);
+							model.addAttribute("gender",gender);
+							model.addAttribute("oneAppointmentR",editbean);
+							return "appointment/appointmentbedit.jsp";
+				    	}
+			    	}else{
+			    		ShowtimeBean showtimebean = appointmovieService.select_showtime(showtimeID);
+			    		if (showtimebean != null)
+	 		    		{  String showtimeData = showtimebean.getMovieName()+"<br/>"+
+			    		        showtimebean.getTheaterName()+"<br/>"+showtimebean.getShowtimeDate()+" "+showtimebean.getShowtimeTime();
+			    		   model.addAttribute("showtimeData",showtimeData);
+	 		    		}
+			    		model.addAttribute("showtimeid",showtimeID);
+						String gender=bean.getGender().toString();
+						if(bean.getGender()==0)
+							gender="女";
+						else if(bean.getGender()==1)
+							gender="男";
+						model.addAttribute("gender",gender);
+			        	return "appointment/appointmentaadd.jsp";
+			    	}
+		    	}
+	    	}
+    	}
+    	return "new_appointmenta";
+	}
+
+	@RequestMapping("/appointmentaadd/appointmentAAdd")
+    public void AppointmentAUpdate(@RequestParam("showtimeid") Integer showtimeid,
+    						  @RequestParam("acontent") String acontent,
+    		                  HttpServletResponse response,HttpSession session){
+	MemberBean bean =  	(MemberBean) session.getAttribute("loginmember");
+	if (bean != null)
+	{
+		Integer memberId = bean.getId();
+	if (memberId != null && showtimeid != null && acontent.length() > 0 )
+	{
+		try {
+			AppointmentBean appointmentBean = new AppointmentBean();
+			appointmentBean.setMemberId(memberId);
+			appointmentBean.setShowtimeId(showtimeid);
+			appointmentBean.setContent(acontent);
+			appointmentBean.setType(1);
+			appointmentBean.setStatus(1);
+			AppointmentBean res1 = appointmentService2.insert(appointmentBean);
+			PrintWriter out;
+			try {
+				out = response.getWriter();
+			    if (res1 == null)
+			    	out.println(-1);
+			    else
+				    out.println(res1.getId());
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		} catch (NumberFormatException e) {
+			e.printStackTrace();
+		}
+		}
+	}		
+	return ;		
+    }
+	
+	//申請約會
 	@RequestMapping("new_appointmentb")	
 	public String new_appointmentb(Model model){
 		List<GenreBean> genre_names = appointmovieService.select_genre_list();

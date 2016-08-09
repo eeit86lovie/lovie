@@ -71,6 +71,50 @@
 .ragent1{
 	color:green;
 }
+.myButton {
+	-moz-box-shadow: 3px 5px 19px -3px #8a2a21;
+	-webkit-box-shadow: 3px 5px 19px -3px #8a2a21;
+	box-shadow: 3px 5px 19px -3px #8a2a21;
+	background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #c62d1f), color-stop(1, #f24437));
+	background:-moz-linear-gradient(top, #c62d1f 5%, #f24437 100%);
+	background:-webkit-linear-gradient(top, #c62d1f 5%, #f24437 100%);
+	background:-o-linear-gradient(top, #c62d1f 5%, #f24437 100%);
+	background:-ms-linear-gradient(top, #c62d1f 5%, #f24437 100%);
+	background:linear-gradient(to bottom, #c62d1f 5%, #f24437 100%);
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#c62d1f', endColorstr='#f24437',GradientType=0);
+	background-color:#c62d1f;
+	-moz-border-radius:6px;
+	-webkit-border-radius:6px;
+	border-radius:6px;
+	border:2px solid #d02718;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:12px;
+	font-weight:bold;
+	padding:5px 4px;
+	text-decoration:none;
+	text-shadow:1px 2px 1px #810e05;
+}
+.myButton:visited {
+	color:#ffffff;
+}
+.myButton:hover {
+	background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #f24437), color-stop(1, #c62d1f));
+	background:-moz-linear-gradient(top, #f24437 5%, #c62d1f 100%);
+	background:-webkit-linear-gradient(top, #f24437 5%, #c62d1f 100%);
+	background:-o-linear-gradient(top, #f24437 5%, #c62d1f 100%);
+	background:-ms-linear-gradient(top, #f24437 5%, #c62d1f 100%);
+	background:linear-gradient(to bottom, #f24437 5%, #c62d1f 100%);
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#f24437', endColorstr='#c62d1f',GradientType=0);
+	background-color:#f24437;
+	color:#f0f0e0;
+}
+.myButton:active {
+	position:relative;
+	top:1px;
+}
 </style>
 <title>查詢約會</title>
 </head>
@@ -86,8 +130,12 @@
 
 <div class="col-md-12">
   <ul class="nav nav-tabs nav-justified">
-  <li><img src="${pageContext.request.contextPath}/image/icon/logo.png" style="width:90px;float:right;padding-right:20px;"></img>
-  <div style="color:red">會員:${loginmember.account}${loginmember.nickname}</div>
+    <li> 
+  <!--<img src="${pageContext.request.contextPath}/image/icon/logo.png" style="width:90px;float:right;padding-right:20px;"></img>
+      <div style="color:red">會員:${loginmember.account}${loginmember.nickname}</div>  -->
+       <span class="myButton" onclick="newappointmentb();"><span class="glyphicon glyphicon-heart" style="padding-right:2px;"></span>+申請新約會</span>
+       <span class="myButton" onclick="newappointmenta();"><span class="glyphicon glyphicon-heart-empty" style="padding-right:2px;"></span>+邀請新約會</span>
+    </li>
     <li><a href="${pageContext.request.contextPath}/appointments">一週約會通知</a></li>
     <li><a href="${pageContext.request.contextPath}/appointmentb">申請的約會</a></li>
     <li class="active"><a href="${pageContext.request.contextPath}/appointmenta">邀請的約會(修改)</a></li>
@@ -154,7 +202,7 @@
 	 <div class="btn-group" role="group" >
 	      <button type="button" id="savebtn" class="btn btn-primary btn-sm" 
 	      	  onClick="editsave();">存檔</button>
-	      <button type="button" class="btn btn-default btn-sm" onClick="editcancel();">返回</button>
+	      <button type="button" class="btn btn-default btn-sm" onClick="editcancel();">返回邀請的約會</button>
 	 </div>
 	 </div>
 	 </div>
@@ -274,7 +322,6 @@ function editsave(){
     //2.(申請狀態為 [1:進行]或[2.成功]) && 勾取消
     //  update app 狀態改為 [0.取消]
     //  update appr status=8取消(邀請者)  where appointmentID= ? and status in (0,1,2)
-
 	var appointmentid = $("#appointmentid").val();
 	var astatus = $("#astatus").val();
 	var acontent = null;
@@ -305,7 +352,7 @@ function editsave(){
 				var res = $.parseJSON(data);
 				if (res==true)
 				{
-					var result2 = window.confirm("存檔成功,是否返回查看申請的約會功能 ?");
+					var result2 = window.confirm("存檔成功,是否返回查看邀請的約會功能 ?");
 					if (result2) {
 						window.location.href = "${pageContext.request.contextPath}/appointmenta";
 					} else {
@@ -319,9 +366,18 @@ function editsave(){
 		});
 		}
 	}else{
-		alert("不符合異動存檔條件,如要返回查看申請的約會功能,請按取消鈕");
+		alert("不符合異動存檔條件,如要返回查看邀請的約會功能,請按返回鈕");
 	}
 }
 </script>
+<script>
+function newappointmenta() {
+	window.location.href = "${pageContext.request.contextPath}/new_appointmenta";
+}
+function newappointmentb() {
+	window.location.href = "${pageContext.request.contextPath}/new_appointmentb";
+}
+</script>
+
 </body>
 </html>

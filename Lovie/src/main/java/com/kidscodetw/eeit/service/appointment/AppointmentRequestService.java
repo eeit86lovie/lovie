@@ -34,4 +34,8 @@ public class AppointmentRequestService {
 	public AppointmentbeditBean selectByAidMid(Integer appointmentID,Integer requestMemberId) {
 		return appointmentRequestDAO.selectByAidMid(appointmentID,requestMemberId);
 	}
+	
+	public Integer selectBySidMid(Integer showtimeID, Integer requestMemberId) {
+		return appointmentRequestDAO.selectBySidMid(showtimeID,requestMemberId);
+	}
 }

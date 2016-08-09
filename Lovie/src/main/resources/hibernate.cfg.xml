@@ -41,6 +41,7 @@
 		<mapping resource="com/kidscodetw/eeit/entity/member/interestedMovies.hbm.xml" />
         <mapping resource="com/kidscodetw/eeit/entity/cart/product.hbm.xml" />
         <mapping resource="com/kidscodetw/eeit/entity/cart/bill.hbm.xml" />
+        <mapping resource="com/kidscodetw/eeit/entity/cart/tradedetail.hbm.xml" />
         <mapping resource="com/kidscodetw/eeit/entity/forum/article_rank.hbm.xml" />
         <mapping resource="com/kidscodetw/eeit/entity/forum/articlereply.hbm.xml" />
         <mapping resource="com/kidscodetw/eeit/entity/forum/forum.hbm.xml" />
@@ -53,6 +54,7 @@
         <mapping class="com.kidscodetw.eeit.entity.appointment.AppointmentareditBean" />
         <mapping class="com.kidscodetw.eeit.entity.appointment.AppointmentaBean" />
         <mapping class="com.kidscodetw.eeit.entity.appointment.AppointmentRequestBean" />
+        <mapping class="com.kidscodetw.eeit.entity.appointment.AppointmovieBean" />
         <mapping class="com.kidscodetw.eeit.entity.report.Chart1Bean" />
         <mapping class="com.kidscodetw.eeit.entity.report.Chart2Bean" />
         <mapping class="com.kidscodetw.eeit.entity.report.Chart3Bean" />
