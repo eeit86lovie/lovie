@@ -62,12 +62,12 @@ public class AppointmentsMVC {
 
 	@RequestMapping("new_appointmoviea_json")
 	public @ResponseBody List<AppointmovieBean> new_appointmoviea_json(
-		   @RequestParam(value="citysels",required=false) String[] citysels,
-		   @RequestParam(value="theatersels",required=false) String theatersels,
-		   @RequestParam(value="genresels",required=false) String[] genresels,
-		   @RequestParam(value="moviesels",required=false) String moviesels,
-		   @RequestParam(value="showtimeDatebeg",required=false) String showtimeDatebeg,
-		   @RequestParam(value="showtimeDateend",required=false) String showtimeDateend,
+			   @RequestParam(value="city",required=false) String[] citysels,
+			   @RequestParam(value="theaterName",required=false) String theatersels,
+			   @RequestParam(value="genreId",required=false) String[] genresels,
+			   @RequestParam(value="movieName",required=false) String moviesels,
+			   @RequestParam(value="showtimeDatebeg",required=false) String showtimeDatebeg,
+			   @RequestParam(value="showtimeDateend",required=false) String showtimeDateend,
 		   Model model){
 		List<AppointmovieBean> appointmovie_list = appointmovieService.select_movieshowtime_list(citysels, theatersels, genresels, moviesels, showtimeDatebeg, showtimeDateend);
 		return appointmovie_list;
