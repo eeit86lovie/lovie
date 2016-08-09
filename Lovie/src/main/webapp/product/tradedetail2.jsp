@@ -80,7 +80,8 @@ text-align:center;;
 </head>
 <body>
 
-	<c:import charEncoding="UTF-8" url="/product/productMenu.jsp"></c:import>
+<c:import charEncoding="UTF-8" url="/product/productMenu.jsp"></c:import>
+	
 	<div id="page-wrapper">
 <div class="col-lg-9">
 <form role="form" action="${pageContext.request.contextPath }/billCheckout" >

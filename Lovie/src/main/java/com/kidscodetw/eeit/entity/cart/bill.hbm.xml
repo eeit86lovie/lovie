@@ -11,7 +11,7 @@
         <property name="memberid" column="memberid" />
         <property name="address" column="address"/>
          <property name="phone" column="phone"/>
-        <property name="tradeTime" column="tradeTime" />
+        <property name="tradeTime" column="tradeTime" update="false" insert="false" generated="insert"/>
         <property name="creditnum" column="creditnum" />
         <property name="status" column="status" />
 

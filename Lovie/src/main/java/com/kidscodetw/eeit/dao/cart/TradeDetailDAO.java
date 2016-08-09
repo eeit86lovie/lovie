@@ -16,6 +16,6 @@ public interface TradeDetailDAO {
 
 	public abstract TradeDetailBean select_id(Integer id);
 
-	public abstract List<TradeDetailBean> select_memberid(Integer memberid);
+	public abstract List<TradeDetailBean> select_billid(Integer billid);
 
 }

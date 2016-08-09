@@ -34,10 +34,10 @@ public class TradeDetailService implements TradeDetailDAO{
 	}
 
 	@Override
-	public List<TradeDetailBean> select_memberid(Integer memberid) {
+	public List<TradeDetailBean> select_billid(Integer billid) {
 		List<TradeDetailBean> result = null;
-		if(memberid!=0 && memberid!=null){
-		result = tradeDetailDAO.select_memberid(memberid);
+		if(billid!=0 && billid!=null){
+		result = tradeDetailDAO.select_billid(billid);
 	}
 		return result;
 	}
