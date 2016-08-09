@@ -41,7 +41,7 @@ margin-top: 10px
 		
 <div id="tabs">
   <ul>
-    <li><a href="#tabs-1">好友列表</a></li>
+    <li><a href="#tabs-1">互相感興趣</a></li>
     <li><a href="#tabs-2">我感興趣的對象</a></li>
     <li><a href="#tabs-3">對我感興趣的人</a></li>
   </ul>

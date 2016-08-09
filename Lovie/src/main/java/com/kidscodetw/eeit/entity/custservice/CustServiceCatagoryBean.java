@@ -3,7 +3,7 @@ import java.io.Serializable;
 public class CustServiceCatagoryBean {
 
 	private Integer id;
-	private String category;
+	private String catagory;
 	
 	public Integer getId() {
 		return id;
@@ -11,15 +11,15 @@ public class CustServiceCatagoryBean {
 	public void setId(Integer id) {
 		this.id = id;
 	}
-	public String getCategory() {
-		return category;
+	public String getCatagory() {
+		return catagory;
 	}
-	public void setCategory(String category) {
-		this.category = category;
+	public void setCatagory(String category) {
+		this.catagory = category;
 	}
 	
 	public String toString(){
-		return "CustServiceCatagoryBean: id:"+id+" ,category:"+category;
+		return "CustServiceCatagoryBean: id:"+id+" ,catagory:"+catagory;
 	}
 	
 }

@@ -33,19 +33,23 @@ public class AddOrRemoveFriendService {
 		Integer memberId=(((MemberBean)session.getAttribute("loginmember"))).getId();
 		FriendBean myFBean=null;
 		FriendBean otherFBean=null;
+		MemberBean mb=null;
 			myFBean=friendDAO.selectOne(memberId, friendId);
 		if(myFBean==null){//代表兩人原本無關係
-			System.out.println("null");
 			myFBean=new FriendBean();
 			otherFBean=new FriendBean();
 			myFBean.setMemberId(memberId);
 			myFBean.setFriendId(friendId);
 			myFBean.setRelation(2);
+			
 			friendDAO.insert(myFBean);
 			otherFBean.setMemberId(friendId);
 			otherFBean.setFriendId(memberId);
 			otherFBean.setRelation(3);
 			friendDAO.insert(otherFBean);
+			
+			
+			
 		}else if(myFBean.getRelation()==3){
 			myFBean.setRelation(1);
 			otherFBean=friendDAO.selectOne(friendId, memberId);
@@ -53,7 +57,14 @@ public class AddOrRemoveFriendService {
 			otherFBean.setRelation(1);
 			friendDAO.update(myFBean);
 			friendDAO.update(otherFBean);
+			
+			//更新memberBean
+			mb=memberDAO.select(myFBean.getMemberId());
+			mb.setFriendNum(friendDAO.selectPart(memberId, 1).size());
+			memberDAO.update(mb);
+			//////////////////////////////////////////////////////////////
 		}
+		
 		
 	}
 	
@@ -62,6 +73,7 @@ public class AddOrRemoveFriendService {
 	public void removeFriend(HttpSession session,
 			@RequestParam Integer friendId,
 			Model model){
+		MemberBean mb=null;
 		Integer memberId=(((MemberBean)session.getAttribute("loginmember"))).getId();
 		FriendBean myFBean=friendDAO.selectOne(memberId, friendId);
 		FriendBean otherFBean=friendDAO.selectOne(friendId, memberId);
@@ -70,11 +82,17 @@ public class AddOrRemoveFriendService {
 			otherFBean.setRelation(2);
 			friendDAO.update(myFBean);
 			friendDAO.update(otherFBean);
+			
+			
 		}else if(myFBean.getRelation()==2){
 			friendDAO.delete(myFBean);
 			friendDAO.delete(otherFBean);
-			
 		}
+		//更新memberBean
+		mb=memberDAO.select(myFBean.getMemberId());
+		mb.setFriendNum(friendDAO.selectPart(memberId, 1).size());
+		memberDAO.update(mb);
+		//////////////////////////////////////////////////////////////
 		
 	}
 	

@@ -26,11 +26,11 @@ public class AttendChannelInterceptor extends ChannelInterceptorAdapter {
 			return;
 		}
 		if (sha.getDestination() !=null && sha.getDestination().equals("/app/attend")) {
-			OnlineUserRepo.getOnlineUser().put(sha.getUser().getName(),
+			OnlineUserRepo.getOnlineUser().add(
 					memberDAO.select(sha.getUser().getName()));
 		}
 		if (sha.getCommand().equals(StompCommand.DISCONNECT) || sha.getCommand().equals(StompCommand.ERROR)) {
-			OnlineUserRepo.getOnlineUser().remove(sha.getUser().getName());
+			OnlineUserRepo.getOnlineUser().remove(memberDAO.select(sha.getUser().getName()));
 		}
 	}
 }

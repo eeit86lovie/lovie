@@ -1,9 +1,6 @@
 package com.kidscodetw.eeit.admin.controller.broadcast;
 
 import java.security.Principal;
-import java.util.List;
-
-import javax.servlet.ServletContext;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.handler.annotation.MessageMapping;
@@ -11,12 +8,13 @@ import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.messaging.simp.annotation.SubscribeMapping;
 import org.springframework.stereotype.Controller;
 
+import com.kidscodetw.eeit.dao.member.MemberDAO;
+
 @Controller
 public class UserMessageController {
-
-	private static List<String> guestlisteningUser;
-	private static List<String> userlisteningUser;
-	private static List<String> goldlisteningUser;
+	
+	@Autowired
+	MemberDAO memberDAO;
 
 	@Autowired
 	private SimpMessagingTemplate template;
@@ -38,6 +36,8 @@ public class UserMessageController {
 			}
 		}
 	}
+	
+	
 
 	 
 

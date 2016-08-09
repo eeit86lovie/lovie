@@ -1,11 +1,13 @@
 package com.kidscodetw.eeit.entity.custservice;
 import java.io.Serializable;
+
+import com.kidscodetw.eeit.entity.movie.TheaterBean;
 public class CustServiceBean implements Serializable{
 	
-	private String memberAccount;
-	private Integer category;
+	private Integer memberId;
+	private Integer catagory;
 	private String message;
-	private byte[] photo;
+	private String replyMessage;
 	private Integer status;
 	private Integer id;
 	
@@ -15,17 +17,18 @@ public class CustServiceBean implements Serializable{
 	public void setId(Integer id) {
 		this.id = id;
 	}
-	public String getMemberAccount() {
-		return memberAccount;
+	
+	public Integer getMemberId() {
+		return memberId;
 	}
-	public void setMemberAccount(String memberAccount) {
-		this.memberAccount = memberAccount;
+	public void setMemberId(Integer memberId) {
+		this.memberId = memberId;
 	}
-	public Integer getCategory() {
-		return category;
+	public Integer getCatagory() {
+		return catagory;
 	}
-	public void setCategory(Integer category) {
-		this.category = category;
+	public void setCatagory(Integer catagory) {
+		this.catagory = catagory;
 	}
 	public String getMessage() {
 		return message;
@@ -33,12 +36,7 @@ public class CustServiceBean implements Serializable{
 	public void setMessage(String message) {
 		this.message = message;
 	}
-	public byte[] getPhoto() {
-		return photo;
-	}
-	public void setPhoto(byte[] photo) {
-		this.photo = photo;
-	}
+
 	public Integer getStatus() {
 		return status;
 	}
@@ -47,6 +45,17 @@ public class CustServiceBean implements Serializable{
 	}	
 	
 	public String toString(){
-		return "model CustServiceBean[ id:"+id+" ,memberAccount:"+memberAccount+" ,category:"+category+" ,message:"+message+" ,status:"+status;
+		return "model CustServiceBean[ id:"+id+" ,memberId:"+memberId+" ,catagory:"+catagory+" ,message:"+message+" ,status:"+status;
 	}
+	public TheaterBean update(CustServiceBean custServiceBean) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	public String getReplyMessage() {
+		return replyMessage;
+	}
+	public void setReplyMessage(String replyMessage) {
+		this.replyMessage = replyMessage;
+	}
+	
 }

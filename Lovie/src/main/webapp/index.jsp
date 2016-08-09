@@ -12,6 +12,9 @@
 <link rel="stylesheet" href="css/footer.css">
 <link rel="stylesheet" href="css/scrolling-nav.css">
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/css/sweetalert/dist/sweetalert.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/animate.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/animated-notifications.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/Icomoon/style.css" />
 <script src="${pageContext.request.contextPath }/css/sweetalert/dist/sweetalert.min.js"></script> 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.1.1/sockjs.min.js"></script>
 <script src="//cdn.bootcss.com/stomp.js/2.3.3/stomp.js"></script>
@@ -98,6 +101,7 @@
 					<li><a href=<c:url value="/members"/>>會員</a></li>
 					<li><a href=<c:url value="/forums"/>>討論</a></li>
 					<li><a href=<c:url value="/products"/>>商城</a></li>
+					<li><a href=<c:url value="/custservice"/>>客服</a></li>
 					<sec:authorize access="!hasRole('ROLE_ADMIN') and !hasRole('ROLE_GOLD') and !hasRole('ROLE_USER')">
 						<li id="login1"><a href=<c:url value="/login"/>>登入 | 註冊</a></li>
 					</sec:authorize>

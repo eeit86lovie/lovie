@@ -25,4 +25,20 @@ public class AdminMembersService {
 			Model model){
 		return memberDAO.select();
 	}
+	
+	@RequestMapping(method = RequestMethod.POST, value="/getMemberFormId", produces=MediaType.APPLICATION_JSON)
+	public @ResponseBody MemberBean getMemberFormId(
+			Integer memberId,
+			Model model){
+		return memberDAO.select(memberId);
+	}
+	
+	@RequestMapping(method = RequestMethod.POST, value="/getMemberFormAccount", produces=MediaType.APPLICATION_JSON)
+	public @ResponseBody MemberBean getMemberFormAccount(
+			String memberAccount,
+			Model model){
+		System.out.println(memberAccount);
+		System.out.println(memberDAO.select(memberAccount));
+		return memberDAO.select(memberAccount);
+	}
 }

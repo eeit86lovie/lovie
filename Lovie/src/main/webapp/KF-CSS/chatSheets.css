@@ -1,4 +1,4 @@
-﻿@charset "utf-8";
+@charset "utf-8";
 /* CSS Document */
 
 html, body {
@@ -205,18 +205,13 @@ body {
 }
 
 /* ���U�j�M�϶��@*/
-.right_frame{
-	width:780px;
-	margin-left:105px;
-}
-
-/* ���U�j�M�϶��@*/
 .right_frame_cata{
 	position:relative;
 	width:780px;
 	height:40px;
 	margin:10px auto;
 }
+
 /* ���϶� */
 .select_cata{
 	width:280px;
@@ -325,6 +320,150 @@ body {
 	border:1px solid #ccc;
 	margin:0;
 }
+	
+#header .white {
+  height: 100px;
+  background-color: #FFFFFF;
+  padding: 20px;
+}
+#header .white .profile {
+  width: 60px;
+  height: 60px;
+  float: left;
+  margin-right: 10px;
+  background-color: #555555;
+}
+#header .white .profile img {
+  width: 60px;
+  height: 60px;
+}
+#header .white .p_info {
+  float: left;
+  font-size: 14px;
+  line-height: 16px;
+}
+#header .white .p_info .name {
+  color: #333333;
+}
+#header .white .p_info .status {
+  padding-top: 10px;
+  color: #999999;
+}
+
+#content {
+  z-index: 1;
+}
+#content #chats_div {
+  height: 348px;
+  background-color: #F9F6F6;
+  padding: 20px;
+  overflow: scroll;
+}
+#content #chats_div .message {
+  font-size: 14px;
+  line-height: 16px;
+  padding-bottom: 20px;
+}
+#content #chats_div .message .time {
+  color: #999999;
+}
+#content #chats_div .message .text {
+  padding-top: 10px;
+  color: #333333;
+}
+#content #chats_div .user {
+  text-align: right;
+}
+#content .input_form {
+  background-color: #FFFFFF;
+  padding: 20px;
+}
+#content .input_form .textarea_box {
+  display: table-cell;
+  width: 100%;
+}
+#content .input_form .textarea_box .textarea_div {
+  border-color: #999999;
+  border-width: 1px;
+  border-style: solid;
+  -ms-border-radius: 3px;
+  -o-border-radius: 3px;
+  border-radius: 3px;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  padding: 15px;
+  background-color: #F9F6F6;
+}
+#content .input_form .textarea_box .textarea_div textarea {
+  resize: none;
+  color: #333333;
+  border: none;
+  cursor: pointer;
+  background-color: transparent;
+  padding: 0px;
+}
+#content .input_form .textarea_box .textarea_div textarea:focus {
+  outline: none;
+}
+#content .input_form .textarea_box .textarea_div textarea::-webkit-input-placeholder {
+  /* WebKit, Blink, Edge */
+  color: #333333;
+  opacity: 0.5;
+}
+#content .input_form .textarea_box .textarea_div textarea:-moz-placeholder {
+  /* Mozilla Firefox 4 to 18 */
+  color: #333333;
+  opacity: 0.5;
+}
+#content .input_form .textarea_box .textarea_div textarea::-moz-placeholder {
+  /* Mozilla Firefox 19+ */
+  color: #333333;
+  opacity: 0.5;
+}
+#content .input_form .textarea_box .textarea_div textarea:-ms-input-placeholder {
+  /* Internet Explorer 10-11 */
+  color: #333333;
+}
+#content .input_form .textarea_box .textarea_div textarea {
+  min-height: 30px;
+  width: 100%;
+  font-size: 14px;
+  line-height: 1.1;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  resize: none;
+}
+#content .input_form .button_box {
+  display: table-cell;
+  padding-left: 20px;
+  vertical-align: top;
+}
+#content .input_form .button_box .button {
+  width: 80px;
+  height: 30px;
+  font-size: 14px;
+  line-height: 16px;
+  cursor: pointer;
+  color: #FFFFFF;
+  background-color: #1762ad;
+  text-align: center;
+  border-color: #1762ad;
+  border-width: 1px;
+  border-style: solid;
+  -ms-border-radius: 3px;
+  -o-border-radius: 3px;
+  border-radius: 3px;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+}
+#content .input_form .button_box .button label {
+  display: block;
+  padding-top: 6px;
+  cursor: pointer;
+}
+
+
+	
 	
 /* �̤W��U�n�J�B���U�϶� */
 .login{

@@ -199,7 +199,7 @@ label:before {
 				    }
 				  });
 			sender_li = $('<li></li>').attr('class', 'person').attr('id',fixedPerson).attr('data-chat',fixedPerson).attr('onclick', 'personClick(this)');
-			sender_img = $('<img></img>').attr('src','http://localhost:8080/Lovie/photo/member/account/'+fixedPerson);
+			sender_img = $('<img></img>').attr('src','${pageContext.request.contextPath}/photo/member/account/'+fixedPerson);
 			sender_span_name = $('<span></span>').attr('class', 'name').text(nickname);
 			var date = new Date(person['timestamp']);
 			var dateString = date.getHours()+':'+date.getMinutes();
