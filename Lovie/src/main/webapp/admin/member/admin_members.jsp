@@ -17,7 +17,7 @@ td{
 th{
 min-width: 50px;
 }
-#search-box {
+.search-box {
   font-size: 13px;
   width: 120px;
   background: #E6E6E6 url('http://www.davidpai.tw/wp-content/uploads/2012/04/search.gif') no-repeat 3px 3px;
@@ -47,8 +47,13 @@ min-width: 50px;
 			<div class="row">
 				<div class="col-md-12">
 					<div class="panel-heading">會員資料列表</div>
-					<div class="panel-heading">ID查詢：<input id="search-box" type="text" name="search-box" /></div>
+					<div class="panel-heading" style="float:left;" >ID查詢：<input id="searchId" type="text" class='search-box' name="search-box" />
+					<button onclick='searchId()'>查詢</button>
+					</div>
 					
+					<div class="panel-heading" style="float:left;">帳號查詢：<input id="searchAccount" type="text" class='search-box' name="search-box" />
+					<button onclick='searchAccount()'>查詢</button>
+					</div>
 					<!-- /.panel-heading -->
 					<div class="panel-body">
 						<div class="dataTable_wrapper">
@@ -104,6 +109,11 @@ $.ajax({
 		var flag = $(document.createDocumentFragment())
 
 		$.each(memberBeanList,function(idx,member){	
+			if(member.gender==0){
+				member.gender="女"
+			}else{
+				member.gender="男"
+			}
 			var cell1  = $("<td style='width:10px'></td>").text(member.privilege)
 			var cell2  = $("<td></td>").text(member.id)
 			var cell3  = $("<td></td>").text(member.account)
@@ -133,7 +143,90 @@ function allIntro(object){
 	alert(object.innerHTML.replace(/<br>/gi,"\n"))
 }
 
+function searchId(){
+	tb.empty()
+	var id = document.getElementById("searchId").value;
+	var formData = new FormData();
+	formData.append('memberId',id);
+	$.ajax({
+		url : "${pageContext.request.contextPath}/admin/member/getMemberFormId",
+		type : "post",
+		data:formData,
+		processData: false,
+		contentType: false,
+		success : function(member) {
+			var flag = $(document.createDocumentFragment())
+				if(member.gender==0){
+					member.gender="女"
+				}else{
+					member.gender="男"
+				}
+				var cell1  = $("<td style='width:10px'></td>").text(member.privilege)
+				var cell2  = $("<td></td>").text(member.id)
+				var cell3  = $("<td></td>").text(member.account)
+				var cell4  = $("<td></td>").text(member.nickname)
+				var cell5  = $("<td></td>").text(member.gender)
+				var cell6  = $("<td></td>").text(member.email)
+				var cell7  = $("<td></td>").text(member.city)
+				var cell8  = $("<td></td>").text(member.district)
+				var cell9  = $("<td></td>").text(member.phone)
+				var cell10  = $("<td></td>").text(member.birthday)
+				var cell11  = $("<td onclick='allIntro(this)'></td>").text(member.intro)
+				var cell12 = $("<td></td>").text(member.registeredTime)
+				var cell13 = $("<td></td>").text(member.lastOnTime)
+				var cell14 = $("<td></td>").text(member.privilegeExp)
+				var cell15  = $("<td></td>").text(member.loginTimes)
 
+				var row = $("<tr></tr>").append([cell1,cell2,cell3,cell4,cell5,cell6,cell7,cell8,cell9,cell10,cell11,cell12,cell13,cell14,cell15])
+				flag.append(row);
+			tb.append(flag)
+		},error: function(){
+			alert("失敗")
+		}					
+	})
+}
+function searchAccount(){
+	tb.empty()
+	var account = document.getElementById("searchAccount").value;
+	var formData = new FormData();
+	formData.append('memberAccount',account);
+	$.ajax({
+		url : "${pageContext.request.contextPath}/admin/member/getMemberFormAccount",
+		type : "post",
+		data:formData,
+		processData: false,
+		contentType: false,
+		success : function(member) {
+			var flag = $(document.createDocumentFragment())
+				if(member.gender==0){
+					member.gender="女"
+				}else{
+					member.gender="男"
+				}
+				var cell1  = $("<td style='width:10px'></td>").text(member.privilege)
+				var cell2  = $("<td></td>").text(member.id)
+				var cell3  = $("<td></td>").text(member.account)
+				var cell4  = $("<td></td>").text(member.nickname)
+				var cell5  = $("<td></td>").text(member.gender)
+				var cell6  = $("<td></td>").text(member.email)
+				var cell7  = $("<td></td>").text(member.city)
+				var cell8  = $("<td></td>").text(member.district)
+				var cell9  = $("<td></td>").text(member.phone)
+				var cell10  = $("<td></td>").text(member.birthday)
+				var cell11  = $("<td onclick='allIntro(this)'></td>").text(member.intro)
+				var cell12 = $("<td></td>").text(member.registeredTime)
+				var cell13 = $("<td></td>").text(member.lastOnTime)
+				var cell14 = $("<td></td>").text(member.privilegeExp)
+				var cell15  = $("<td></td>").text(member.loginTimes)
+
+				var row = $("<tr></tr>").append([cell1,cell2,cell3,cell4,cell5,cell6,cell7,cell8,cell9,cell10,cell11,cell12,cell13,cell14,cell15])
+				flag.append(row);
+			tb.append(flag)
+		},error: function(){
+			alert("失敗")
+		}					
+	})
+}
 </script>		
 
 </body>
