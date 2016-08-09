@@ -60,8 +60,7 @@
             <div class="left_menu">
             	<ul>
                 	<li><a href="KF-FAQ.jsp" title="常見問題FAQ" class="select">常見問題FAQ</a></li>
-                    <li><a href="custServiceForm" title="問題回報線上表單" >問題回報線上表單</a></li>
-                    <li><a href="KF-chat.jsp" title="線上客服">線上客服</a></li>
+                    <li><a href="" title="問題回報線上表單" >問題回報線上表單</a></li>
                 </ul>
             </div>
         </div>
