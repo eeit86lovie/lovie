@@ -62,6 +62,10 @@ public class AddOrRemoveFriendService {
 			mb=memberDAO.select(myFBean.getMemberId());
 			mb.setFriendNum(friendDAO.selectPart(memberId, 1).size());
 			memberDAO.update(mb);
+			
+			mb=memberDAO.select(otherFBean.getMemberId());
+			mb.setFriendNum(friendDAO.selectPart(friendId, 1).size());
+			memberDAO.update(mb);
 			//////////////////////////////////////////////////////////////
 		}
 		
@@ -91,6 +95,10 @@ public class AddOrRemoveFriendService {
 		//更新memberBean
 		mb=memberDAO.select(myFBean.getMemberId());
 		mb.setFriendNum(friendDAO.selectPart(memberId, 1).size());
+		memberDAO.update(mb);
+		
+		mb=memberDAO.select(otherFBean.getMemberId());
+		mb.setFriendNum(friendDAO.selectPart(friendId, 1).size());
 		memberDAO.update(mb);
 		//////////////////////////////////////////////////////////////
 		
