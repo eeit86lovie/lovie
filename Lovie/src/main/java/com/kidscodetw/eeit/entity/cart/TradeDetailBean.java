@@ -3,7 +3,7 @@ package com.kidscodetw.eeit.entity.cart;
 public class TradeDetailBean  {
 
 private Integer id;
-private Integer memberid;
+private Integer billid;
 private Integer productid;
 private int amount;//嚙踐嚙踝蕭嚙�?
 private int totalcost;//?嚙踝蕭鞈∴蕭?嚙踝蕭嚙踝蕭
@@ -13,11 +13,11 @@ public Integer getId() {
 public void setId(Integer id) {
 	this.id = id;
 }
-public Integer getMemberid() {
-	return memberid;
+public Integer getBillid() {
+	return billid;
 }
-public void setMemberid(Integer memberid) {
-	this.memberid = memberid;
+public void setBillid(Integer billid) {
+	this.billid = billid;
 }
 public Integer getProductid() {
 	return productid;
@@ -39,10 +39,11 @@ public void setTotalcost(int totalcost) {
 }
 @Override
 public String toString() {
-	return "TradeDetailBean [id=" + id + ", memberid=" + memberid
-			+ ", productid=" + productid + ", amount=" + amount
-			+ ", totalcost=" + totalcost + "]";
+	return "TradeDetailBean [id=" + id + ", billid=" + billid + ", productid="
+			+ productid + ", amount=" + amount + ", totalcost=" + totalcost
+			+ "]";
 }
+
 
 
 

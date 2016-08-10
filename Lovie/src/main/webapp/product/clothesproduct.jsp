@@ -58,7 +58,14 @@
 .thumbnail {
 	text-align: center;
 	border: solid;
+	width:300px;
+    height:400px
 }
+#clothdiscount img { 
+max-width:150px; 
+myimg:expression(onload=function(){ 
+this.style.width=(this.offsetWidth > 150)?"150px":"auto"});
+} 
 </style>
 
 
@@ -169,7 +176,7 @@
 					ClotheCaptionDiv.id = "clothProduct";
 
 					var ClotheImgDiv = document.createElement("img");
-					ClotheImgDiv.setAttribute("src", "null");
+					ClotheImgDiv.setAttribute("src", "${pageContext.request.contextPath}/image/product/clothes/"+data[i].productid+".jpg");
 
 					var ClotheThumbnailDiv = document.createElement("div");
 					ClotheThumbnailDiv.className = "thumbnail";

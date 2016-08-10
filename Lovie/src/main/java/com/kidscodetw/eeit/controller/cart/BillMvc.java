@@ -54,7 +54,10 @@ public class BillMvc {
 			
 			
 			BillBean billBean = new BillBean();
+			billBean.setMemberid(member.getId());
 			billBean.setAddress(address);
+			billBean.setPhone(phone);
+			
 			
 			
 			

@@ -11,7 +11,7 @@ public class ProductBean implements Serializable{
 	private Integer cost;
 	private double discount;
 	private Integer inventory;
-	private Blob productphoto;
+
 	private Integer category;
 	private String content;
 	
@@ -53,12 +53,6 @@ public class ProductBean implements Serializable{
 	public void setInventory(Integer inventory) {
 		this.inventory = inventory;
 	}
-	public Blob getProductphoto() {
-		return productphoto;
-	}
-	public void setProductphoto(Blob productphoto) {
-		this.productphoto = productphoto;
-	}
 	public Integer getCategory() {
 		return category;
 	}
@@ -78,8 +72,7 @@ public class ProductBean implements Serializable{
 	public String toString() {
 		return "ProductBean [name=" + name + ", productid=" + productid
 				+ ", cost=" + cost + ", discount=" + discount + ", inventory="
-				+ inventory + ", productphoto=" + productphoto + ", category="
-				+ category + ", content=" + content + "]";
+				+ inventory + ", category="+ category + ", content=" + content + "]";
 	}
 
 
