@@ -206,7 +206,8 @@ function add(){
 			
 			var article_genre_Text = document.createTextNode(articleJson[i].genre);
 	  		var article_title_Text = document.createTextNode(articleJson[i].title);
-	  		var article_content_Text = document.createTextNode(articleJson[i].content);
+// 	  		var article_content_Text = document.createTextNode(articleJson[i].content.replace(/<br>/gi,"\n"));
+
 	  		var time_pubTime = new Date(articleJson[i].pubTime);
 	  		var article_pubTime_Text = document.createTextNode("發表時間:"+time_pubTime.customFormat( "#YYYY#-#MM#-#DD# #hh#:#mm#:#ss#" ));
 	  		time_editTime = new Date(articleJson[i].editTime);
@@ -362,7 +363,8 @@ function add(){
 	  		var Article_genre_p = $("<p class='genre_p'></p>").append(article_genre_Text);
 	  		var Article_genre_div = $("<div class='genre'></div>").append(Article_genre_p);	  		
 			var Article_title_div = $("<div class='title'></div>").append(article_title_Text);
-	  		var Article_content_div = $("<div class='content'></div>").append(article_content_Text);
+			var tempTextarea=$("<span></span>").append(articleJson[i].content);
+	  		var Article_content_div = $("<div class='content'></div>").append(tempTextarea);
 	  		var Article_pubTime_div = $("<div class='pubTime'></div>").append(article_pubTime_Text);
 	  		var Article_editTime_div = $("<div class='editTime'></div>").append(article_editTime_Text);
 	  		var Article_replyarea_div = $("<div class='replyarea' id='"+'replyarea'+articleJson[i].id+"'></div>");

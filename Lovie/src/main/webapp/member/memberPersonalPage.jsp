@@ -167,7 +167,7 @@ function city_edit(member_col){
 	var districttext=member_col.childNodes[2].innerHTML;
 	var cityText=$('<span id="twzipcode"></span>')
 		$("#"+member_col.id).replaceWith(cityText);
-	console.log(districttext+"????")
+// 	console.log(districttext+"????")
 		$('#twzipcode').twzipcode({
 			'countySel':text,
 			'districtSel':districttext})
