@@ -114,9 +114,9 @@ $.ajax({
 			
 			var detailimg = document.createElement("img");
 			detailimg.className = "deleteimg";
-			detailimg.id = "deleteimg"+report[i].id;
+			detailimg.id = "detailimg"+report[i].id;
 			detailimg.setAttribute("onclick", "clickdetail(this)");
-			deleteimg.src = "${pageContext.request.contextPath}/image/deleteArticle.gif";
+			detailimg.src = "${pageContext.request.contextPath}/image/admin_forum.gif";
 			
 			var td0 = $("<td id='"+'img'+report[i].id+"'></td>").append(deleteimg);
 			var td1 = $("<td id='"+'img'+report[i].id+"'></td>").append(detailimg);

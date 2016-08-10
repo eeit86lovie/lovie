@@ -236,7 +236,8 @@ function clickLightButton(){
 	var pubMember = "${loginmember.account}";
 	var pubTitle = $("#articleTitle").val();
 	var pubGenre = $("#ArticleGenre").val();
-	var pubContent = $("#textArea").val();
+	var pubContent = $("#textArea").val().replace(/\n/g,"<br>");
+	
 	
 	var error_title = 0;
 	var error_content = 0;

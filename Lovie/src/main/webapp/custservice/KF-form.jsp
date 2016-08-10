@@ -180,13 +180,8 @@
 				var problemsNember = $("#catalog").val();
 				var reportReason = $("#reportReason").val();
 				
-				
-				alert(member);
-				alert(problemsNember);
-				alert(reportReason);
-				
 				 $.ajax({
-					url : "custService",
+					url : "${pageContext.request.contextPath }/custService",
 					type : "POST",					
 					data : {
 						Member:member,
@@ -194,7 +189,12 @@
 						ReportReason:reportReason,
 					},
 					success : function(result) {
-						//alert(result);
+						if(result==1){
+							$("#reportReason").empty();
+							alert("回報成功");
+						}else{
+							alert("回報失敗");
+						}
 					}		
 				})			 
 			}
