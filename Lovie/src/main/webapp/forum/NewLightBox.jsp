@@ -97,6 +97,7 @@ function clickLightButton(){
 	var pubGenre = $("#ArticleGenre").val();
 	var pubContent = $("#textArea").val();
 	
+	
 	var error_title = 0;
 	var error_content = 0;
 	$("#error_title").empty();

@@ -237,7 +237,7 @@ function clickLightButton(){
 	var pubTitle = $("#articleTitle").val();
 	var pubGenre = $("#ArticleGenre").val();
 	var pubContent = $("#textArea").val().replace(/\n/g,"<br>");
-	alert(pubContent)
+	
 	
 	var error_title = 0;
 	var error_content = 0;

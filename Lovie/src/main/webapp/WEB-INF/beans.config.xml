@@ -245,4 +245,12 @@
 		<constructor-arg ref="interestedMoviesDAOHibernate"></constructor-arg>
 	</bean>	
 	
+		<!-- 	custServiceDAO -->
+	<bean id="custServiceDAOHibernate" class="com.kidscodetw.eeit.dao.custservice.CustServiceDAOHibernate">
+		<constructor-arg ref="sessionFactory"></constructor-arg>
+	</bean>
+	<bean id="custServiceDAO" class="com.kidscodetw.eeit.service.custservice.CustServiceService">
+		<constructor-arg ref="custServiceDAOHibernate"></constructor-arg>
+	</bean>	
+	
 </beans>

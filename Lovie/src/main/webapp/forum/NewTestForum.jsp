@@ -12,7 +12,7 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/selectLike/selectLike.css">
 <script src="${pageContext.request.contextPath}/js/jquery.hoverCarousel.js"></script>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>電影討論區</title>
 
 <style type="text/css">
 
