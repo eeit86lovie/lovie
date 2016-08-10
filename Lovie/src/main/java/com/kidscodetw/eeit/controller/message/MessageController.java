@@ -42,7 +42,7 @@ public class MessageController {
 	@RequestMapping(method = RequestMethod.GET)
 	public String dispatch(Principal principal, Model model, @RequestParam(value="sender", required=false) String sender){
 		Integer memberId = memberDAO.select(principal.getName()).getId();
-		List<FriendBean> friendBeans = friendDAO.selectPart(memberId, 3);
+		List<FriendBean> friendBeans = friendDAO.selectPart(memberId, 1);
 		List<MemberBean> memberBeans = new ArrayList<MemberBean>();
 		for(FriendBean bean :friendBeans){
 			memberBeans.add(memberDAO.select(bean.getFriendId()));
