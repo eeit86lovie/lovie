@@ -5,19 +5,15 @@
 <html>
 <head>
 <c:import charEncoding="UTF-8" url="/meta.jsp"></c:import>
-<title>LOVIE - 常見問題FAQ</title>
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta http-equiv="cache-control" content="max-age=0" />
-<meta http-equiv="cache-control" content="no-cache" />
-<meta http-equiv="expires" content="0" />
-<meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT" />
-<meta http-equiv="pragma" content="no-cache" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link  rel="stylesheet" />
-<link rel="stylesheet" href="KF-CSS/style.css" />
-<link rel="stylesheet" href="KF-CSS/inner.css" />
-<link rel="stylesheet" href="KF-CSS/common.css" />
-<link rel="stylesheet" href="KF-CSS/colorbox.css" />
+<title>Lovie 常見問題FAQ</title>
+
+
+
+<link rel="stylesheet" href="${pageContext.request.contextPath}/KF-CSS/formCommon.css"> 
+<link rel="stylesheet" href="${pageContext.request.contextPath}/KF-CSS/style.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/KF-CSS/inner.css" />
+<link rel="stylesheet" href="${pageContext.request.contextPath}/KF-CSS/colorbox.css" />
+
 <script src="KF-JS/jquery.colorbox.js"></script>
 <script src="KF-JS/jquery.min.js"></script>
 
@@ -49,45 +45,35 @@
         }
     </script>
 </head>
-<body id="faqPage">
+<body>
 <c:import charEncoding="UTF-8" url="/header.jsp"></c:import>
 	
-	
+<div class="container">
 
 		
  <!-- 內容區塊 -->
     <div class="content">
+ <!-- 左欄 -->
+    	<div class="left_frame">
+        	<h1>客戶中心</h1>
+            <!-- 左欄選單 -->
+            <div class="left_menu">
+            	<ul>
+                	<li><a href="KF-FAQ.jsp" title="常見問題FAQ" class="select">常見問題FAQ</a></li>
+                    <li><a href="" title="問題回報線上表單" >問題回報線上表單</a></li>
+                </ul>
+            </div>
+        </div>
+ 
+        <div class="right_frame">
+          
 
  	<!-- 右欄 -->
         <div class="right_frame">
             <!-- 常見問題FAQ內容 -->
-            <div style="font-size:40px">
-                <h1>常見問題FAQ</h1>
+           <div class="sub_title">
+                <h1><em>常見問題</em>&nbsp FAQ</h1>
             </div>
-            <!-- 搜尋區塊 -->
-            <div class="right_frame_cata">
-            	<!-- 常見問題FAQ分類選單 -->
-                <form action="?" method="get" id="search">
-            	<div class="select_cata">
-                	<select name="catalog" class="select_list">
-                    	<option value=""  selected>選擇分類</option>
-                    							<option value="1">平台</option>
-												<option value="2">儲值</option>
-												<option value="7">帳號相關</option>
-												<option value="3">個人問題</option>
-												<option value="6">其他問題</option>
-						                    </select></div>
-              		<!-- 關鍵字搜尋｜搜尋標題及內文 -->
-                	<div class="search_keywords"><input id="searchKeyword" name="keyword" class="search_txt" type="text" placeholder="關鍵字搜尋" value=""/></div>
-                    <!-- 搜尋按鈕 -->
-                	<div class="btn_search"><input type="hidden" name="pg" value="faq">
-                        <a id="searchButton" onclick="form_submit()" style="cursor: pointer;" title="搜尋">搜尋</a>
-                    <script>function form_submit() { document.getElementById("search").submit(); }</script>    
-                    </div>
-                	
-                </form>
-            </div>
-
             <!-- 常見問題列表 -->
             <div class="list">
             	<ul>
@@ -280,12 +266,12 @@
             
     <br />
   		<!-- 返回最上層 -->
-<div class="btn_top"><a href="#top"></a></div>
+
 
     </div>
  </div>
-		
-			
+</div>
+	
 	</div>
 <c:import charEncoding="UTF-8" url="/footer.jsp"></c:import>
 </body>
