@@ -58,7 +58,7 @@
 				<div class="col-md-10">
 					<div id="crawloutput"></div>
 				</div>
-				<div class="col-md-2">
+				<div class="col-md-2" id="haveDelete">
 					
 				</div>
 			</div>
@@ -72,7 +72,7 @@
 							<table class="table table-striped table-bordered table-hover"
 								id="forumable" "style='table-layout: fixed'">
 								<thead>
-								    <tr>
+								    <tr id="report_th">
 										<th>檢舉會員</th>
 										<th>檢舉會員 暱稱</th>
 									    <th>檢舉會員帳號</th>
@@ -201,7 +201,10 @@ function deleteArticle(){
 		},
 		success : function(deleteCount) {
 			if(deleteCount==1){
-				$("#"+"BOX01"+ article_ID).remove();
+				$("#"+"forum_tbody").remove();
+				$("#"+"box").remove();
+				$("#"+"report_th").remove();
+				$("#"+"haveDelete").append("已刪除")
 				alert("刪除成功");
 			}else{
 				alert("刪除失敗");

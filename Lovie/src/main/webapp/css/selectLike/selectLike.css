@@ -173,7 +173,7 @@
 .carousel > .wrap > ul > li:first-child {
   margin: 0;
 }
-.carousel > .wrap > ul > li > img {
+.carousel  .wrap  ul  li  a {
   display: block;
   height: 100%;
   margin: auto;
@@ -182,4 +182,8 @@
   z-index: 1;
   -webkit-transition: 1s ease;
   transition: 1s ease;
+  max-width: 100%;
+}
+.rankPeople_img{
+	height:100%;
 }

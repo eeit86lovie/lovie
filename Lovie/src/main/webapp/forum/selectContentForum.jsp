@@ -186,7 +186,8 @@ $.ajax({
 								
 								if(selectContentArticlejson !=""){
 									selectContentArticleJson = selectContentArticlejson;
-			 						createArticle(selectContentArticlejson,selectReplyjson,allLikejson);		
+			 						createArticle(selectContentArticlejson,selectReplyjson,allLikejson);
+			 						
 								}else{
 									var no_member = $("<p class='notfound'></p>").append("查無此文章")
 									$("#box").append(no_member);
@@ -202,7 +203,7 @@ $.ajax({
 	}	
 })
 	
-	
+
 	
 </script>
 

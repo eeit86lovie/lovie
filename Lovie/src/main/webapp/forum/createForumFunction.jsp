@@ -909,7 +909,7 @@ function add(){
 				
 				if(error_update_title == 0 && error_update_content == 0){
 					$.ajax({
-						url : "forumsUpdateArticle",
+						url : "${pageContext.request.contextPath}/forumsUpdateArticle",
 						type : "POST",
 						dataType : "json",
 						data : {
@@ -982,7 +982,7 @@ function add(){
 	   document.getElementById("myNav").style.height = "40%";
 		
 		$.ajax({
-			url : "forumsAllLike",
+			url : "${pageContext.request.contextPath}/forumsAllLike",
 			type : "post",
 			dataType : "json",
 			success : function(allLikejson) {
@@ -996,14 +996,22 @@ function add(){
 							var li_Rank = $("<li></li>");											
 							//var rankPeople_div = $("<div ></div>");
 							//var rankPeopleName_div = $("<div></div>").append(getmemberPhoto(allLikejson[m].memberAccount).nickname);
+							
+							var linklikeMember = document.createElement("a");
+							var likememberLink = "${pageContext.request.contextPath}/member/profile/"+getmemberPhoto(allLikejson[m].memberAccount).id;
+							linklikeMember.setAttribute("href", likememberLink);
+							
+							
 							var rankPeople_img = document.createElement("img");
 							rankPeople_img.className ="rankPeople_img";
 							rankPeople_img.src = "${pageContext.request.contextPath}/photo/member/"+getmemberPhoto(allLikejson[m].memberAccount).id;
 				
+							
+							linklikeMember.appendChild(rankPeople_img);
 							//rankPeople_div.append(rankPeople_img);
 							//rankPeople_div.append(rankPeopleName_div);	
 							
-							li_Rank.append(rankPeople_img);
+							li_Rank.append(linklikeMember);
 							
 														
 							$("#selectLike_ul").append(li_Rank);
@@ -1040,11 +1048,17 @@ function add(){
 							var li_Rank = $("<li></li>");											
 							//var rankPeople_div = $("<div ></div>");
 							//var rankPeopleName_div = $("<div></div>").append(getmemberPhoto(allLikejson[m].memberAccount).nickname);
+							var linkDislikeMember = document.createElement("a");
+							var DislikememberLink = "${pageContext.request.contextPath}/member/profile/"+getmemberPhoto(allLikejson[m].memberAccount).id;
+							linkDislikeMember.setAttribute("href", DislikememberLink);
+							
+							
 							var rankPeople_img = document.createElement("img");
 							rankPeople_img.className ="rankPeople_img";
 							rankPeople_img.src = "${pageContext.request.contextPath}/photo/member/"+getmemberPhoto(allLikejson[m].memberAccount).id;
 				
-							li_Rank.append(rankPeople_img);
+							linkDislikeMember.appendChild(rankPeople_img);
+							li_Rank.append(linkDislikeMember);
 							//rankPeople_div.append(rankPeopleName_div);
 							//a_Rank.appendChild(rankPeople_img);	
 							$("#selectLike_ul").append(li_Rank);
