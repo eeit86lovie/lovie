@@ -2,6 +2,8 @@ package com.kidscodetw.eeit.entity.cart;
 
 public class TradeCheckoutBean{
 	
+	
+	private Integer id;
 	private Integer memberid;
 	private String memberaccount;
 	private String memberaddress;
@@ -10,6 +12,16 @@ public class TradeCheckoutBean{
 	private java.util.Date checktradeTime;
 	private Integer amount;
 	private Integer totalcost;
+	
+	public Integer getId(){
+		return id;
+		
+	}
+	public void setId(Integer id) {
+		this.id =id;
+	}
+	
+	
 	public Integer getMemberid() {
 		return memberid;
 	}
@@ -61,12 +73,13 @@ public class TradeCheckoutBean{
 	
 	@Override
 	public String toString() {
-		return "TradeCheckout [memberid=" + memberid + ", memberaccount="
+		return "TradeCheckout [id="+id+",memberid=" + memberid + ", memberaccount="
 				+ memberaccount + ", memberaddress=" + memberaddress
 				+ ", memberphone=" + memberphone + ", productname="
 				+ productname + ", checktradeTime=" + checktradeTime
 				+ ", amount=" + amount + ", totalcost=" + totalcost + "]";
 	}
+
 	
 	
 	

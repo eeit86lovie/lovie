@@ -10,10 +10,8 @@ public class TradeDetailDAOHibernate implements TradeDetailDAO {
 
 	private static final String SELECT_ALL = "FROM TradeDetailBean";
 	private static final String SELECT_ID = "FROM TradeDetailBean WHERE id=?";
-
 	private static final String SELECT_BILLID = "FROM TradeDetailBean WHERE billid=:billid";
-	private static final String INSERT = "INSERT INTO TradeDetailBean(memberid,productid,totalcost,amount)VALUES(?,?,?,?)";
-
+	private static final String INSERT = "INSERT INTO TradeDetailBean(memberid,billid,productid,totalcost,amount)VALUES(?,?,?,?,?)";
 	private static final String UPDATE = "UPDATE TradeDetailBean SET memberid=COALESCE(?,memberid),productid=COALESCE(?,productid),totalcost =COALESCE(?, totalcost),amount =COALESCE(?, amount)WHERE id=?";
 	private static final String DELETE = "DELETE FROM TradeDetailBean WHERE id=?";
 	private SessionFactory sessionFactory;

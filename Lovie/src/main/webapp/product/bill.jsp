@@ -120,7 +120,6 @@ text-align:center;;
                                           
                                             <th>產品編號</th>
                                             <th>產品名稱</th>
-                                            <th>產品樣式</th>
                                             <th>產品內容</th>
                                             <th>產品折扣</th>
                                             <th>產品價格</th>
@@ -256,7 +255,6 @@ text-align:center;;
 	
 
 	<script>
- 
 
 				function chkName(){
 				var theName=document.getElementById("idName").value;

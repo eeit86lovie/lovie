@@ -14,9 +14,6 @@ public void setId(Integer id) {
 	this.id = id;
 }
 
-
-
-
 public Integer getProductid() {
 	return productid;
 }
