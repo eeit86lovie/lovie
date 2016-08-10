@@ -94,7 +94,7 @@ text-align:center;;
                                 <table id="ShoppingCart"class="table">
                                     <thead>
                                         <tr>
-                                          
+                                   
                                             <th>會員編號</th>
                                             <th>會員帳號</th>
                                             <th>地址</th>
@@ -109,17 +109,16 @@ text-align:center;;
                                     <tbody>
                                     <c:forEach items="${checkoutItems}" var="checkoutItem" >
                                     <tr>
-                                           
+
                                              <td>${checkoutItem.memberid }</td>
                                              <td>${checkoutItem.memberaccount }</td>
                                              <td>${checkoutItem.memberaddress }</td>
                                              <td>${checkoutItem.memberphone }</td>
                                              <td>${checkoutItem.checktradeTime }</td>
                                              <td>${checkoutItem.productname }</td>
-                                             <td>${checkoutItem.amount }</td>
+                                             <td>${checkoutItem.amount}</td>
                                              <td>${checkoutItem.totalcost }</td>
-                                          
-                                    		
+
                                      </tr>
                                     </c:forEach>
                                    
@@ -139,6 +138,10 @@ text-align:center;;
                   
   </div>
 
+
+
+
+
   </div>
   </div>
                       
@@ -150,15 +153,7 @@ text-align:center;;
 
 		<script>
 		
-		
-		
-		
-		
-		
-		
-		
-		
-		
+
 	</script>
 
 

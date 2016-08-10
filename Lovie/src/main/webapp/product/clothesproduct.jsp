@@ -59,7 +59,7 @@
 	text-align: center;
 	border: solid;
 	width:300px;
-    height:400px
+    height:300px
 }
 #clothdiscount img { 
 max-width:150px; 

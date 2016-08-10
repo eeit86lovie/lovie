@@ -63,8 +63,6 @@ public class BillMvc {
 		Integer billId = resultBill.getId();
 		for(Map map: cartlist){
 			TradeDetailBean tradeDetailBean = new TradeDetailBean();
-			
-			
 			ProductBean productBean = (ProductBean)map.get("bean");
 			Integer totalCost = (productBean.getCost()*(Integer)map.get("amount"));
 			TradeCheckoutBean tradeCheckoutBean=new TradeCheckoutBean();
@@ -80,7 +78,7 @@ public class BillMvc {
 			tradeCheckoutBean.setProductname(productBean.getName());
 			tradeCheckoutBean.setChecktradeTime(new java.sql.Timestamp(new java.util.Date().getTime()));
 			tradeCheckoutBean.setTotalcost(productBean.getCost()*(Integer)map.get("amount"));
-			tradeCheckoutBean.setAmount(totalCost);
+			tradeCheckoutBean.setAmount((Integer)map.get("amount"));
 			allTotalCost = allTotalCost + totalCost;
 			checkoutItems.add(tradeCheckoutBean);
 			System.out.println(billBean.getAddress());

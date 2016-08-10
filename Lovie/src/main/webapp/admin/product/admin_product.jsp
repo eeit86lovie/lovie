@@ -47,15 +47,16 @@
 								id="movietable">
 								<thead>
 									<tr>
-										<th>操作</th>
-									    <th>觀看</th>
-										<th>ID</th>
-										<th>會員</th>
-										<th>分類</th>
-										<th>文章標題</th>
-										<th>文章內容</th>
-										<th>發佈時間</th>
-										<th>檢舉次數</th>
+									    <th>訂單</th>
+										<th>會員編號</th>
+									    <th>會員帳號</th>
+										<th>地址</th>
+										<th>聯絡電話</th>
+										<th>交易日期</th>
+										<th>產品名稱</th>
+										<th>數量</th>
+										<th>總價</th>
+									
 									</tr>
 								</thead>
 								<tbody id="forum_tbody">				
@@ -76,7 +77,7 @@
 <script>
 
 $.ajax({
-	url : "${pageContext.request.contextPath}/",
+	url : "${pageContext.request.contextPath}/checkoutbill",
 	type : "get",
 	dataType : "json",
 	success : function() {

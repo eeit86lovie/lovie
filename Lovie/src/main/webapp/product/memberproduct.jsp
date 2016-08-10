@@ -54,13 +54,18 @@
 .nav {
 	text-align: center;
 }
-
 .thumbnail {
 	text-align: center;
 	border: solid;
+	width:350px;
+    height:400px
 }
+#postdiscount img { 
+max-width:150px; 
+myimg:expression(onload=function(){ 
+this.style.width=(this.offsetWidth > 150)?"150px":"auto"});
+} 
 
-.
 
 
 </style>
