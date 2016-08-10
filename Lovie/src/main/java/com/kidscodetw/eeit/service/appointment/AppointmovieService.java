@@ -52,7 +52,7 @@ public class AppointmovieService {
 			String showtimeDateend
 			) {
 		List<AppointmovieBean> result = null;
-		result = appointmovieDAO.select_movieshowtime_list(genresels, showtimeDateend, genresels, showtimeDateend, showtimeDateend, showtimeDateend);
+		result = appointmovieDAO.select_movieshowtime_list(citysels, theatersels, genresels, moviesels, showtimeDatebeg, showtimeDateend);
 		return result;		
 	}
 

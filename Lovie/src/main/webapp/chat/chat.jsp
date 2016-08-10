@@ -244,7 +244,12 @@ label:before {
     </script>
     <script>
     function firstLoad(){
-    	var firstPerson = $('.right div:nth-child(2)').attr('data-chat')
+    	
+    	var firstPerson = "${firstSender}";
+    	if (firstPerson == ""){
+    		var firstPerson = $('.right div:nth-child(2)').attr('data-chat')
+    	}
+    	
     	var nickname;
     	$.ajax({
 				    url: '${pageContext.request.contextPath}/member/nickname/'+firstPerson,

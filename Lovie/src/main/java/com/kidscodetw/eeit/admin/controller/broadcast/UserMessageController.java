@@ -12,7 +12,7 @@ import com.kidscodetw.eeit.dao.member.MemberDAO;
 
 @Controller
 public class UserMessageController {
-	
+
 	@Autowired
 	MemberDAO memberDAO;
 
@@ -36,9 +36,12 @@ public class UserMessageController {
 			}
 		}
 	}
-	
-	
 
-	 
-
+	@MessageMapping("/broadcastMember")
+	public void dispatchMember(FromBackendMessge message) throws Exception {
+		for (Object role : message.getGroup()) {
+			template.convertAndSendToUser((String) role, "/queue/broadcastOne", message.getMessage());
+			
+		}
+	}
 }

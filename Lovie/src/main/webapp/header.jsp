@@ -24,7 +24,7 @@ a{
 	<div id="nav" class="navbar navbar-inverse" role="navigation">
 		<nav >
 		<div class="container" >
-
+			
 			<div class="navbar-header" >
 				<button type="button" class="navbar-toggle" data-toggle="collapse"
 					data-target="#bs-example-navbar-collapse-1">
@@ -34,7 +34,7 @@ a{
 				</button>
 				<a class="navbar-brand" href="#"></a>
 			</div>
-
+			
 			<div class="collapse navbar-collapse"
 				id="bs-example-navbar-collapse-1">
 				<ul class="nav navbar-nav">
@@ -63,7 +63,7 @@ a{
 								<div class="msg">${msg}</div>
 							</c:if>
 							<form name='loginForm'
-		 					 action="<c:url value='${pageContext.request.contextPath }/j_spring_security_check' />" method="post">
+		 					 action="${pageContext.request.contextPath }/j_spring_security_check" method="post">
 					
 							   <table>
 								<tr>
@@ -105,7 +105,7 @@ a{
 									<li><div><a href='${pageContext.request.contextPath}/member/profile/${loginmember.id}'>個人首頁</a></div></li>
 									<li><div><a href='${pageContext.request.contextPath}/member/memberFriendList.jsp'>我的交友圈</a></div></li>
 									<li><div>我的約會</div></li>
-									<li><div>訊息通知</div></li>
+<!-- 									<li><div>訊息通知</div></li> -->
 									<li><div><a href="${pageContext.request.contextPath}/chat/" target="_blank">聊天</a></div></li>
 									<sec:authorize access="hasRole('ADMIN')">
 									<li id="backstage" style="display: none"><div>

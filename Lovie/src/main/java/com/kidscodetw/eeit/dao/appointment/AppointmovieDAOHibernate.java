@@ -70,20 +70,58 @@ public class AppointmovieDAOHibernate implements AppointmovieDAO {
 			String showtimeDateend
 			) {
 		List<AppointmovieBean> result = null;
+		
 		try { 
 			/*
-			System.out.println("citysels="+citysels.toString()+","+(citysels==null)+","+citysels.length);
-			System.out.println("theatersels="+theatersels+","+(theatersels==null)+","+theatersels.length());
-			System.out.println("genresels="+genresels.toString()+","+(genresels==null)+","+genresels.length);
-			System.out.println("moviesels="+moviesels+","+(moviesels==null)+","+moviesels.length());
-			System.out.println("showtimeDatebeg="+showtimeDatebeg+","+(showtimeDatebeg==null)+","+showtimeDatebeg.length());
-			System.out.println("showtimeDateend="+showtimeDateend+","+(showtimeDateend==null)+","+showtimeDateend.length());
+			if (citysels==null)
+				System.out.println("citysels=null");
+			else
+				System.out.println("citysels="+citysels+","+(citysels==null)+","+citysels.length);
+			if (theatersels==null)
+				System.out.println("theatersels=null");
+			else
+				System.out.println("theatersels="+theatersels+","+(theatersels==null)+","+theatersels.length());
+			if (genresels==null)
+				System.out.println("genresels=null");
+			else
+				System.out.println("genresels="+genresels+","+(genresels==null)+","+genresels.length);
+			if (moviesels==null)
+				System.out.println("moviesels=null");
+			else
+				System.out.println("moviesels="+moviesels+","+(moviesels==null)+","+moviesels.length());
+			if (showtimeDatebeg==null)
+				System.out.println("showtimeDatebeg=null");
+			else
+				System.out.println("showtimeDatebeg="+showtimeDatebeg+","+(showtimeDatebeg==null)+","+showtimeDatebeg.length());
+			if (showtimeDateend==null)
+				System.out.println("showtimeDateend=null");
+			else
+				System.out.println("showtimeDateend="+showtimeDateend+","+(showtimeDateend==null)+","+showtimeDateend.length());
+	            
             citysels=[Ljava.lang.String;@ea0e4b,false,0
 			theatersels=,false,0
 			genresels=[Ljava.lang.String;@ea0e4b,false,0
 			moviesels=,false,0
 			showtimeDatebeg=,false,0
 			showtimeDateend=,false,0
+            
+			String SELECT_MovieShowtime_BySel =
+					"SELECT * FROM eeit86.Showtime S " +
+					"where movieName = '名偵探柯南：純黑的惡夢'  " + // moviesels  
+					"  and theaterName = '基隆秀泰影城'  " +   // theatersels
+					"  and showtimeDate between '2016-08-02' and  '2016-08-02'  " + // showtimeDatebeg+"~"+showtimeDateend
+					"  and movieName in (  " +                  // genresels
+					"	SELECT M.name  " +
+					"	FROM eeit86.Movie M join " +
+					"	 (SELECT * FROM eeit86.MovieGenre " +
+					"	   where genreid in(1,2,10)) MG " +
+					"	on M.id = MG.movieid " +
+					"  ) " +
+					"  and theaterName in ( " +                 // citysels
+					"	SELECT name FROM eeit86.Theater T " +
+					"	where city in ('台北市','基隆市') " +
+					"  ) " +
+					"order by movieName,theaterName,showtimeDate,showtimeTime " ;
             */
 			StringBuffer wherestr = new StringBuffer();
 			if (moviesels != null && moviesels.length()>0) 
@@ -122,26 +160,57 @@ public class AppointmovieDAOHibernate implements AppointmovieDAO {
 			if (genresels != null && genresels.length > 0 ) 
 			{
 				StringBuffer wheregenre = new StringBuffer(genresels[0]);
+				for(int i=1;i<genresels.length;i++)
+				{
+					wheregenre.append(","+genresels[i]);
+				}
+				if (wherestr.length() > 0)
+					wherestr.append(" and ");
+				wherestr.append("  (movieName in (  ");		
+				wherestr.append("	SELECT M.name  ");	
+				wherestr.append("	FROM eeit86.Movie M join ");	
+				wherestr.append("	 (SELECT * FROM eeit86.MovieGenre ");	
+				wherestr.append("	   where genreid in(");	
+				wherestr.append(wheregenre);	
+				wherestr.append(")) MG ");	
+				wherestr.append("	on M.id = MG.movieid ");	
+				wherestr.append("  )) ");	
 			}
-			//genresels=[Ljava.lang.String;@ea0e4b,false,0
-			//citysels=[Ljava.lang.String;@ea0e4b,false,0
-			String SELECT_MovieShowtime_BySel =
-					"SELECT * FROM eeit86.Showtime S " +
-					"where movieName = '名偵探柯南：純黑的惡夢'  " + // moviesels  
-					"  and theaterName = '基隆秀泰影城'  " +   // theatersels
-					"  and showtimeDate between '2016-08-02' and  '2016-08-02'  " + // showtimeDatebeg+"~"+showtimeDateend
-					"  and movieName in (  " +                  // genresels
-					"	SELECT M.name  " +
-					"	FROM eeit86.Movie M join " +
-					"	 (SELECT * FROM eeit86.MovieGenre " +
-					"	   where genreid in(1,2,10)) MG " +
-					"	on M.id = MG.movieid " +
-					"  ) " +
-					"  and theaterName in ( " +                 // citysels
-					"	SELECT name FROM eeit86.Theater T " +
-					"	where city in ('台北市','基隆市') " +
-					"  ) " +
-					"order by movieName,theaterName,showtimeDate,showtimeTime " ;
+			if (citysels != null && citysels.length > 0 ) 
+			{
+				StringBuffer wherecity = new StringBuffer("'"+citysels[0]+"'");
+				for(int i=1;i<citysels.length;i++)
+				{
+					wherecity.append(",'"+citysels[i]+"'");
+				}
+				if (wherestr.length() > 0)
+					wherestr.append(" and ");
+				wherestr.append("");	
+				wherestr.append("  (theaterName in ( ");             
+				wherestr.append("	SELECT name FROM eeit86.Theater T ");
+				wherestr.append("	where city in (");
+				wherestr.append(wherecity);
+				wherestr.append(") ");
+				wherestr.append("  )) ");				
+			}
+			String SELECT_MovieShowtime_BySel;
+			if (wherestr.length() > 0)
+			{
+				SELECT_MovieShowtime_BySel = 
+						"SELECT * FROM eeit86.Showtime S " +
+						"where " +
+						new String(wherestr) +
+						"order by movieName,theaterName,showtimeDate,showtimeTime " ;
+				System.out.println("=="+SELECT_MovieShowtime_BySel);		
+			}
+			else
+			{
+				SELECT_MovieShowtime_BySel = 
+						"SELECT * FROM eeit86.Showtime S " +
+						"order by movieName,theaterName,showtimeDate,showtimeTime " ;
+				System.out.println("=="+SELECT_MovieShowtime_BySel);		
+			
+			}
 							
 			SQLQuery query = getSession().createSQLQuery(SELECT_MovieShowtime_BySel);
 			query.addEntity(ShowtimeBean.class);
@@ -173,8 +242,8 @@ public class AppointmovieDAOHibernate implements AppointmovieDAO {
 							}else{
 								appointmovieBean.setGenrelist(genrelist.toString());
 							}
+							result.add(appointmovieBean);
 						}
-						result.add(appointmovieBean);
 						movieName = sbean.getMovieName();
 						showtimeBeans = new LinkedHashSet<ShowtimeBean>();
 					}
@@ -199,8 +268,8 @@ public class AppointmovieDAOHibernate implements AppointmovieDAO {
 					}else{
 						appointmovieBean.setGenrelist(genrelist.toString());
 					}
+					result.add(appointmovieBean);				
 				}
-				result.add(appointmovieBean);				
 			}
 		} catch (RuntimeException e) {
 			e.printStackTrace();

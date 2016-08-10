@@ -7,8 +7,7 @@
     z-index: 1;
     bottom: 0%;
     left: 0;
-    background-color: rgb(0,0,0);
-    background-color: rgba(0,0,0, 0.9);
+    background-color: rgba(0, 0, 0, 0.6);
     overflow-y: hidden;
     transition: 0.5s;
 }
@@ -61,17 +60,17 @@
   min-width: 550px;
   margin: auto;
   font-size: 0;
-  background: #505456;
+  background-color: rgba(0, 0, 0, 0.1);
   padding: 8px;
   border-radius: 6px;
-  box-shadow: 0 4px 10px #000;
   /********************/
-  height: 200px;
+  height: 215px;
   -webkit-overflow-scrolling: touch;
   /* for tablets */
 }
 .touch .carousel {
   overflow: auto;
+  background-color: rgba(0, 0, 0, 0.6);
 }
 .carousel:before, .carousel:after {
   content: '';
@@ -95,17 +94,17 @@
   left: 0;
   text-align: left;
   text-indent: -20px;
-  box-shadow: 50px 0 20px -20px #292B2C inset;
 }
 .carousel:after {
   content: '\203A';
   right: 0;
   text-align: right;
   text-indent: 40px;
-  box-shadow: -50px 0 20px -20px #292B2C inset;
+  
 }
 .carousel.right:after, .carousel.left:before {
   opacity: 1;
+  
 }
 .carousel.right:after {
   right: 0;
@@ -124,6 +123,7 @@
   font-size: 1.5em;
   -webkit-transition: 0.1s;
   transition: 0.1s;
+  
 }
 .carousel > a:hover {
   color: #FFF;
@@ -134,13 +134,13 @@
 .carousel > a.next {
   right: -20px;
 }
+
 .carousel > .indicator {
   pointer-events: none;
   position: absolute;
   z-index: 4;
   bottom: 0;
   left: 0;
-  background: #D82B6A;
   height: 4px;
   border-radius: 10px;
   opacity: 0;

@@ -20,7 +20,6 @@ import com.kidscodetw.eeit.entity.member.MemberBean;
 
 
 @Controller
-// @RequestMapping("forum")
 public class SelectArticleServlet {
 
 	@Autowired
@@ -146,4 +145,6 @@ public class SelectArticleServlet {
 		PublicationArticleResult.add(PublicationArticle);
 		return PublicationArticleResult;
 	}
+	
+	
 }

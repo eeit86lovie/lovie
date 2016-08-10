@@ -38,7 +38,6 @@
 <link href="${pageContext.request.contextPath}/css/timeline.css"
 	rel="stylesheet">
 
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <c:import charEncoding="UTF-8" url="/meta.jsp"></c:import>
 <title>商城購物</title>
 
@@ -220,9 +219,13 @@ text-align:center;;
 									<img src="${pageContext.request.contextPath}/src/main/webapp/image/product/visa.jpg"></img>
 									<input class="" type="text" id="idCard" required placeholder="請輸入卡號"  name="card"/><span id="idsp4"> </span> <br>
 									<span>(不可空白)</span></br>
-
+										
 								</div>
 
+						</div>
+						<div>
+							
+							
 						</div>
 						 
 						 <Input type="submit" class="btn btn-primary btn-lg btn-block" ></Input>
@@ -230,9 +233,19 @@ text-align:center;;
 					</form>
 					
 					</div>
-					<div>
-                           
+					<div style="margin:10px;">
+                           <button class="btn btn-danger" onclick="autoType()">一鍵輸入</button><br>
                       </div>
+                      <script>
+                      	function autoType(){
+                      		$('#idName').val("劉德華");
+                      		$('#idAddress').val("台北市復興南路100號");
+                      		$('#idMail').val("ggg123@gmail.com");
+                      		$('#idPhone').val("0912478547");
+                      		$('#idCard').val("5520547855433698");
+                      		
+                      	}
+                      </script>
 				</div>
 			</div>
 	

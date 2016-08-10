@@ -5,7 +5,7 @@ public class TradeCheckoutBean{
 	private Integer memberid;
 	private String memberaccount;
 	private String memberaddress;
-	private Integer memberphone;
+	private String memberphone;
 	private String productname;
 	private java.util.Date checktradeTime;
 	private Integer amount;
@@ -28,10 +28,10 @@ public class TradeCheckoutBean{
 	public void setMemberaddress(String memberaddress) {
 		this.memberaddress = memberaddress;
 	}
-	public Integer getMemberphone() {
+	public String getMemberphone() {
 		return memberphone;
 	}
-	public void setMemberphone(Integer memberphone) {
+	public void setMemberphone(String memberphone) {
 		this.memberphone = memberphone;
 	}
 	public String getProductname() {

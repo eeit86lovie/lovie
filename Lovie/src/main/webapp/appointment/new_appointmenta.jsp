@@ -53,6 +53,12 @@
 { 
    text-decoration:none;
 } 
+.nondisplaycomp {
+    display:none;
+}
+.displaycomp {
+    display:inline;
+}
 </style>
 <title>邀請新約會</title>
 </head>
@@ -77,7 +83,7 @@
     <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
       <div class="panel-body">
       <!-- 1查詢條件 beg -->
-	  <form class="form-horizontal" role="form" name="form1" action="#">
+	  <form class="form-horizontal" role="form" name="form1" id="form1" action="#">
 	  <fieldset>
 		<div class="form-group">
 		    <label class="control-label col-md-2" for="city" style="margin-right: 0px;">城　　市：</label>
@@ -126,9 +132,13 @@
 		    <span class="glyphicon glyphicon-remove-sign clearselspan" aria-hidden="true" onclick="clearinput(4);"></span>
 		</div>
 		<div class="form-group">
-		    <label class="control-label col-md-2" for="showtimeDate" style="margin-right: 0px;">放映日期：</label>
-		    <div class="col-md-9"> 
-		    	<input type="text" class="form-control" id="showtimeDate" name="showtimeDate" placeholder="請選擇放映日期" readonly>
+		    <label class="control-label col-md-2" for="showtimeDatebeg" style="margin-right: 0px;">放映日期：</label>
+		    <div class="col-md-4"> 
+		    	<input type="text" class="form-control" id="showtimeDatebeg" name="showtimeDatebeg" placeholder="請選擇放映起日" readonly>
+		    </div>
+		    <div class="col-md-1" style="text-align:center;line-height:29px;"><span >～</span></div>
+		    <div class="col-md-4"> 
+		    	<input type="text" class="form-control" id="showtimeDateend" name="showtimeDateend" placeholder="請選擇放映迄日" readonly>
 		    </div>
 		    <span class="glyphicon glyphicon-remove-sign clearselspan" aria-hidden="true" onclick="clearinput(5);"></span>
 	    </div>
@@ -158,6 +168,7 @@
     <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
       <div class="panel-body">
       <!-- 2 showtime beg -->
+      <img src="${pageContext.request.contextPath}/image/ajax-loader.gif" id="ajax-loader" class="nondisplaycomp" />
 	  <div id="movieshowtime">
         	目前沒有符合條件的電影,請重新查詢。
       </div> 
@@ -200,15 +211,11 @@ function formreset() {
 	$("#theaterName").val('').trigger('change');
 	$("#genreId").val('').trigger('change');
 	$("#movieName").val('').trigger('change');
-	$("#showtimeDate").val(""); 
+	$("#showtimeDatebeg").val(""); 
+	$("#showtimeDateend").val(""); 
 }
 
 function formsubmit() {
-	var citysels = $("#city").val();
-	var theatersels = $("#theaterName").val();
-	var genresels = $("#genreId").val();
-	var moviesels = $("#movieName").val();
-<<<<<<< HEAD
 	var showtimeDatebeg = $("#showtimeDatebeg").val();
 	var showtimeDateend = $("#showtimeDateend").val();
 
@@ -218,25 +225,27 @@ function formsubmit() {
 		alert("放映起日不可大於放映迄日,請重新選擇.");
 		return;
 	}	
+	var data_to_send = $("#form1").serialize();
 	
-	console.log(citysels);  //array
-	console.log(theatersels);
-	console.log(genresels);   //array
-	console.log(moviesels);
-	console.log(showtimeDatebeg+"~"+showtimeDateend);
-
 	$.ajax({
 		url : "new_appointmoviea_json",
-		data:{citysels:citysels,theatersels:theatersels,
-			genresels:genresels,moviesels:moviesels,
-			showtimeDatebeg:showtimeDatebeg,showtimeDateend:showtimeDateend},
-		type:"get",
+		data:data_to_send,
+		type:"post",
+		beforeSend : function(){
+			var movieshowtime = $("#movieshowtime");
+			movieshowtime.empty();
+			$("#ajax-loader").removeClass("nondisplaycomp").addClass("displaycomp");
+			$("#collapseTwo").addClass('in');
+		},
+		complete: function(){
+			$("#ajax-loader").removeClass("displaycomp").addClass("nondisplaycomp");
+		},
 		success : function(data) {
 		if (data != null) {
 				//var result = JSON.parse(data);
 				var result =data;
 				var movieshowtime = $("#movieshowtime");
-				console.log(movieshowtime);
+				//console.log(movieshowtime);
 				if (result.length > 0) {
 					movieshowtime.empty();
 				for (var i = 0; i < result.length; i++) {
@@ -269,28 +278,22 @@ function formsubmit() {
 					}
 				//**one movie template end	
 				}
+					$("#ajax-loader").removeClass("displaycomp").addClass("nondisplaycomp");
 					$("#collapseOne").removeClass('in');
 				 	//alert("查詢完成.....");
 				} else {
+					$("#ajax-loader").removeClass("displaycomp").addClass("nondisplaycomp");
 					movieshowtime.text("目前沒有符合條件的電影,請重新查詢。");
-				 	//alert("沒有相符的電影,請重新查詢。");
+				 	alert("沒有相符的電影,請重新查詢。");
 				}
-				$("#collapseTwo").addClass('in');
+				//$("#collapseTwo").addClass('in');
 					
-		}}
+		}else{
+			movieshowtime.text("請重新查詢。");
+			alert("請重新查詢。");
+		}
+		}
 	});
-=======
-	var showtimesels = $("#showtimeDate").val();
-console.log(citysels);
-console.log(theatersels);
-console.log(genresels);
-console.log(moviesels);
-console.log(showtimesels);
-  alert("查詢.....");
-  
-  
-  
->>>>>>> branch 'master' of https://github.com/eeit86lovie/lovie.git
 }
 </script>
 
@@ -310,7 +313,8 @@ console.log(showtimesels);
 			 placeholder: '請選擇電影名稱',
 			 allowClear: true
 		 });
-         $('#showtimeDate').datepicker({ dateFormat: "yy-mm-dd" });
+         $('#showtimeDatebeg').datepicker({ dateFormat: "yy-mm-dd" });
+         $('#showtimeDateend').datepicker({ dateFormat: "yy-mm-dd" });
      });
 </script>
 <!-- end script -->

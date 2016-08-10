@@ -22,6 +22,7 @@ import com.kidscodetw.eeit.entity.appoint.AppointmentBean;
 import com.kidscodetw.eeit.entity.appointment.AppointmentBean2;
 import com.kidscodetw.eeit.entity.appointment.AppointmentaBean;
 import com.kidscodetw.eeit.entity.appointment.AppointmentaeditBean;
+import com.kidscodetw.eeit.entity.appointment.AppointmentamBean;
 import com.kidscodetw.eeit.entity.appointment.AppointmentbBean;
 import com.kidscodetw.eeit.entity.appointment.AppointmentbeditBean;
 import com.kidscodetw.eeit.entity.appointment.AppointmentsBean;
@@ -62,12 +63,12 @@ public class AppointmentsMVC {
 
 	@RequestMapping("new_appointmoviea_json")
 	public @ResponseBody List<AppointmovieBean> new_appointmoviea_json(
-		   @RequestParam(value="citysels",required=false) String[] citysels,
-		   @RequestParam(value="theatersels",required=false) String theatersels,
-		   @RequestParam(value="genresels",required=false) String[] genresels,
-		   @RequestParam(value="moviesels",required=false) String moviesels,
-		   @RequestParam(value="showtimeDatebeg",required=false) String showtimeDatebeg,
-		   @RequestParam(value="showtimeDateend",required=false) String showtimeDateend,
+			   @RequestParam(value="city",required=false) String[] citysels,
+			   @RequestParam(value="theaterName",required=false) String theatersels,
+			   @RequestParam(value="genreId",required=false) String[] genresels,
+			   @RequestParam(value="movieName",required=false) String moviesels,
+			   @RequestParam(value="showtimeDatebeg",required=false) String showtimeDatebeg,
+			   @RequestParam(value="showtimeDateend",required=false) String showtimeDateend,
 		   Model model){
 		List<AppointmovieBean> appointmovie_list = appointmovieService.select_movieshowtime_list(citysels, theatersels, genresels, moviesels, showtimeDatebeg, showtimeDateend);
 		return appointmovie_list;
@@ -189,7 +190,14 @@ public class AppointmentsMVC {
 		return "appointment/new_appointmentb.jsp";
 	}	
 		
-		
+	@RequestMapping("new_appointment_json")
+	public @ResponseBody List<AppointmentamBean> new_appointment_json(
+			   @RequestParam(value="showtimechk",required=false) Integer[] showtimechk){
+		List<AppointmentamBean> appointment_list = appointmentService2.selectBySids(showtimechk);
+		return appointment_list;
+	}
+
+	
 	//查詢(1)
 	@RequestMapping("appointments")
 	public String getAppointments(){

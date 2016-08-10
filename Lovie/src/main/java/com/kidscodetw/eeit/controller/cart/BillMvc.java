@@ -1,5 +1,6 @@
 package com.kidscodetw.eeit.controller.cart;
 
+import java.io.UnsupportedEncodingException;
 import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.kidscodetw.eeit.dao.cart.BillDAO;
 import com.kidscodetw.eeit.dao.cart.ProductDAO;
+import com.kidscodetw.eeit.dao.cart.TradeDetailDAO;
 import com.kidscodetw.eeit.dao.member.MemberDAO;
 import com.kidscodetw.eeit.entity.cart.BillBean;
 import com.kidscodetw.eeit.entity.cart.ProductBean;
@@ -34,39 +36,43 @@ public class BillMvc {
 	
 	@Autowired
 	private MemberDAO memberDAO;
-   
+	
+	@Autowired
+	private TradeDetailDAO tradeDetailDAO;
+	
+	@Autowired
+	HttpSession session;
 	
 
 
     @RequestMapping("billCheckout")
-	public String getBillData(@RequestParam("username")String username,@RequestParam("address")String address,@RequestParam("phone")int phone,@RequestParam("card")int card, Principal principal, HttpServletRequest request, Model model ){
-		System.out.println(principal.getName()); //3122094
+	public String getBillData(@RequestParam("username")String username,@RequestParam("address")String address,@RequestParam("phone")String phone,@RequestParam("card")String card, Principal principal,Model model ){
+		
+    	System.out.println(address);
 		MemberBean member = memberDAO.select(principal.getName());
-		System.out.println(member);
-		HttpSession session = request.getSession();
 		List<Map<String, Object>> cartlist = (List<Map<String, Object>>) session.getAttribute("addcartlist");
 		Integer allTotalCost = new Integer(0);
 		List<TradeCheckoutBean> checkoutItems = new ArrayList<TradeCheckoutBean>();
+		BillBean billBean = new BillBean();
+		billBean.setAddress(address);
+		billBean.setCreditnum(card);
+		billBean.setPhone(phone);
+		billBean.setMemberid(member.getId());
+		billBean.setStatus(0);
+		BillBean resultBill = billDAO.insert(billBean);
+		Integer billId = resultBill.getId();
 		for(Map map: cartlist){
-			TradeDetailBean tradeDetailbean = new TradeDetailBean();
-			
-			
-			
-			
-			BillBean billBean = new BillBean();
-			billBean.setMemberid(member.getId());
-			billBean.setAddress(address);
-			billBean.setPhone(phone);
-			
-			
+			TradeDetailBean tradeDetailBean = new TradeDetailBean();
 			
 			
 			ProductBean productBean = (ProductBean)map.get("bean");
-			System.out.println(productBean);
-			System.out.println(map.get("amount"));
 			Integer totalCost = (productBean.getCost()*(Integer)map.get("amount"));
-			System.out.println(totalCost);
 			TradeCheckoutBean tradeCheckoutBean=new TradeCheckoutBean();
+			tradeDetailBean.setBillid(billId);
+			tradeDetailBean.setAmount((Integer)map.get("amount"));
+			tradeDetailBean.setProductid(productBean.getProductid());
+			tradeDetailBean.setTotalcost(totalCost);
+			tradeDetailDAO.insert(tradeDetailBean);
 			tradeCheckoutBean.setMemberid(member.getId());
 			tradeCheckoutBean.setMemberaccount(member.getAccount());
 			tradeCheckoutBean.setMemberaddress(address);
@@ -77,33 +83,7 @@ public class BillMvc {
 			tradeCheckoutBean.setAmount(totalCost);
 			allTotalCost = allTotalCost + totalCost;
 			checkoutItems.add(tradeCheckoutBean);
-		
-//		
-//		Map<String,Object> all = new HashMap<String,Object>();
-//
-//		List<BillBean> lbb=billDAO.select_memberid(member.getId());
-//		System.out.println(lbb);
-//		for(BillBean checkbillBean : lbb){
-//		
-//			System.out.println(checkbillBean);
-//		}
-//		all.put("memberid",billBean.getMemberid().toString());
-//		all.put("address",allcheckBill.getAddress().toString());
-//		all.put("phone",allcheckBill.getPhone().toString());
-//		all.put("creditnum",allcheckBill.getCreditnum().toString());
-//		all.put("status",allcheckBill.getStatus().toString());
-//		all.put("time",allcheckBill.getTradeTime().toString());
-		
-//		
-//		List<TradeDetailBean> allcheckdetail=tradedetailDAO.select_memberid(member.getId());
-//		System.out.println(allcheckdetail);
-//		all.put("mid",allcheckdetail.getMemberid().toString());
-//		all.put("pid",allcheckdetail.getProductid().toString());
-//		all.put("totalcost",allcheckdetail.getTotalcost().toString());
-//		all.put("amount",allcheckdetail.getAmount().toString());
-//		
-//		Map<String,Object> last=new HashMap<String,Object>();
-//		last.put("all",all);
+			System.out.println(billBean.getAddress());
 		
 	}
 		model.addAttribute("checkoutItems", checkoutItems);

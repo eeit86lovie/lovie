@@ -235,6 +235,12 @@
 						<li><a href="${pageContext.request.contextPath}/admin/broadcast/broadcastAll">使用者群組廣播</a></li>
 						<li><a href="${pageContext.request.contextPath}/admin/broadcast/broadcastOne">特定使用者廣播</a></li>
 					</ul></li>
+					
+					<li><a href="pages/forms.html"><i class="fa fa-microphone fa-fw"></i>
+						客服<span class="fa arrow"></a>
+					<ul class="nav nav-second-level">
+						<li><a href="${pageContext.request.contextPath}/admin/custservice/_custservice">問題查看</a></li>
+					</ul></li>
 			</ul>
 		</div>
 		<!-- /.sidebar-collapse -->

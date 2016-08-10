@@ -12,9 +12,9 @@ public class BillBean implements Serializable{
 	private Integer id;
 	private Integer memberid;
     private String address;
-    private Integer phone;
+    private String phone;
 	private java.util.Date tradeTime;
-	private Integer creditnum;
+	private String creditnum;
 	private Integer status;
 	public Integer getId() {
 		return id;
@@ -34,10 +34,10 @@ public class BillBean implements Serializable{
 	public void setAddress(String address) {
 		this.address = address;
 	}
-	public Integer getPhone() {
+	public String getPhone() {
 		return phone;
 	}
-	public void setPhone(Integer phone) {
+	public void setPhone(String phone) {
 		this.phone = phone;
 	}
 	public java.util.Date getTradeTime() {
@@ -46,10 +46,10 @@ public class BillBean implements Serializable{
 	public void setTradeTime(java.util.Date tradeTime) {
 		this.tradeTime = tradeTime;
 	}
-	public Integer getCreditnum() {
+	public String getCreditnum() {
 		return creditnum;
 	}
-	public void setCreditnum(Integer creditnum) {
+	public void setCreditnum(String creditnum) {
 		this.creditnum = creditnum;
 	}
 	public Integer getStatus() {

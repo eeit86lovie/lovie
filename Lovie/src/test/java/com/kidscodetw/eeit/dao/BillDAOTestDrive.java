@@ -60,7 +60,7 @@ public class BillDAOTestDrive {
 		bb.setMemberid(2);
 		bb.setTradeTime(new java.sql.Timestamp(new java.util.Date().getTime()));
 	    bb.setStatus(0);
-	    bb.setCreditnum(111111111);
+	    bb.setCreditnum("111111111");
 		BillBean result = billDAO.insert(bb);
 		Assert.isTrue(result.getMemberid().equals(2), "insert fail");
 	}
@@ -70,10 +70,10 @@ public class BillDAOTestDrive {
 	@Rollback(true)
 	public void update() {
 		BillBean bb = billDAO.select_id(29);
-		bb.setCreditnum(123456789);
+		bb.setCreditnum("123456789");
 		billDAO.update(bb);
-		Integer result = billDAO.select_id(29).getCreditnum();
-		Assert.isTrue(result.equals(123456789), "update fail");
+		String result = billDAO.select_id(29).getCreditnum();
+		Assert.isTrue(result.equals("123456789"), "update fail");
 
 	}
 
