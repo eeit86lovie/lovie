@@ -201,14 +201,14 @@ public class AppointmovieDAOHibernate implements AppointmovieDAO {
 						"where " +
 						new String(wherestr) +
 						"order by movieName,theaterName,showtimeDate,showtimeTime " ;
-				System.out.println("=="+SELECT_MovieShowtime_BySel);		
+				//System.out.println("=="+SELECT_MovieShowtime_BySel);		
 			}
 			else
 			{
 				SELECT_MovieShowtime_BySel = 
 						"SELECT * FROM eeit86.Showtime S " +
 						"order by movieName,theaterName,showtimeDate,showtimeTime " ;
-				System.out.println("=="+SELECT_MovieShowtime_BySel);		
+				//System.out.println("=="+SELECT_MovieShowtime_BySel);		
 			
 			}
 							
@@ -274,7 +274,7 @@ public class AppointmovieDAOHibernate implements AppointmovieDAO {
 		} catch (RuntimeException e) {
 			e.printStackTrace();
 		}
-		System.out.println(result);
+		//System.out.println(result);
 		return result;
 	}
 	

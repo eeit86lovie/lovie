@@ -284,7 +284,7 @@ function formsubmit() {
 				} else {
 					$("#ajax-loader").removeClass("displaycomp").addClass("nondisplaycomp");
 					movieshowtime.text("目前沒有符合條件的電影,請重新查詢。");
-				 	alert("沒有相符的電影,請重新查詢。");
+				 	alert("沒有符合條件的電影,請重新查詢。");
 				}
 				//$("#collapseTwo").addClass('in');
 					

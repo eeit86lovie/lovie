@@ -3,6 +3,8 @@ package com.kidscodetw.eeit.dao.appointment;
 import java.sql.Date;
 import java.util.List;
 
+import javax.persistence.Id;
+
 import org.hibernate.Query;
 import org.hibernate.SQLQuery;
 import org.hibernate.Session;
@@ -14,6 +16,7 @@ import com.kidscodetw.eeit.entity.appointment.AppointmentaBean;
 import com.kidscodetw.eeit.entity.appointment.AppointmentaeditBean;
 import com.kidscodetw.eeit.entity.appointment.AppointmentamBean;
 import com.kidscodetw.eeit.entity.appointment.AppointmentareditBean;
+import com.kidscodetw.eeit.entity.appointment.AppointmentbaddBean;
 import com.kidscodetw.eeit.entity.appointment.AppointmentsBean;
 
 public class AppointmentDAO2Hibernate implements AppointmentDAO2 {
@@ -287,25 +290,29 @@ public class AppointmentDAO2Hibernate implements AppointmentDAO2 {
 	}	
 
 	@Override
-	public List<AppointmentamBean> selectBySids(Integer[] showtimeIds) {
+	public List<AppointmentamBean> selectBySids(Integer[] showtimeIds,Integer memberId) {
 		List<AppointmentamBean> result = null;
 		try {
 			StringBuffer whereshowtime = new StringBuffer();
 			if (showtimeIds != null && showtimeIds.length > 0 ) 
 			{
-				whereshowtime = new StringBuffer("and showtimeId in ("+showtimeIds[0]);
+				whereshowtime.append("and showtimeId in ("+showtimeIds[0]);
 				for(int i=1;i<showtimeIds.length;i++)
 				{
 					whereshowtime.append(","+showtimeIds[i]);
 				}
 				whereshowtime.append(")");
 			}
+			if (memberId != null && memberId > 0 ) 
+			{
+				whereshowtime.append(" and (memberId <> "+memberId+") ");
+			}
 			String SELECT_BySids = 
 			   		"select C.id,pubTime,showtimeId,astatus,acontent,requestcnt, " + 
 					   "       memberId,nickname,gender, " + 
 					   "	   if(birthday= null,null,Year(current_date())-Year(birthday)) age, " + 
 					   "       if(gender= 0,'女',if(gender=1,'男',gender)) gendertxt,	    " + 
-					   "       showtimeDate,concat(movieName,'<br/>',theaterName,'<br/>',showtimeDate,' ',showtimeTime) showtimeData " + 
+					   "       showtimeDate,concat(movieName,'＜',theaterName,'＞<br/>',showtimeDate,' ',showtimeTime) showtimeData " + 
 					   "from ( select id,memberId,pubTime,showtimeId, " + 
 					   "              astatus,acontent,count(appointmentID) requestcnt " + 
 					   "       from " + 
@@ -328,16 +335,64 @@ public class AppointmentDAO2Hibernate implements AppointmentDAO2 {
 					   "    (select id,nickname,gender,birthday from eeit86.Member) E " + 
 					   "	 on memberId = E.id " + 
 					   "order by requestcnt desc,showtimeDate desc,pubTime,age " ;
-			System.out.println(SELECT_BySids);
+			//System.out.println(SELECT_BySids);
 			SQLQuery query = getSession().createSQLQuery(SELECT_BySids);
 			query.addEntity(AppointmentamBean.class);
 			result = query.list();
 		} catch (RuntimeException e) {
 			e.printStackTrace();
 		}
+		//System.out.println("sid="+result);
 		return result;
 	}	
 
+	@Override
+	public AppointmentbaddBean selectam_ByAidMid(Integer appointmentID) {
+		List<AppointmentbaddBean> result = null;
+		try {
+			String SELECT_ByAidMid = 
+			   		"select C.id,pubTime,showtimeId,astatus,acontent,requestcnt, " + 
+					   "       memberId mId,nickname,gender,constellation,city,district,birthday, " + 
+					   "	   if(birthday= null,null,Year(current_date())-Year(birthday)) age, " + 
+					   "       if(gender= 0,'女',if(gender=1,'男',gender)) gendertxt,	    " + 
+					   "       showtimeDate, concat(movieName,'<br/>',theaterName,'<br/>',showtimeDate,' ',showtimeTime) showtimeData " + 
+					   "from ( select id,memberId,pubTime,showtimeId, " + 
+					   "              astatus,acontent,count(appointmentID) requestcnt " + 
+					   "       from " + 
+					   "       (select id,memberId,pubTime,showtimeId, " + 
+					   "	           status astatus,content acontent " + 
+					   "	    from eeit86.Appointment " + 
+					   "        where status = 1 and id = "+ appointmentID +" ) A " + 
+					   "	   left outer join " + 
+					   "	   (select appointmentID,requestMemberId " + 
+					   "        from eeit86.AppointmentRequest " + 
+					   "        where status <> 9 ) B " + 
+					   "	   on A.id = B.appointmentID " + 
+					   "       group by id,memberId,pubTime,showtimeId,astatus,acontent " + 
+					   "     ) C " + 
+					   "	 join " + 
+					   "	(select id,showtimeDate,showtimeTime,movieName,theaterName " + 
+					   "	 from eeit86.Showtime) D " + 
+					   "	 on C.showtimeId = D.id " + 
+					   "	 join " + 
+					   "    (select id,nickname,gender,birthday," +
+					   "     constellation,city,district        " +
+					   "     from eeit86.Member) E " + 
+					   "	 on memberId = E.id " + 
+					   "order by requestcnt desc,showtimeDate desc,pubTime,age " ;
+			//System.out.println("**="+SELECT_ByAidMid);
+			SQLQuery query = getSession().createSQLQuery(SELECT_ByAidMid);
+			query.addEntity(AppointmentbaddBean.class);
+			result = query.list();
+			if (result.size() > 0)
+				return result.get(0);
+		} catch (RuntimeException e) {
+			e.printStackTrace();
+		}
+		//System.out.println("sid="+result);
+		return null;
+	}	
+	
 	@Override
 	public AppointmentaeditBean selectByAidMid(Integer appointmentID,Integer memberId) {
 		AppointmentaeditBean result = null;
