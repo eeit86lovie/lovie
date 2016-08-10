@@ -48,9 +48,9 @@
 					<div class="output"></div>
 				</div>
 				<div class="col-md-2">
-					<button>
-						<a href="showtimecrawler.do">更新電影時刻表</a>
-					</button>
+<!-- 					<button> -->
+<!-- 						<a href="showtimecrawler.do">更新電影時刻表</a> -->
+<!-- 					</button> -->
 				</div>
 			</div>
 			<hr>
