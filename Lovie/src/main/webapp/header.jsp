@@ -104,7 +104,7 @@ a{
 								<ul id="menu" style="display:none;position:absolute;z-index:1;">
 									<li><div><a href='${pageContext.request.contextPath}/member/profile/${loginmember.id}'>個人首頁</a></div></li>
 									<li><div><a href='${pageContext.request.contextPath}/member/memberFriendList.jsp'>我的交友圈</a></div></li>
-									<li><div>我的約會</div></li>
+									<li><div><a href=<c:url value="/appointments"/>><div>我的約會</div></a></li>
 <!-- 									<li><div>訊息通知</div></li> -->
 									<li><div><a href="${pageContext.request.contextPath}/chat/" target="_blank">聊天</a></div></li>
 									<sec:authorize access="hasRole('ADMIN')">
