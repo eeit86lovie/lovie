@@ -96,8 +96,7 @@ text-align:center;;
 							class="glyphicon glyphicon-shopping-cart"></i> 購物車</a></li>
 					<li><a href="/Lovie/product/tradedetail.jsp"><i
 							class="selectbill"></i>訂單查詢</a></li>
-					<li><a href=""><i class="customerservice"></i>回報客服</a> <!-- /.nav-second-level -->
-					</li>
+				
 
 
 				</ul>
@@ -214,11 +213,12 @@ text-align:center;;
 						</div>
 						<div class="col-lg-6">
 							<div class="form-group">
+							        <img src="${pageContext.request.contextPath}/image/product/member/card.jpg"></img>
+							        <div><br>
 									<label for="idCard">信用卡號</label>
-									<img src="${pageContext.request.contextPath}/src/main/webapp/image/product/visa.jpg"></img>
 									<input class="" type="text" id="idCard" required placeholder="請輸入卡號"  name="card"/><span id="idsp4"> </span> <br>
 									<span>(不可空白)</span></br>
-										
+									</div>	
 								</div>
 
 						</div>

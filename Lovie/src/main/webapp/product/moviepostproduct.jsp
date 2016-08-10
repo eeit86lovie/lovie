@@ -58,7 +58,7 @@
 .thumbnail {
 	text-align: center;
 	border: solid;
-	width:350px;
+	width:300px;
     height:400px
 }
 #postdiscount img { 

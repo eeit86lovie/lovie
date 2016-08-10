@@ -19,8 +19,7 @@
 							class="glyphicon glyphicon-shopping-cart"></i> 購物車</a></li>
 					<li><a href="${pageContext.request.contextPath}/product/queryTrade"><i
 							class="selectbill"></i>訂單查詢</a></li>
-					<li><a href=""><i class="customerservice"></i>回報客服</a> <!-- /.nav-second-level -->
-					</li>
+					
 
 
 				</ul>
