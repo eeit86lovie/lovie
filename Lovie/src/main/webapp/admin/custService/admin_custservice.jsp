@@ -96,7 +96,7 @@
 				td4.append(button);
 				
 				if(Selectresult[i].status=="1"){
-					status ="代處理";
+					status ="待處理";
 					
 					var td5 = $("<td id='"+'statue'+Selectresult[i].id+"'></td>").append(status);
 				}else{

@@ -355,7 +355,7 @@ function add(){
 				
 	  		
 	  		var img = document.createElement("img");
-	  		img.src = getmemberPhoto(articleJson[i].memberAccount).photoUrl;
+	  		img.src = "${pageContext.request.contextPath}/photo/member/"+getmemberPhoto(articleJson[i].memberAccount).id;
 	  		img.className = "photo_div";
 	  		var Article_photo_div = $("<div></div>").append(img);
 	  		var Article_member_div = $("<div class='member'></div>").append(linkMember);	  		
@@ -569,7 +569,7 @@ function add(){
 		
 	
 		var Reply_img = document.createElement("img");
-		Reply_img.src = getmemberPhoto(returnReplyjson.memberAccount).photoUrl;
+		Reply_img.src = "${pageContext.request.contextPath}/photo/member/"+getmemberPhoto(returnReplyjson.memberAccount).id;
 		Reply_img.className = "replyphoto";
 	  	var Reply_photo_div = $("<div></div>").append(Reply_img);
 	  		  	
@@ -998,7 +998,7 @@ function add(){
 							//var rankPeopleName_div = $("<div></div>").append(getmemberPhoto(allLikejson[m].memberAccount).nickname);
 							var rankPeople_img = document.createElement("img");
 							rankPeople_img.className ="rankPeople_img";
-							rankPeople_img.src = getmemberPhoto(allLikejson[m].memberAccount).photoUrl;
+							rankPeople_img.src = "${pageContext.request.contextPath}/photo/member/"+getmemberPhoto(allLikejson[m].memberAccount).id;
 				
 							//rankPeople_div.append(rankPeople_img);
 							//rankPeople_div.append(rankPeopleName_div);	
@@ -1042,7 +1042,7 @@ function add(){
 							//var rankPeopleName_div = $("<div></div>").append(getmemberPhoto(allLikejson[m].memberAccount).nickname);
 							var rankPeople_img = document.createElement("img");
 							rankPeople_img.className ="rankPeople_img";
-							rankPeople_img.src = getmemberPhoto(allLikejson[m].memberAccount).photoUrl;
+							rankPeople_img.src = "${pageContext.request.contextPath}/photo/member/"+getmemberPhoto(allLikejson[m].memberAccount).id;
 				
 							li_Rank.append(rankPeople_img);
 							//rankPeople_div.append(rankPeopleName_div);
