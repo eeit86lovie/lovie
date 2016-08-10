@@ -10,7 +10,16 @@
     <script type="text/javascript">
         var stompClient = null;
 
-
+        function getCheckedBoxes(chkboxName) {
+        	  var checkboxes = document.getElementsByName(chkboxName);
+        	  var checkboxesChecked = [];
+        	  for (var i=0; i<checkboxes.length; i++) {
+        	     if (checkboxes[i].checked) {
+        	        checkboxesChecked.push(checkboxes[i]);
+        	     }
+        	  }
+        	  return checkboxesChecked.length > 0 ? checkboxesChecked : null;
+        	}
 
         function connect() {
             var socket = new SockJS('/Lovie/stomp');
@@ -30,14 +39,18 @@
 
         function sendMessage() {
         	var style;
+        	var group = [];
             var message = document.getElementById('messageInput').value;
-            var checkedGuest = document.getElementById("guestCheckbox");
-            var checkedUser = document.getElementById("userCheckbox");
-            var checkedGold = document.getElementById("goldCheckbox");
-           	if(!checkedGuest.checked && !checkedUser.checked && !checkedGold.checked){
+            var checkedBoxs = getCheckedBoxes("account");
+            if(checkedBoxs == null){
             	alert("請至少勾選一名會員");
+           	}else if(document.getElementById("messageInput").value==""){
+           		alert("請輸入廣播訊息")
            	}else{
-           		stompClient.send("/app/broadcast", {}, JSON.stringify({ 'message': message ,'group':[getCheckedValue(checkedGuest) ,getCheckedValue(checkedUser),getCheckedValue(checkedGold)]}));
+           		for(var i=0;i<checkedBoxs.length;i++){
+           			group.push(checkedBoxs[i].id)
+           		}
+           		stompClient.send("/app/broadcastMember", {}, JSON.stringify({ 'message': message ,'group':group}));
            	}
         }
 
@@ -72,21 +85,23 @@
 	<thead>
 		<th></th>
 		<th>照片</th>
-		<th>ID</th>
 		<th>帳號</th>
 		<th>暱稱</th>
+		<th>年齡</th>
 		<th>性別</th>
 		<th>居住地</th>
 	</thead>
 	<tbody>
 	<c:forEach items="${onlineUsers }" var="onlineUser">
+	
 	<tr>
-		<td><input type="checkbox" name="account" value="${onlineUser.account }" /></td>
+		<td><input type="checkbox" name="account" id="${onlineUser.account }" value="${onlineUser.account }" /></td>
 		<td><img height="100" src="${pageContext.request.contextPath }/photo/member/${onlineUser.id}" /></td>
-		<td>${onlineUser.id}</td>
 		<td>${onlineUser.account}</td>
 		<td>${onlineUser.nickname}</td>
-		<td>${onlineUser.gender}</td>
+		<td>${onlineUser.age}</td>
+		<c:if test="${onlineUser.gender=='1'}"><td>男</td></c:if>
+		<c:if test="${onlineUser.gender=='0'}"><td>女</td></c:if>
 		<td>${onlineUser.city}</td>
 	</tr>
 	</c:forEach>

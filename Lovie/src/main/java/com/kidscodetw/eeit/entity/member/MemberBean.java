@@ -6,6 +6,8 @@ import java.util.List;
 
 import javax.persistence.Column;
 
+import org.apache.commons.lang.builder.EqualsBuilder;
+import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.hibernate.annotations.Table;
 
 
@@ -193,6 +195,28 @@ public class MemberBean implements Serializable{
 	public void setLoginTimes(Integer loginTimes) {
 		this.loginTimes = loginTimes;
 	}
+
+	@Override
+    public int hashCode() {
+        return new HashCodeBuilder(17, 31). 
+            append(id).
+            append(account).
+            toHashCode();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+       if (!(obj instanceof MemberBean))
+            return false;
+        if (obj == this)
+            return true;
+
+        MemberBean rhs = (MemberBean) obj;
+        return new EqualsBuilder().
+            append(id, rhs.id).
+            append(account, rhs.account).
+            isEquals();
+    }
 	
 
 }
