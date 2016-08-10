@@ -24,6 +24,7 @@ public class AppointmentamBean implements Serializable{
 	private Integer gender;	
 	private Integer age;
 	private String gendertxt;
+	
 	public Integer getId() {
 		return id;
 	}

@@ -20,10 +20,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kidscodetw.eeit.entity.appoint.AppointmentBean;
 import com.kidscodetw.eeit.entity.appointment.AppointmentBean2;
+import com.kidscodetw.eeit.entity.appointment.AppointmentRequestBean;
 import com.kidscodetw.eeit.entity.appointment.AppointmentaBean;
 import com.kidscodetw.eeit.entity.appointment.AppointmentaeditBean;
 import com.kidscodetw.eeit.entity.appointment.AppointmentamBean;
 import com.kidscodetw.eeit.entity.appointment.AppointmentbBean;
+import com.kidscodetw.eeit.entity.appointment.AppointmentbaddBean;
 import com.kidscodetw.eeit.entity.appointment.AppointmentbeditBean;
 import com.kidscodetw.eeit.entity.appointment.AppointmentsBean;
 import com.kidscodetw.eeit.entity.appointment.AppointmovieBean;
@@ -84,7 +86,7 @@ public class AppointmentsMVC {
 	    	if (memberId != null && showtimeID != null)
 	    	{
 	    		Integer appointmentID =  appointmentService2.selectByMemberShowtimeId(memberId, showtimeID);
-  		System.out.println("2 showtimeID"+showtimeID+","+memberId+","+appointmentID);
+	    		//System.out.println("2 showtimeID"+showtimeID+","+memberId+","+appointmentID);
 		    	if (appointmentID != null)
 		    	{
 			    	AppointmentaeditBean editbean = appointmentService2.selectByAidMidwith9(appointmentID, memberId);
@@ -94,7 +96,7 @@ public class AppointmentsMVC {
 				    	return "appointment/appointmentaedit.jsp";
 			    	}
 		    	}else{
-		    		System.out.println("4 showtimeID");
+		    		//System.out.println("4 showtimeID");
 		    		appointmentID =  appointmentRequestService.selectBySidMid(showtimeID, memberId);
 			    	if (appointmentID != null)
 			    	{
@@ -192,11 +194,92 @@ public class AppointmentsMVC {
 		
 	@RequestMapping("new_appointment_json")
 	public @ResponseBody List<AppointmentamBean> new_appointment_json(
-			   @RequestParam(value="showtimechk",required=false) Integer[] showtimechk){
-		List<AppointmentamBean> appointment_list = appointmentService2.selectBySids(showtimechk);
+			   @RequestParam(value="showtimechk",required=false) Integer[] showtimechk,
+			   HttpSession session){
+		//if (showtimechk != null)
+		//  for (Integer one : showtimechk) 
+		//	  System.out.print("**"+one+",");
+		
+		Integer memberId = null;
+		MemberBean bean =  	(MemberBean) session.getAttribute("loginmember");
+		if (bean != null)
+		{  memberId = bean.getId();  }
+		List<AppointmentamBean> appointment_list = appointmentService2.selectBySids(showtimechk,memberId);
 		return appointment_list;
 	}
 
+	@RequestMapping(value="/appointmentbadd/{appointmentID}", produces=MediaType.APPLICATION_JSON)
+	public String appointmentbadd(@PathVariable("appointmentID")Integer appointmentID, 
+			                          Model model,HttpSession session){
+		MemberBean bean =  	(MemberBean) session.getAttribute("loginmember");
+    	if (bean != null)
+    	{
+    		Integer memberId = bean.getId();
+	    	if (memberId != null && appointmentID != null)
+	    	{
+		    	AppointmentbeditBean editbean = appointmentRequestService.selectByAidMidwith9(appointmentID, memberId);
+		    	if (editbean != null)
+		    	{
+			    	//DataTransfer.changeBirthdayToAge
+					int intValue = Integer.parseInt(editbean.getBirthday().substring(0, 4));
+					java.util.Date today = Calendar.getInstance().getTime();
+					Integer memberAge = today.getYear() + 1900 - intValue;
+			    	//DataTransfer.genderTransfer
+					String gender=null;
+					if(editbean.getGender()==0)
+						gender="女";
+					else if(editbean.getGender()==1)
+						gender="男";
+					//DataTransfer  end 
+					model.addAttribute("memberAge",memberAge);
+					model.addAttribute("gender",gender);
+					model.addAttribute("oneAppointmentR",editbean);
+					return "appointment/appointmentbedit.jsp";
+		    	}else{
+		      		//System.out.println("2 appointmentID"+appointmentID+","+memberId);
+		      		AppointmentbaddBean ambean = appointmentService2.selectam_ByAidMid(appointmentID);
+		      		model.addAttribute("oneAppointmentR",ambean);
+		        	return "appointment/appointmentbadd.jsp";
+		    	}
+	    	}
+    	}
+    	return "new_appointmentb";
+	}
+	
+	@RequestMapping("/appointmentbadd/appointmentRAdd")
+    public void AppointmentBUpdate(@RequestParam("appointmentid") Integer appointmentid,
+    						  @RequestParam("bcontent") String bcontent,
+    		                  HttpServletResponse response,HttpSession session){
+	MemberBean bean =  	(MemberBean) session.getAttribute("loginmember");
+	if (bean != null)
+	{
+		Integer memberId = bean.getId();
+	if (memberId != null && appointmentid != null && bcontent.length() > 0 )
+	{
+		try {
+			AppointmentRequestBean appointmentRequestBean = new AppointmentRequestBean();
+			  appointmentRequestBean.setAppointmentID(appointmentid);
+			  appointmentRequestBean.setRequestMemberId(memberId);
+			  appointmentRequestBean.setContent(bcontent);
+			  appointmentRequestBean.setStatus(0);
+			  AppointmentRequestBean res1 = appointmentRequestService.insert(appointmentRequestBean);
+			PrintWriter out;
+			try {
+				out = response.getWriter();
+			    if (res1 == null)
+			    	out.println(-1);
+			    else
+				    out.println(res1.getAppointmentID());
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		} catch (NumberFormatException e) {
+			e.printStackTrace();
+		}
+		}
+	}		
+	return ;		
+    }
 	
 	//查詢(1)
 	@RequestMapping("appointments")

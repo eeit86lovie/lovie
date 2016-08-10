@@ -18,6 +18,7 @@ public class AppointmentRequestBean implements Serializable{
 	private Timestamp requestAppointmentTime;
 	private String content;
 	private Integer status;
+	
 	public Integer getAppointmentID() {
 		return appointmentID;
 	}
