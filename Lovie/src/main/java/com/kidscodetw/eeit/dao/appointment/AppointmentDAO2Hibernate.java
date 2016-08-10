@@ -312,6 +312,7 @@ public class AppointmentDAO2Hibernate implements AppointmentDAO2 {
 					   "       memberId,nickname,gender, " + 
 					   "	   if(birthday= null,null,Year(current_date())-Year(birthday)) age, " + 
 					   "       if(gender= 0,'女',if(gender=1,'男',gender)) gendertxt,	    " + 
+					   //"       showtimeDate,concat(movieName,'<br/>',theaterName,'<br/>',showtimeDate,' ',showtimeTime) showtimeData " + 
 					   "       showtimeDate,concat(movieName,'＜',theaterName,'＞<br/>',showtimeDate,' ',showtimeTime) showtimeData " + 
 					   "from ( select id,memberId,pubTime,showtimeId, " + 
 					   "              astatus,acontent,count(appointmentID) requestcnt " + 

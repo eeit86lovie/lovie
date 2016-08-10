@@ -58,11 +58,13 @@
 }
 .displaycomp {
     display:inline;
+    margin-left:10px;
 }
 .memberColumn {
-	color: black;
+	color: #A52A2A;//black;
 }
 .oneappdiv-o{
+  line-height:20px;
   display:inline-block ;
   vertical-align: top;
   background:white;
@@ -84,10 +86,10 @@
   height:100%;
 }
 .oneappdiv-ic0{
-background:#ffe6ee;
+  background:#ffe6ee;
 }
 .oneappdiv-ic1{
-background:#ceebfd;//#e7f5fe;
+  background:#ceebfd;
 }
 .oneappdiv-o:hover {
   border:1px solid #bcf6ff;
@@ -96,7 +98,7 @@ background:#ceebfd;//#e7f5fe;
 }
 .memimg{
   float:left;
-  border:0px solid #acd6ff;
+  border:2px solid white;
   border-radius:6px;
   width:30%;
   margin:3px;
@@ -105,6 +107,62 @@ div.panel-body {
   padding-right: 0px;
   padding-left: 0px;
 }
+/* effect-7 css */
+.port-7 .text-desc{
+	//background-color: #fff;
+	background: rgba(255,255,0,0.1);
+	//background: rgba(192,192,192,0.1);
+	opacity: 0; 
+	transition: 0.5s; 
+	color: #000;
+	padding:5px;
+	margin:5px;
+	border-radius:5px;
+	border:3px;
+	border-color: rgba(100%,100%,100%,0.2);
+	border-style:inset;
+	height:155px;
+}
+.port-7.effect-1 .image-box {
+	transition: 0.5s; 
+	position: relative; 
+	width: 100%; 
+	left: 0;
+}
+.port-7.effect-1:hover .image-box{
+	left: 68%;
+}
+.port-7.effect-1 .text-desc{
+	transform: perspective(600px) rotateY(90deg); 
+	transform-origin: left center 0; 
+	width: 67%; 
+	position: absolute; 
+	left: 0; 
+	top: 0;  
+	padding: 10px 10px;
+}
+.port-7.effect-1:hover .text-desc{
+	opacity: 1; 
+	transform: perspective(600px) rotateY(0deg); 
+	z-index: 99;
+}
+.btndiv{
+	display: inline-block; 
+	padding: 2px 3px; 
+	font-size: 13px; 
+	color: #fff; 
+	border: 2px solid #4d92d9; 
+	background-color: #4d92d9; 
+	text-decoration: none; 
+	transition: 0.4s;}
+	
+.btndiv:hover{
+	background-color: transparent; 
+	color: #4d92d9; 
+	transition: 0.4s;
+}
+/* effect-7 css end */
+
 </style>
 <title>申請新約會</title>
 </head>
@@ -439,9 +497,9 @@ function appointdiv() {
 		$.each(appointmentrlist,function(idx,oneAppoint){
 			//**one appoint template beg
 		    var oneapp_div = document.createElement('div');
-		    $(oneapp_div).addClass("col-md-4 oneappdiv-o").appendTo(frag); 
+		    $(oneapp_div).addClass("col-md-4 oneappdiv-o port-7 effect-1").appendTo(frag); 
 		    var oneapp_div_i = document.createElement('div');
-		    $(oneapp_div_i).addClass("col-md-12 oneappdiv-i").appendTo(oneapp_div);
+		    $(oneapp_div_i).addClass("col-md-12 oneappdiv-i image-box").appendTo(oneapp_div);
 		    if (oneAppoint.gender == 0) {
 		    	$(oneapp_div_i).addClass("oneappdiv-ic0");
 		    }else if (oneAppoint.gender == 1) {
@@ -452,25 +510,36 @@ function appointdiv() {
 		    $("<span class='glyphicon glyphicon-heart-empty' style='color:red;'></span>").appendTo(oneapp_div_i);
 		    $("<b class='memberColumn'> 已申請：</b>"+oneAppoint.requestcnt+"<br />").appendTo(oneapp_div_i);
 		    $("<b class='memberColumn'>邀請者：</b>"+oneAppoint.nickname+"<br />").appendTo(oneapp_div_i);
-		    $("<b class='memberColumn'>年齡：</b>"+oneAppoint.age+"歲　　<b class='memberColumn'>性別：</b>"+oneAppoint.gendertxt+"<br />").appendTo(oneapp_div_i);
+		    $("<b class='memberColumn'>年齡：</b>"+oneAppoint.age+"歲　<b class='memberColumn'>性別：</b>"+oneAppoint.gendertxt+"<br />").appendTo(oneapp_div_i);
 		    $("<b class='memberColumn'>許願：</b>"+oneAppoint.showtimeData+"<br />").appendTo(oneapp_div_i);
-		    $("<b class='memberColumn'>內容：</b>"+oneAppoint.acontent+"<br />").appendTo(oneapp_div_i);
+		    var textdesc_div_i = document.createElement('div');
+		    $(textdesc_div_i).addClass("text-desc").appendTo(oneapp_div);
+		    $("<a href='${pageContext.request.contextPath }/appointmentbadd/"+oneAppoint.id+"' class='btndiv'>按我約會</a><br />").appendTo(textdesc_div_i);
+		    $("<h3><b class='memberColumn'>邀請者：</b>"+oneAppoint.nickname+"</h3>").appendTo(textdesc_div_i);
+		    $("<b class='memberColumn'>留言內容：</b>"+oneAppoint.acontent+"<br />").appendTo(textdesc_div_i);
+        
 		    //**one appoint template end
 			/*
-		      <!-- one div beg -->
-			  <div class="col-md-4 oneappdiv-o"  >
-			  <div class="col-md-12 oneappdiv-i" id="app1" >
+        	  <!-- one div beg -->
+			  <div class="col-md-4 oneappdiv-o port-7 effect-1"  >
+			  <div class="col-md-12 oneappdiv-i image-box" >
 			  <a href='${pageContext.request.contextPath }/appointmentbadd/28'>
 			  <img id="blah" style="float:left;border:0px solid #acd6ff;border-radius:6px;width:30%;margin:3px;" src="${pageContext.request.contextPath}/photo/member/28" xx="${oneAppointmentedit.memberId}">
 			  </a>
 			  <b class="memberColumn">已申請：</b>${oneAppointmentedit.requestcnt}　<br />
 			  <b class="memberColumn">邀請者暱稱：</b>${oneAppointmentedit.nickname}　　<br />
-			  <b class="memberColumn">年齡：</b>${oneAppointmentedit.age}歲　　<b class="memberColumn">性別：</b>${oneAppointmentedit.gendertxt}<br />
+			  <b class="memberColumn">年齡：</b>${oneAppointmentedit.age}歲<br />
+			  <b class="memberColumn">性別：</b>${oneAppointmentedit.gendertxt}<br />
 			  <b class="memberColumn">許願：</b>
 			  ${oneAppointmentedit.showtimeData}<br />
-			  <b class="memberColumn">內容：</b>
-			  ${oneAppointmentedit.acontent}<br />
-			  </div></div>
+			  </div>
+	          <div class="text-desc">
+                  	<h3>${oneAppointmentedit.nickname}</h3>
+			  		<b class="memberColumn">留言內容：</b>
+			  		${oneAppointmentedit.acontent}<br />
+                  	<a href="${pageContext.request.contextPath }/appointmentbadd/28" class="btn">按我約會</a>
+              </div>
+			  </div>
 			  <!-- one div end --> 
 			*/			
 		});

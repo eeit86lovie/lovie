@@ -205,6 +205,7 @@ public class AppointmentsMVC {
 		if (bean != null)
 		{  memberId = bean.getId();  }
 		List<AppointmentamBean> appointment_list = appointmentService2.selectBySids(showtimechk,memberId);
+		//System.out.println(appointment_list);
 		return appointment_list;
 	}
 

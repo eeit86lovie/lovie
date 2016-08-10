@@ -119,12 +119,9 @@
 <!--  <div class="row"> -->
 <div class="col-md-12">
   <ul class="nav nav-tabs nav-justified">
-    <li> 
-  <!--<img src="${pageContext.request.contextPath}/image/icon/logo.png" style="width:90px;float:right;padding-right:20px;"></img>
-      <div style="color:red">會員:${loginmember.account}${loginmember.nickname}</div>  -->
-       <span class="myButton" onclick="newappointmentb();"><span class="glyphicon glyphicon-heart" style="padding-right:2px;"></span>+申請新約會</span>
-       <span class="myButton" onclick="newappointmenta();"><span class="glyphicon glyphicon-heart-empty" style="padding-right:2px;"></span>+邀請新約會</span>
-    </li>
+  <li><img src="${pageContext.request.contextPath}/image/icon/logo.png" style="width:90px;float:right;padding-right:20px;"></img>
+  <!-- <div style="color:red">會員:${loginmember.account}${loginmember.nickname}</div> -->
+  </li>
     <li><a href="${pageContext.request.contextPath}/appointments">一週約會通知</a></li>
     <li class="active"><a href="${pageContext.request.contextPath}/appointmentb">申請的約會(新增)</a></li>
     <li><a href="${pageContext.request.contextPath}/appointmenta">邀請的約會</a></li>
@@ -237,14 +234,5 @@ function addsave(){
 	}
 }
 </script>
-<script>
-function newappointmenta() {
-	window.location.href = "${pageContext.request.contextPath}/new_appointmenta";
-}
-function newappointmentb() {
-	window.location.href = "${pageContext.request.contextPath}/new_appointmentb";
-}
-</script>
-
 </body>
 </html>
