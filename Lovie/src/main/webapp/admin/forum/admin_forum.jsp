@@ -173,7 +173,7 @@ function clickDelete(ButtonObject){
 		},
 		success : function(deleteCount) {
 			if(deleteCount==1){
-				$("#"+"BOX01"+ article_ID).remove();
+				$("#"+"tr"+ article_ID).remove();
 				alert("刪除成功");
 			}else{
 				alert("刪除失敗");
