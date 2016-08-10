@@ -15,7 +15,7 @@
 
 
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>電影討論區</title>
 
 <style type="text/css">
 .notfound{
