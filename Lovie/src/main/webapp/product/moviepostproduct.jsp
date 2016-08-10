@@ -58,7 +58,16 @@
 .thumbnail {
 	text-align: center;
 	border: solid;
+	width:300px;
+    height:400px
 }
+#postdiscount img { 
+max-width:150px; 
+myimg:expression(onload=function(){ 
+this.style.width=(this.offsetWidth > 150)?"150px":"auto"});
+} 
+
+
 </style>
 
 
@@ -143,7 +152,8 @@
 					PostCaptionDiv.id = "postProduct";
 
 					var PostImgDiv = document.createElement("img");
-					PostImgDiv.setAttribute("src", "null");
+					PostImgDiv.id=data[i].productid;
+					PostImgDiv.setAttribute("src", "${pageContext.request.contextPath}/image/product/post/"+data[i].productid+".jpg");
 
 					var PostThumbnailDiv = document.createElement("div");
 					PostThumbnailDiv.className = "thumbnail";

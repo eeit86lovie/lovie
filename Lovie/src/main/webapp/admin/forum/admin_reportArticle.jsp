@@ -24,6 +24,24 @@
 	height: 120px;
 }
 
+.delete_btu{
+	position: relative;
+	left: 0;
+	top: 60px;
+	width:70px;
+	height:35px;
+	margin-top:5px;
+	color: #FFFFFF;
+	font-size:22px;
+	background-color:#ff5959;
+	border:none;
+	border-radius:3px;
+	-moz-border-radius:3px;
+	
+}
+
+
+
 </style>
 </head>
 <body>
@@ -61,7 +79,7 @@
 										<th>檢舉原因</th>
 									</tr>
 									
-									<button type="button" onclick="deleteArticle()">刪除</button>
+									<button class="delete_btu" type="button" onclick="deleteArticle()">刪除</button>
 								</thead>
 								<tbody id="forum_tbody">				
 																	

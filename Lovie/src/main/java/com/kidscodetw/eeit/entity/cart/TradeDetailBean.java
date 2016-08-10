@@ -14,6 +14,9 @@ public void setId(Integer id) {
 	this.id = id;
 }
 
+
+
+
 public Integer getProductid() {
 	return productid;
 }
@@ -34,9 +37,11 @@ public void setTotalcost(int totalcost) {
 }
 @Override
 public String toString() {
+
 	return "TradeDetailBean [id=" + id + ", memberid=" + billid
 			+ ", productid=" + productid + ", amount=" + amount
 			+ ", totalcost=" + totalcost + "]";
+
 }
 public Integer getBillid() {
 	return billid;
@@ -44,6 +49,7 @@ public Integer getBillid() {
 public void setBillid(Integer billid) {
 	this.billid = billid;
 }
+
 
 
 

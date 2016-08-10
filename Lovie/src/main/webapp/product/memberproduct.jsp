@@ -167,7 +167,7 @@
 						CaptionDiv.id = "memberproduct";
 
 						var ImgDiv = document.createElement("img");
-						ImgDiv.setAttribute("src", "null");
+						ImgDiv.setAttribute("src", "${pageContext.request.contextPath}/image/product/member/VIP.jpg");
 
 						var ThumbnailDiv = document.createElement("div");
 						ThumbnailDiv.className = "thumbnail";

@@ -59,7 +59,7 @@
 
                 <!-- 文字表單｜多欄不限字數 -->
                 <div class="form_area">
-                  <textarea class="form_txtarea" name="description" placeholder="描述您的問題"></textarea>
+                  <textarea id="reportReason" class="form_txtarea" name="description" placeholder="描述您的問題"></textarea>
                 </div>
                 
 <!--                 上傳附件｜不限格式限制2MB內檔案 -->
@@ -83,7 +83,7 @@
                 <div class="form_btn">
                     <div class="btn_send">
                     <input type="Hidden" name="method" value="add">
-                    <a onclick="form_submit()" style="cursor: pointer;" title="確認送出">確認送出</a></div>
+                    <a onclick="clickReport()" style="cursor: pointer;" title="確認送出">確認送出</a></div>
                     <div class="btn_cancel"><a onclick='document.getElementById("faq_form").reset()' style="cursor: pointer;" title="取消重填">取消重填</a></div>
                 </div>
                 </form>
@@ -124,58 +124,80 @@
 			alert(document.getElementByPhoto("photo").value)  */
 		
 
-			function messageGo(){
+// 			function messageGo(){
 
-			  //取得 "username" 欄位值
+// 			  //取得 "username" 欄位值
 
-			  var Id = $('#Id').val();        
+// 			  var Id = $('#Id').val();        
 
-			   //取得 "message" 欄位值                                
+// 			   //取得 "message" 欄位值                                
 
-			  var username = $('#username').val();                                           
+// 			  var username = $('#username').val();                                           
 
-			    $.ajax({
+// 			    $.ajax({
 
-			        //告訴程式表單要傳送到哪裡                                         
+// 			        //告訴程式表單要傳送到哪裡                                         
 
-			        url:"username.php",                                                              
+// 			        url:"username.php",                                                              
 
-			        //需要傳送的資料
+// 			        //需要傳送的資料
 
-			        data:"&username="+username+"&val="+val,  
+// 			        data:"&username="+username+"&val="+val,  
 
-			         //使用POST方法     
+// 			         //使用POST方法     
 
-			        type : "POST",                                                                    
+// 			        type : "POST",                                                                    
 
-			        //接收回傳資料的格式
-			        dataType:'json', 
+// 			        //接收回傳資料的格式
+// 			        dataType:'json', 
 
-			         //傳送失敗則跳出失敗訊息      
+// 			         //傳送失敗則跳出失敗訊息      
 
-			        error:function(){                                                                 
+// 			        error:function(){                                                                 
 
-			        //資料傳送失敗後就會執行這個function內的程式，可以在這裡寫入要執行的程式  
+// 			        //資料傳送失敗後就會執行這個function內的程式，可以在這裡寫入要執行的程式  
 
-			        alert("失敗");
+// 			        alert("失敗");
 
-			        },
+// 			        },
 
-			        //傳送成功則跳出成功訊息
+// 			        //傳送成功則跳出成功訊息
 
-			        success:function(){                                                           
+// 			        success:function(){                                                           
 
-			        //資料傳送成功後就會執行這個function內的程式，可以在這裡寫入要執行的程式  
+// 			        //資料傳送成功後就會執行這個function內的程式，可以在這裡寫入要執行的程式  
 
-			        alert("成功");
+// 			        alert("成功");
 
-			        }
+// 			        }
 
-			    }); 
+// 			    }); 
 
-			};
+// 			};
 			
-			
+			function clickReport(){
+				var member = "${loginmember.account }";
+				var problemsNember = $("#catalog").val();
+				var reportReason = $("#reportReason").val();
+				
+				
+				alert(member);
+				alert(problemsNember);
+				alert(reportReason);
+				
+				 $.ajax({
+					url : "custService",
+					type : "POST",					
+					data : {
+						Member:member,
+						ProblemsNember:problemsNember,
+						ReportReason:reportReason,
+					},
+					success : function(result) {
+						//alert(result);
+					}		
+				})			 
+			}
 		</script>
 	
 <c:import charEncoding="UTF-8" url="/footer.jsp"></c:import>

@@ -116,7 +116,6 @@
                                            <tr id="Cart${addtocart.bean.productid}" data-cost="${addtocart.bean.cost*addtocart.amount}" class="success">
                                              <td>${addtocart.bean.productid}</td>
                                              <td>${addtocart.bean.name}</td>
-                                             <td>${addtocart.bean.productphoto}</td>
                                              <td>${addtocart.bean.content}</td>
                                              <td>${addtocart.bean.discount}</td>
                                              <td>${addtocart.bean.cost}</td>

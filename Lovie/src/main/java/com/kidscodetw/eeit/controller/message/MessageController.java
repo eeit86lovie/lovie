@@ -15,6 +15,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kidscodetw.eeit.dao.member.FriendDAO;
@@ -39,12 +40,15 @@ public class MessageController {
 	private MemberDAO memberDAO;
 
 	@RequestMapping(method = RequestMethod.GET)
-	public String dispatch(Principal principal, Model model){
+	public String dispatch(Principal principal, Model model, @RequestParam(value="sender", required=false) String sender){
 		Integer memberId = memberDAO.select(principal.getName()).getId();
 		List<FriendBean> friendBeans = friendDAO.selectPart(memberId, 3);
 		List<MemberBean> memberBeans = new ArrayList<MemberBean>();
 		for(FriendBean bean :friendBeans){
 			memberBeans.add(memberDAO.select(bean.getFriendId()));
+		}
+		if(sender != null){
+			model.addAttribute("firstSender", sender);
 		}
 		model.addAttribute("friends", memberBeans);
 		return "/chat/chat.jsp";
@@ -81,6 +85,8 @@ public class MessageController {
 		}
 		return both;
 	}
+	
+	
 
 	public List<MessageBean> getSenders(String sender) {
 		return messageDAO.selectSender(sender);

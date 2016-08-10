@@ -63,7 +63,7 @@ color:black;
   <div class="col-md-9" ><b class="memberColumn">性別：</b>${gender}</div>
   <div class="col-md-9" ><b class="memberColumn">星座：</b>${oneMember.constellation}</div>
   <div class="col-md-9" ><b class="memberColumn">所在地：</b><span id="city" onclick="city_edit(this)"><span>${oneMember.city}</span>  <span>${oneMember.district}</span></span></div>
-  <div class="col-md-9" ><b class="memberColumn">好友數：</b><a href='${pageContext.request.contextPath}/member/memberFriendList.jsp'>${oneMember.friendNum}</a></div>
+  <div class="col-md-9" ><b class="memberColumn">好友數：</b>${oneMember.friendNum}</div>
   <div class="col-md-9" ><b class="memberColumn">會員等級：</b>${memberPrivilege}</div>
   <div class="col-md-9" ><b class="memberColumn">會員發文總數：</b><a href='${pageContext.request.contextPath}/forumsOneMember/${oneMember.account}'>${article}</a></div>
   <div class="col-md-9" id="pic" style="display:none"><b class="memberColumn">頭像：</b><input id="imgInp" style="margin-top:5px;display:inline" type="file"></input></div>
@@ -167,7 +167,7 @@ function city_edit(member_col){
 	var districttext=member_col.childNodes[2].innerHTML;
 	var cityText=$('<span id="twzipcode"></span>')
 		$("#"+member_col.id).replaceWith(cityText);
-	console.log(districttext+"????")
+// 	console.log(districttext+"????")
 		$('#twzipcode').twzipcode({
 			'countySel':text,
 			'districtSel':districttext})

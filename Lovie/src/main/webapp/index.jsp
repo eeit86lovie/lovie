@@ -5,12 +5,12 @@
 <!DOCTYPE html>
 <html>
 <head>
-<link rel="stylesheet" href="css/bootstrap.css">
-<link rel="stylesheet" href="css/imagehover.css">
-<link rel="stylesheet" href="css/bulma.css">
-<link rel="stylesheet" href="css/style.css">
-<link rel="stylesheet" href="css/footer.css">
-<link rel="stylesheet" href="css/scrolling-nav.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath }/css/bootstrap.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath }/css/imagehover.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath }/css/bulma.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath }/css/style.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath }/css/footer.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath }/css/scrolling-nav.css">
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/css/sweetalert/dist/sweetalert.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/animate.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/animated-notifications.css">

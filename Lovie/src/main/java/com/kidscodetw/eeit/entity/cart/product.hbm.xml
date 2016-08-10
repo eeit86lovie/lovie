@@ -12,7 +12,6 @@
         <property name="cost" column="cost" />
         <property name="discount" column="discount" />
         <property name="inventory" column=" inventory" />
-         <property name="productphoto" column="productphoto" />
           <property name="category" column="category" />
            <property name="content" column="content" />
         
