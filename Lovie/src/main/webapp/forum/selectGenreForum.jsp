@@ -37,7 +37,7 @@
 	
 		
 	<div class="row">
-   ${memberAccount}
+   
 		
 		<div class="col-md-2">
 			<c:import charEncoding="UTF-8" url="/forum/NewTestUl.jsp"></c:import>
@@ -70,8 +70,7 @@
     
       <div class="user_login">
     <form>
-       <input type="text" id="updateTitle" class="articleTitle"><br>
-        <p id ="error_update_title"></p>
+      
         
         
         <select id="updateGenre" class="articleGenre">
@@ -83,7 +82,10 @@
 	　		<option value="其他">其他</option>
 	　	</select><br>
 
-        <label>文章內容</label><TextArea type="text" id="updateTextArea"></TextArea><br>
+      <input type="text" id="updateTitle" class="articleTitle"><br>
+        <p id ="error_update_title"></p>
+
+         <TextArea type="text" id="updateTextArea" class="articleTextArea"></TextArea><br>
         <p id="error_update_content"></p>
         
         <div class="action_btns">

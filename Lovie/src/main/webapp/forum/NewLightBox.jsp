@@ -123,7 +123,7 @@ function clickLightButton(){
 		
 		if(error_title == 0 && error_content == 0){
 			$.ajax({
-				url : "forumsPublicationArticle",
+				url : "${pageContext.request.contextPath}/forumsPublicationArticle",
 				type : "post",
 				data : { 
 						 PublicationMember:pubMember,
