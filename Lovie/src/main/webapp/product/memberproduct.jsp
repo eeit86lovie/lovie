@@ -56,15 +56,18 @@
 }
 .thumbnail {
 	text-align: center;
-	border: solid;
+	border:4px solid #ffb1b1;
 	width:350px;
-    height:300px
+    height:300px;
+
 }
 #memberdiscount img { 
 max-width:150px; 
 myimg:expression(onload=function(){ 
 this.style.width=(this.offsetWidth > 150)?"150px":"auto"});
 } 
+
+
 
 
 
@@ -123,13 +126,13 @@ this.style.width=(this.offsetWidth > 150)?"150px":"auto"});
 						MemberNameP.appendChild(MemberNameTextP);
 
 						var MemberMoneyP = document.createElement("p");
-						var MemberMoneyTextP = document.createTextNode(data[i].cost);
+						var MemberMoneyTextP = document.createTextNode("$"+data[i].cost+"元");
 						MemberMoneyP.appendChild(MemberMoneyTextP);
 
 						var MemberContentP = document.createElement("p");
 						var MemberContentTextP = document.createTextNode(data[i].content);
 						MemberContentP.appendChild(MemberContentTextP);
-
+						
 						var MemberBtnP = document.createElement("button");
 						MemberBtnP.id = "MemberBtnP"+JSON.stringify(data[i]['productid']);
 						MemberBtnP.setAttribute('onclick', "addToCart(this)");
@@ -138,7 +141,7 @@ this.style.width=(this.offsetWidth > 150)?"150px":"auto"});
 						MemberBtnP.appendChild(MemberBtnTextP);
 						
 						var MemberSelect=document.createElement("select");
-						MemberSelect.className="form-control input-sm";
+						MemberSelect.className="dataTables-example_length";
 						MemberSelect.id="MemberSelectAmountdata"+JSON.stringify(data[i].productid);
 						
 						var MemberOpt1=document.createElement("option");
@@ -166,6 +169,12 @@ this.style.width=(this.offsetWidth > 150)?"150px":"auto"});
 						var MemberOPtText5=document.createTextNode(5);
 						MemberOpt5.appendChild(MemberOPtText5);
 
+						
+						var MemberSelectD=document.createElement("div");
+						MemberSelectD.className="memberdiv";
+						MemberSelectD.id="memberproductselect"
+						
+
 						var CaptionDiv = document.createElement("div");
 						CaptionDiv.className = "caption";
 						CaptionDiv.id = "memberproduct";
@@ -189,7 +198,8 @@ this.style.width=(this.offsetWidth > 150)?"150px":"auto"});
 						MemberSelect.appendChild(MemberOpt3);
 						MemberSelect.appendChild(MemberOpt4);
 						MemberSelect.appendChild(MemberOpt5);
-						CaptionDiv.appendChild(MemberSelect);
+						MemberSelectD.appendChild(MemberSelect);
+						CaptionDiv.appendChild(MemberSelectD);
 						CaptionDiv.appendChild(MemberBtnP);
 						CaptionDiv.appendChild(MemberBtnP);
 						ThumbnailDiv.appendChild(ImgDiv);

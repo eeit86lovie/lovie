@@ -54,12 +54,12 @@
 .nav {
 	text-align: center;
 }
-
 .thumbnail {
 	text-align: center;
-	border: solid;
-	width:300px;
-    height:400px
+	border:4px solid #ffb1b1;
+	width:350px;
+    height:400px;
+
 }
 #postdiscount img { 
 max-width:150px; 
@@ -103,7 +103,7 @@ this.style.width=(this.offsetWidth > 150)?"150px":"auto"});
 					PostNameP.appendChild(PostNameTextP);
 
 					var PostMoneyP = document.createElement("p");
-					var PostMoneyTextP = document.createTextNode(data[i].cost);
+					var PostMoneyTextP = document.createTextNode("$"+data[i].cost+"元");
 					PostMoneyP.appendChild(PostMoneyTextP);
 
 					var PostContentP = document.createElement("p");
@@ -119,7 +119,7 @@ this.style.width=(this.offsetWidth > 150)?"150px":"auto"});
 					PostBtnP.appendChild(PostBtnTextP);
 					
 					var PostSelect=document.createElement("select");
-					PostSelect.className="form-control input-sm";
+					PostSelect.className="dataTables-example_length";
 					PostSelect.id="PostSelectAmountdata"+JSON.stringify(data[i].productid);
 					
 					var PostOpt1=document.createElement("option");
@@ -146,7 +146,11 @@ this.style.width=(this.offsetWidth > 150)?"150px":"auto"});
 					PostOpt5.value=5;
 					var PostOPtText5=document.createTextNode(5);
 					PostOpt5.appendChild(PostOPtText5);
-	
+					
+					var PostSelectD=document.createElement("div");
+					PostSelectD.className="postdiv";
+					PostSelectD.id="postproductselect"
+					
 					var PostCaptionDiv = document.createElement("div");
 					PostCaptionDiv.className = "caption";
 					PostCaptionDiv.id = "postProduct";
@@ -171,7 +175,8 @@ this.style.width=(this.offsetWidth > 150)?"150px":"auto"});
 					PostSelect.appendChild(PostOpt3);
 					PostSelect.appendChild(PostOpt4);
 					PostSelect.appendChild(PostOpt5);
-					PostCaptionDiv.appendChild(PostSelect);
+					PostSelectD.appendChild(PostSelect);
+					PostCaptionDiv.appendChild(PostSelectD);
 					PostCaptionDiv.appendChild(PostBtnP);
 					PostThumbnailDiv.appendChild(PostImgDiv);
 					PostThumbnailDiv.appendChild(PostCaptionDiv);

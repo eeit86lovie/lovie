@@ -57,9 +57,10 @@
 
 .thumbnail {
 	text-align: center;
-	border: solid;
-	width:300px;
-    height:400px
+	border:4px solid #ffb1b1;
+	width:350px;
+    height:400px;
+ 
 }
 #dolldiscount img { 
 max-width:150px; 
@@ -101,7 +102,7 @@ this.style.width=(this.offsetWidth > 150)?"150px":"auto"});
 					DollNameP.appendChild(DollNameTextP);
 
 					var DollMoneyP = document.createElement("p");
-					var DollMoneyTextP = document.createTextNode(data[i].cost);
+					var DollMoneyTextP = document.createTextNode("$"+data[i].cost+"元");
 					DollMoneyP.appendChild(DollMoneyTextP);
 
 					var DollContentP = document.createElement("p");
@@ -116,7 +117,7 @@ this.style.width=(this.offsetWidth > 150)?"150px":"auto"});
 					DollBtnP.appendChild(DollBtnTextP);
 					
 					var DollSelect=document.createElement("select");
-					DollSelect.className="form-control input-sm";
+					DollSelect.className="dataTables-example_length";
 					DollSelect.id="DollSelectAmountdata"+JSON.stringify(data[i].productid);
 					
 					var DollOpt1=document.createElement("option");
@@ -145,6 +146,10 @@ this.style.width=(this.offsetWidth > 150)?"150px":"auto"});
 					DollOpt5.appendChild(DollOPtText5);
 	
 
+					var DollSelectD=document.createElement("div");
+					DollSelectD.className="dolldiv";
+					DollSelectD.id="dollproductselect"
+
 					var DollCaptionDiv = document.createElement("div");
 					DollCaptionDiv.className = "caption";
 					DollCaptionDiv.id = "dollProduct";
@@ -168,7 +173,8 @@ this.style.width=(this.offsetWidth > 150)?"150px":"auto"});
 					DollSelect.appendChild(DollOpt3);
 					DollSelect.appendChild(DollOpt4);
 					DollSelect.appendChild(DollOpt5);
-					DollCaptionDiv.appendChild(DollSelect);
+					DollSelectD.appendChild(DollSelect);
+					DollCaptionDiv.appendChild(DollSelectD);
 					DollCaptionDiv.appendChild(DollBtnP);
 					DollThumbnailDiv.appendChild(DollImgDiv);
 					DollThumbnailDiv.appendChild(DollCaptionDiv);

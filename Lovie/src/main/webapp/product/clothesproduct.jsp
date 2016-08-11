@@ -57,9 +57,10 @@
 
 .thumbnail {
 	text-align: center;
-	border: solid;
+	border:4px solid #ffb1b1;
 	width:300px;
-    height:300px
+    height:300px;
+ 
 }
 #clothdiscount img { 
 max-width:150px; 

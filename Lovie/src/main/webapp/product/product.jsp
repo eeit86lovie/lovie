@@ -56,6 +56,13 @@
 	border: solid;
 }
 
+#slide-image img { 
+max-width:1000px;
+max-height:200px; 
+myimg:expression(onload=function(){ 
+this.style.height=(this.offsetWidth > 200px)?"200px":"auto"});
+} 
+
 
 
 </style>
@@ -98,6 +105,23 @@
                     </div>
 
 	</div>
+	
+	
+	<div class="col-md-12"><br>
+	
+	
+	<div class="show">
+	 <img class="slide-image" src="${pageContext.request.contextPath}/image/product/images.png" >
+	</div>
+	
+	
+		</div>
+	
+	
+	
+	
+	
+	
 </div>
 	<script>
 		//首頁	

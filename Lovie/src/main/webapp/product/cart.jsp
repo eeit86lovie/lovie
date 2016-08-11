@@ -57,6 +57,17 @@
 	text-align: center;
 
 }
+
+{
+width:50px;
+height:25px;
+	margin-top:5px;
+	color: #FFFFFF;
+	background-color:#ff5959;
+	border:none;
+		border-radius:3px;
+	-moz-border-radius:3px;
+}
 </style>
 
 
