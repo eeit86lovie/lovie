@@ -55,24 +55,12 @@
 	border: solid;
 }
 
-
-.btn btn-primary btn-lg{
-text-align: center;
-
-}
 .panel-heading{
 
 text-align: center;
 }
-alert alert-warning{
 
-text-align: right;
-}
 
-.btn btn-primary btn-lg btn-block{
-text-align:center;;
-
-}
 </style>
 
 <c:import charEncoding="UTF-8" url="/header.jsp"></c:import>

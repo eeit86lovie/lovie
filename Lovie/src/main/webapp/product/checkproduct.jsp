@@ -66,13 +66,18 @@
 	border: solid;
 }
 
+.checkbill{
 
-
-.col-lg-6{
-
-	text-align: center;
-
+text-align: center;
 }
+
+.panel-heading{
+text-align: center;
+}
+
+
+
+
 </style>
 
 
@@ -87,7 +92,7 @@
 
 	<div id="page-wrapper">
 
-		<div class="col-lg-6">
+		<div class="col-lg-9">
                     <div class="panel panel-default">
                         <div class="panel-heading">
                                                                                         購物車
@@ -143,7 +148,7 @@
                                 </div>
                             </div>
                             
-                            <div>
+                            <div class="checkbill">
                             <a href="#" type="button" class="btn btn-primary" onclick="checktitleCost()">確認結帳</a>
                        
                             <button type="button" class="btn btn-danger" onclick="history.back()">回上一頁</button>

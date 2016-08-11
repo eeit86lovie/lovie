@@ -70,10 +70,12 @@ alert alert-warning{
 text-align: right;
 }
 
-.btn btn-primary btn-lg btn-block{
-text-align:center;;
-
+.finishbill{
+text-align: center;
 }
+
+
+
 </style>
 
 <c:import charEncoding="UTF-8" url="/header.jsp"></c:import>
@@ -138,18 +140,14 @@ text-align:center;;
                   
   </div>
 
-
+<div class="finishbill">
+           <img src="${pageContext.request.contextPath}/image/product/finish.png"></img>
+</div>
 
 
 
   </div>
   </div>
-                      
-
-	
-	
-	
-
 
 		<script>
 		

@@ -106,7 +106,7 @@ this.style.width=(this.offsetWidth > 150)?"150px":"auto"});
 					ClotheNameP.appendChild(ClotheNameTextP);
 
 					var ClotheMoneyP = document.createElement("p");
-					var ClotheMoneyTextP = document.createTextNode(data[i].cost);
+					var ClotheMoneyTextP = document.createTextNode("$"+data[i].cost+"元");
 					ClotheMoneyP.appendChild(ClotheMoneyTextP);
 
 					var ClotheContentP = document.createElement("p");
@@ -121,7 +121,7 @@ this.style.width=(this.offsetWidth > 150)?"150px":"auto"});
 					ClotheBtnP.appendChild(ClotheBtnTextP);
 					
 					var ClotheSelect=document.createElement("select");
-					ClotheSelect.className="form-control input-sm";
+					ClotheSelect.className="dataTables-example_length";
 					ClotheSelect.id="ClotheSelectAmountdata"+JSON.stringify(data[i].productid);
 					
 					var ClotheOpt1=document.createElement("option");
@@ -148,6 +148,11 @@ this.style.width=(this.offsetWidth > 150)?"150px":"auto"});
 					ClotheOpt5.value=5;
 					var ClotheOPtText5=document.createTextNode(5);
 					ClotheOpt5.appendChild(ClotheOPtText5);
+					
+
+					var ClotheSelectD=document.createElement("div");
+					ClotheSelectD.className="cothediv";
+					ClotheSelectD.id="cotheproductselect"
 
 					var ClotheCaptionDiv = document.createElement("div");
 					ClotheCaptionDiv.className = "caption";
@@ -172,7 +177,8 @@ this.style.width=(this.offsetWidth > 150)?"150px":"auto"});
 					ClotheSelect.appendChild(ClotheOpt3);
 					ClotheSelect.appendChild(ClotheOpt4);
 					ClotheSelect.appendChild(ClotheOpt5);
-					ClotheCaptionDiv.appendChild(ClotheSelect);
+					ClotheSelectD.appendChild(ClotheSelect)
+					ClotheCaptionDiv.appendChild(ClotheSelectD);
 					ClotheCaptionDiv.appendChild(ClotheBtnP);
 					ClotheThumbnailDiv.appendChild(ClotheImgDiv);
 					ClotheThumbnailDiv.appendChild(ClotheCaptionDiv);

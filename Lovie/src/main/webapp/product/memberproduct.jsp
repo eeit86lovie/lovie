@@ -201,7 +201,6 @@ this.style.width=(this.offsetWidth > 150)?"150px":"auto"});
 						MemberSelectD.appendChild(MemberSelect);
 						CaptionDiv.appendChild(MemberSelectD);
 						CaptionDiv.appendChild(MemberBtnP);
-						CaptionDiv.appendChild(MemberBtnP);
 						ThumbnailDiv.appendChild(ImgDiv);
 						ThumbnailDiv.appendChild(CaptionDiv);
 						ColDiv.appendChild(ThumbnailDiv);

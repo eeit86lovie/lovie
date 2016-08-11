@@ -58,16 +58,19 @@
 
 }
 
-{
-width:50px;
-height:25px;
-	margin-top:5px;
-	color: #FFFFFF;
-	background-color:#ff5959;
-	border:none;
-		border-radius:3px;
-	-moz-border-radius:3px;
+.panel-heading{
+
+text-align: center;
+
 }
+
+.allbutton{
+text-align: center;
+}
+
+
+
+
 </style>
 
 
@@ -103,7 +106,7 @@ height:25px;
 
 	<div id="page-wrapper">
 
-		<div class="col-lg-6">
+		<div class="col-lg-9">
                     <div class="panel panel-default">
                         <div class="panel-heading">
                                                                                         購物車
@@ -164,7 +167,7 @@ height:25px;
                                 </div>
                             </div>
                             
-                            <div>
+                            <div class="allbutton">
                             <button type="button" class="btn btn-primary" onclick="checkoutProduct()">前往結帳</button>
                             <button type="button" class="btn btn-warning" onclick="deleteCart()">清空購物車</button>
                             <button type="button" class="btn btn-danger" onclick="history.back()">繼續購物</button>
