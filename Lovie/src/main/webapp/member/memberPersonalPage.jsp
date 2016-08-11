@@ -209,7 +209,7 @@ $('#uesrPic').click(function(){
 			success: function(data){
 				alert("圖片更新成功！")
 			},error: function(){
-				alert("圖片更新失敗，請再試一次")
+// 				alert("圖片更新失敗，請再試一次")
 			}
 		})	
 
