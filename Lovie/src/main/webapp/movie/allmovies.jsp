@@ -18,6 +18,7 @@
 
 .col-md-3 a img{
 	height: 280px;
+	width:196px;
 }
 
 .col-md-3{

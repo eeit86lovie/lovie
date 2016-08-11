@@ -61,6 +61,7 @@ public class MovieCrawler {
 					MOVIE_MAP.remove(entry.getKey());
 					MOVIE_MAP.put(mb.getName(), entry.getValue());
 				}
+				MOVIE_MAP.remove("喜劇大師卓別林經典數位修復影展");
 			}
 			
 			remove_MOVIE_MAP_duplicate();
