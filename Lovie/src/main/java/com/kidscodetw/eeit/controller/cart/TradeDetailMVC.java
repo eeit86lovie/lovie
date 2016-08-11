@@ -33,9 +33,11 @@ public class TradeDetailMVC {
 	@Autowired
 	private ProductDAO productDAO;
 	
+	private Integer totalAmount = new Integer(0);
+	
 	@RequestMapping("product/queryTrade")
 	public String dispatch(Principal principal, Model model){
-		
+		totalAmount = 0;
 		MemberBean memberBean = memberDAO.select(principal.getName());
 		Integer memberId = memberBean.getId();
 		List<BillBean> billBeans = billDAO.select_memberid(memberId);
@@ -52,9 +54,14 @@ public class TradeDetailMVC {
 				checkout.setProductname(productDAO.select_id(tradeDetailBean.getProductid()).getName());
 				checkout.setAmount(tradeDetailBean.getAmount());
 				checkout.setTotalcost(tradeDetailBean.getTotalcost());
+				totalAmount = totalAmount + tradeDetailBean.getTotalcost();
 				tradeCheckoutBeans.add(checkout);
 			}
 		}
+		
+		
+		
+		model.addAttribute("amount", totalAmount);
 		model.addAttribute("checkoutItems", tradeCheckoutBeans);
 		return "product/tradedetail2.jsp";
 		

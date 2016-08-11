@@ -195,7 +195,7 @@ this.style.width=(this.offsetWidth > 150)?"150px":"auto"});
 		window.onload= buyClothes();
 		function addToCart(addToCartObject){
 			var ProductId = addToCartObject.id.substring(10);
-			alert(ProductId);
+	
 	        var ClotheAmount=document.getElementById("ClotheSelectAmountdata"+addToCartObject.id.substring(10));
 			$.ajax({
 				type : "get",

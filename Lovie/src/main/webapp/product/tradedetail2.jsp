@@ -65,15 +65,7 @@ text-align: center;
 
 text-align: center;
 }
-alert alert-warning{
 
-text-align: right;
-}
-
-.btn btn-primary btn-lg btn-block{
-text-align:center;;
-
-}
 </style>
 
 <c:import charEncoding="UTF-8" url="/header.jsp"></c:import>
@@ -121,10 +113,7 @@ text-align:center;;
                                     		
                                      </tr>
                                     </c:forEach>
-                                   
-                                     
-                                     	
-                                     
+
                                     </tbody>
                                     
                                     
@@ -137,33 +126,10 @@ text-align:center;;
                             </div>
                   
   </div>
+    </form>
 
   </div>
   </div>
-                      
-
-	
-	
-	
-
-
-		<script>
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-	</script>
-
-
-
-
-
 
 
 	<!-- jQuery -->

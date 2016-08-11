@@ -65,15 +65,6 @@ text-align: center;
 
 text-align: center;
 }
-alert alert-warning{
-
-text-align: right;
-}
-
-.finishbill{
-text-align: center;
-}
-
 
 
 </style>
@@ -128,8 +119,7 @@ text-align: center;
                                      	
                                      
                                     </tbody>
-                                    
-                                    
+
                                 </table>
                                 <div style="float:right; font-size: 18px;margin-right:8px;">
                           			總金額:${amount }
@@ -139,16 +129,19 @@ text-align: center;
                             </div>
                   
   </div>
+  </form>
 
-<div class="finishbill">
-           <img src="${pageContext.request.contextPath}/image/product/finish.png"></img>
+
+
+  </div>
+  
+  <div class="col-lg-6">
+	<div class="show">
+	 <img class="slide-image" src="${pageContext.request.contextPath}/image/product/finish.png"" >
+	</div>
+	
+  </div>
 </div>
-
-
-
-  </div>
-  </div>
-
 		<script>
 		
 
